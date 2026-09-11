@@ -41,22 +41,24 @@ final class PrimeSieve {
                 let p4 = p3 + p
                 let unrolledEnd = end - p3
 
+                // Byte indices stay below end + p, far from Int.max, so wrapping
+                // additions change no result; they only drop overflow checks.
                 for _ in 0..<8 {
                     let mask = UInt8(1) << (start & 7)
                     var byte = start >> 3
 
                     while byte < unrolledEnd {
                         bytes[byte] |= mask
-                        bytes[byte + p] |= mask
-                        bytes[byte + p2] |= mask
-                        bytes[byte + p3] |= mask
-                        byte += p4
+                        bytes[byte &+ p] |= mask
+                        bytes[byte &+ p2] |= mask
+                        bytes[byte &+ p3] |= mask
+                        byte &+= p4
                     }
                     while byte < end {
                         bytes[byte] |= mask
-                        byte += p
+                        byte &+= p
                     }
-                    start += p
+                    start &+= p
                 }
             }
             p += 2
