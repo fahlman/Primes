@@ -27,6 +27,12 @@ final class PrimeSieve {
         while p <= limit / p {
             let candidate = (p - 3) / 2
             if bytes[candidate >> 3] & (UInt8(1) << (candidate & 7)) == 0 {
+                if p < 8 {
+                    markDenseMultiples(of: p)
+                    p += 2
+                    continue
+                }
+
                 // Consecutive odd multiples differ by p bit positions. Eight
                 // interleaved streams each keep a fixed mask and advance p bytes.
                 var start = (p * p - 3) / 2
@@ -54,6 +60,114 @@ final class PrimeSieve {
                 }
             }
             p += 2
+        }
+    }
+
+    private func markDenseMultiples(of p: Int) {
+        let bytes = storage
+        var bit = (p * p - 3) / 2
+
+        // Odd p is coprime to 8, so at most seven marks reach a byte boundary.
+        while bit < oddCount && bit & 7 != 0 {
+            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
+            bit += p
+        }
+        guard bit < oddCount else { return }
+
+        var byte = bit >> 3
+        let fullBytes = oddCount >> 3
+
+        // From a byte boundary, eight successive marks are at 0, p, ... 7p.
+        // They span p bytes; the next mark starts the next p-byte group.
+        // Apply each single-bit mask locally, then store each byte once.
+        switch p {
+        case 3:
+            while byte <= fullBytes - 3 {
+                var value = bytes[byte]
+                value |= 0x01
+                value |= 0x08
+                value |= 0x40
+                bytes[byte] = value
+
+                value = bytes[byte + 1]
+                value |= 0x02
+                value |= 0x10
+                value |= 0x80
+                bytes[byte + 1] = value
+
+                value = bytes[byte + 2]
+                value |= 0x04
+                value |= 0x20
+                bytes[byte + 2] = value
+                byte += 3
+            }
+        case 5:
+            while byte <= fullBytes - 5 {
+                var value = bytes[byte]
+                value |= 0x01
+                value |= 0x20
+                bytes[byte] = value
+
+                value = bytes[byte + 1]
+                value |= 0x04
+                value |= 0x80
+                bytes[byte + 1] = value
+
+                value = bytes[byte + 2]
+                value |= 0x10
+                bytes[byte + 2] = value
+
+                value = bytes[byte + 3]
+                value |= 0x02
+                value |= 0x40
+                bytes[byte + 3] = value
+
+                value = bytes[byte + 4]
+                value |= 0x08
+                bytes[byte + 4] = value
+                byte += 5
+            }
+        case 7:
+            while byte <= fullBytes - 7 {
+                var value = bytes[byte]
+                value |= 0x01
+                value |= 0x80
+                bytes[byte] = value
+
+                value = bytes[byte + 1]
+                value |= 0x40
+                bytes[byte + 1] = value
+
+                value = bytes[byte + 2]
+                value |= 0x20
+                bytes[byte + 2] = value
+
+                value = bytes[byte + 3]
+                value |= 0x10
+                bytes[byte + 3] = value
+
+                value = bytes[byte + 4]
+                value |= 0x08
+                bytes[byte + 4] = value
+
+                value = bytes[byte + 5]
+                value |= 0x04
+                bytes[byte + 5] = value
+
+                value = bytes[byte + 6]
+                value |= 0x02
+                bytes[byte + 6] = value
+                byte += 7
+            }
+        default:
+            preconditionFailure("Dense marking requires factor 3, 5, or 7")
+        }
+
+        // At most eight marks remain, including any partial final byte.
+        bit = byte * 8
+        while bit < oddCount {
+            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
+            bit += p
         }
     }
 
