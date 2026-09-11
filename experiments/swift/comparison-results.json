@@ -1,0 +1,56 @@
+{
+  "revision": "22bfea9c7122c46dcda799020fccf5ae83fe667f",
+  "samples": {
+    "repository": [
+      {
+        "output": "repository_striped_u8;23974;5.000128666;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 23974,
+        "seconds": 5.000128666,
+        "validation": "Validated: 78498 primes; checksum: 1037259",
+        "milliseconds_per_pass": 0.20856463944272965
+      },
+      {
+        "output": "repository_striped_u8;23799;5.000130708;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 23799,
+        "seconds": 5.000130708,
+        "validation": "Validated: 78498 primes; checksum: 1031079",
+        "milliseconds_per_pass": 0.210098353208118
+      },
+      {
+        "output": "repository_striped_u8;23820;5.000065334;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 23820,
+        "seconds": 5.000065334,
+        "validation": "Validated: 78498 primes; checksum: 1031877",
+        "milliseconds_per_pass": 0.2099103834592779
+      }
+    ],
+    "new": [
+      {
+        "output": "fahlman_swift_striped_unrolled;41089;5.000082541;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41089,
+        "seconds": 5.000082541,
+        "validation": "Validated: 78498 primes; checksum: 8781270",
+        "milliseconds_per_pass": 0.12168907836647279
+      },
+      {
+        "output": "fahlman_swift_striped_unrolled;40767;5.000074708;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 40767,
+        "seconds": 5.000074708,
+        "validation": "Validated: 78498 primes; checksum: 8711405",
+        "milliseconds_per_pass": 0.12265005293497191
+      },
+      {
+        "output": "fahlman_swift_striped_unrolled;40302;5.000018625;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 40302,
+        "seconds": 5.000018625,
+        "validation": "Validated: 78498 primes; checksum: 8610458",
+        "milliseconds_per_pass": 0.12406378405538186
+      }
+    ]
+  },
+  "median_ms": {
+    "repository": 0.2099103834592779,
+    "new": 0.12265005293497191
+  },
+  "speedup": 1.7114577485797802
+}
