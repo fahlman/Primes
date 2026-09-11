@@ -33,7 +33,7 @@ struct Benchmark {
 
         let seconds = Double(elapsed) / 1_000_000_000
         // stdout uses the repository's required result format.
-        print("fahlman_swift_striped_unrolled;\(passes);\(seconds);1;algorithm=base,faithful=yes,bits=1")
+        print("fahlman_swift_dense_striped;\(passes);\(seconds);1;algorithm=base,faithful=yes,bits=1")
         FileHandle.standardError.write(Data("Validated: 78498 primes; checksum: \(checksum)\n".utf8))
     }
 }

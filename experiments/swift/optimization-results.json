@@ -1,0 +1,144 @@
+{
+  "recorded_at_utc": "2026-09-11T22:26:59.399099+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "flags": [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "variants": {
+    "baseline": {
+      "revision": "25402d46ba991b39451724d3873d326626981e3f",
+      "source_sha256": "85c6545dcfd713af56cc49c926209db3a8fa6e827325b41fd004a3d8ee3ddc8e"
+    },
+    "stream-fusion": {
+      "revision": "f0cd82df7c1c24e02b25dab259ec3d3ffc4732be",
+      "source_sha256": "64a28f22327478936d9f356e6e66bad95660ace32e4dc9bb30e666a1e08f440b"
+    },
+    "dense-small-factors": {
+      "revision": "b45c0c199ab43567636e9b79310fc925b80b42af",
+      "source_sha256": "a1ae5fd32583bf0608aa47379ee0e3f6e7cf215df307b3f3e918c4a76eaceb96"
+    }
+  },
+  "run_order": [
+    [
+      "baseline",
+      "stream-fusion",
+      "dense-small-factors"
+    ],
+    [
+      "stream-fusion",
+      "dense-small-factors",
+      "baseline"
+    ],
+    [
+      "dense-small-factors",
+      "baseline",
+      "stream-fusion"
+    ]
+  ],
+  "samples": {
+    "baseline": [
+      {
+        "output": "baseline;42080;5.000044416;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 42080,
+        "seconds": 5.000044416,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8996585",
+        "milliseconds_per_pass": 0.11882234828897338
+      },
+      {
+        "output": "baseline;41456;5.000000875;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41456,
+        "seconds": 5.000000875,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8860724",
+        "milliseconds_per_pass": 0.12060982427151679
+      },
+      {
+        "output": "baseline;41739;5.000007167;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41739,
+        "seconds": 5.000007167,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8922625",
+        "milliseconds_per_pass": 0.11979221272670643
+      }
+    ],
+    "stream-fusion": [
+      {
+        "output": "stream-fusion;41869;5.000108375;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41869,
+        "seconds": 5.000108375,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8951189",
+        "milliseconds_per_pass": 0.11942268444433829
+      },
+      {
+        "output": "stream-fusion;41258;5.000113625;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41258,
+        "seconds": 5.000113625,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8817795",
+        "milliseconds_per_pass": 0.12119137197634398
+      },
+      {
+        "output": "stream-fusion;41097;5.000064;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 41097,
+        "seconds": 5.000064,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 8783029",
+        "milliseconds_per_pass": 0.12166493904664574
+      }
+    ],
+    "dense-small-factors": [
+      {
+        "output": "dense-small-factors;60051;5.000065833;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 60051,
+        "seconds": 5.000065833,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 12905586",
+        "milliseconds_per_pass": 0.08326365644202427
+      },
+      {
+        "output": "dense-small-factors;61131;5.000001333;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 61131,
+        "seconds": 5.000001333,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 13140712",
+        "milliseconds_per_pass": 0.08179158418805517
+      },
+      {
+        "output": "dense-small-factors;60695;5.000026667;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 60695,
+        "seconds": 5.000026667,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 13045923",
+        "milliseconds_per_pass": 0.08237954801878244
+      }
+    ]
+  },
+  "median_ms": {
+    "baseline": 0.11979221272670643,
+    "stream-fusion": 0.12119137197634398,
+    "dense-small-factors": 0.08237954801878244
+  },
+  "speedup_over_first": {
+    "baseline": 1.0,
+    "stream-fusion": 0.988454959896727,
+    "dense-small-factors": 1.454149914726334
+  },
+  "cpu": "Apple M4 Pro"
+}

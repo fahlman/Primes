@@ -1,5 +1,7 @@
 # Equal-terms Swift sieve comparison
 
+This records the original baseline at `25402d4`. See [OptimizationResults.md](OptimizationResults.md) for subsequent experiments.
+
 The target is achieved on this Mac: the unrolled implementation beats all three repository Swift versions while retaining `base,faithful=yes`, single-threaded operation.
 
 | Implementation | Median milliseconds per pass | Our throughput advantage |

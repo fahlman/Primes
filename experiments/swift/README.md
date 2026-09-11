@@ -1,10 +1,10 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. It uses eight interleaved marking streams per prime, with a fixed mask in each stream, and unrolls the inner loop into four individual writes. It does not use pre-sieving, cached prime results, or a wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factors 3, 5, and 7 use specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Larger factors use eight fixed-mask streams with four writes per inner iteration. There is no presieving, cached sieve state, or wheel.
 
-`PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` to obtain the inclusive prime list or `withStorage` to inspect the completed flags. Bit index zero represents 3; a set bit means composite. Padding bits must be ignored. A pointer passed into `withStorage` must not outlive its sieve instance.
+`PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
-The declared comparison tags are `algorithm=base,faithful=yes,bits=1`, with one thread. The base classification follows the repository's existing striped UInt8 implementation. This README describes the actual striped traversal so it can be reviewed independently.
+The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop is unchanged from our verified baseline.
 
 ## Run instructions
 
@@ -14,7 +14,13 @@ With Swift installed:
 sh ./run.sh
 ```
 
-The script compiles with `-O -whole-module-optimization` and runs fresh one-million sieves for at least five seconds. Build time and validation are outside the measured interval. Result output goes to stdout; validation/checksum details go to stderr.
+The script compiles with `-O -whole-module-optimization` and runs fresh one-million sieves for at least five seconds. Build time, validation, enumeration, and printing are outside the timed interval. Allocation, initialization, marking, opaque observation, and release are inside every timed pass.
+
+Example from the final entry-point check on Apple M4 Pro with Swift 6.3.3:
+
+```text
+fahlman_swift_dense_striped;60279;5.000052542;1;algorithm=base,faithful=yes,bits=1
+```
 
 Optional Docker build and run:
 
@@ -23,52 +29,45 @@ docker build -t faster-prime-swift .
 docker run --rm faster-prime-swift
 ```
 
-The Dockerfile uses the official `swift:6.3.3` and `swift:6.3.3-slim` images. Both tags were checked to exist for amd64 and arm64. Docker is not installed on the test Mac, so the container build and Linux runtime have not been tested.
+The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The image tags were checked for amd64 and arm64. Docker is not installed on the test Mac, so the container build and Linux runtime remain untested.
 
-## Output
+## Optimization results
 
-One measured run on Apple M4 Pro, Apple Swift 6.3.3, arm64 macOS:
+Three rotated five-second runs per implementation, on the same Apple M4 Pro and Swift 6.3.3 toolchain, using one frozen benchmark runner and separately compiled observer:
 
-```text
-fahlman_swift_striped_unrolled;41508;5.000106084;1;algorithm=base,faithful=yes,bits=1
-```
+| Implementation | Median milliseconds per pass | Throughput relative to saved baseline | Decision |
+|---|---:|---:|---|
+| Saved unrolled baseline | 0.119792 | 1.000x | Preserved |
+| Eight fused marking streams | 0.121191 | 0.988x | Not adopted |
+| Specialized factors 3, 5, and 7 | 0.082380 | 1.454x | Current implementation |
 
-## Comparison
+The retained change reduced time per sieve by 31.2%, or increased throughput by 45.4%, relative to the saved baseline in this comparison. Stream fusion did not demonstrate an improvement, so the two changes were not combined. All nine measured executions validated 78,498 primes and exited successfully. [Full results and reproduction commands](reports/OptimizationResults.md) are recorded with the [raw measurements](optimization-results.json).
 
-The implementation beats all three repository Swift implementations in this local comparison. All four use `algorithm=base`, `faithful=yes`, and one thread. The original Boolean entry uses eight bits per flag; the other three use one bit per flag.
+## Original repository comparison
 
-Apple M4 Pro, Apple Swift 6.3.3, arm64 macOS. All entries compiled with `-O -whole-module-optimization`. Each calculates the sieve through one million. Results are medians of three rotated runs per implementation, each lasting at least five seconds.
+Before these experiments, our saved baseline beat all three repository Swift entries under the same allocation-to-release timing convention:
 
-| Implementation | Median milliseconds per pass | Our throughput advantage |
-|---|---:|---:|
-| Repository: Boolean | 0.292488 | 2.43× |
-| Repository: packed UInt8 | 0.351134 | 2.91× |
-| Repository: striped UInt8 | 0.208603 | 1.73× |
-| Our unrolled Swift | 0.120461 | — |
+| Repository implementation | Baseline throughput advantage |
+|---|---:|
+| Boolean | 2.43x |
+| Packed UInt8 | 2.91x |
+| Striped UInt8 | 1.73x |
 
-The timed workload includes fresh allocation, initialization, sieving, an opaque observation, and release on every pass. It excludes prime enumeration, output-array construction, and printing. `BenchmarkObserver.swift` is separately compiled Swift code that reads a runtime-selected byte, preventing the optimizer from removing sieve stores. The same observer and runner are used for every implementation. It calculates no part of the sieve.
+Those are historical baseline measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The current optimization was compared directly with our saved baseline; the original three entries were not rerun during this experiment.
 
-Repository sources are pinned to commit `22bfea9c7122c46dcda799020fccf5ae83fe667f`. Allocation and marking loops are unchanged. The comparison removes each CLI/stopwatch, places equivalent packed-mask initialization in a lazy closure, and adds storage access/validation adapters. One-time mask initialization occurs before timing. The original Boolean algorithm is tested only at one million here, which avoids its known bounds issue at some other sizes.
-
-Every runner validates the expected 78,498 primes before timing. Complete-array comparisons and AddressSanitizer validation of the unrolled implementation also passed, as described below.
-
-Reproduce the all-three comparison (approximately 60 seconds of timed work, plus compilation):
+To compare the current implementation with all three original entries:
 
 ```sh
 python3 compare_all.py
 ```
 
-The script downloads the pinned original sources, compiles all four programs with identical settings, and saves every raw run in `all-swift-results.json`. Generated sources and binaries live under `.build`. All benchmark logic is Swift; Python only builds and launches the independent executables.
+This takes approximately 60 seconds of timed work plus compilation, downloads originals pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`, and replaces `all-swift-results.json` with the new measurements. Generated files stay under `.build`. Python only builds and launches executables; sieve and timed benchmark logic are Swift.
 
-The earlier two-way comparison remains reproducible with `python3 compare.py` and its original `comparison-results.json`.
-
-[Repository Swift implementations](https://github.com/PlummersSoftwareLLC/Primes/tree/22bfea9c7122c46dcda799020fccf5ae83fe667f/PrimeSwift/solution_1)
+The earlier two-way comparison remains available through `compare.py` and `comparison-results.json`. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
 
 ## Validation
 
-Full prime arrays matched an independent ordinary Boolean sieve for every limit from -2 through 2,048, larger prime-square boundaries, one million, and ten million. Known counts matched 78,498 and 664,579. Repeated marking preserved the same results. This pass also ran with AddressSanitizer enabled and completed without errors.
-
-Run verification on a toolchain supporting AddressSanitizer:
+The baseline verification program was reused unchanged. Both candidates passed complete-array comparisons against an independent Boolean sieve for all limits from -2 through 2,048, larger square boundaries, one million, and ten million. Repeated marking preserved results. Both candidates passed the same checks with AddressSanitizer enabled.
 
 ```sh
 mkdir -p .build
@@ -76,19 +75,14 @@ swiftc -O -sanitize=address PrimeSieve.swift Verify.swift -o .build/verify
 .build/verify
 ```
 
+## Development branches
+
+- `swift/baseline`: the original verified implementation at `25402d4`.
+- `swift/stream-fusion`: the tested traversal experiment, retained as evidence rather than adopted.
+- `swift/dense-small-factors`: the measured improvement and current development branch.
+
+Use separate branches for further optimizations. The target remains `base,faithful=yes`, one thread, and one million, with the same timing boundary and compiler settings. Wheel, cached-state, and parallel variants remain deferred. A future upstream submission should contain the proven change and required supporting files.
+
 ## License
 
-The new code is provided under the included MIT license. The original baseline source downloaded by `compare.py` remains attributed to its repository authors.
-
-## Development baseline
-
-This directory preserves the verified implementation and recorded measurements before further optimization. The baseline branch is `swift/baseline`, based on upstream commit `22bfea9c7122c46dcda799020fccf5ae83fe667f`.
-
-The current target remains `algorithm=base,faithful=yes`, one thread, and a sieve limit of one million. Every timed pass includes fresh allocation, initialization, sieving, and release; prime enumeration is outside the timed interval. Retain the same compiler settings and observer when comparing implementations.
-
-Create a separate branch from this baseline for each optimization. The first candidates are stream fusion and specialized dense marking, evaluated independently before combining changes. Wheel, cached-state, and parallel variants remain deferred. A future upstream submission should contain the proven change and required supporting files.
-
-- [Equal-terms comparison](reports/EqualTermsSwiftComparison.md)
-- [Review of other-language optimizations](reports/OtherLanguageOptimizationReview.md)
-
-The source, verification program, benchmark tools, and recorded result files were copied without changes from the working package. These results describe the earlier measurements; repository setup did not rerun the full comparison. The Docker build remains untested.
+The new code is provided under the included MIT license. Downloaded original comparison sources remain attributed to their repository authors.

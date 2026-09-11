@@ -80,7 +80,7 @@ extension Sieve {
     source += '\ntypealias PrimeSieve = Sieve\n'
     source_path = build / (name + '.swift')
     source_path.write_text(source)
-    adapted_runner = runner.replace('fahlman_swift_striped_unrolled', name).replace('bits=1', f'bits={bits}')
+    adapted_runner = runner.replace('fahlman_swift_dense_striped', name).replace('bits=1', f'bits={bits}')
     if bits == 8:
         adapted_runner = adapted_runner.replace('let byteCount = ((limit - 1) / 2 + 7) / 8', 'let byteCount = (limit + 1) / 2')
     runner_path = build / (name + '-runner.swift')

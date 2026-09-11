@@ -1,5 +1,7 @@
 # Optimizations from other Primes submissions
 
+This review preceded implementation. See [OptimizationResults.md](OptimizationResults.md) for the measured outcome of the first two experiments.
+
 Reviewed September 11, 2026, against repository commit `22bfea9c7122c46dcda799020fccf5ae83fe667f`.
 
 The best next experiments are **fusing the eight marking streams** and **specializing dense marking for small factors**. Both have source-level precedents in submissions classified `algorithm=base,faithful=yes`. Neither has been implemented or benchmarked in our Swift version during this review.

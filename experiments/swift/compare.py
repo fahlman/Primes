@@ -47,7 +47,7 @@ extension Sieve {
 typealias PrimeSieve = Sieve
 '''
 (build / 'RepositoryBaseline.swift').write_text(source)
-runner = (root / 'Benchmark.swift').read_text().replace('fahlman_swift_striped_unrolled', 'repository_striped_u8')
+runner = (root / 'Benchmark.swift').read_text().replace('fahlman_swift_dense_striped', 'repository_striped_u8')
 (build / 'RepositoryBenchmark.swift').write_text(runner)
 
 def run(*arguments):
