@@ -51,7 +51,7 @@ Measurements are from each experiment's recorded session; use the linked reports
 | `run.sh`, `Dockerfile` | Build and run with the benchmark flags. |
 | `compare_optimizations.py` | Timing comparison of committed revisions, using the frozen runner and observer from commit `25402d4`. |
 | `compare_all.py` | Timing comparison against the three upstream entries, downloaded at commit `22bfea9`. |
-| `tools/phase-split/` | Times each stage of a pass. It copies the sieve code as of `5833376`; see its header. |
+| `tools/phase-split/` | Cumulative phase diagnostics copied from adopted through-63 source `19aa38a`; see its README for validation and measurement limits. |
 | `reports/`, `*.json` | Recorded results. Don't overwrite them unintentionally. |
 
 ## Sieve rules
