@@ -1,0 +1,9 @@
+{
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reason": "User explicitly requested rerunning PR25 after identifying its earlier 2.04x duration result.",
+  "scope": "One fresh six-trial AB/BA/AB session; same compiler/flags/frozen runner and observer. Preserve original records; no pooling, best-of selection or automatic further repeat.",
+  "conditions": "Time Machine initially idle; record pre/post and five-second process/audio/backup snapshots. Record PPID ancestry for monitored compiler/benchmark ownership, since Swift frontend may use a distinct process group.",
+  "review_basis": "Exact candidate/control/runtime and verifier inputs unchanged; prior 19-command/eight-verifier source and assembly admission independently rechecked. Fresh benchmark validation in each trial; no duplicate full correctness campaign.",
+  "disposition": "No merge authorized by this timing request."
+}

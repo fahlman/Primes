@@ -1,0 +1,61 @@
+{
+  "reviewer": "Codex independent reviewer /root/review_sieve; computations and record assembled by root",
+  "decision": "Retain rejection; keep PR25 closed and unmerged",
+  "comparison_exit_code": 0,
+  "wrapper_exit_code": 0,
+  "wrapper_status": "passed",
+  "raw_sha256": "a4ea88fc58099ed65ad9f26c1b5d532c886949635ce2ab7a6ab02e8adcef1f87",
+  "provenance_sha256": "78e107a376ce32303fff4bf39ecada88b6b1e9b8e3b471cf3cbf1ad5d6df00af",
+  "executed_wrapper_sha256": "ea0be2830110dd8979c85570ed8f6bd30f18746c634d28e5442b85c2927924e0",
+  "source_compiler_harness_and_flags_match_original": true,
+  "binaries_match_original": true,
+  "prior_records_unchanged": true,
+  "samples": {
+    "control-111": {
+      "median_us": 38.628089593634115,
+      "range_us": [
+        38.48247261602401,
+        38.69523275161552
+      ],
+      "all_runs_valid": true
+    },
+    "vector-recurrence": {
+      "median_us": 79.35407178339602,
+      "range_us": [
+        79.26496578947369,
+        79.42050923646299
+      ],
+      "all_runs_valid": true
+    }
+  },
+  "run_order": [
+    [
+      "control-111",
+      "vector-recurrence"
+    ],
+    [
+      "vector-recurrence",
+      "control-111"
+    ],
+    [
+      "control-111",
+      "vector-recurrence"
+    ]
+  ],
+  "duration_ratio": 2.054310027189994,
+  "throughput_change_percent": -51.32185567103234,
+  "extra_us_per_sieve": 40.72598218976191,
+  "every_candidate_trial_slower": true,
+  "monitor_samples": 16,
+  "sampled_backup_idle_and_no_audio": true,
+  "sampled_processes_owned_by_ancestry": true,
+  "no_sampler_errors": true,
+  "lock_absent_after": true,
+  "limitations": [
+    "Initial snapshot recorded two corespotlightd processes at86.8% and84.7%CPU. Background desktop/OS activity remained.",
+    "Periodic five-second snapshots have gaps and small sampling overhead; cannot prove perfect idleness or absence of human activity.",
+    "Three rounds of two variants are incompletely position-balanced.",
+    "One machine/compiler and separate session; no pooling, best-of selection, causal attribution or other-platform prediction."
+  ],
+  "no_additional_runs": true
+}

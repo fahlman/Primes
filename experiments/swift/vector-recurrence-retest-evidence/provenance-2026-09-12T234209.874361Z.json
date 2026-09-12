@@ -1,0 +1,2996 @@
+{
+  "status": "passed",
+  "started_at_utc": "2026-09-12T23:42:09.912995+00:00",
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reason": "User explicitly requested rerunning PR25 after discussing the original 2.04-times duration result. The original session had substantial backup/desktop activity before compilation; its exact impact is unknown.",
+  "scope": "One fresh six-run AB/BA/AB session; rebuild both; preserve both sessions separately; no source changes, pooled statistics, best-of selection or further repeat.",
+  "review_reused": "Exact inputs unchanged; prior correctness, source and assembly admission independently rechecked by Codex review agent before this repeat.",
+  "prior_record_sha256": {
+    "verification-616d0bd.json": "e8f33fb5a0df47c9a93231e4d04f1b4fd2df81eb67e95e16537cb88ea8a0f73e",
+    "review-admission-616d0bd.json": "0c9cf265a4bcb588b3fb9991b70340d4f29a2de4dcc72cedcdc3405c1744299e",
+    "timing-616d0bd.json": "92f2ef9ab95d444c611e47511abd988b7dccdc6e39210edbca4347277f770b1a",
+    "timing-provenance-616d0bd.json": "5dc0725f1f166747867329a80f718bf061a979ad760319d545deecb266ce860e",
+    "primes_run_support.py": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5"
+  },
+  "wrapper_sha256": "ea0be2830110dd8979c85570ed8f6bd30f18746c634d28e5442b85c2927924e0",
+  "compare_script_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+  "monitor_interval_seconds": 5,
+  "monitor_samples": [
+    {
+      "at_utc": "2026-09-12T23:42:15.123318+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 14.3,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.5,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 6.0,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.4,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 770,
+          "cpu_percent": 0.9,
+          "executable": "SafariBookmarksSyncAgent"
+        },
+        {
+          "pid": 4087,
+          "cpu_percent": 0.9,
+          "executable": "PerfPowerServices"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.7,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.7,
+          "executable": "claude"
+        },
+        {
+          "pid": 404,
+          "cpu_percent": 0.4,
+          "executable": "corebrightnessd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7175,
+          "cpu_percent": 0.3,
+          "executable": "Finder"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:20.223835+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.2,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 13.5,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 6.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.0,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.5,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.8,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.6,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.5,
+          "executable": "claude"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.4,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.3,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.3,
+          "executable": "milod"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 0.3,
+          "executable": "codex"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.2,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:25.324959+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.7,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 13.8,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 6.2,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.7,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.1,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.0,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 338,
+          "cpu_percent": 0.9,
+          "executable": "UserEventAgent"
+        },
+        {
+          "pid": 350,
+          "cpu_percent": 0.8,
+          "executable": "powerd"
+        },
+        {
+          "pid": 411,
+          "cpu_percent": 0.8,
+          "executable": "cfprefsd"
+        },
+        {
+          "pid": 419,
+          "cpu_percent": 0.7,
+          "executable": "analyticsd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.6,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 4087,
+          "cpu_percent": 0.6,
+          "executable": "PerfPowerServices"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.5,
+          "executable": "opendirectoryd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.7,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:30.432242+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 31.0,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 14.6,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 9.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 7202,
+          "cpu_percent": 5.3,
+          "executable": "NotificationCenter"
+        },
+        {
+          "pid": 384,
+          "cpu_percent": 2.0,
+          "executable": "locationd"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.8,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.5,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.2,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.5,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.5,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.5,
+          "executable": "milod"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.4,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.4,
+          "executable": "nearbyd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:35.536931+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.8,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 7202,
+          "cpu_percent": 2.7,
+          "executable": "NotificationCenter"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.6,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.2,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 371,
+          "cpu_percent": 0.9,
+          "executable": "coreduetd"
+        },
+        {
+          "pid": 1420,
+          "cpu_percent": 0.6,
+          "executable": "TGOnDeviceInferenceProviderService"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 340,
+          "cpu_percent": 0.5,
+          "executable": "fseventsd"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.5,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.2,
+          "executable": "nearbyd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:40.637737+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.5,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.9,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.5,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 1.1,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.7,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.5,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.5,
+          "executable": "milod"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.4,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.4,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:45.742839+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 25.4,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 12.6,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 9.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.9,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.5,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 0.5,
+          "executable": "codex"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.5,
+          "executable": "claude"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.4,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.3,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.2,
+          "executable": "milod"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.2,
+          "executable": "zsh"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:50.845369+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.1,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 19.4,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 9.4,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 8.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.9,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.5,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.7,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.7,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.6,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.6,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.5,
+          "executable": "logd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.5,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.2,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.2,
+          "executable": "rapportd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 99.1,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:42:55.948593+00:00",
+      "top_processes": [
+        {
+          "pid": 23294,
+          "cpu_percent": 97.6,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.6,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.9,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.7,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.2,
+          "executable": "launchd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.2,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.2,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 404,
+          "cpu_percent": 0.1,
+          "executable": "corebrightnessd"
+        },
+        {
+          "pid": 50963,
+          "cpu_percent": 0.1,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.1,
+          "executable": "claude"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.0,
+          "executable": "logd"
+        },
+        {
+          "pid": 337,
+          "cpu_percent": 0.0,
+          "executable": "smd"
+        },
+        {
+          "pid": 338,
+          "cpu_percent": 0.0,
+          "executable": "UserEventAgent"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23294,
+          "cpu_percent": 97.6,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23294,
+              "parent_pid": 23293,
+              "process_group": 23294,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23293,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:01.052498+00:00",
+      "top_processes": [
+        {
+          "pid": 23484,
+          "cpu_percent": 99.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23484,
+              "parent_pid": 23481,
+              "process_group": 23484,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23481,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.7,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.5,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.4,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.3,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 23498,
+          "cpu_percent": 1.1,
+          "executable": "sleep"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.7,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.6,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.6,
+          "executable": "milod"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.5,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.5,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.4,
+          "executable": "zsh"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23484,
+          "cpu_percent": 99.0,
+          "executable": "swift-frontend",
+          "ancestry": [
+            {
+              "pid": 23484,
+              "parent_pid": 23481,
+              "process_group": 23484,
+              "executable": "swift-frontend"
+            },
+            {
+              "pid": 23481,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "swift-driver"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:06.152942+00:00",
+      "top_processes": [
+        {
+          "pid": 23516,
+          "cpu_percent": 97.9,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23516,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 28.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 12.4,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.9,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.0,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.5,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 632,
+          "cpu_percent": 0.9,
+          "executable": "cloudd"
+        },
+        {
+          "pid": 23522,
+          "cpu_percent": 0.9,
+          "executable": "sleep"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 23523,
+          "cpu_percent": 0.6,
+          "executable": "ps"
+        },
+        {
+          "pid": 669,
+          "cpu_percent": 0.5,
+          "executable": "fileproviderd"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.5,
+          "executable": "claude"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.4,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.3,
+          "executable": "logd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23516,
+          "cpu_percent": 97.9,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23516,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:11.252665+00:00",
+      "top_processes": [
+        {
+          "pid": 23537,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23537,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 15.3,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.9,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.1,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.2,
+          "executable": "launchd"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 1.4,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 819,
+          "cpu_percent": 1.3,
+          "executable": "corespeechd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.6,
+          "executable": "claude"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.5,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.4,
+          "executable": "logd"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.4,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.4,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 424,
+          "cpu_percent": 0.3,
+          "executable": "coreaudiod"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23537,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23537,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:16.355952+00:00",
+      "top_processes": [
+        {
+          "pid": 23560,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23560,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.6,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.5,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 3.6,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.3,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 23567,
+          "cpu_percent": 1.2,
+          "executable": "sleep"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.0,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.9,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.4,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.4,
+          "executable": "milod"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.4,
+          "executable": "milod"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.4,
+          "executable": "zsh"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.4,
+          "executable": "claude"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23560,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23560,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:21.459212+00:00",
+      "top_processes": [
+        {
+          "pid": 23583,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23583,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.2,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.4,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 3.7,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 23593,
+          "cpu_percent": 0.9,
+          "executable": "sleep"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.6,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 0.6,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.5,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.4,
+          "executable": "zsh"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.3,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.3,
+          "executable": "claude"
+        },
+        {
+          "pid": 365,
+          "cpu_percent": 0.2,
+          "executable": "mds"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23583,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23583,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:26.563425+00:00",
+      "top_processes": [
+        {
+          "pid": 23607,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23607,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 28.2,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 11.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.0,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.0,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.6,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 770,
+          "cpu_percent": 1.4,
+          "executable": "SafariBookmarksSyncAgent"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 23613,
+          "cpu_percent": 0.6,
+          "executable": "sleep"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.6,
+          "executable": "claude"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 0.3,
+          "executable": "codex"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.2,
+          "executable": "zsh"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.1,
+          "executable": "logd"
+        },
+        {
+          "pid": 375,
+          "cpu_percent": 0.1,
+          "executable": "contextstored"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.1,
+          "executable": "notifyd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23607,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23607,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:43:31.666458+00:00",
+      "top_processes": [
+        {
+          "pid": 23627,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23627,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.7,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 3.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.7,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.6,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 23637,
+          "cpu_percent": 1.1,
+          "executable": "sleep"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.9,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.7,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.6,
+          "executable": "milod"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.5,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 34673,
+          "cpu_percent": 0.4,
+          "executable": "zsh"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.2,
+          "executable": "rapportd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 23627,
+          "cpu_percent": 100.0,
+          "executable": "benchmark",
+          "ancestry": [
+            {
+              "pid": 23627,
+              "parent_pid": 23282,
+              "process_group": 23282,
+              "executable": "benchmark"
+            },
+            {
+              "pid": 23282,
+              "parent_pid": 23270,
+              "process_group": 23282,
+              "executable": "Python"
+            },
+            {
+              "pid": 23270,
+              "parent_pid": 50821,
+              "process_group": 23270,
+              "executable": "Python"
+            },
+            {
+              "pid": 50821,
+              "parent_pid": 50787,
+              "process_group": 50787,
+              "executable": "codex"
+            },
+            {
+              "pid": 50787,
+              "parent_pid": 1,
+              "process_group": 50787,
+              "executable": "ChatGPT"
+            },
+            {
+              "pid": 1,
+              "parent_pid": 0,
+              "process_group": 1,
+              "executable": "launchd"
+            }
+          ]
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    }
+  ],
+  "monitor_limit": "Periodic process/audio snapshots, not continuous tracing or proof that no human used the desktop. The same lightweight sampler spans both variants.",
+  "backup_before": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n",
+  "before": {
+    "at_utc": "2026-09-12T23:42:09.971641+00:00",
+    "top_processes": [
+      {
+        "pid": 716,
+        "cpu_percent": 86.8,
+        "executable": "corespotlightd"
+      },
+      {
+        "pid": 7179,
+        "cpu_percent": 84.7,
+        "executable": "corespotlightd"
+      },
+      {
+        "pid": 7184,
+        "cpu_percent": 30.4,
+        "executable": "suggestd"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 26.3,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 21.7,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 700,
+        "cpu_percent": 18.3,
+        "executable": "suggestd"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 14.6,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 23270,
+        "cpu_percent": 13.1,
+        "executable": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 5.8,
+        "executable": "codex"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 3.3,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.9,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.5,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.2,
+        "executable": "logd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 1.2,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.9,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "cpu": "Apple M4 Pro",
+  "command": {
+    "command": [
+      "python3",
+      "/Users/ryan/Developer/Primes-vector-recurrence-retest/experiments/swift/compare_optimizations.py",
+      "--repo",
+      "/Users/ryan/Developer/Primes-vector-recurrence-retest",
+      "--variant",
+      "control-111=1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "--variant",
+      "vector-recurrence=616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+      "--output",
+      "/Users/ryan/Developer/Primes-vector-recurrence-retest/experiments/swift/vector-recurrence-retest-evidence/timing-2026-09-12T234209.874361Z.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-vector-recurrence-retest/experiments/swift",
+    "started_at_utc": "2026-09-12T23:42:10.064742+00:00",
+    "owned_process_group": 23282,
+    "exit_code": 0,
+    "combined_stdout_stderr": "control-111: 0.038482 ms/pass (129930 passes)\nvector-recurrence: 0.079354 ms/pass (63009 passes)\nvector-recurrence: 0.079265 ms/pass (63080 passes)\ncontrol-111: 0.038628 ms/pass (129440 passes)\ncontrol-111: 0.038695 ms/pass (129215 passes)\nvector-recurrence: 0.079421 ms/pass (62957 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"control-111\": 0.03862808959363412,\n    \"vector-recurrence\": 0.07935407178339603\n  },\n  \"speedup_over_first\": {\n    \"control-111\": 1.0,\n    \"vector-recurrence\": 0.4867814432896766\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T23:43:34.427657+00:00"
+  },
+  "binary_sha256": {
+    "control-111": "31fd5e6de9f702f99f86fa54e14b6c8655abb2b057977be4fce4d08ebc391b4f",
+    "vector-recurrence": "b2e4d91a9a012c79dd5cd8d47fb2532dad094334003c0113aabc6604c8ba7a51"
+  },
+  "after": {
+    "at_utc": "2026-09-12T23:43:34.478305+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 31.8,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 15.2,
+        "executable": "launchd"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 12.5,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 7.4,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.6,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.2,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.7,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.5,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.4,
+        "executable": "logd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.4,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.4,
+        "executable": "milod"
+      },
+      {
+        "pid": 7155,
+        "cpu_percent": 0.4,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.4,
+        "executable": "claude"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.3,
+        "executable": "notifyd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "backup_after": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n",
+  "result_sha256": "a4ea88fc58099ed65ad9f26c1b5d532c886949635ce2ab7a6ab02e8adcef1f87",
+  "sampled_conditions_passed": true,
+  "finished_at_utc": "2026-09-12T23:43:34.484170+00:00",
+  "lock_absent_after": true
+}

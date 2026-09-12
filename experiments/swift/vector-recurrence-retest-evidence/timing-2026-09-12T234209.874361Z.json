@@ -1,0 +1,106 @@
+{
+  "recorded_at_utc": "2026-09-12T23:43:34.338012+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu": "Apple M4 Pro",
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "flags": [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "variants": {
+    "control-111": {
+      "revision": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448"
+    },
+    "vector-recurrence": {
+      "revision": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+      "source_sha256": "4256badbc50f242eca8156b8e9daa41b86f22c3af05b298268ab5419c70eaba2"
+    }
+  },
+  "run_order": [
+    [
+      "control-111",
+      "vector-recurrence"
+    ],
+    [
+      "vector-recurrence",
+      "control-111"
+    ],
+    [
+      "control-111",
+      "vector-recurrence"
+    ]
+  ],
+  "samples": {
+    "control-111": [
+      {
+        "output": "control-111;129930;5.000027667;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129930,
+        "seconds": 5.000027667,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27892552",
+        "milliseconds_per_pass": 0.03848247261602401
+      },
+      {
+        "output": "control-111;129440;5.000019917;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129440,
+        "seconds": 5.000019917,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27790337",
+        "milliseconds_per_pass": 0.03862808959363412
+      },
+      {
+        "output": "control-111;129215;5.0000045;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129215,
+        "seconds": 5.0000045,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27742049",
+        "milliseconds_per_pass": 0.03869523275161552
+      }
+    ],
+    "vector-recurrence": [
+      {
+        "output": "vector-recurrence;63009;5.000020709;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 63009,
+        "seconds": 5.000020709,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 13538647",
+        "milliseconds_per_pass": 0.07935407178339603
+      },
+      {
+        "output": "vector-recurrence;63080;5.000034042;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 63080,
+        "seconds": 5.000034042,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 13552844",
+        "milliseconds_per_pass": 0.07926496578947369
+      },
+      {
+        "output": "vector-recurrence;62957;5.000077;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 62957,
+        "seconds": 5.000077,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 13528141",
+        "milliseconds_per_pass": 0.07942050923646299
+      }
+    ]
+  },
+  "median_ms": {
+    "control-111": 0.03862808959363412,
+    "vector-recurrence": 0.07935407178339603
+  },
+  "speedup_over_first": {
+    "control-111": 1.0,
+    "vector-recurrence": 0.4867814432896766
+  }
+}
