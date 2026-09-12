@@ -1,0 +1,272 @@
+{
+  "tested_files": {
+    "combined-a": {
+      "PrimeSieve.swift": "35921649b485d617f4858036b7eadd4595e9724644829ce2dc77627ce27452cb",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "ExtraVerify.swift": "3b5fd7401442239666e2eabba8a8f3ba6aa58d2a8d74ca754e39f123d14b3e82",
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e"
+    },
+    "combined-b": {
+      "PrimeSieve.swift": "0711802c2685ed92724957bd88a5086c30be8277d9d7551585cc62e854edd4cc",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "ExtraVerify.swift": "3b5fd7401442239666e2eabba8a8f3ba6aa58d2a8d74ca754e39f123d14b3e82",
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e"
+    }
+  },
+  "commands": [
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "./verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "./verify"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "./extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: every limit in 2,049...20,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n"
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "BenchmarkObserver.swift",
+        "-o",
+        "BenchmarkObserver.o"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-a",
+      "revision": "f43c436e94fb9271a1d18c85c61540ef79891e63",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        ".",
+        "PrimeSieve.swift",
+        "Benchmark.swift",
+        "-S",
+        "-o",
+        "PrimeSwift.s"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "./verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "./verify"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "./extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: every limit in 2,049...20,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n"
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "BenchmarkObserver.swift",
+        "-o",
+        "BenchmarkObserver.o"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "combined-b",
+      "revision": "e8ba7346615e79b65bba2e4aef57af9aaf8ea180",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        ".",
+        "PrimeSieve.swift",
+        "Benchmark.swift",
+        "-S",
+        "-o",
+        "PrimeSwift.s"
+      ],
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "assembly": {
+    "combined-a": {
+      "observer_call": true,
+      "factor3_st3_16b": true,
+      "variable_64bit_shifts": [],
+      "markWord_calls": [],
+      "vector_orr_count": 23,
+      "overflow_branches": 16
+    },
+    "combined-b": {
+      "observer_call": true,
+      "factor3_st3_16b": true,
+      "variable_64bit_shifts": [],
+      "markWord_calls": [],
+      "vector_orr_count": 23,
+      "overflow_branches": 10
+    }
+  },
+  "traceability": {
+    "a_parent_is_baseline": true,
+    "b_parent_is_a": true,
+    "factor_5_case_matches_prior": true,
+    "factor_7_case_matches_prior": true,
+    "factor_9_case_matches_prior": true,
+    "factor_11_case_matches_prior": true,
+    "factor_13_case_matches_prior": true,
+    "six_wrapping_lines_match_exp1": true,
+    "Benchmark.swift_unchanged": true,
+    "BenchmarkObserver.swift_unchanged": true,
+    "Verify.swift_unchanged": true,
+    "ExtraVerify_matches_exp2": true
+  }
+}
