@@ -6,11 +6,18 @@ These instructions apply to everything in `experiments/swift`, and this file dou
 
 Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8bitBool`, `PrimeSwift_1bit_u8`, `PrimeSwift_1bitStriped_u8`) on equal terms, in one category: `algorithm=base,faithful=yes,bits=1`, one thread, limit 1,000,000. Wheel, cached-state, and multithreaded variants are deferred.
 
+## Baseline and development controls
+
+The project baseline is currently `PrimeSwift_1bitStriped_u8` at upstream `22bfea9`, as established in [the direct comparison](reports/UpstreamBaselineComparison.md). In general, it is the fastest of the three upstream Swift implementations, measured with the same runner, compiler flags, machine, and timing session as our candidate. Pin the upstream commit and identify the winning entry in each report. The Bool entry uses `bits=8`; retain that label when comparing it with the three `bits=1` implementations.
+
+Our earlier versions are development controls: they measure the contribution of an optimization. The historical `swift/baseline` branch (`25402d4`) and `0d0a142` are development controls, not the upstream baseline. Preserve those branches and historical results. Report gains over the upstream baseline separately from gains over a development control.
+
 ## Current best
 
 - `swift/dense-small-factors`: combined candidate `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4) in merge commit `3191a53`.
 - One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–13 have dense word handlers (the runtime composite test excludes 9); larger factors use eight fixed-mask byte streams with four writes per iteration and wrapping index arithmetic.
-- 0.058781 ms per pass, the median of three rotated five-second trials on the reference machine: 38.72% more throughput than `0d0a142` in that session. Wrapping added 9.48% over the combined word handlers alone. Desktop activity and timing variation make the precise percentages provisional. This candidate has not yet been timed against the three upstream Swift entries in the same session.
+- Direct upstream comparison: 0.059299 ms per pass versus 0.207650 ms for the fastest upstream entry, striped UInt8: **3.50x throughput** in three rotated five-second trials. [Report](reports/UpstreamBaselineComparison.md), [raw results and provenance](upstream-baseline-e8ba734.json). Desktop activity makes the precise ratio provisional.
+- Separate development-control session: 0.058781 ms per pass, 38.72% more throughput than `0d0a142`. Wrapping added 9.48% over the combined word handlers alone. These are gains over our earlier versions, not upstream.
 - Latest [review](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/reports/CombinedReview.md), [raw timing results](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-results-e8ba734.json), and [verification evidence](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-verification-e8ba734.json) are published in `8d77381` on `swift/combined-review`.
 
 ## Experiments
@@ -65,8 +72,8 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
 - Build the benchmark with `-O -whole-module-optimization` and the observer as in `run.sh`. Compared variants use identical flags and the same runner.
 - Timing evidence comes only from the reference machine (Apple M4 Pro, Swift 6.3.3): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
-- Compare committed revisions with `compare_optimizations.py`. Always include the current development branch in the same run, and pass `--output` so the recorded `optimization-results.json` isn't overwritten.
-- `compare_all.py` overwrites `all-swift-results.json`. Copy that file first.
+- Compare committed revisions with `compare_optimizations.py`. Include the current development branch as a development control in the same run, and pass `--output` so the recorded `optimization-results.json` isn't overwritten.
+- Use `compare_all.py` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It overwrites `all-swift-results.json`: copy that file first, preserve the new run under a unique name, and restore the earlier record. Record the exact candidate revision, upstream revision, source and adapter hashes, hardware, Swift version, and run order with the results; acquire the timing lock before this script starts compiling.
 
 ## Timing sessions
 
