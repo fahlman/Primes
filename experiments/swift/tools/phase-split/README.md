@@ -89,8 +89,10 @@ swiftc -O -whole-module-optimization PrimeSieve.swift \
 ```
 
 Use `-O -sanitize=address` in place of WMO for its original ASan check.
-No new verification or timing result is claimed by this tooling change; see the
-[implementation record](../../reports/CurrentPhaseTools.md).
+At exact candidate `0c605a4`, current verification passed 66,845 checks over
+2,305 limits under both ASan and WMO. Actual binary review, short wrapper checks
+and stale-input/overwrite refusals passed. See the [verification record](../../reports/CurrentPhaseTools.md).
+No new phase timings are claimed.
 
 ## Future timing and interpretation
 
