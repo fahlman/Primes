@@ -7,6 +7,11 @@ let generator = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
 let process = Process()
 process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
 process.arguments = ["swift", generator.path] + Array(CommandLine.arguments.dropFirst())
-try process.run()
-process.waitUntilExit()
-exit(process.terminationStatus)
+do {
+    try process.run()
+    process.waitUntilExit()
+    exit(process.terminationStatus)
+} catch {
+    FileHandle.standardError.write(Data((error.localizedDescription + "\n").utf8))
+    exit(1)
+}

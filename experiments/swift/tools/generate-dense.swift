@@ -63,44 +63,49 @@ let switches = [
     DenseSwitch(width: 128, firstFactor: 65, lastFactor: 111,
                 helper: "markVectorWord", diagnostic: "Vector-dense"),
 ]
-let arguments = Array(CommandLine.arguments.dropFirst())
-if arguments.isEmpty {
-    for block in switches {
-        print(block.generated(), terminator: "")
-    }
-} else {
-    guard arguments.count == 2 && (arguments[0] == "--check" || arguments[0] == "--write") else {
-        throw NSError(domain: "GenerateDense", code: 1, userInfo: [
-            NSLocalizedDescriptionKey: "Usage: generate-dense.swift [--check|--write PrimeSieve.swift]"
-        ])
-    }
-    let file = URL(fileURLWithPath: arguments[1])
-    var source = try String(contentsOf: file, encoding: .utf8)
-    let ranges = try switches.map { try $0.markedRange(in: source) }
-    guard ranges[0].upperBound <= ranges[1].lowerBound else {
-        throw NSError(domain: "GenerateDense", code: 2, userInfo: [
-            NSLocalizedDescriptionKey: "Generated blocks must be separate, with the 64-bit block first"
-        ])
-    }
-    for block in switches {
-        let range = try block.markedRange(in: source)
-        let generated = block.generated()
-        if arguments[0] == "--check" {
-            guard source[range] == generated else {
-                throw NSError(domain: "GenerateDense", code: 3, userInfo: [
-                    NSLocalizedDescriptionKey: "The generated \(block.label) switch does not match the source"
-                ])
+do {
+    let arguments = Array(CommandLine.arguments.dropFirst())
+    if arguments.isEmpty {
+        for block in switches {
+            print(block.generated(), terminator: "")
+        }
+    } else {
+        guard arguments.count == 2 && (arguments[0] == "--check" || arguments[0] == "--write") else {
+            throw NSError(domain: "GenerateDense", code: 1, userInfo: [
+                NSLocalizedDescriptionKey: "Usage: generate-dense.swift [--check|--write PrimeSieve.swift]"
+            ])
+        }
+        let file = URL(fileURLWithPath: arguments[1])
+        var source = try String(contentsOf: file, encoding: .utf8)
+        let ranges = try switches.map { try $0.markedRange(in: source) }
+        guard ranges[0].upperBound <= ranges[1].lowerBound else {
+            throw NSError(domain: "GenerateDense", code: 2, userInfo: [
+                NSLocalizedDescriptionKey: "Generated blocks must be separate, with the 64-bit block first"
+            ])
+        }
+        for block in switches {
+            let range = try block.markedRange(in: source)
+            let generated = block.generated()
+            if arguments[0] == "--check" {
+                guard source[range] == generated else {
+                    throw NSError(domain: "GenerateDense", code: 3, userInfo: [
+                        NSLocalizedDescriptionKey: "The generated \(block.label) switch does not match the source"
+                    ])
+                }
+            } else {
+                source.replaceSubrange(range, with: generated)
             }
+        }
+        // Write once, after both blocks have been located successfully. Everything
+        // outside the markers is preserved, including alignment peels and tails.
+        if arguments[0] == "--write" {
+            try source.write(to: file, atomically: true, encoding: .utf8)
+            print("Updated both generated dense switches.")
         } else {
-            source.replaceSubrange(range, with: generated)
+            print("Generated 64-bit 5...63 and 128-bit 65...111 switches match.")
         }
     }
-    // Write once, after both blocks have been located successfully. Everything
-    // outside the markers is preserved, including alignment peels and tails.
-    if arguments[0] == "--write" {
-        try source.write(to: file, atomically: true, encoding: .utf8)
-        print("Updated both generated dense switches.")
-    } else {
-        print("Generated 64-bit 5...63 and 128-bit 65...111 switches match.")
-    }
+} catch {
+    FileHandle.standardError.write(Data((error.localizedDescription + "\n").utf8))
+    exit(1)
 }
