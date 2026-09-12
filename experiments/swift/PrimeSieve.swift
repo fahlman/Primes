@@ -38,12 +38,17 @@ final class PrimeSieve {
                 }
 
                 // Consecutive odd multiples differ by p bit positions. Eight
-                // interleaved streams each keep a fixed mask and advance p bytes.
+                // interleaved streams each keep a fixed mask and advance p bytes,
+                // with eight writes per iteration.
                 var start = (p * p - 3) / 2
                 let p2 = p + p
                 let p3 = p2 + p
                 let p4 = p3 + p
-                let unrolledEnd = end - p3
+                let p5 = p4 + p
+                let p6 = p5 + p
+                let p7 = p6 + p
+                let p8 = p7 + p
+                let unrolledEnd = end - p7
 
                 // Wrapping additions change no result here; they only drop overflow
                 // checks. The byte index stays below end + p, and the bit index start
@@ -57,7 +62,11 @@ final class PrimeSieve {
                         bytes[byte &+ p] |= mask
                         bytes[byte &+ p2] |= mask
                         bytes[byte &+ p3] |= mask
-                        byte &+= p4
+                        bytes[byte &+ p4] |= mask
+                        bytes[byte &+ p5] |= mask
+                        bytes[byte &+ p6] |= mask
+                        bytes[byte &+ p7] |= mask
+                        byte &+= p8
                     }
                     while byte < end {
                         bytes[byte] |= mask
