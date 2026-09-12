@@ -1,0 +1,41 @@
+{
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Independent Codex agent /root/review_sieve, checked by coordinating Codex",
+  "status": "passed",
+  "evidence_sha256": {
+    "timing-616d0bd.json": "92f2ef9ab95d444c611e47511abd988b7dccdc6e39210edbca4347277f770b1a",
+    "timing-provenance-616d0bd.json": "5dc0725f1f166747867329a80f718bf061a979ad760319d545deecb266ce860e",
+    "compiler-events-616d0bd.jsonl": "f08e2297419dde4e72640a38f7ec1e916fef98116e2f6903ea667619771f8d11"
+  },
+  "exact_source_harness_observer_binaries_and_admission_verified": true,
+  "validated_five_second_runs": 6,
+  "run_order": "AB BA AB",
+  "control_median_us": 39.04107324843251,
+  "candidate_median_us": 79.82491259299466,
+  "control_range_us": [
+    38.87498672036573,
+    39.14104380636272
+  ],
+  "candidate_range_us": [
+    79.51358607254743,
+    79.87622544211384
+  ],
+  "duration_ratio": 2.0446392978246215,
+  "added_us": 40.78383934456215,
+  "throughput_change_percent": -51.09161791696255,
+  "every_candidate_trial_slower_than_every_control": true,
+  "control_compile_seconds": 49.316682375,
+  "candidate_compile_seconds": 7.348467666,
+  "compile_seconds_saved": 41.968214709,
+  "compiler_events": "observer then control then candidate, all before timing; version query after timing",
+  "decision": "Rejected for adoption; preserve source and evidence; no package/Linux follow-up gate reached",
+  "limitations": [
+    "Substantial background desktop activity in before-compilation snapshot",
+    "Endpoint-only monitoring",
+    "Three rounds incompletely balance two positions",
+    "Single build timing per variant",
+    "M4 Pro / Swift6.3.3 only; no causal or other-platform proof"
+  ],
+  "lock_release_recorded": true
+}

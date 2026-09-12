@@ -1,0 +1,292 @@
+{
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "status": "passed",
+  "started_at_utc": "2026-09-12T23:14:08.528212+00:00",
+  "verification_sha256": "e8f33fb5a0df47c9a93231e4d04f1b4fd2df81eb67e95e16537cb88ea8a0f73e",
+  "admission_sha256": "0c9cf265a4bcb588b3fb9991b70340d4f29a2de4dcc72cedcdc3405c1744299e",
+  "timing_script_sha256": "547c788b7757dd1f282e08ffa080efa48c56bf65e2419cb4188d5f79455d0f6b",
+  "compare_script_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+  "before": {
+    "at_utc": "2026-09-12T23:14:08.577942+00:00",
+    "top_processes": [
+      {
+        "pid": 16696,
+        "cpu_percent": 77.4,
+        "executable": "backupd"
+      },
+      {
+        "pid": 641,
+        "cpu_percent": 31.5,
+        "executable": "SystemUIServer"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 29.6,
+        "executable": "launchd"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 22.0,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 16852,
+        "cpu_percent": 16.9,
+        "executable": "Python"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 14.2,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 16851,
+        "cpu_percent": 9.9,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 9.6,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 5.8,
+        "executable": "codex"
+      },
+      {
+        "pid": 7175,
+        "cpu_percent": 4.7,
+        "executable": "Finder"
+      },
+      {
+        "pid": 642,
+        "cpu_percent": 4.6,
+        "executable": "Finder"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 3.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.9,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 2.1,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 2.1,
+        "executable": "WallpaperSequoiaExtension"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "compiler_recorder_source": "#!/Applications/Xcode.app/Contents/Developer/usr/bin/python3\nimport json,subprocess,sys,time\nfrom datetime import datetime,timezone\ncompiler='/usr/bin/swiftc'\nevents='/Users/ryan/Developer/Primes-vector-recurrence/experiments/swift/vector-recurrence-evidence/compiler-events-616d0bd.jsonl'\nargs=[compiler,*sys.argv[1:]]\nstart=time.monotonic();stamp=datetime.now(timezone.utc).isoformat()\nresult=subprocess.run(args)\nentry={'command':args,'started_at_utc':stamp,'duration_seconds':time.monotonic()-start,'exit_code':result.returncode}\nwith open(events,'a') as output:output.write(json.dumps(entry)+'\\n')\nsys.exit(result.returncode if result.returncode>=0 else 128-result.returncode)\n",
+  "compiler_recorder_sha256": "fe5c39c166b01a06a225706b189987578dfbb0f3bd2dbdbc5bef333f151eeefc",
+  "real_compiler": "/usr/bin/swiftc",
+  "command": {
+    "command": [
+      "env",
+      "PATH=/Users/ryan/Developer/Primes-vector-recurrence/experiments/swift/.build/compiler-recorder-616d0bd:/opt/local/bin:/opt/local/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/pkg/env/global/bin:/Library/Apple/usr/bin:/Applications/Privileges.app/Contents/MacOS:/Users/ryan/.codex/tmp/arg0/codex-arg0zANzj0:/Users/ryan/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/opt/local/bin:/opt/local/sbin:/Users/ryan/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Users/ryan/Applications/ChatGPT.app/Contents/Resources",
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "/Users/ryan/Developer/Primes-vector-recurrence/experiments/swift/compare_optimizations.py",
+      "--repo",
+      "/Users/ryan/Developer/Primes-vector-recurrence",
+      "--variant",
+      "control-111=1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "--variant",
+      "vector-recurrence=616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+      "--output",
+      "/Users/ryan/Developer/Primes-vector-recurrence/experiments/swift/vector-recurrence-evidence/timing-616d0bd.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-vector-recurrence/experiments/swift",
+    "started_at_utc": "2026-09-12T23:14:08.578886+00:00",
+    "owned_process_group": 16859,
+    "exit_code": 0,
+    "combined_stdout_stderr": "control-111: 0.038875 ms/pass (128618 passes)\nvector-recurrence: 0.079514 ms/pass (62883 passes)\nvector-recurrence: 0.079825 ms/pass (62638 passes)\ncontrol-111: 0.039041 ms/pass (128071 passes)\ncontrol-111: 0.039141 ms/pass (127744 passes)\nvector-recurrence: 0.079876 ms/pass (62597 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"control-111\": 0.03904107324843251,\n    \"vector-recurrence\": 0.07982491259299467\n  },\n  \"speedup_over_first\": {\n    \"control-111\": 1.0,\n    \"vector-recurrence\": 0.48908382083037455\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T23:15:35.732557+00:00"
+  },
+  "raw_timing_sha256": "92f2ef9ab95d444c611e47511abd988b7dccdc6e39210edbca4347277f770b1a",
+  "binary_sha256": {
+    "control-111": "31fd5e6de9f702f99f86fa54e14b6c8655abb2b057977be4fce4d08ebc391b4f",
+    "vector-recurrence": "b2e4d91a9a012c79dd5cd8d47fb2532dad094334003c0113aabc6604c8ba7a51"
+  },
+  "compiler_events_sha256": "f08e2297419dde4e72640a38f7ec1e916fef98116e2f6903ea667619771f8d11",
+  "after_trials_under_lock": {
+    "at_utc": "2026-09-12T23:15:35.785072+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 10.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 6.1,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 5.4,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 3.0,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 2.4,
+        "executable": "launchd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.2,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.5,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 16696,
+        "cpu_percent": 1.4,
+        "executable": "backupd"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.2,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.2,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.1,
+        "executable": "logd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.8,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.7,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.7,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.6,
+        "executable": "SiriNCService"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "after": {
+    "at_utc": "2026-09-12T23:15:35.836556+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 10.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 6.1,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 5.4,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 3.0,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 2.4,
+        "executable": "launchd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.2,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.5,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 16696,
+        "cpu_percent": 1.4,
+        "executable": "backupd"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.2,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.2,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.1,
+        "executable": "logd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.8,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.7,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.7,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.6,
+        "executable": "SiriNCService"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T23:15:35.836792+00:00",
+  "lock_absent_after": true
+}
