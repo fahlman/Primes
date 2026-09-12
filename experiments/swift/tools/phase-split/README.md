@@ -1,5 +1,9 @@
 # Through-63 phase diagnostics
 
+Production now uses fused sparse streams at `8f108f5`. This diagnostic still copies
+`19aa38a` and must be refreshed and reviewed before profiling current production.
+The recorded through-63 measurements remain historical evidence.
+
 The [recorded through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) includes
 raw samples, source verification and measurement limits.
 

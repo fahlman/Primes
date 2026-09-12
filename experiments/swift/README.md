@@ -33,19 +33,21 @@ The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The im
 
 ## Current results and project baseline
 
-The adopted implementation is **through-63 `19aa38a`**, merged through [PR #8](https://github.com/fahlman/Primes/pull/8) as `5cd948e`, after [PR #5](https://github.com/fahlman/Primes/pull/5) (`98b21c6`) and [PR #7](https://github.com/fahlman/Primes/pull/7) (`8861ddb`). All three used merge commits, preserving the reviewed candidates without rebasing.
+The adopted implementation is **experiment 8B, `8f108f5`**, merged through [PR #11](https://github.com/fahlman/Primes/pull/11) as `703dc12`. It retains the dense handlers through 63 and uses fused streams for larger factors. The merge preserves the reviewed commits and produces B's exact source.
 
 | Latest development comparison | Median milliseconds per pass |
 |---|---:|
-| Development control `0c370b5` | 0.058000 |
-| Through 47 `404d1cb` | 0.046580 |
-| Adopted through 63 `19aa38a` | **0.042376** |
+| Development control `4483965` | 0.043259 |
+| Alternative 8A, eight writes per stream `47b4af1` | 0.042549 |
+| Adopted 8B, fused sparse streams `8f108f5` | **0.040806** |
 
-Through 63 delivered **9.92% more throughput than through 47**, saving **4.204 µs per sieve**, and **36.87% more throughput than development control `0c370b5`**. All nine runs in this rotated M4 Pro / Swift 6.3.3 session validated correctly, and every through-63 trial beat every through-47 trial. The gain includes compiler outlining effects, which were not isolated. Desktop activity makes exact percentages provisional. [Review and reproduction](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md), [raw timing](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-results-19aa38a.json), [verification](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json).
+B delivered **6.01% more throughput than development**, saving **2.453 µs per sieve**, and **4.27% more throughput than A**. All nine runs in this rotated M4 Pro / Swift 6.3.3 session validated correctly, and every B trial beat every A and development trial. Desktop activity makes exact percentages provisional; instruction counts do not isolate the cause of the gains. See the [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md), [raw results](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-results-8f108f5.json), and [verification evidence](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json).
+
+The earlier through-63 `19aa38a` remains the source of the existing phase diagnostic. Its [breakdown](reports/PhaseBreakdownThrough63.md) and the [later band measurements](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md) describe that earlier implementation. Refresh and review the diagnostic copy before using it to profile B; identical output flags do not prove identical timing code.
 
 ## Most recent direct upstream comparison
 
-The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). It has not been repeated for through-63 `19aa38a`.
+The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). It has not been repeated for adopted `8f108f5`.
 
 
 | Implementation | Median milliseconds per pass | e8ba734 throughput advantage |
@@ -71,7 +73,7 @@ Before these experiments, our original development control beat all three reposi
 | Packed UInt8 | 2.91x |
 | Striped UInt8 | 1.73x |
 
-Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; through-63 `19aa38a` has only the recorded development comparisons so far. Do not combine ratios across sessions.
+Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; adopted `8f108f5` has only the recorded development comparison so far. Do not combine ratios across sessions.
 
 To compare the current implementation with all three original entries:
 
@@ -87,7 +89,7 @@ The earlier two-way comparison remains available through `compare.py` and `compa
 
 ## Validation
 
-The adopted candidate `19aa38a` passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including small limits, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered every limit 2,049–30,000, 500 random limits, and 1,561 prime-square boundaries. All 30 word cases reproduced exactly from the generator; assembly confirmed the separate word handler and real observer call. See the [through-63 verification record](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json). Integration preserved these tested source files byte-for-byte.
+The adopted candidate `8f108f5` passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including every limit from −2 through 2,048, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered every limit 2,049–30,000, 500 random limits, and 1,561 prime-square cases. The unchanged phase verifier passed 16,511 partial/full checks over 1,501 limits under ASAN and WMO, including full-buffer equality to `19aa38a` with padding. Dense handlers are unchanged; assembly confirmed the separate word handler and real observer call. See the [verification record](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json). Integration preserved the tested sieve and runner byte-for-byte.
 
 ```sh
 mkdir -p .build
@@ -99,7 +101,8 @@ swiftc -O -sanitize=address PrimeSieve.swift Verify.swift -o .build/verify
 
 - `swift/baseline`: the original verified implementation at `25402d4`, preserved as a development control.
 - `swift/stream-fusion`: the tested traversal experiment, retained as evidence rather than adopted.
-- `swift/dense-small-factors`: the measured improvement and current development branch.
+- `swift/dense-small-factors`: the adopted implementation and current development branch.
+- `swift/sparse-stream-loops`: experiment 8 history, preserving alternative A and adopted B.
 
 Use separate branches for further optimizations. The target remains `base,faithful=yes`, one thread, and one million, with the same timing boundary and compiler settings. Wheel, cached-state, and parallel variants remain deferred. A future upstream submission should contain the proven change and required supporting files.
 

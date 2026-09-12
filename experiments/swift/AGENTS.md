@@ -14,11 +14,12 @@ Our earlier versions are development controls: they measure the contribution of 
 
 ## Current best
 
-- `swift/dense-small-factors`: through-63 candidate `19aa38a`, adopted through [PR #8](https://github.com/fahlman/Primes/pull/8) in merge commit `5cd948e`. PRs #5, #7 and #8 were merged in that order with merge commits, preserving the reviewed source commits; no rebase was needed.
-- One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–63 have dense word handlers, dispatched only after the runtime composite test; larger factors use eight fixed-mask byte streams with four writes per iteration and wrapping index arithmetic.
-- Latest development comparison: **0.042376 ms per pass**, **9.92% more throughput** than through-47 `404d1cb` (0.046580 ms), and **36.87% more** than development control `0c370b5` (0.058000 ms), in one rotated session. Every through-63 trial beat every through-47 trial; all nine runs validated correctly. Apple M4 Pro, Swift 6.3.3; desktop activity makes precise percentages provisional. The gain includes compiler outlining effects, which were not isolated.
-- Latest [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md), [raw timing results](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-results-19aa38a.json) and [verification evidence](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json) are published in `ff6e8bf` on `swift/word-dense-49-63-review`.
-- The most recent direct upstream comparison measured the earlier `e8ba734`: 0.059299 ms versus 0.207650 ms for upstream striped UInt8, **3.50x throughput**. [Report](reports/UpstreamBaselineComparison.md), [raw results](upstream-baseline-e8ba734.json). It identifies the upstream baseline but does not measure the current through-63 candidate's upstream advantage; do not combine ratios across sessions.
+- `swift/dense-small-factors`: experiment 8B, fused sparse streams at `8f108f5`, adopted through [PR #11](https://github.com/fahlman/Primes/pull/11) in merge commit `703dc12`. The merge preserves the original A and B commits; the resulting source is exactly reviewed B.
+- One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–63 retain their dense word handlers. Larger factors use one fused loop per factor, marking eight successive multiples with separate single-bit masks derived from every odd residue mod 8. Wrapping arithmetic and fresh class-owned storage remain.
+- Latest development comparison: **0.040806 ms per pass**, **6.01% more throughput** than development control `4483965` (0.043259 ms), saving **2.453 µs per sieve**. B also delivered **4.27% more throughput** than alternative 8A `47b4af1` (0.042549 ms). Every B trial beat every A and development trial; all nine runs validated correctly. Apple M4 Pro, Swift 6.3.3; desktop activity makes exact percentages provisional. Instruction counts do not isolate the cause of the gains.
+- Latest [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md), [raw results](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-results-8f108f5.json), and [verification evidence](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json) are published in `a7fc27f` on `swift/sparse-stream-review`.
+- The most recent direct upstream comparison measured the earlier `e8ba734`: 0.059299 ms versus 0.207650 ms for upstream striped UInt8, **3.50x throughput**. [Report](reports/UpstreamBaselineComparison.md), [raw results](upstream-baseline-e8ba734.json). It identifies the upstream baseline but does not measure the current `8f108f5` candidate's upstream advantage; do not combine ratios across sessions.
+- The phase diagnostic still copies `19aa38a`. Refresh and review that copy before profiling current B; matching full output flags alone does not establish timing-code fidelity. PR #10's band extension remains separate from this adoption.
 
 ## Experiments
 
@@ -35,7 +36,9 @@ Our earlier versions are development controls: they measure the contribution of 
 | 4B: combined word handlers plus wrapping arithmetic | [PR #4](https://github.com/fahlman/Primes/pull/4), `e8ba734` | 0.058781 | Adopted; extended by experiments 5–7 |
 | 5: word handlers for odd factors 15–31 | [PR #5](https://github.com/fahlman/Primes/pull/5), `7ee6500`; [review](https://github.com/fahlman/Primes/blob/a334f451ed91e08fb74b3b7d08c7291ea58e2848/experiments/swift/reports/WordDense15Through31Review.md) | 0.049446 | Adopted in `98b21c6`; incorporated into experiment 7 |
 | 6: word handlers for odd factors 33–47 | [PR #7](https://github.com/fahlman/Primes/pull/7), `404d1cb`; [review](https://github.com/fahlman/Primes/blob/9093317190d9e004db9685f742a976caf0693ebc/experiments/swift/reports/WordDense33Through47Review.md) | 0.046554 | Adopted in `8861ddb`; incorporated into experiment 7 |
-| 7: word handlers for odd factors 49–63 | [PR #8](https://github.com/fahlman/Primes/pull/8), `19aa38a`; [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md) | 0.042376 | Adopted in `5cd948e`; current best |
+| 7: word handlers for odd factors 49–63 | [PR #8](https://github.com/fahlman/Primes/pull/8), `19aa38a`; [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md) | 0.042376 | Adopted in `5cd948e`; dense handlers retained in 8B |
+| 8A: eight writes per sparse fixed-mask stream | [PR #11](https://github.com/fahlman/Primes/pull/11), `47b4af1` | 0.042549 | Not selected; 8B won the direct comparison |
+| 8B: fused sparse streams above 63 | [PR #11](https://github.com/fahlman/Primes/pull/11), `8f108f5`; [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md) | 0.040806 | Adopted in `703dc12`; current best |
 
 Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 
@@ -51,7 +54,7 @@ Measurements are from each experiment's recorded session; use the linked reports
 | `run.sh`, `Dockerfile` | Build and run with the benchmark flags. |
 | `compare_optimizations.py` | Timing comparison of committed revisions, using the frozen runner and observer from commit `25402d4`. |
 | `compare_all.py` | Timing comparison against the three upstream entries, downloaded at commit `22bfea9`. |
-| `tools/phase-split/` | Cumulative phase diagnostics copied from adopted through-63 source `19aa38a`; see its README for validation and measurement limits. |
+| `tools/phase-split/` | Historical cumulative diagnostic copied from `19aa38a`; refresh and review before profiling adopted `8f108f5`. See its README for validation and measurement limits. |
 | `reports/`, `*.json` | Recorded results. Don't overwrite them unintentionally. |
 
 ## Sieve rules
