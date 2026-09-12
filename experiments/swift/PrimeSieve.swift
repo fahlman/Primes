@@ -92,43 +92,34 @@ final class PrimeSieve {
         let doubleGroupEnd = groupEnd - p
         var byte = start >> 3
 
+        @inline(__always)
+        func markGroup(at index: Int) {
+            bytes[index] |= m0
+            bytes[index &+ r1] |= m1
+            bytes[index &+ r2] |= m2
+            bytes[index &+ r3] |= m3
+            bytes[index &+ r4] |= m4
+            bytes[index &+ r5] |= m5
+            bytes[index &+ r6] |= m6
+            bytes[index &+ r7] |= m7
+        }
+
         // Wrapping additions change no result here; they only drop overflow checks.
         // The byte index stays below end + p and the bit index below 8 * end + p,
         // both far from Int.max.
         // The second group's last address is byte + p + r7, bounded by end.
         // Advance the index between groups while reusing the eight source offsets.
         while byte < doubleGroupEnd {
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            markGroup(at: byte)
             byte &+= p
 
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            markGroup(at: byte)
             byte &+= p
         }
 
         // At most one complete eight-mark group remains before the scalar tail.
         if byte < groupEnd {
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            markGroup(at: byte)
             byte &+= p
         }
 
@@ -136,11 +127,29 @@ final class PrimeSieve {
         // end of the last byte, so it can also set padding bits past the last
         // candidate; enumeration ignores them.
         let bitEnd = end << 3
-        var index = (byte << 3) + bit
-        while index < bitEnd {
-            bytes[index >> 3] |= UInt8(1) << (index & 7)
-            index &+= p
+        let index = (byte << 3) + bit
+        markScalarMultiples(bytes, from: index, until: bitEnd, step: p, wrappingStep: true)
+    }
+
+    /// Mark individual multiples up to end or alignment, returning the stopping index.
+    /// A zero alignment mask means no alignment stop; callers select the endpoint
+    /// and retain the sparse tail's wrapping step versus the dense phases' checked step.
+    @inline(__always)
+    @discardableResult
+    private func markScalarMultiples(
+        _ bytes: UnsafeMutablePointer<UInt8>, from start: Int, until end: Int,
+        step p: Int, alignmentMask: Int = 0, wrappingStep: Bool = false
+    ) -> Int {
+        var bit = start
+        while bit < end && (alignmentMask == 0 || bit & alignmentMask != 0) {
+            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
+            if wrappingStep {
+                bit &+= p
+            } else {
+                bit += p
+            }
         }
+        return bit
     }
 
     /// Dense marking on bytes for factor 3.
@@ -149,10 +158,7 @@ final class PrimeSieve {
         var bit = (p * p - 3) / 2
 
         // Odd p is coprime to 8, so at most seven marks reach a byte boundary.
-        while bit < oddCount && bit & 7 != 0 {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        bit = markScalarMultiples(bytes, from: bit, until: oddCount, step: p, alignmentMask: 7)
         guard bit < oddCount else { return }
 
         var byte = bit >> 3
@@ -188,10 +194,7 @@ final class PrimeSieve {
 
         // At most eight marks remain, including any partial final byte.
         bit = byte * 8
-        while bit < oddCount {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        markScalarMultiples(bytes, from: bit, until: oddCount, step: p)
     }
 
     /// Dense marking on 64-bit words for odd factors 5 through 63. Together with the
@@ -203,10 +206,7 @@ final class PrimeSieve {
         var bit = (p * p - 3) / 2
 
         // Odd p is coprime to 64, so at most 63 marks reach a word boundary.
-        while bit < oddCount && bit & 63 != 0 {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        bit = markScalarMultiples(bytes, from: bit, until: oddCount, step: p, alignmentMask: 63)
         guard bit < oddCount else { return }
 
         let words = UnsafeMutableRawPointer(bytes)
@@ -1364,10 +1364,7 @@ final class PrimeSieve {
 
         // Fewer than p complete words remain, plus any partial final word.
         bit = word * 64
-        while bit < oddCount {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        markScalarMultiples(bytes, from: bit, until: oddCount, step: p)
     }
 
     /// Marks each multiple of p within one 64-bit word individually, starting at
@@ -1396,10 +1393,7 @@ final class PrimeSieve {
         var bit = (p * p - 3) / 2
 
         // Odd p is coprime to 128: at most 127 individual marks reach a boundary.
-        while bit < bitEnd && bit & 127 != 0 {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        bit = markScalarMultiples(bytes, from: bit, until: bitEnd, step: p, alignmentMask: 127)
         guard bit < bitEnd else { return }
 
         let words = UnsafeMutableRawPointer(bytes)
@@ -3626,10 +3620,7 @@ final class PrimeSieve {
 
         // At most 128 marks remain, including any partial chunk and byte padding.
         bit = word * 128
-        while bit < bitEnd {
-            bytes[bit >> 3] |= UInt8(1) << (bit & 7)
-            bit += p
-        }
+        markScalarMultiples(bytes, from: bit, until: bitEnd, step: p)
     }
 
     /// A 128-bit local value with two UInt64 lanes. Each multiple receives its own

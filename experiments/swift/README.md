@@ -6,6 +6,23 @@ This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It store
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
 
+## Inline marking helper experiment
+
+Branch `swift/marking-helpers` contains a separate, unmerged refactor from adopted development `1d0522115846d8c6487d49a9bf0e60b18b9d8599`. A local `@inline(__always)` helper expresses the eight sparse marks once and is called for both main-loop groups and the optional cleanup group. It captures the same offsets and single-bit masks; the original group bounds, mark order, wrapping offsets, and byte advances remain.
+
+A second inline helper shares the seven scalar alignment and tail loops. It returns the stopping index for alignment; tails discard that index. Each call retains its original endpoint and addition semantics:
+
+| Scalar phase | Exclusive endpoint | Alignment mask | Step |
+|---|---|---|---|
+| Factor 3 / 64-bit alignment | `oddCount` | 7 / 63 | Checked `+=` |
+| Factor 3 / 64-bit tail | `oddCount` | 0 (no alignment stop) | Checked `+=` |
+| 128-bit alignment / tail | `byteCount << 3` | 127 / 0 | Checked `+=` |
+| Sparse tail | `end << 3` | 0 | Wrapping `&+=` |
+
+Both explicit dense switches, dense group geometry, runtime factor discovery, allocation, word/vector operations, enumeration, runner, observer, and verifiers are unchanged. Source-based classification remains `algorithm=base,faithful=yes,bits=1`, one thread: each composite still receives its own single-bit operation, with fresh class-owned storage per pass.
+
+`PrimeSieve.swift` falls from 3,679 to 3,670 lines. Excluding the two explicit switches, handwritten source falls from 322 to 313 lines; excluding blank and comment lines as well gives 232 to 218. Assembly identity is not assumed: local-function captures and the scalar helper's constant options still need compiler review. All six correctness checks, independent review, assembly comparison, and any required timing remain pending central execution. No performance result is claimed for this refactor.
+
 ## 128-bit cutoff sweep
 
 Cutoff 111, exact measured source `099e35afa8a2f01d79ef11f805d760e81d1d983a`, is adopted through [PR #16](https://github.com/fahlman/Primes/pull/16) in merge commit `380a942`. It incorporates PR #14's 128-bit marking and proven-safe wrapping byte offsets, with handlers ending at 111. Factors above 111 use the retained sixteen-write sparse loop. The 79 and 95 variants were not selected, and the earlier 127 configuration is superseded. The verifiers retain their 65–127 boundary limits, including factors now handled by the sparse loop. The recorded comparison and its limits are summarized below.
