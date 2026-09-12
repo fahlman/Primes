@@ -1,10 +1,34 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. The runtime-discovered factor 3 uses specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Factors 5 through 63 use the same approach on 64-bit words; the cases for the composite values 9, 15, 21, 25, 27, 33, 35, 39, 45, 49, 51, 55, 57, and 63 are never reached. Larger factors use one fused loop per factor: each iteration marks two groups of eight successive multiples, with a fixed single-bit mask for each bit phase. One optional eight-mark group precedes the unchanged scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. This variant uses the 128-bit local handlers for every odd factor 65 through 111, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
+
+## 128-bit cutoff sweep
+
+Branch `swift/dense-128-cutoff` is stacked on unmerged `bd3858c` and asks where the 128-bit handlers should stop. Each of its commits is a complete variant that changes only the generator's `lastFactor`, the regenerated switch, the dispatch bound in `runSieve`, and the matching comments: cutoffs 95, 79 and 111, in that order. Development (no 128-bit handlers, in effect a cutoff of 63) and `bd3858c` (cutoff 127) complete the bracket, so one rotated session can compare all five. The verifiers keep their 65–127 boundary limits; those remain valid limits for the factors that now take the sparse loop. No result is predicted here; the session decides.
+
+## Focused 128-bit wrapping-offset follow-up
+
+Exact candidate **`bd3858cac9a306aa3b8d4729cf059959a7c70885`** delivered **3.36% more throughput**, saving **1.316 µs per sieve**: median **39.116 µs** versus adopted sixteen-write development **40.432 µs** at `e3f5a412d832e7fd25b1354dcf027e1dbf7ab29c`. Every candidate trial beat every development trial in one rotated session on Apple M4 Pro / Swift 6.3.3, with three five-second runs each. All six trials validated correctly. Before/after snapshots found no competing builds, tests, benchmarks or audio assertions, but background desktop activity and a single session limit precision. The candidate remains **unmerged** in [PR #14](https://github.com/fahlman/Primes/pull/14).
+
+Branch `swift/dense-128-wrapping-offset` has two source commits: the unchanged 128-bit port A (`63ff55cd77b47e6c906e801cf22bb9113fa5c080`) and focused offset change B (`bd3858c`). A is traceability only and was not timed. The comparison measured development versus final B; it does not isolate wrapping's throughput contribution. [Review and measured result](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/reports/Dense128WrappingOffsetReview.md), [raw results](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-results-bd3858c.json), and [verification and assembly evidence](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-verification.json) are permanently linked at the evidence commit. The separate [upstream comparison](https://github.com/fahlman/Primes/blob/599821c1a259976fd44837c17bc618199985bf1a/experiments/swift/reports/CurrentUpstreamSwiftComparison.md), summarized below, is now published. Linux/Docker validation remains pending.
+
+A reuses the exact 128-bit dispatch, helpers and generated switch from `307da10fe930e2bbdb46254770833026277e4cf3`, while preserving the adopted sixteen-write sparse code for factors above 127. B changes only the local chunk offset from `word * 16` to `word &* 16`, with the caller invariant `0 <= word < byteCount / 16`, hence `16 * word <= byteCount - 16`. The mathematical offset cannot overflow. Independent source and assembly reviews found no blockers before timing. All 3,072 per-chunk overflow checks and traps disappeared; the vector helper fell from 36,370 to 12,847 static instructions and from 4,619 to 1,669 stack-access instructions. The frame grew from 1,056 to 1,280 bytes, while every runtime-prime main loop had fewer stack accesses. No new helper calls appeared, and real sieve, observer and release calls remain. These counts do not isolate the cause of the measured gain. No other tuning is included.
+
+In `bd3858c`, all odd cases 65 through 127 are present, without precomputed prime lists or multi-bit composite masks. Individual marks peel from p² to a 128-bit boundary, complete groups mark p chunks, and an individual tail runs through the last allocated byte. Raw unaligned loads/stores and per-lane little-endian conversion preserve the original byte representation and B's padding, including factor 101's mark for 1,000,001 at limit 1,000,000. Fresh allocation, dense handlers 3–63, enumeration, benchmark and observer are unchanged. Classification remains source-based; the compiler may combine individual source operations.
+
+The unchanged Swift generator can check the imported switch after acquiring the timing lock, from this directory:
+
+```sh
+swift tools/generate-dense-128.swift --check PrimeSieve.swift
+```
+
+The generator's `--check` passed for all 32 cases and 3,072 calls. `--write` remains available to regenerate only the marked block; it was not run for this follow-up. Verify passed under AddressSanitizer and optimized WMO. ExtraVerify passed under ASAN, retaining the original exhaustive, random and prime-square checks plus 3,654 sparse-group limits and 11,382 wide alignment/group/tail limits. PhaseVerify passed under WMO with 53,015 partial/full checks over 2,305 limits, including complete raw-buffer equality and padding. ExtraVerify WMO and PhaseVerify ASAN were not added to this local bracket. PhaseSieve stays the unchanged earlier B reference; its timing copy is stale for this candidate and must not profile it.
+
+The [original 128-bit review](reports/Dense128Review.md) measured `307da10` at 42.365 microseconds versus then-development at 40.044 microseconds, a regression. Its verification and assembly evidence explain this follow-up but do not validate or measure final B. The sixteen-write results below describe the adopted development control in an earlier session; do not combine those timings with new measurements.
 
 ## Run instructions
 
@@ -39,7 +63,7 @@ Exact measured source **`59262fe`** delivered **1.24% more throughput**, saving 
 
 Verify, ExtraVerify and PhaseVerify passed under both AddressSanitizer and optimized WMO, including 3,654 additional sparse-group boundaries and 34,983 phase checks over 1,521 limits with full-buffer equality and padding. These checks ran at `6679810`; final `59262fe` changes one comment only, independently reviewed with byte-identical recompiled assembly. The main loops use 51 instructions per sixteen marks, versus 54 for two B iterations; setup and cleanup still incur additional work. The real observer call and release remain. These counts do not isolate the cause of the measured gain.
 
-[Review and decision](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/reports/SixteenWriteFusedReview.md), [raw results](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-results-59262fe-307da10.json), and [verification evidence](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-verification.json) are published for [PR #12](https://github.com/fahlman/Primes/pull/12). Changes after the measured source commit are documentation only.
+[Review and decision](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/reports/SixteenWriteFusedReview.md), [raw results](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-results-59262fe-307da10.json), and [verification evidence](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-verification.json) are published for [PR #12](https://github.com/fahlman/Primes/pull/12). Those results describe the adopted development source, before this follow-up.
 
 The diagnostic copy still describes B. Its full-buffer verifier provides a reference for this candidate, but its timings do not profile the sixteen-write loop. The historical results below describe adopted or earlier versions and are separate from this session.
 
@@ -47,7 +71,7 @@ The diagnostic copy still describes B. Its full-buffer verifier provides a refer
 
 The adopted implementation is the **sixteen-write fused sparse loop, source `59262fe`**, merged through [PR #12](https://github.com/fahlman/Primes/pull/12) as `83751ea`. It retains dense handlers through 63 and marks sixteen successive sparse multiples per main iteration.
 
-| Latest development comparison | Median milliseconds per pass |
+| Earlier adopted-development comparison | Median milliseconds per pass |
 |---|---:|
 | Development control `7509c87` | 0.040044 |
 | Adopted sixteen-write loop `59262fe` | **0.039553** |
@@ -112,7 +136,7 @@ The earlier two-way comparison remains available through `compare.py` and `compa
 
 ## Validation
 
-The earlier adopted B candidate `8f108f5` passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including every limit from −2 through 2,048, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered every limit 2,049–30,000, 500 random limits, and 1,561 prime-square cases. The unchanged phase verifier passed 16,511 partial/full checks over 1,501 limits under ASAN and WMO, including full-buffer equality to `19aa38a` with padding. Dense handlers are unchanged; assembly confirmed the separate word handler and real observer call. See the [verification record](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json). Integration preserved the tested sieve and runner byte-for-byte.
+The current candidate's executed checks are listed in the follow-up section above and its immutable verification record. Historically, adopted candidate `8f108f5` passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including every limit from −2 through 2,048, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered every limit 2,049–30,000, 500 random limits, and 1,561 prime-square cases. Its phase verifier passed 16,511 partial/full checks over 1,501 limits under ASAN and WMO, including full-buffer equality to `19aa38a` with padding. Assembly confirmed the separate word handler and real observer call. See that earlier [verification record](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json). Integration preserved its tested sieve and runner byte-for-byte.
 
 ```sh
 mkdir -p .build

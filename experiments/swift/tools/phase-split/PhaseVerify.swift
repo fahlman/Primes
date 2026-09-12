@@ -32,6 +32,20 @@ struct PhaseVerify {
                 for offset in -2...2 { limits.insert(max(0, boundary + offset)) }
             }
         }
+        // The copy remains adopted B; compare the new production 128-bit path
+        // to its full raw flags around alignment and first/second group edges.
+        // Include the earlier byte-rounded boundary, which exercises padding.
+        for p in stride(from: 65, through: 127, by: 2) {
+            var aligned = (p * p - 3) / 2
+            while aligned & 127 != 0 { aligned += p }
+            for boundary in [p * p, 2 * aligned + 3,
+                             2 * (aligned + 128 * p) - 13,
+                             2 * (aligned + 128 * p) + 1,
+                             2 * (aligned + 256 * p) - 13,
+                             2 * (aligned + 256 * p) + 1] {
+                for offset in -2...2 { limits.insert(boundary + offset) }
+            }
+        }
         limits.formUnion([4_488, 4_489, 4_490, 994_008, 994_009, 994_010,
                           999_999, 1_000_000, 1_000_001, 2_000_000])
         // Both sides of the squares at the sparse band edges: 251, 257, 499 and 503.
