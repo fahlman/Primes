@@ -1,0 +1,218 @@
+{
+  "candidate": "ce33c7d021f464b4740dcaa46d9ae5bbf2fb065b",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "started_at_utc": "2026-09-12T21:16:49.815484+00:00",
+  "commands": [
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:49.883387+00:00",
+      "owned_process_group": 96142,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-12T21:16:50.256917+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:50.257297+00:00",
+      "owned_process_group": 96143,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-12T21:16:50.719564+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:50.720227+00:00",
+      "owned_process_group": 96147,
+      "exit_code": -5,
+      "combined_stdout_stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=GenerateDense Code=3 \"The generated 64-bit 5...63 switch does not match the source\" UserInfo={NSLocalizedDescription=The generated 64-bit 5...63 switch does not match the source}\nStack dump:\n0.\tProgram arguments: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -interpret tools/generate-dense.swift -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -no-color-diagnostics -Xcc -fno-color-diagnostics -new-driver-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-driver -empty-abi-descriptor -no-auto-bridging-header-chaining -module-name main -disable-clang-spi -target-sdk-version 26.5 -target-sdk-name macosx26.5 -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/local/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/lib/swift/host/plugins -- --check /Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-64.swift\n1.\tApple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\n2.\tCompiling with effective version 5.10\n3.\tWhile running user code \"tools/generate-dense.swift\"\nStack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  swift-frontend           0x000000010935108c llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 56\n1  swift-frontend           0x000000010934e52c llvm::sys::RunSignalHandlers() + 172\n2  swift-frontend           0x000000010935167c SignalHandler(int, __siginfo*, void*) + 356\n3  libsystem_platform.dylib 0x0000000188e85744 _sigtramp + 56\n4  libswiftCore.dylib       0x000000019c72cd04 $ss17_assertionFailure__4file4line5flagss5NeverOs12StaticStringV_SSAHSus6UInt32VtF + 172\n5  libswiftCore.dylib       0x000000019c60c5a4 swift_errorInMain + 632\n6  (error)                  0x0000000116848b60\n7  swift-frontend           0x0000000103044c48 llvm::orc::runAsMain(int (*)(int, char**), llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>, std::__1::optional<llvm::StringRef>) + 908\n8  swift-frontend           0x0000000102f41f94 swift::SwiftJIT::runMain(llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>) + 636\n9  swift-frontend           0x0000000102f4e23c swift::RunImmediately(swift::CompilerInstance&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&, swift::IRGenOptions const&, swift::SILOptions const&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&) + 964\n10 swift-frontend           0x0000000102ec20d0 processCommandLineAndRunImmediately(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::FrontendObserver*, int&) + 484\n11 swift-frontend           0x0000000102ebb89c performCompileStepsPostSILGen(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::PrimarySpecificPaths const&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 2068\n12 swift-frontend           0x0000000102ebaecc swift::performCompileStepsPostSema(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4560\n13 swift-frontend           0x0000000102ec03a0 performCompile(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4028\n14 swift-frontend           0x0000000102ebc818 swift::performFrontend(llvm::ArrayRef<char const*>, char const*, void*, swift::FrontendObserver*) + 3308\n15 swift-frontend           0x0000000102e3c424 swift::mainEntry(int, char const**) + 5224\n16 dyld                     0x0000000188ab04e4 start + 6992\n",
+      "finished_at_utc": "2026-09-12T21:16:51.072210+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:51.072553+00:00",
+      "owned_process_group": 96148,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:16:51.388591+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:51.389264+00:00",
+      "owned_process_group": 96149,
+      "exit_code": -5,
+      "combined_stdout_stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=GenerateDense Code=3 \"The generated 128-bit 65...111 switch does not match the source\" UserInfo={NSLocalizedDescription=The generated 128-bit 65...111 switch does not match the source}\nStack dump:\n0.\tProgram arguments: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -interpret tools/generate-dense.swift -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -no-color-diagnostics -Xcc -fno-color-diagnostics -new-driver-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-driver -empty-abi-descriptor -no-auto-bridging-header-chaining -module-name main -disable-clang-spi -target-sdk-version 26.5 -target-sdk-name macosx26.5 -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/local/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/lib/swift/host/plugins -- --check /Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-128.swift\n1.\tApple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\n2.\tCompiling with effective version 5.10\n3.\tWhile running user code \"tools/generate-dense.swift\"\nStack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  swift-frontend           0x000000010887908c llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 56\n1  swift-frontend           0x000000010887652c llvm::sys::RunSignalHandlers() + 172\n2  swift-frontend           0x000000010887967c SignalHandler(int, __siginfo*, void*) + 356\n3  libsystem_platform.dylib 0x0000000188e85744 _sigtramp + 56\n4  libswiftCore.dylib       0x000000019c72cd04 $ss17_assertionFailure__4file4line5flagss5NeverOs12StaticStringV_SSAHSus6UInt32VtF + 172\n5  libswiftCore.dylib       0x000000019c60c5a4 swift_errorInMain + 632\n6  (error)                  0x0000000115d80b60\n7  swift-frontend           0x000000010256cc48 llvm::orc::runAsMain(int (*)(int, char**), llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>, std::__1::optional<llvm::StringRef>) + 908\n8  swift-frontend           0x0000000102469f94 swift::SwiftJIT::runMain(llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>) + 636\n9  swift-frontend           0x000000010247623c swift::RunImmediately(swift::CompilerInstance&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&, swift::IRGenOptions const&, swift::SILOptions const&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&) + 964\n10 swift-frontend           0x00000001023ea0d0 processCommandLineAndRunImmediately(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::FrontendObserver*, int&) + 484\n11 swift-frontend           0x00000001023e389c performCompileStepsPostSILGen(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::PrimarySpecificPaths const&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 2068\n12 swift-frontend           0x00000001023e2ecc swift::performCompileStepsPostSema(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4560\n13 swift-frontend           0x00000001023e83a0 performCompile(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4028\n14 swift-frontend           0x00000001023e4818 swift::performFrontend(llvm::ArrayRef<char const*>, char const*, void*, swift::FrontendObserver*) + 3308\n15 swift-frontend           0x0000000102364424 swift::mainEntry(int, char const**) + 5224\n16 dyld                     0x0000000188ab04e4 start + 6992\n",
+      "finished_at_utc": "2026-09-12T21:16:51.759254+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/corrupt-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:51.761226+00:00",
+      "owned_process_group": 96152,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:16:52.076201+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/missing-marker.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:52.077005+00:00",
+      "owned_process_group": 96154,
+      "exit_code": -5,
+      "combined_stdout_stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=GenerateDense Code=2 \"Missing, duplicated, or reversed 128-bit generated-block markers\" UserInfo={NSLocalizedDescription=Missing, duplicated, or reversed 128-bit generated-block markers}\nStack dump:\n0.\tProgram arguments: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-frontend -frontend -interpret tools/generate-dense.swift -Xllvm -aarch64-use-tbi -enable-objc-interop -stack-check -sdk /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk -no-color-diagnostics -Xcc -fno-color-diagnostics -new-driver-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift-driver -empty-abi-descriptor -no-auto-bridging-header-chaining -module-name main -disable-clang-spi -target-sdk-version 26.5 -target-sdk-name macosx26.5 -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -external-plugin-path /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/local/lib/swift/host/plugins#/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/usr/bin/swift-plugin-server -in-process-plugin-server-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/libSwiftInProcPluginServer.dylib -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/host/plugins -plugin-path /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/local/lib/swift/host/plugins -- --write /Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/missing-marker.swift\n1.\tApple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\n2.\tCompiling with effective version 5.10\n3.\tWhile running user code \"tools/generate-dense.swift\"\nStack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  swift-frontend           0x000000010764108c llvm::sys::PrintStackTrace(llvm::raw_ostream&, int) + 56\n1  swift-frontend           0x000000010763e52c llvm::sys::RunSignalHandlers() + 172\n2  swift-frontend           0x000000010764167c SignalHandler(int, __siginfo*, void*) + 356\n3  libsystem_platform.dylib 0x0000000188e85744 _sigtramp + 56\n4  libswiftCore.dylib       0x000000019c72cd04 $ss17_assertionFailure__4file4line5flagss5NeverOs12StaticStringV_SSAHSus6UInt32VtF + 172\n5  libswiftCore.dylib       0x000000019c60c5a4 swift_errorInMain + 632\n6  (error)                  0x0000000114b7cb60\n7  swift-frontend           0x0000000101334c48 llvm::orc::runAsMain(int (*)(int, char**), llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>, std::__1::optional<llvm::StringRef>) + 908\n8  swift-frontend           0x0000000101231f94 swift::SwiftJIT::runMain(llvm::ArrayRef<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>) + 636\n9  swift-frontend           0x000000010123e23c swift::RunImmediately(swift::CompilerInstance&, std::__1::vector<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>, std::__1::allocator<std::__1::basic_string<char, std::__1::char_traits<char>, std::__1::allocator<char>>>> const&, swift::IRGenOptions const&, swift::SILOptions const&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&) + 964\n10 swift-frontend           0x00000001011b20d0 processCommandLineAndRunImmediately(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>&&, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::FrontendObserver*, int&) + 484\n11 swift-frontend           0x00000001011ab89c performCompileStepsPostSILGen(swift::CompilerInstance&, std::__1::unique_ptr<swift::SILModule, std::__1::default_delete<swift::SILModule>>, llvm::PointerUnion<swift::ModuleDecl*, swift::SourceFile*>, swift::PrimarySpecificPaths const&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 2068\n12 swift-frontend           0x00000001011aaecc swift::performCompileStepsPostSema(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4560\n13 swift-frontend           0x00000001011b03a0 performCompile(swift::CompilerInstance&, int&, swift::FrontendObserver*, llvm::ArrayRef<char const*>) + 4028\n14 swift-frontend           0x00000001011ac818 swift::performFrontend(llvm::ArrayRef<char const*>, char const*, void*, swift::FrontendObserver*) + 3308\n15 swift-frontend           0x000000010112c424 swift::mainEntry(int, char const**) + 5224\n16 dyld                     0x0000000188ab04e4 start + 6992\n",
+      "finished_at_utc": "2026-09-12T21:16:52.366295+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-module-name",
+        "PrimeSwift",
+        "-I",
+        "/Users/ryan/Developer/Primes-compact-dense-loops/experiments/swift/.build/compact-loop-probe",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/context/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/context/Benchmark.swift",
+        "-S",
+        "-o",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/dense-generator-evidence/generator-ce33c7d.s"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:16:52.367285+00:00",
+      "owned_process_group": 96155,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:17:41.630661+00:00"
+    }
+  ],
+  "status": "passed",
+  "runtime_source_identity_after_removing_two_markers": true,
+  "source_sha256": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+  "before": {
+    "at_utc": "2026-09-12T21:16:49.882974+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 25.2,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 18.9,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 11.7,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 6.5,
+        "executable": "codex"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 2.1,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.6,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 96134,
+        "cpu_percent": 1.3,
+        "executable": "sleep"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.9,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 51355,
+        "cpu_percent": 0.9,
+        "executable": "codex-code-mode-host"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.6,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.6,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.6,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 34673,
+        "cpu_percent": 0.6,
+        "executable": "zsh"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.4,
+        "executable": "logd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "control_assembly_sha256": "8a8ec1e81bf8f5095e4d09b65b5e8ecfaf407f253b90cdeb6264ec8d5c8ffe8f",
+  "candidate_assembly_sha256": "8a8ec1e81bf8f5095e4d09b65b5e8ecfaf407f253b90cdeb6264ec8d5c8ffe8f",
+  "whole_assembly_byte_identical": true,
+  "finished_at_utc": "2026-09-12T21:17:41.631966+00:00",
+  "lock_absent_after": true
+}

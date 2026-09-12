@@ -29,6 +29,8 @@ Our earlier versions are development controls: they measure the contribution of 
 
 | Experiment | Branch or record | Median ms per pass | Status |
 |---|---|---:|---|
+| Compact dense case-literal loops | [PR #20](https://github.com/fahlman/Primes/pull/20), `1a259a8`; [review](https://github.com/fahlman/Primes/blob/1972c27a09ed12f519bffc21be6a6ef78adb2ae8/experiments/swift/reports/CompactDenseLoops.md) | 0.362478 | Rejected versus adopted 111 at 0.038298; closed unmerged; branch preserved |
+| Unified dense-switch generator | [PR #21](https://github.com/fahlman/Primes/pull/21), `9c5d7e5`; [review](reports/DenseGeneratorReview.md) | Not timed | Complete benchmark assembly byte-identical; ready for integration, unmerged |
 | Eight fixed-mask streams, four writes each | `swift/baseline` (`25402d4`) | 0.1198 | Superseded |
 | Direct array access; cached square root | [EqualTermsSwiftComparison.md](reports/EqualTermsSwiftComparison.md) | no reliable gain | Rejected |
 | Stream fusion | `swift/stream-fusion` (`f0cd82d`) | 0.1212 | Rejected |
@@ -59,6 +61,7 @@ Measurements are from each experiment's recorded session; use the linked reports
 | File | Role |
 |---|---|
 | `PrimeSieve.swift` | The sieve class: one bit per odd candidate, bit 0 stands for 3, and a set bit means composite. |
+| `tools/generate-dense.swift` | Canonical generator for both marked explicit dense switches: every odd factor 5–63 at 64 bits and 65–111 at 128 bits. Use `--check PrimeSieve.swift` or `--write PrimeSieve.swift` under the timing lock. The old `generate-dense-128.swift` filename forwards to it. |
 | `Benchmark.swift` | The timed runner. |
 | `BenchmarkObserver.swift` | An opaque one-byte read, compiled as a separate module so the optimizer can't remove sieve work. It computes no part of the sieve. |
 | `Verify.swift` | Complete-array checks against an independent Boolean sieve. |

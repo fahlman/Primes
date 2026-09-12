@@ -1,0 +1,13 @@
+{
+  "candidate": "9c5d7e541499294c49b0a256441347555b9410eb",
+  "reviewer": "Codex independent review agent /root/cpp_zig_review",
+  "blocking_findings": [],
+  "findings": [
+    "Both complete generated blocks independently reproduced; all54 odd cases present.",
+    "Removing only two64bit marker comments reproduces adopted source byte-for-byte.",
+    "Generation logic and executable source unchanged in9c5d7e5 catch-only delta.",
+    "All11 expected exits verified against saved evidence; repaired fixtures exactly match current sieve; missing-marker fixture preserved.",
+    "Full assembly hash verified8a8ec1e81bf8f5095e4d09b65b5e8ecfaf407f253b90cdeb6264ec8d5c8ffe8f."
+  ],
+  "editorial_finding": "README pending-check statement corrected in publication commit."
+}
