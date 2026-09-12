@@ -12,7 +12,7 @@ let endMarker = "        // END GENERATED DENSE 128"
 // The dispatch in runSieve must send exactly the odd values firstFactor through
 // lastFactor here; larger factors take the fused sparse loop.
 let firstFactor = 65
-let lastFactor = 79
+let lastFactor = 111
 let rangeLabel = "\(firstFactor)...\(lastFactor)"
 
 func generatedSwitch() -> String {
