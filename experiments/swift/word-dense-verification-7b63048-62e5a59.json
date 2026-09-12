@@ -1,0 +1,180 @@
+{
+  "tested_files": {
+    "word9-13": {
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "PrimeSieve.swift": "d4ca5d3770858b6dbb00b94e581822085269fd2985d29aec1a398fa094eb8b2c",
+      "ExtraVerify.swift": "3b5fd7401442239666e2eabba8a8f3ba6aa58d2a8d74ca754e39f123d14b3e82",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e"
+    },
+    "word5-7": {
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "PrimeSieve.swift": "029bd51df2dc24498bddcc24a1692869a4fbfb6dd93fb4dcd4b92f16c8ba92e6",
+      "ExtraVerify.swift": "3a318d4990fc818002573c912677e80519c8b428e72939172f509b1c521e9437",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e"
+    }
+  },
+  "commands": [
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "./verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "./verify"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word9_13",
+      "revision": "7b63048bc31d6740b3af690e9be99771ea3d26a4",
+      "command": [
+        "./extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: every limit in 2,049...20,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n"
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "./verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "verify"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "./verify"
+      ],
+      "exit_code": 0,
+      "output": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n"
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "variant": "word5_7",
+      "revision": "62e5a596359d07fedaba6e22a7aa786bed7c40fd",
+      "command": [
+        "./extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "output": "Passed: 500 random limits in 2,049...2,000,000 and 1561 limits within 3 of every prime square up to 2,000,000.\n"
+    }
+  ],
+  "assembly": {
+    "word9_13": {
+      "observer_call": true,
+      "factor3_st3_16b": true,
+      "variable_64bit_shifts": [],
+      "markWord_calls": [],
+      "vector_orr_count": 18
+    },
+    "word5_7": {
+      "observer_call": true,
+      "factor3_st3_16b": true,
+      "variable_64bit_shifts": [],
+      "markWord_calls": [],
+      "vector_orr_count": 8
+    }
+  }
+}
