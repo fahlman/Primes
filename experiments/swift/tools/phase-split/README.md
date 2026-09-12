@@ -7,6 +7,9 @@ remove the six-line diagnostic header to compare it with `PrimeSieve.swift`
 before use after a source change. Production sieve, submission runner and
 observer are unchanged by this diagnostic update.
 
+The [refreshed B breakdown](../../reports/FusedSparseBandBreakdown.md) records the
+verified `56ad42b` copy, all 21 timing samples and the passing 3% full-copy control.
+
 The [earlier through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) and
 [earlier sparse-band report](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md)
 describe `19aa38a` and remain historical evidence. They do not profile the current
