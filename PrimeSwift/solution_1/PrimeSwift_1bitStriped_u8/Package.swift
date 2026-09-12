@@ -17,7 +17,11 @@ let package = Package(
     targets: [
         // The observer stays opaque to the executable's optimizer. Do not enable
         // cross-module optimization when building this package.
-        .target(name: "BenchmarkObserver"),
+        .target(
+            name: "BenchmarkObserver",
+            swiftSettings: [
+                .unsafeFlags(["-disable-cmo"], .when(configuration: .release)),
+            ]),
         .executableTarget(
             name: "PrimeSieveSwift",
             dependencies: [
@@ -25,7 +29,7 @@ let package = Package(
                 .product(name: "ArgumentParser", package: "swift-argument-parser"),
             ],
             swiftSettings: [
-                .unsafeFlags(["-whole-module-optimization"], .when(configuration: .release)),
+                .unsafeFlags(["-whole-module-optimization", "-disable-cmo"], .when(configuration: .release)),
             ]),
     ]
 )

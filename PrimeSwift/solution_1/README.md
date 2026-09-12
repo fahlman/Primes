@@ -35,8 +35,9 @@ classification describes those source operations.
 
 Allocation, initialization, sieving, an opaque observation, and release are timed.
 `BenchmarkObserver` is compiled as a separate SwiftPM target so the executable
-optimizer cannot remove the completed sieve. Do not enable cross-module
-optimization. Enumeration, result checking, and printing occur outside timing.
+optimizer cannot remove the completed sieve. The striped package explicitly
+disables SwiftPM's default cross-module optimization for its observer and
+executable targets. Enumeration, result checking, and printing occur outside timing.
 
 ## Run instructions
 
