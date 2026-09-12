@@ -1,0 +1,320 @@
+{
+  "candidate_revision": "7ee65009d6ed2ed497a32688fa818b2eaffabc86",
+  "control_revision": "5f1a3e8a32af96aa3196f1cfed155310ba8c4b6d",
+  "started_at_utc": "2026-09-12T00:55:27.623176+00:00",
+  "checks": [
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        ".build/verify-asan"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".build/verify-asan"
+      ],
+      "exit_code": 0,
+      "stdout": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        ".build/verify"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".build/verify"
+      ],
+      "exit_code": 0,
+      "stdout": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        ".build/extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        ".build/extra-verify-asan"
+      ],
+      "exit_code": 0,
+      "stdout": "Passed: every limit in 2,049...20,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swift",
+        ".build/word-cases.swift",
+        "5",
+        "31"
+      ],
+      "exit_code": 0,
+      "stdout": "        case 5:\n            while word + 5 <= fullWords {\n                markWord(words, word, first: 0, step: 5)\n                markWord(words, word + 1, first: 1, step: 5)\n                markWord(words, word + 2, first: 2, step: 5)\n                markWord(words, word + 3, first: 3, step: 5)\n                markWord(words, word + 4, first: 4, step: 5)\n                word += 5\n            }\n        case 7:\n            while word + 7 <= fullWords {\n                markWord(words, word, first: 0, step: 7)\n                markWord(words, word + 1, first: 6, step: 7)\n                markWord(words, word + 2, first: 5, step: 7)\n                markWord(words, word + 3, first: 4, step: 7)\n                markWord(words, word + 4, first: 3, step: 7)\n                markWord(words, word + 5, first: 2, step: 7)\n                markWord(words, word + 6, first: 1, step: 7)\n                word += 7\n            }\n        case 9:\n            while word + 9 <= fullWords {\n                markWord(words, word, first: 0, step: 9)\n                markWord(words, word + 1, first: 8, step: 9)\n                markWord(words, word + 2, first: 7, step: 9)\n                markWord(words, word + 3, first: 6, step: 9)\n                markWord(words, word + 4, first: 5, step: 9)\n                markWord(words, word + 5, first: 4, step: 9)\n                markWord(words, word + 6, first: 3, step: 9)\n                markWord(words, word + 7, first: 2, step: 9)\n                markWord(words, word + 8, first: 1, step: 9)\n                word += 9\n            }\n        case 11:\n            while word + 11 <= fullWords {\n                markWord(words, word, first: 0, step: 11)\n                markWord(words, word + 1, first: 2, step: 11)\n                markWord(words, word + 2, first: 4, step: 11)\n                markWord(words, word + 3, first: 6, step: 11)\n                markWord(words, word + 4, first: 8, step: 11)\n                markWord(words, word + 5, first: 10, step: 11)\n                markWord(words, word + 6, first: 1, step: 11)\n                markWord(words, word + 7, first: 3, step: 11)\n                markWord(words, word + 8, first: 5, step: 11)\n                markWord(words, word + 9, first: 7, step: 11)\n                markWord(words, word + 10, first: 9, step: 11)\n                word += 11\n            }\n        case 13:\n            while word + 13 <= fullWords {\n                markWord(words, word, first: 0, step: 13)\n                markWord(words, word + 1, first: 1, step: 13)\n                markWord(words, word + 2, first: 2, step: 13)\n                markWord(words, word + 3, first: 3, step: 13)\n                markWord(words, word + 4, first: 4, step: 13)\n                markWord(words, word + 5, first: 5, step: 13)\n                markWord(words, word + 6, first: 6, step: 13)\n                markWord(words, word + 7, first: 7, step: 13)\n                markWord(words, word + 8, first: 8, step: 13)\n                markWord(words, word + 9, first: 9, step: 13)\n                markWord(words, word + 10, first: 10, step: 13)\n                markWord(words, word + 11, first: 11, step: 13)\n                markWord(words, word + 12, first: 12, step: 13)\n                word += 13\n            }\n        case 15:\n            while word + 15 <= fullWords {\n                markWord(words, word, first: 0, step: 15)\n                markWord(words, word + 1, first: 11, step: 15)\n                markWord(words, word + 2, first: 7, step: 15)\n                markWord(words, word + 3, first: 3, step: 15)\n                markWord(words, word + 4, first: 14, step: 15)\n                markWord(words, word + 5, first: 10, step: 15)\n                markWord(words, word + 6, first: 6, step: 15)\n                markWord(words, word + 7, first: 2, step: 15)\n                markWord(words, word + 8, first: 13, step: 15)\n                markWord(words, word + 9, first: 9, step: 15)\n                markWord(words, word + 10, first: 5, step: 15)\n                markWord(words, word + 11, first: 1, step: 15)\n                markWord(words, word + 12, first: 12, step: 15)\n                markWord(words, word + 13, first: 8, step: 15)\n                markWord(words, word + 14, first: 4, step: 15)\n                word += 15\n            }\n        case 17:\n            while word + 17 <= fullWords {\n                markWord(words, word, first: 0, step: 17)\n                markWord(words, word + 1, first: 4, step: 17)\n                markWord(words, word + 2, first: 8, step: 17)\n                markWord(words, word + 3, first: 12, step: 17)\n                markWord(words, word + 4, first: 16, step: 17)\n                markWord(words, word + 5, first: 3, step: 17)\n                markWord(words, word + 6, first: 7, step: 17)\n                markWord(words, word + 7, first: 11, step: 17)\n                markWord(words, word + 8, first: 15, step: 17)\n                markWord(words, word + 9, first: 2, step: 17)\n                markWord(words, word + 10, first: 6, step: 17)\n                markWord(words, word + 11, first: 10, step: 17)\n                markWord(words, word + 12, first: 14, step: 17)\n                markWord(words, word + 13, first: 1, step: 17)\n                markWord(words, word + 14, first: 5, step: 17)\n                markWord(words, word + 15, first: 9, step: 17)\n                markWord(words, word + 16, first: 13, step: 17)\n                word += 17\n            }\n        case 19:\n            while word + 19 <= fullWords {\n                markWord(words, word, first: 0, step: 19)\n                markWord(words, word + 1, first: 12, step: 19)\n                markWord(words, word + 2, first: 5, step: 19)\n                markWord(words, word + 3, first: 17, step: 19)\n                markWord(words, word + 4, first: 10, step: 19)\n                markWord(words, word + 5, first: 3, step: 19)\n                markWord(words, word + 6, first: 15, step: 19)\n                markWord(words, word + 7, first: 8, step: 19)\n                markWord(words, word + 8, first: 1, step: 19)\n                markWord(words, word + 9, first: 13, step: 19)\n                markWord(words, word + 10, first: 6, step: 19)\n                markWord(words, word + 11, first: 18, step: 19)\n                markWord(words, word + 12, first: 11, step: 19)\n                markWord(words, word + 13, first: 4, step: 19)\n                markWord(words, word + 14, first: 16, step: 19)\n                markWord(words, word + 15, first: 9, step: 19)\n                markWord(words, word + 16, first: 2, step: 19)\n                markWord(words, word + 17, first: 14, step: 19)\n                markWord(words, word + 18, first: 7, step: 19)\n                word += 19\n            }\n        case 21:\n            while word + 21 <= fullWords {\n                markWord(words, word, first: 0, step: 21)\n                markWord(words, word + 1, first: 20, step: 21)\n                markWord(words, word + 2, first: 19, step: 21)\n                markWord(words, word + 3, first: 18, step: 21)\n                markWord(words, word + 4, first: 17, step: 21)\n                markWord(words, word + 5, first: 16, step: 21)\n                markWord(words, word + 6, first: 15, step: 21)\n                markWord(words, word + 7, first: 14, step: 21)\n                markWord(words, word + 8, first: 13, step: 21)\n                markWord(words, word + 9, first: 12, step: 21)\n                markWord(words, word + 10, first: 11, step: 21)\n                markWord(words, word + 11, first: 10, step: 21)\n                markWord(words, word + 12, first: 9, step: 21)\n                markWord(words, word + 13, first: 8, step: 21)\n                markWord(words, word + 14, first: 7, step: 21)\n                markWord(words, word + 15, first: 6, step: 21)\n                markWord(words, word + 16, first: 5, step: 21)\n                markWord(words, word + 17, first: 4, step: 21)\n                markWord(words, word + 18, first: 3, step: 21)\n                markWord(words, word + 19, first: 2, step: 21)\n                markWord(words, word + 20, first: 1, step: 21)\n                word += 21\n            }\n        case 23:\n            while word + 23 <= fullWords {\n                markWord(words, word, first: 0, step: 23)\n                markWord(words, word + 1, first: 5, step: 23)\n                markWord(words, word + 2, first: 10, step: 23)\n                markWord(words, word + 3, first: 15, step: 23)\n                markWord(words, word + 4, first: 20, step: 23)\n                markWord(words, word + 5, first: 2, step: 23)\n                markWord(words, word + 6, first: 7, step: 23)\n                markWord(words, word + 7, first: 12, step: 23)\n                markWord(words, word + 8, first: 17, step: 23)\n                markWord(words, word + 9, first: 22, step: 23)\n                markWord(words, word + 10, first: 4, step: 23)\n                markWord(words, word + 11, first: 9, step: 23)\n                markWord(words, word + 12, first: 14, step: 23)\n                markWord(words, word + 13, first: 19, step: 23)\n                markWord(words, word + 14, first: 1, step: 23)\n                markWord(words, word + 15, first: 6, step: 23)\n                markWord(words, word + 16, first: 11, step: 23)\n                markWord(words, word + 17, first: 16, step: 23)\n                markWord(words, word + 18, first: 21, step: 23)\n                markWord(words, word + 19, first: 3, step: 23)\n                markWord(words, word + 20, first: 8, step: 23)\n                markWord(words, word + 21, first: 13, step: 23)\n                markWord(words, word + 22, first: 18, step: 23)\n                word += 23\n            }\n        case 25:\n            while word + 25 <= fullWords {\n                markWord(words, word, first: 0, step: 25)\n                markWord(words, word + 1, first: 11, step: 25)\n                markWord(words, word + 2, first: 22, step: 25)\n                markWord(words, word + 3, first: 8, step: 25)\n                markWord(words, word + 4, first: 19, step: 25)\n                markWord(words, word + 5, first: 5, step: 25)\n                markWord(words, word + 6, first: 16, step: 25)\n                markWord(words, word + 7, first: 2, step: 25)\n                markWord(words, word + 8, first: 13, step: 25)\n                markWord(words, word + 9, first: 24, step: 25)\n                markWord(words, word + 10, first: 10, step: 25)\n                markWord(words, word + 11, first: 21, step: 25)\n                markWord(words, word + 12, first: 7, step: 25)\n                markWord(words, word + 13, first: 18, step: 25)\n                markWord(words, word + 14, first: 4, step: 25)\n                markWord(words, word + 15, first: 15, step: 25)\n                markWord(words, word + 16, first: 1, step: 25)\n                markWord(words, word + 17, first: 12, step: 25)\n                markWord(words, word + 18, first: 23, step: 25)\n                markWord(words, word + 19, first: 9, step: 25)\n                markWord(words, word + 20, first: 20, step: 25)\n                markWord(words, word + 21, first: 6, step: 25)\n                markWord(words, word + 22, first: 17, step: 25)\n                markWord(words, word + 23, first: 3, step: 25)\n                markWord(words, word + 24, first: 14, step: 25)\n                word += 25\n            }\n        case 27:\n            while word + 27 <= fullWords {\n                markWord(words, word, first: 0, step: 27)\n                markWord(words, word + 1, first: 17, step: 27)\n                markWord(words, word + 2, first: 7, step: 27)\n                markWord(words, word + 3, first: 24, step: 27)\n                markWord(words, word + 4, first: 14, step: 27)\n                markWord(words, word + 5, first: 4, step: 27)\n                markWord(words, word + 6, first: 21, step: 27)\n                markWord(words, word + 7, first: 11, step: 27)\n                markWord(words, word + 8, first: 1, step: 27)\n                markWord(words, word + 9, first: 18, step: 27)\n                markWord(words, word + 10, first: 8, step: 27)\n                markWord(words, word + 11, first: 25, step: 27)\n                markWord(words, word + 12, first: 15, step: 27)\n                markWord(words, word + 13, first: 5, step: 27)\n                markWord(words, word + 14, first: 22, step: 27)\n                markWord(words, word + 15, first: 12, step: 27)\n                markWord(words, word + 16, first: 2, step: 27)\n                markWord(words, word + 17, first: 19, step: 27)\n                markWord(words, word + 18, first: 9, step: 27)\n                markWord(words, word + 19, first: 26, step: 27)\n                markWord(words, word + 20, first: 16, step: 27)\n                markWord(words, word + 21, first: 6, step: 27)\n                markWord(words, word + 22, first: 23, step: 27)\n                markWord(words, word + 23, first: 13, step: 27)\n                markWord(words, word + 24, first: 3, step: 27)\n                markWord(words, word + 25, first: 20, step: 27)\n                markWord(words, word + 26, first: 10, step: 27)\n                word += 27\n            }\n        case 29:\n            while word + 29 <= fullWords {\n                markWord(words, word, first: 0, step: 29)\n                markWord(words, word + 1, first: 23, step: 29)\n                markWord(words, word + 2, first: 17, step: 29)\n                markWord(words, word + 3, first: 11, step: 29)\n                markWord(words, word + 4, first: 5, step: 29)\n                markWord(words, word + 5, first: 28, step: 29)\n                markWord(words, word + 6, first: 22, step: 29)\n                markWord(words, word + 7, first: 16, step: 29)\n                markWord(words, word + 8, first: 10, step: 29)\n                markWord(words, word + 9, first: 4, step: 29)\n                markWord(words, word + 10, first: 27, step: 29)\n                markWord(words, word + 11, first: 21, step: 29)\n                markWord(words, word + 12, first: 15, step: 29)\n                markWord(words, word + 13, first: 9, step: 29)\n                markWord(words, word + 14, first: 3, step: 29)\n                markWord(words, word + 15, first: 26, step: 29)\n                markWord(words, word + 16, first: 20, step: 29)\n                markWord(words, word + 17, first: 14, step: 29)\n                markWord(words, word + 18, first: 8, step: 29)\n                markWord(words, word + 19, first: 2, step: 29)\n                markWord(words, word + 20, first: 25, step: 29)\n                markWord(words, word + 21, first: 19, step: 29)\n                markWord(words, word + 22, first: 13, step: 29)\n                markWord(words, word + 23, first: 7, step: 29)\n                markWord(words, word + 24, first: 1, step: 29)\n                markWord(words, word + 25, first: 24, step: 29)\n                markWord(words, word + 26, first: 18, step: 29)\n                markWord(words, word + 27, first: 12, step: 29)\n                markWord(words, word + 28, first: 6, step: 29)\n                word += 29\n            }\n        case 31:\n            while word + 31 <= fullWords {\n                markWord(words, word, first: 0, step: 31)\n                markWord(words, word + 1, first: 29, step: 31)\n                markWord(words, word + 2, first: 27, step: 31)\n                markWord(words, word + 3, first: 25, step: 31)\n                markWord(words, word + 4, first: 23, step: 31)\n                markWord(words, word + 5, first: 21, step: 31)\n                markWord(words, word + 6, first: 19, step: 31)\n                markWord(words, word + 7, first: 17, step: 31)\n                markWord(words, word + 8, first: 15, step: 31)\n                markWord(words, word + 9, first: 13, step: 31)\n                markWord(words, word + 10, first: 11, step: 31)\n                markWord(words, word + 11, first: 9, step: 31)\n                markWord(words, word + 12, first: 7, step: 31)\n                markWord(words, word + 13, first: 5, step: 31)\n                markWord(words, word + 14, first: 3, step: 31)\n                markWord(words, word + 15, first: 1, step: 31)\n                markWord(words, word + 16, first: 30, step: 31)\n                markWord(words, word + 17, first: 28, step: 31)\n                markWord(words, word + 18, first: 26, step: 31)\n                markWord(words, word + 19, first: 24, step: 31)\n                markWord(words, word + 20, first: 22, step: 31)\n                markWord(words, word + 21, first: 20, step: 31)\n                markWord(words, word + 22, first: 18, step: 31)\n                markWord(words, word + 23, first: 16, step: 31)\n                markWord(words, word + 24, first: 14, step: 31)\n                markWord(words, word + 25, first: 12, step: 31)\n                markWord(words, word + 26, first: 10, step: 31)\n                markWord(words, word + 27, first: 8, step: 31)\n                markWord(words, word + 28, first: 6, step: 31)\n                markWord(words, word + 29, first: 4, step: 31)\n                markWord(words, word + 30, first: 2, step: 31)\n                word += 31\n            }\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        ".build/BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "BenchmarkObserver.swift",
+        "-o",
+        ".build/BenchmarkObserver.o"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        ".build",
+        "PrimeSieve.swift",
+        "Benchmark.swift",
+        "-S",
+        "-o",
+        ".build/PrimeSwift.s"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        ".build",
+        ".build/control/PrimeSieve.swift",
+        ".build/control/Benchmark.swift",
+        "-S",
+        "-o",
+        ".build/control/PrimeSwift.s"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    }
+  ],
+  "source_sha256": {
+    "PrimeSieve.swift": "dd2e82d1895f7824f1157f532d760377d8390e18fe884d860dd97ccfd16f5c3e",
+    "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "ExtraVerify.swift": "3b5fd7401442239666e2eabba8a8f3ba6aa58d2a8d74ca754e39f123d14b3e82"
+  },
+  "generator": {
+    "source": "// Prints markWordDenseMultiples switch cases for odd p in lo...hi, in PrimeSieve.swift's\n// style. In a p-word group, word j's first multiple is at bit (-64 * j) mod p.\n// Usage: swift word-cases.swift lo hi\nlet arguments = CommandLine.arguments\nlet lo = Int(arguments[1])!\nlet hi = Int(arguments[2])!\nfor p in stride(from: lo, through: hi, by: 2) {\n    print(\"        case \\(p):\")\n    print(\"            while word + \\(p) <= fullWords {\")\n    for j in 0..<p {\n        let first = ((-64 * j) % p + p) % p\n        let target = j == 0 ? \"word\" : \"word + \\(j)\"\n        print(\"                markWord(words, \\(target), first: \\(first), step: \\(p))\")\n    }\n    print(\"                word += \\(p)\")\n    print(\"            }\")\n}\n",
+    "sha256": "384704fb54685be56d267e868faacddf00b4c4904423350b7aa6748d09abb040",
+    "exact_match_all_odd_5_through_31": true
+  },
+  "assembly_sha256": {
+    "candidate": "7196e88db754c0fd306ccfef111ef454eaa34ab53dd24abdb288b86ab308eb79",
+    "control": "99f770e97473e74d6b4ee10d6a5d5d267763140299c1000e055671fe5f3e7cfe"
+  },
+  "status": "passed",
+  "finished_at_utc": "2026-09-12T00:55:34.295994+00:00",
+  "assembly_review": {
+    "candidate": {
+      "runSieve_instructions": 1060,
+      "arm64_instruction_bytes": 4240,
+      "vector_orr_instructions": 122,
+      "factor3_st3_16b_instructions": 1,
+      "wide_variable_shift_instructions": [],
+      "calls_in_runSieve": [],
+      "observe_calls": [
+        "bl\t_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF"
+      ]
+    },
+    "control": {
+      "runSieve_instructions": 480,
+      "arm64_instruction_bytes": 1920,
+      "vector_orr_instructions": 23,
+      "factor3_st3_16b_instructions": 1,
+      "wide_variable_shift_instructions": [],
+      "calls_in_runSieve": [],
+      "observe_calls": [
+        "bl\t_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF"
+      ]
+    }
+  },
+  "assembly_count_method": "Count instruction mnemonic lines inside runSieve through .cfi_endproc, including operand-free ret; exclude directives, labels, constants, padding and other functions.",
+  "source_review": {
+    "all_14_case_blocks_exactly_regenerated": true,
+    "markWord_calls": 252,
+    "added_cases": 9,
+    "added_markWord_calls": 207,
+    "existing_5_through_13_cases_identical": true,
+    "each_block_marks_exactly_0_p_through_63p": true,
+    "first_full_group_limits": {
+      "17": 3585,
+      "19": 3969,
+      "23": 5633,
+      "29": 4609,
+      "31": 8833
+    },
+    "verdict": "No blocking findings; source-based base,faithful=yes,bits=1 classification preserved."
+  },
+  "current_development_revision": "0c370b5d87e01989f176dfd07a98e068b0c9f3aa",
+  "control_matches_current_development_sieve_runner_observer_harness": true,
+  "timing_session": {
+    "lock_path": "/tmp/primes-timing.lock",
+    "command": [
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "-u",
+      "compare_optimizations.py",
+      "--variant",
+      "control=5f1a3e8a32af96aa3196f1cfed155310ba8c4b6d",
+      "--variant",
+      "word-dense-15-31=7ee65009d6ed2ed497a32688fa818b2eaffabc86",
+      "--output",
+      "word-dense-15-31-results-7ee6500.json"
+    ],
+    "started_at_utc": "2026-09-12T00:57:57.630458+00:00",
+    "activity_before": [
+      {
+        "pid": 50834,
+        "cpu_percent": 13.6,
+        "process": "Codex (Renderer)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 6.7,
+        "process": "WindowServer"
+      },
+      {
+        "pid": 12905,
+        "cpu_percent": 4.8,
+        "process": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 3.2,
+        "process": "codex"
+      },
+      {
+        "pid": 517,
+        "cpu_percent": 2.1,
+        "process": "mDNSResponder"
+      },
+      {
+        "pid": 1026,
+        "cpu_percent": 1.5,
+        "process": "PrivilegesAgent"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 1.0,
+        "process": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 53900,
+        "cpu_percent": 1.0,
+        "process": "claude"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.9,
+        "process": "SiriNCService"
+      },
+      {
+        "pid": 9347,
+        "cpu_percent": 0.8,
+        "process": "claude"
+      }
+    ],
+    "audio_assertion_present": false,
+    "exit_code": 0,
+    "activity_after": [
+      {
+        "pid": 409,
+        "cpu_percent": 8.8,
+        "process": "WindowServer"
+      },
+      {
+        "pid": 1026,
+        "cpu_percent": 2.4,
+        "process": "PrivilegesAgent"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.3,
+        "process": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 53900,
+        "cpu_percent": 1.4,
+        "process": "claude"
+      },
+      {
+        "pid": 16696,
+        "cpu_percent": 0.9,
+        "process": "backupd"
+      },
+      {
+        "pid": 9347,
+        "cpu_percent": 0.8,
+        "process": "claude"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.8,
+        "process": "SiriNCService"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.7,
+        "process": "sharingd"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 0.7,
+        "process": "diskimagesiod"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.6,
+        "process": "bluetoothd"
+      }
+    ],
+    "finished_at_utc": "2026-09-12T00:58:29.587130+00:00"
+  }
+}
