@@ -34,6 +34,10 @@ struct PhaseVerify {
         }
         limits.formUnion([4_488, 4_489, 4_490, 994_008, 994_009, 994_010,
                           999_999, 1_000_000, 1_000_001, 2_000_000])
+        // Both sides of the squares at the sparse band edges: 251, 257, 499 and 503.
+        for square in [63_001, 66_049, 249_001, 253_009] {
+            for offset in -2...2 { limits.insert(square + offset) }
+        }
         var state: UInt64 = 0x5EED_0063
         for _ in 0..<100 {
             state = state &* 6_364_136_223_846_793_005 &+ 1
@@ -43,8 +47,10 @@ struct PhaseVerify {
         for limit in limits.sorted() {
             let oddCount = limit >= 3 ? (limit - 1) / 2 : 0
             let byteCount = (oddCount + 7) / 8
-            // Odd, even and composite cutoffs around both dispatch transitions.
-            for cap in [1, 2, 3, 4, 62, 63, 64, 65, 66, 67, Int.max] {
+            // Odd, even and composite cutoffs around both dispatch transitions
+            // and around the sparse band edges 251/257 and 499/503.
+            for cap in [1, 2, 3, 4, 62, 63, 64, 65, 66, 67,
+                        250, 251, 252, 253, 256, 257, 498, 499, 500, 501, 502, 503, Int.max] {
                 let sieve = PhaseSieve(limit: limit)
                 sieve.runSieve(throughFactor: cap)
                 let expected = reference(limit: limit, throughFactor: cap)
