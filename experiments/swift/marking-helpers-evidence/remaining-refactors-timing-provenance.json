@@ -1,0 +1,212 @@
+{
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "started_at_utc": "2026-09-12T22:00:51.849950+00:00",
+  "status": "passed",
+  "gates": {
+    "marking-helpers": {
+      "candidate": "06b24cba796ce60fae80e6823d9858ef014f1fe8",
+      "verification_sha256": "f07ed7079b89557d97b0dd4ed79af3b781213c5359cd9950afe4a4508e634e5e",
+      "review_sha256": "893beec0b7b7b96385d72c2c363c68ec137e61a8fabcc833aa02b49df09c116d"
+    },
+    "unified-dense-128": {
+      "candidate": "9b2d9cb52aacc8ed69f47a1b1dab7181b85e578d",
+      "verification_sha256": "052968c2e1b08bebd25c850f07e319d684a18bd8b70efb70619a0b243e422f77",
+      "review_sha256": "0e87c6e200ce21a23357fcbffde58622d40d14b47b286fa29d959b97cb0e7edc"
+    }
+  },
+  "before": {
+    "at_utc": "2026-09-12T22:00:51.889695+00:00",
+    "top_processes": [
+      {
+        "pid": 16696,
+        "cpu_percent": 13.4,
+        "executable": "backupd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 5.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.7,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 1.2,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 0.9,
+        "executable": "codex"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.6,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.5,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 4331,
+        "cpu_percent": 0.4,
+        "executable": "sleep"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 0.3,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.3,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.3,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 0.3,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50963,
+        "cpu_percent": 0.3,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 574,
+        "cpu_percent": 0.2,
+        "executable": "searchpartyd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "command": {
+    "command": [
+      "python3",
+      "/Users/ryan/Developer/Primes-marking-helpers/experiments/swift/compare_optimizations.py",
+      "--repo",
+      "/Users/ryan/Developer/Primes-marking-helpers",
+      "--variant",
+      "control-111=1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "--variant",
+      "marking-helpers=06b24cba796ce60fae80e6823d9858ef014f1fe8",
+      "--variant",
+      "unified-dense-128=9b2d9cb52aacc8ed69f47a1b1dab7181b85e578d",
+      "--output",
+      "/Users/ryan/Developer/Primes-marking-helpers/experiments/swift/marking-helpers-evidence/remaining-refactors-timing.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-marking-helpers/experiments/swift",
+    "started_at_utc": "2026-09-12T22:00:51.890063+00:00",
+    "owned_process_group": 4335,
+    "exit_code": 0,
+    "combined_stdout_stderr": "control-111: 0.039084 ms/pass (127929 passes)\nmarking-helpers: 0.038881 ms/pass (128598 passes)\nunified-dense-128: 0.520221 ms/pass (9612 passes)\nmarking-helpers: 0.038963 ms/pass (128327 passes)\nunified-dense-128: 0.519643 ms/pass (9623 passes)\ncontrol-111: 0.038912 ms/pass (128496 passes)\nunified-dense-128: 0.517089 ms/pass (9670 passes)\ncontrol-111: 0.038989 ms/pass (128241 passes)\nmarking-helpers: 0.038967 ms/pass (128315 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"control-111\": 0.038989368329941286,\n    \"marking-helpers\": 0.03896324169504469,\n    \"unified-dense-128\": 0.5196433154941286\n  },\n  \"speedup_over_first\": {\n    \"control-111\": 1.0,\n    \"marking-helpers\": 1.000670545718477,\n    \"unified-dense-128\": 0.07503102063935205\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T22:04:49.519469+00:00"
+  },
+  "binary_sha256": {
+    "control-111": "31fd5e6de9f702f99f86fa54e14b6c8655abb2b057977be4fce4d08ebc391b4f",
+    "marking-helpers": "2a48b79ee177ef0e3f0d552861851fea3ac346ebd65c867865ecd11d5169e74d",
+    "unified-dense-128": "920ac950eb1771d3cb9e82e612828806315bd1474bfde9b5dbea7f31a7bd6fcb"
+  },
+  "after": {
+    "at_utc": "2026-09-12T22:04:49.559206+00:00",
+    "top_processes": [
+      {
+        "pid": 16696,
+        "cpu_percent": 17.4,
+        "executable": "backupd"
+      },
+      {
+        "pid": 641,
+        "cpu_percent": 7.2,
+        "executable": "SystemUIServer"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.2,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 2.2,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 0.6,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 0.5,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.5,
+        "executable": "claude"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 0.4,
+        "executable": "launchd"
+      },
+      {
+        "pid": 642,
+        "cpu_percent": 0.4,
+        "executable": "Finder"
+      },
+      {
+        "pid": 365,
+        "cpu_percent": 0.3,
+        "executable": "mds"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 0.3,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.1,
+        "executable": "logd"
+      },
+      {
+        "pid": 340,
+        "cpu_percent": 0.1,
+        "executable": "fseventsd"
+      },
+      {
+        "pid": 517,
+        "cpu_percent": 0.1,
+        "executable": "mDNSResponder"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T22:04:49.559375+00:00",
+  "lock_absent_after": true
+}

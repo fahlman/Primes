@@ -1,0 +1,144 @@
+{
+  "recorded_at_utc": "2026-09-12T22:04:49.434463+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu": "Apple M4 Pro",
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "flags": [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "variants": {
+    "control-111": {
+      "revision": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448"
+    },
+    "marking-helpers": {
+      "revision": "06b24cba796ce60fae80e6823d9858ef014f1fe8",
+      "source_sha256": "45fd6ea13420ee09a62297f6457c8b558f0d4235d4f5e4537ccf5b641f73ba20"
+    },
+    "unified-dense-128": {
+      "revision": "9b2d9cb52aacc8ed69f47a1b1dab7181b85e578d",
+      "source_sha256": "2a031fb6888799d0a5b14f661fb713f6c7159d50261397b8688bef03f335f488"
+    }
+  },
+  "run_order": [
+    [
+      "control-111",
+      "marking-helpers",
+      "unified-dense-128"
+    ],
+    [
+      "marking-helpers",
+      "unified-dense-128",
+      "control-111"
+    ],
+    [
+      "unified-dense-128",
+      "control-111",
+      "marking-helpers"
+    ]
+  ],
+  "samples": {
+    "control-111": [
+      {
+        "output": "control-111;127929;5.000035458;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127929,
+        "seconds": 5.000035458,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27474560",
+        "milliseconds_per_pass": 0.03908445667518702
+      },
+      {
+        "output": "control-111;128496;5.000007209;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128496,
+        "seconds": 5.000007209,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27591813",
+        "milliseconds_per_pass": 0.03891177319916573
+      },
+      {
+        "output": "control-111;128241;5.000035584;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128241,
+        "seconds": 5.000035584,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27538751",
+        "milliseconds_per_pass": 0.038989368329941286
+      }
+    ],
+    "marking-helpers": [
+      {
+        "output": "marking-helpers;128598;5.000003625;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128598,
+        "seconds": 5.000003625,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27613620",
+        "milliseconds_per_pass": 0.038880881701115096
+      },
+      {
+        "output": "marking-helpers;128327;5.000035917;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128327,
+        "seconds": 5.000035917,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27556973",
+        "milliseconds_per_pass": 0.03896324169504469
+      },
+      {
+        "output": "marking-helpers;128315;5.000034958;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128315,
+        "seconds": 5.000034958,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27554654",
+        "milliseconds_per_pass": 0.03896687805790437
+      }
+    ],
+    "unified-dense-128": [
+      {
+        "output": "unified-dense-128;9612;5.000367;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 9612,
+        "seconds": 5.000367,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 2000572",
+        "milliseconds_per_pass": 0.5202212858926343
+      },
+      {
+        "output": "unified-dense-128;9623;5.000527625;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 9623,
+        "seconds": 5.000527625,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 2002785",
+        "milliseconds_per_pass": 0.5196433154941286
+      },
+      {
+        "output": "unified-dense-128;9670;5.000251666;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 9670,
+        "seconds": 5.000251666,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 2012955",
+        "milliseconds_per_pass": 0.5170891071354704
+      }
+    ]
+  },
+  "median_ms": {
+    "control-111": 0.038989368329941286,
+    "marking-helpers": 0.03896324169504469,
+    "unified-dense-128": 0.5196433154941286
+  },
+  "speedup_over_first": {
+    "control-111": 1.0,
+    "marking-helpers": 1.000670545718477,
+    "unified-dense-128": 0.07503102063935205
+  }
+}

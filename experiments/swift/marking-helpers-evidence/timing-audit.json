@@ -1,0 +1,20 @@
+{
+  "reviewer": "Independent Codex agent /root/review_sieve, checked by coordinating Codex",
+  "raw_sha256": "239bf2082fe121d3d5954ec6e5457d1d4ce30b3e29b436d7cfde116f78e7388e",
+  "provenance_sha256": "68acc382397e5b27dbd8a843e7d8a5c22700911cb9a269e14689a6dc40eda320",
+  "validated_runs": 9,
+  "all_runs_at_least_five_seconds": true,
+  "each_variant_in_each_position_once": true,
+  "source_runner_observer_binary_and_admission_hashes_match": true,
+  "control_median_us": 38.989368329941286,
+  "helpers_median_us": 38.96324169504469,
+  "unified_median_us": 519.6433154941286,
+  "helpers_ranges_overlap": true,
+  "every_unified_trial_slower_than_every_control": true,
+  "decision": "Reject unified128; helpers inconclusive and not selected given speed priority. No source adoption.",
+  "limitations": [
+    "Three trials, not a significance or equivalence test",
+    "Endpoint-only snapshots show backupd at 13.4 and 17.4 percent",
+    "No actual submission SwiftPM or native Linux runs for rejected candidates"
+  ]
+}
