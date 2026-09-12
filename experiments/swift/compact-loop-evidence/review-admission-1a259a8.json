@@ -1,0 +1,32 @@
+{
+  "candidate": "1a259a84a892cc1008de179ef332d66bd1c514bf",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Codex independent review agent /root/review_sieve",
+  "admitted_for_timing": true,
+  "source_findings": "Expanding all54 compact loops reproduces all3132 calls and the complete control source byte-for-byte. Same individual-source-mark base/faithful classification; endpoints and padding preserved.",
+  "verification": "All17 commands exit0, six verifier executions passed including full raw-buffer equality.",
+  "assembly_findings": {
+    "fully_folded_cases": [
+      5,
+      7
+    ],
+    "cases_with_runtime_chunk_iteration_and_remainder_arithmetic": 52,
+    "control_instructions": {
+      "runSieve": 907,
+      "word_handler": 2530,
+      "vector_handler": 8061
+    },
+    "candidate_instructions": {
+      "runSieve_with_inlined_dense_handlers": 4462
+    },
+    "control_runSieve_stack_frame_bytes": 240,
+    "candidate_runSieve_stack_frame_bytes": 912,
+    "sparse_loop_instructions": 51,
+    "sparse_loop_stores": 16,
+    "sparse_loops_have_no_stack_accesses": true,
+    "completedPass_identical_after_label_normalization": true,
+    "real_observer_and_release_calls": true,
+    "control_assembly_sha256": "8a8ec1e81bf8f5095e4d09b65b5e8ecfaf407f253b90cdeb6264ec8d5c8ffe8f",
+    "candidate_assembly_sha256": "43bd24066efda6b715acb4521c866db0ee8689c2fc671be24b12c58f9c3e5b10"
+  }
+}
