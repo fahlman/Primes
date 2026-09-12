@@ -5,7 +5,7 @@ unchanged Docker image built and ran successfully on amd64 and arm64, and all
 six correctness checks have successful evidence on each architecture. The amd64
 coverage combines five checks from the original job with the final PhaseVerify
 WMO check from one focused follow-up. The original 45-minute timeout is retained
-as a failed run. Hosted smoke runs are compatibility evidence only.
+as a cancelled run. Hosted smoke runs are compatibility evidence only.
 
 The solution is exactly `bd3858cac9a306aa3b8d4729cf059959a7c70885`, the 128-bit
 wrapping-offset candidate in [PR #14](https://github.com/fahlman/Primes/pull/14).
@@ -195,7 +195,7 @@ maps all 12 successful native verifier executions to the two runs. This is
 source-specific compatibility/correctness coverage across jobs. The original
 amd64 job remains cancelled, with its unfinished compile exit code `null` and
 absent final rehash/cleanup fields preserved. The original matrix therefore
-remains failed despite successful aggregate completion. The
+remains `cancelled` despite successful aggregate completion. The
 [evidence manifest](../linux-docker-validation/evidence-manifest.json) records
 SHA256 hashes for the preserved files.
 

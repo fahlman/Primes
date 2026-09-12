@@ -99,7 +99,7 @@ evidence. The original arm64 job also passed all six checks. Independent audits
 confirm full six-check coverage on each native architecture for exact solution
 `bd3858cac9a306aa3b8d4729cf059959a7c70885`, with amd64 coverage assembled across
 the original five checks and the focused final check. The original timeout is
-retained as a failed run. See the [complete report](../../reports/LinuxDockerValidation.md)
+retained as a cancelled run. See the [complete report](../../reports/LinuxDockerValidation.md)
 and [aggregate coverage record](../../linux-docker-validation/aggregate-coverage.json).
 
 Implementation and static review do not establish Linux support. Full Linux
