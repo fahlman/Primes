@@ -1,0 +1,10 @@
+{
+  "candidate": "968c249b7bc61bad48dd39bcfdc4a325b71c1905",
+  "control": "6f989eeb17b4826d43925efe6fa7a0e178efcc76",
+  "assembly_sha256": "084d64a4c2546a723ca17c55462d3f9310060c66a7af621446238b99815c286d",
+  "status": "admitted",
+  "blocking_findings": [],
+  "reviewer": "Codex independent review_sieve subagent; root source and evidence review",
+  "pr_comment": "https://github.com/fahlman/Primes/pull/18#issuecomment-5648054805",
+  "scope": "Source, generator and six captured correctness runs, assembly recovery, real observer call; no timing result yet"
+}

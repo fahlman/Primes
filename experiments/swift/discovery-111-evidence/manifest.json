@@ -1,0 +1,73 @@
+{
+  "scope": "Immutable report and evidence files; manifest excludes itself",
+  "files": {
+    "reports/DiscoveryBound111Review.md": {
+      "bytes": 7219,
+      "sha256": "6e9115a5cd3015dd658ebdbbfce5fbabd2199c83fd9463b2563fd690b6d0b5b7"
+    },
+    "discovery-111-results-968c249.json": {
+      "bytes": 3579,
+      "sha256": "dfe7400ce7a0d4d938167817b9eeea56aeab104968094fac81890c74debfe601"
+    },
+    "discovery-111-evidence/PrimeSwift.s": {
+      "bytes": 704488,
+      "sha256": "084d64a4c2546a723ca17c55462d3f9310060c66a7af621446238b99815c286d"
+    },
+    "discovery-111-evidence/admission.md": {
+      "bytes": 1780,
+      "sha256": "42e338ed1863562dab4c31a6c1ef5f818d828582df0ca1c4838a67cf915c235b"
+    },
+    "discovery-111-evidence/analysis.json": {
+      "bytes": 1527,
+      "sha256": "d42c686c0206340f2473330ddecb78836dd6b2e33a196f393657610d06c191c4"
+    },
+    "discovery-111-evidence/assembly.json": {
+      "bytes": 8115,
+      "sha256": "8033fd0b219389833555d1a78a2419ed5b0108168b5bd0df9be5f77b3eb934c9"
+    },
+    "discovery-111-evidence/ci-cancellations.json": {
+      "bytes": 591,
+      "sha256": "343bfb8e475bf9b8344e9212dbb38ff44a35ece1a71368843d2df0bed2c1088c"
+    },
+    "discovery-111-evidence/independent-audit.json": {
+      "bytes": 14151,
+      "sha256": "2cd735c5a4a1899df936cd57f36ae6faf9ccad5aedb19501ed177625050750d9"
+    },
+    "discovery-111-evidence/review.json": {
+      "bytes": 561,
+      "sha256": "51e088c110f761b1d322efe556fea55b1cd0b3e848bb14c9c6eea59e872a2b68"
+    },
+    "discovery-111-evidence/scripts/analyze.py": {
+      "bytes": 2007,
+      "sha256": "c54c430f4fd045384283cd6a717c4304537c15f6a94e61731b38248805459882"
+    },
+    "discovery-111-evidence/scripts/complete-assembly-v1.py": {
+      "bytes": 6494,
+      "sha256": "45781d3ced586129a4fc376a880bd66870da0dc7c8d581d23ae65040a41ff562"
+    },
+    "discovery-111-evidence/scripts/complete.py": {
+      "bytes": 6839,
+      "sha256": "6a829614ebefbdde50c1c5c655fee3eec39fad4bb3ace3487023a6be1105b414"
+    },
+    "discovery-111-evidence/scripts/primes_run_support.py": {
+      "bytes": 3400,
+      "sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5"
+    },
+    "discovery-111-evidence/scripts/run.py": {
+      "bytes": 4922,
+      "sha256": "a702af9b849fe005d1900fa49e1b0cd0e1b79120c4933ec71482cdd618ae1cb9"
+    },
+    "discovery-111-evidence/source-review.md": {
+      "bytes": 899,
+      "sha256": "4266884c24212503077805ec42fb16bcfb13b114dfa8ec6d5285253fd788ada7"
+    },
+    "discovery-111-evidence/timing.json": {
+      "bytes": 8109,
+      "sha256": "34c096fef38ee46909629334a2478d946ce5b4132dc74ad797344b8bb74f7ac0"
+    },
+    "discovery-111-evidence/verify.json": {
+      "bytes": 13874,
+      "sha256": "2ebb55d4453aae4524948d9ba4f4c6dafb48e2422751a7dd3a509de68f45e969"
+    }
+  }
+}

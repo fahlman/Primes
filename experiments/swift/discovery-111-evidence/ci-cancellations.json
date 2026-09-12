@@ -1,0 +1,17 @@
+{
+  "scope": "Two inherited all-language CI runs triggered by this candidate were deliberately cancelled while queued. They do not test experiments/swift. All required local checks were executed. No dedicated Linux run was requested for this retest.",
+  "runs": [
+    {
+      "id": 34712651943,
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head_sha": "968c249b7bc61bad48dd39bcfdc4a325b71c1905"
+    },
+    {
+      "id": 34712648323,
+      "status": "completed",
+      "conclusion": "cancelled",
+      "head_sha": "968c249b7bc61bad48dd39bcfdc4a325b71c1905"
+    }
+  ]
+}

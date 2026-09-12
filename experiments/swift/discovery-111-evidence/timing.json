@@ -1,0 +1,237 @@
+{
+  "mode": "timing",
+  "candidate": "968c249b7bc61bad48dd39bcfdc4a325b71c1905",
+  "control": "6f989eeb17b4826d43925efe6fa7a0e178efcc76",
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "started_at_utc": "2026-09-12T19:07:19.550765+00:00",
+  "wrapper_sha256": "6a829614ebefbdde50c1c5c655fee3eec39fad4bb3ace3487023a6be1105b414",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "source_sha256": {
+    "PrimeSieve.swift": "a193b04bfba33cd517578ef91e271f2c6ea285632d456c58ed566c4181eb09b0",
+    "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+    "tools/generate-dense-128.swift": "ef71c0e2f9610cf0bb3d8dccc6b6eb4816f0ea39370b91223137d352da234e91",
+    "Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "run.sh": "3498a80bd27adab9e4bede9430598ce1ddab8b251c5041fa284e73fa3a205ba6",
+    "compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844"
+  },
+  "original_verification_sha256": "2ebb55d4453aae4524948d9ba4f4c6dafb48e2422751a7dd3a509de68f45e969",
+  "completed_correctness_commands": 14,
+  "commands": [
+    {
+      "command": [
+        "swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift",
+      "started_at_utc": "2026-09-12T19:07:19.593100+00:00",
+      "owned_process_group": 77173,
+      "exit_code": 0,
+      "combined_stdout_stderr": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "finished_at_utc": "2026-09-12T19:07:19.667545+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+        "-u",
+        "compare_optimizations.py",
+        "--variant",
+        "control111=6f989eeb17b4826d43925efe6fa7a0e178efcc76",
+        "--variant",
+        "discovery111=968c249b7bc61bad48dd39bcfdc4a325b71c1905",
+        "--output",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/discovery-111-results-968c249.json"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift",
+      "started_at_utc": "2026-09-12T19:07:19.670924+00:00",
+      "owned_process_group": 77175,
+      "exit_code": 0,
+      "combined_stdout_stderr": "control111: 0.039093 ms/pass (127900 passes)\ndiscovery111: 0.039115 ms/pass (127830 passes)\ndiscovery111: 0.039303 ms/pass (127216 passes)\ncontrol111: 0.039356 ms/pass (127045 passes)\ncontrol111: 0.039255 ms/pass (127374 passes)\ndiscovery111: 0.039089 ms/pass (127915 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"control111\": 0.039254544687298824,\n    \"discovery111\": 0.0391145756708128\n  },\n  \"speedup_over_first\": {\n    \"control111\": 1.0,\n    \"discovery111\": 1.0035784362756226\n  }\n}\n",
+      "finished_at_utc": "2026-09-12T19:09:30.566117+00:00"
+    }
+  ],
+  "conditions_scope": "Before/after snapshots, not continuous monitoring",
+  "recovery": "All six checks and generator passed; original wrapper stopped before assembly because current runner output label differs from frozen. Original failed record preserved. No completed checks repeated. Assembly uses the frozen runner; timing uses the unchanged comparison script.",
+  "admission": "Every candidate trial must beat every control trial; one three-round rotated session; no automatic extra trials or merge.",
+  "assembly_record_sha256": "8033fd0b219389833555d1a78a2419ed5b0108168b5bd0df9be5f77b3eb934c9",
+  "review_sha256": "51e088c110f761b1d322efe556fea55b1cd0b3e848bb14c9c6eea59e872a2b68",
+  "before": {
+    "at_utc": "2026-09-12T19:07:19.592592+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 16.4,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 11.9,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 77141,
+        "cpu_percent": 11.3,
+        "executable": "Python"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 10.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.4,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.8,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.4,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 1.4,
+        "executable": "codex"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 1.3,
+        "executable": "launchd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.1,
+        "executable": "logd"
+      },
+      {
+        "pid": 16696,
+        "cpu_percent": 0.8,
+        "executable": "backupd"
+      },
+      {
+        "pid": 384,
+        "cpu_percent": 0.7,
+        "executable": "locationd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.6,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.6,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.6,
+        "executable": "SiriNCService"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "result_file": "discovery-111-results-968c249.json",
+  "result_sha256": "dfe7400ce7a0d4d938167817b9eeea56aeab104968094fac81890c74debfe601",
+  "binary_sha256": {
+    "control111": "0b3cdd51263c56ce6b2b8d06136919504b755055ed26d575d89bfa572f7efc50",
+    "discovery111": "2d4204f2af5f077af4781a3af66f9ded3a61502cb6be9e6a255152a8355da376"
+  },
+  "status": "passed",
+  "after": {
+    "at_utc": "2026-09-12T19:09:30.606564+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 10.4,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 3.4,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 2.0,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 1.7,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 1.7,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 1.5,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 625,
+        "cpu_percent": 1.4,
+        "executable": "ContinuityCaptureAgent"
+      },
+      {
+        "pid": 683,
+        "cpu_percent": 0.9,
+        "executable": "nearbyd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.9,
+        "executable": "milod"
+      },
+      {
+        "pid": 406,
+        "cpu_percent": 0.6,
+        "executable": "com.apple.cmio.registerassistantservice"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.6,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 0.6,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.5,
+        "executable": "claude"
+      },
+      {
+        "pid": 810,
+        "cpu_percent": 0.4,
+        "executable": "SidecarRelay"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.3,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T19:09:30.607157+00:00",
+  "lock_absent_after": true
+}

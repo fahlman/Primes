@@ -1,0 +1,49 @@
+{
+  "result_sha256": "dfe7400ce7a0d4d938167817b9eeea56aeab104968094fac81890c74debfe601",
+  "variants": {
+    "control111": {
+      "revision": "6f989eeb17b4826d43925efe6fa7a0e178efcc76",
+      "microseconds_per_sieve": [
+        39.09312711493354,
+        39.356291739147544,
+        39.25454468729882
+      ],
+      "median_microseconds": 39.25454468729882,
+      "median_sieves_per_second": 25474.757329781474,
+      "minimum_microseconds": 39.09312711493354,
+      "maximum_microseconds": 39.356291739147544
+    },
+    "discovery111": {
+      "revision": "968c249b7bc61bad48dd39bcfdc4a325b71c1905",
+      "microseconds_per_sieve": [
+        39.1145756708128,
+        39.30341144981764,
+        39.08876271742954
+      ],
+      "median_microseconds": 39.1145756708128,
+      "median_sieves_per_second": 25565.917125523047,
+      "minimum_microseconds": 39.08876271742954,
+      "maximum_microseconds": 39.30341144981764
+    }
+  },
+  "throughput_change_percent": 0.35784362756225985,
+  "microseconds_saved": 0.13996901648602034,
+  "range_gap_microseconds": -0.2102843348841006,
+  "qualifies": false,
+  "decision": "overlapping ranges; flat under agreed admission rule; does not qualify",
+  "admission_rule": "Maximum candidate microseconds/sieve must be less than minimum control microseconds/sieve; this screen is not a significance test.",
+  "run_order": [
+    [
+      "control111",
+      "discovery111"
+    ],
+    [
+      "discovery111",
+      "control111"
+    ],
+    [
+      "control111",
+      "discovery111"
+    ]
+  ]
+}

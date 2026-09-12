@@ -10,7 +10,7 @@ The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread
 
 This branch retests PR #18's exact square-root discovery change on adopted cutoff 111 (`6f989ee`), preserving the original cutoff-127 experiment (`76d82c2`) and its flat timing result. `runSieve` computes and corrects an integer square root inside every timed pass, then compares odd candidates with that bound instead of dividing on each candidate. All marking, allocation, runner, observer, generator and verification sources are otherwise unchanged from adopted cutoff 111.
 
-The new combined revision requires its own correctness checks, independent review and one locked comparison against `6f989ee`, with three rotated five-second trials each and a unique `--output`. Every candidate trial must beat every control trial to qualify. No result is predicted, and this experiment is not adopted by creating or timing it.
+Exact `968c249` passed independent review, the generator check and all six local ASan/WMO checks. Its three-trial median was **39.115 µs** versus cutoff 111 at **39.255 µs**, a median **0.358%** throughput increase saving **0.140 µs**. Trial ranges overlap, so it is **flat under the agreed admission rule and remains unmerged**. The original wrapper failure after successful correctness checks and separate assembly completion are preserved. [Report and evidence](reports/DiscoveryBound111Review.md).
 
 ## 128-bit cutoff sweep
 

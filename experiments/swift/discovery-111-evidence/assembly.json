@@ -1,0 +1,254 @@
+{
+  "mode": "assembly",
+  "candidate": "968c249b7bc61bad48dd39bcfdc4a325b71c1905",
+  "control": "6f989eeb17b4826d43925efe6fa7a0e178efcc76",
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "started_at_utc": "2026-09-12T19:04:44.257806+00:00",
+  "wrapper_sha256": "45781d3ced586129a4fc376a880bd66870da0dc7c8d581d23ae65040a41ff562",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "source_sha256": {
+    "PrimeSieve.swift": "a193b04bfba33cd517578ef91e271f2c6ea285632d456c58ed566c4181eb09b0",
+    "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+    "tools/generate-dense-128.swift": "ef71c0e2f9610cf0bb3d8dccc6b6eb4816f0ea39370b91223137d352da234e91",
+    "Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "run.sh": "3498a80bd27adab9e4bede9430598ce1ddab8b251c5041fa284e73fa3a205ba6",
+    "compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844"
+  },
+  "original_verification_sha256": "2ebb55d4453aae4524948d9ba4f4c6dafb48e2422751a7dd3a509de68f45e969",
+  "completed_correctness_commands": 14,
+  "commands": [
+    {
+      "command": [
+        "swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift",
+      "started_at_utc": "2026-09-12T19:04:44.297001+00:00",
+      "owned_process_group": 76746,
+      "exit_code": 0,
+      "combined_stdout_stderr": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "finished_at_utc": "2026-09-12T19:04:44.378129+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/.build/discovery-111-verification/BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "BenchmarkObserver.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/.build/discovery-111-verification/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift",
+      "started_at_utc": "2026-09-12T19:04:44.381806+00:00",
+      "owned_process_group": 76750,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T19:04:44.541568+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/.build/discovery-111-verification",
+        "PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/.build/discovery-111-verification/FrozenBenchmark.swift",
+        "-S",
+        "-o",
+        "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift/.build/discovery-111-verification/PrimeSwift.s"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-discovery-bound-111/experiments/swift",
+      "started_at_utc": "2026-09-12T19:04:44.541953+00:00",
+      "owned_process_group": 76753,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T19:05:31.504743+00:00"
+    }
+  ],
+  "conditions_scope": "Before/after snapshots, not continuous monitoring",
+  "recovery": "All six checks and generator passed; original wrapper stopped before assembly because current runner output label differs from frozen. Original failed record preserved. No completed checks repeated. Assembly uses the frozen runner; timing uses the unchanged comparison script.",
+  "admission": "Every candidate trial must beat every control trial; one three-round rotated session; no automatic extra trials or merge.",
+  "before": {
+    "at_utc": "2026-09-12T19:04:44.296536+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 18.5,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 76715,
+        "cpu_percent": 11.1,
+        "executable": "Python"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 10.3,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 8.2,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 632,
+        "cpu_percent": 4.4,
+        "executable": "cloudd"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 4.4,
+        "executable": "codex"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 3.5,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 655,
+        "cpu_percent": 3.2,
+        "executable": "nsurlsessiond"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 2.4,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.9,
+        "executable": "logd"
+      },
+      {
+        "pid": 664,
+        "cpu_percent": 1.9,
+        "executable": "bird"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 1.3,
+        "executable": "launchd"
+      },
+      {
+        "pid": 76727,
+        "cpu_percent": 1.1,
+        "executable": "sleep"
+      },
+      {
+        "pid": 596,
+        "cpu_percent": 0.9,
+        "executable": "distnoted"
+      },
+      {
+        "pid": 378,
+        "cpu_percent": 0.8,
+        "executable": "apsd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "assembly_runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "assembly_sha256": "084d64a4c2546a723ca17c55462d3f9310060c66a7af621446238b99815c286d",
+  "status": "passed",
+  "after": {
+    "at_utc": "2026-09-12T19:05:31.547362+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 10.2,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 4.5,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 3.1,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 1.9,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 574,
+        "cpu_percent": 1.4,
+        "executable": "searchpartyd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 1.2,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 1.0,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.7,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 683,
+        "cpu_percent": 0.7,
+        "executable": "nearbyd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.6,
+        "executable": "milod"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.5,
+        "executable": "claude"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.1,
+        "executable": "logd"
+      },
+      {
+        "pid": 384,
+        "cpu_percent": 0.1,
+        "executable": "locationd"
+      },
+      {
+        "pid": 391,
+        "cpu_percent": 0.1,
+        "executable": "distnoted"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T19:05:31.547929+00:00",
+  "lock_absent_after": true
+}
