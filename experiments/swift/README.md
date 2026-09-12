@@ -10,7 +10,7 @@ The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread
 
 Exact candidate **`bd3858cac9a306aa3b8d4729cf059959a7c70885`** delivered **3.36% more throughput**, saving **1.316 µs per sieve**: median **39.116 µs** versus adopted sixteen-write development **40.432 µs** at `e3f5a412d832e7fd25b1354dcf027e1dbf7ab29c`. Every candidate trial beat every development trial in one rotated session on Apple M4 Pro / Swift 6.3.3, with three five-second runs each. All six trials validated correctly. Before/after snapshots found no competing builds, tests, benchmarks or audio assertions, but background desktop activity and a single session limit precision. The candidate remains **unmerged** in [PR #14](https://github.com/fahlman/Primes/pull/14).
 
-Branch `swift/dense-128-wrapping-offset` has two source commits: the unchanged 128-bit port A (`63ff55cd77b47e6c906e801cf22bb9113fa5c080`) and focused offset change B (`bd3858c`). A is traceability only and was not timed. The comparison measured development versus final B; it does not isolate wrapping's throughput contribution. [Review and measured result](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/reports/Dense128WrappingOffsetReview.md), [raw results](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-results-bd3858c.json), and [verification and assembly evidence](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-verification.json) are permanently linked at the evidence commit. The fresh upstream comparison and Linux/Docker validation have separate publication pending.
+Branch `swift/dense-128-wrapping-offset` has two source commits: the unchanged 128-bit port A (`63ff55cd77b47e6c906e801cf22bb9113fa5c080`) and focused offset change B (`bd3858c`). A is traceability only and was not timed. The comparison measured development versus final B; it does not isolate wrapping's throughput contribution. [Review and measured result](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/reports/Dense128WrappingOffsetReview.md), [raw results](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-results-bd3858c.json), and [verification and assembly evidence](https://github.com/fahlman/Primes/blob/40900ef9fef5253f60e030af1ec872aa37f6892e/experiments/swift/dense-128-offset-verification.json) are permanently linked at the evidence commit. The separate [upstream comparison](https://github.com/fahlman/Primes/blob/599821c1a259976fd44837c17bc618199985bf1a/experiments/swift/reports/CurrentUpstreamSwiftComparison.md), summarized below, is now published. Linux/Docker validation remains pending.
 
 A reuses the exact 128-bit dispatch, helpers and generated switch from `307da10fe930e2bbdb46254770833026277e4cf3`, while preserving the adopted sixteen-write sparse code for factors above 127. B changes only the local chunk offset from `word * 16` to `word &* 16`, with the caller invariant `0 <= word < byteCount / 16`, hence `16 * word <= byteCount - 16`. The mathematical offset cannot overflow. Independent source and assembly reviews found no blockers before timing. All 3,072 per-chunk overflow checks and traps disappeared; the vector helper fell from 36,370 to 12,847 static instructions and from 4,619 to 1,669 stack-access instructions. The frame grew from 1,056 to 1,280 bytes, while every runtime-prime main loop had fewer stack accesses. No new helper calls appeared, and real sieve, observer and release calls remain. These counts do not isolate the cause of the measured gain. No other tuning is included.
 
@@ -53,7 +53,7 @@ The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The im
 
 ## Adopted sixteen-write fused loop
 
-The adopted development version tested two fused groups per sparse-loop iteration against adopted B at development `7509c87`. The bound `byte < end - r7 - p` protects the second group's last address; advancing by two groups leaves at most one complete eight-mark cleanup group. The scalar tail preserves B's byte-rounded padding behavior. Runtime factor discovery, factors 3–63, storage, benchmark and observer were unchanged.
+The adopted change uses two fused groups per sparse-loop iteration, measured against the earlier B development control `7509c87`. The bound `byte < end - r7 - p` protects the second group's last address; advancing by two groups leaves at most one complete eight-mark cleanup group. The scalar tail preserves B's byte-rounded padding behavior. Runtime factor discovery, factors 3–63, storage, benchmark and observer are unchanged.
 
 Exact measured source **`59262fe`** delivered **1.24% more throughput**, saving **0.491 µs per sieve**: median **39.553 µs** versus development **40.044 µs**. Every candidate trial beat every development trial in one shared, rotated session on Apple M4 Pro / Swift 6.3.3, with three five-second runs each. The independent 128-bit candidate measured 42.365 µs in that session. Spotlight was near 99% CPU in both condition snapshots, so the exact percentages are provisional. This implementation was adopted through PR #12 in merge commit `83751ea`, which preserves the exact reviewed sieve, runner and observer.
 
@@ -79,17 +79,20 @@ The [phase diagnostic](tools/phase-split/README.md) still copies earlier B (`8f1
 
 ## Most recent published direct upstream comparison
 
-The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The published session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). Publication of the fresh comparison for final `bd3858c` is pending separately; no new upstream ratio is claimed here.
+The fastest tested candidate is **`bd3858c` in [PR #14](https://github.com/fahlman/Primes/pull/14), not yet merged**. It adds the 128-bit handlers for odd factors 65–127 to the adopted sixteen-write loop, with provably safe wrapping byte offsets. Its direct development comparison measured **39.116 µs** versus `e3f5a41` at **40.432 µs**, **3.36% more throughput**, saving **1.316 µs per sieve**. Every candidate trial beat every development trial. [Review](reports/Dense128WrappingOffsetReview.md), [raw results](dense-128-offset-results-bd3858c.json), [verification](dense-128-offset-verification.json). The port parent was not timed, so this does not isolate wrapping's contribution.
 
+A separate fresh session compared that exact candidate with all three upstream entries. The project baseline remains **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest upstream implementation.
 
-| Implementation | Median milliseconds per pass | e8ba734 throughput advantage |
+| Implementation | Median µs per sieve | Candidate throughput ratio |
 |---|---:|---:|
-| Upstream Bool (`bits=8`) | 0.295470 | 4.98x |
-| Upstream packed UInt8 (`bits=1`) | 0.347904 | 5.87x |
-| Upstream striped UInt8 (`bits=1`), project baseline | 0.207650 | 3.50x |
-| Earlier candidate `e8ba734` (`bits=1`) | 0.059299 | — |
+| Upstream Bool (`bits=8`) | 290.055 | 7.44x |
+| Upstream packed UInt8 (`bits=1`) | 349.419 | 8.96x |
+| Upstream striped UInt8 (`bits=1`), project baseline | 207.191 | **5.31x** |
+| Unmerged candidate `bd3858c` (`bits=1`) | **39.000** | — |
 
-Three rotated five-second trials per implementation, Apple M4 Pro, Swift 6.3.3, same compiler flags and allocation-through-release Swift runner. All 12 executions validated 78,498 primes. Background desktop and backup activity makes the precise ratios provisional. These results compare adapted upstream kernels under the common runner. [Full report, adapter details, and reproduction](reports/UpstreamBaselineComparison.md); [raw results and provenance](upstream-baseline-e8ba734.json).
+Three rotated five-second trials per implementation, Apple M4 Pro, Swift 6.3.3, identical compiler flags and allocation-through-release Swift runner. All 12 executions validated 78,498 primes, and every candidate trial beat every upstream trial. Spotlight activity before compilation makes the exact ratios provisional; snapshots do not establish activity during individual trials. Three rounds do not fully balance four execution positions. These are adapted upstream kernels under a common runner at one million, not the original CLI executables or Threadripper measurements. [Report and adapter details](reports/CurrentUpstreamSwiftComparison.md), [raw results](upstream-current-bd3858c.json), [provenance](upstream-current-bd3858c-verification.json).
+
+The earlier `e8ba734` comparison remains preserved in its [report](reports/UpstreamBaselineComparison.md) and [raw record](upstream-baseline-e8ba734.json). The adopted development source remains the sixteen-write implementation described above; the newest direct upstream result belongs to unmerged `bd3858c`.
 
 Our earlier implementations are **development controls**, including the historical `swift/baseline` branch. Comparisons against them measure each optimization's contribution and are separate from the upstream baseline. The combined candidate's earlier 38.72% gain was over development control `0d0a142`; wrapping added 9.48% over the combined word handlers alone. See the [combined review](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/reports/CombinedReview.md).
 
@@ -105,7 +108,7 @@ Before these experiments, our original development control beat all three reposi
 | Packed UInt8 | 2.91x |
 | Striped UInt8 | 1.73x |
 
-Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; adopted `59262fe` has only its recorded development comparison so far. Do not combine ratios across sessions.
+Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` and unmerged `bd3858c` each have their own direct upstream comparison; adopted `59262fe` has its recorded development comparison. Do not combine ratios across sessions.
 
 To compare the current implementation with all three original entries:
 
