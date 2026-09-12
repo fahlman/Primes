@@ -1,0 +1,35 @@
+{
+  "candidate": "9b2d9cb52aacc8ed69f47a1b1dab7181b85e578d",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Codex independent review agent /root/fast_u8",
+  "admitted_for_timing": true,
+  "verification_sha256": "052968c2e1b08bebd25c850f07e319d684a18bd8b70efb70619a0b243e422f77",
+  "source": "All55 odd cases; individual-source marks; runtime discovery/p\u00b2/fresh state retained; per-factor endpoints preservepadding.",
+  "checks": "All16 commands0, six verifier executions passed; Phase62054 checks/2698 limits. Source/runner/observer/assembly hashes match.",
+  "assembly": {
+    "completedPass_instructions": 30,
+    "init_deinit_instructions": [
+      23,
+      11
+    ],
+    "runSieve_instructions": [
+      907,
+      752
+    ],
+    "old_word_vector_instructions": [
+      2530,
+      8061
+    ],
+    "unified_instructions": 13809,
+    "old_vector_frame_bytes": 720,
+    "unified_frame_bytes": 848,
+    "old_word_vector_direct_stack_memory_instructions": 597,
+    "unified_direct_stack_memory_instructions": 1219,
+    "dynamic_inner_bit_loops": [
+      3,
+      5
+    ],
+    "constant_folded_example": 7,
+    "real_sieve_observer_release_calls": true
+  }
+}

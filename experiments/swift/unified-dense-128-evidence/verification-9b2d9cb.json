@@ -1,0 +1,437 @@
+{
+  "candidate": "9b2d9cb52aacc8ed69f47a1b1dab7181b85e578d",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "harness": "25402d46ba991b39451724d3873d326626981e3f",
+  "started_at_utc": "2026-09-12T21:45:42.832829+00:00",
+  "commands": [
+    {
+      "command": [
+        "swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:45:42.921745+00:00",
+      "owned_process_group": 2009,
+      "exit_code": 0,
+      "combined_stdout_stderr": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "finished_at_utc": "2026-09-12T21:45:43.001182+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/BenchmarkObserver.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:45:43.025389+00:00",
+      "owned_process_group": 2012,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:45:43.188281+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-module-name",
+        "PrimeSwift",
+        "-I",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/Benchmark.swift",
+        "-S",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/unified-dense-128-evidence/candidate-9b2d9cb.s"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:45:43.188759+00:00",
+      "owned_process_group": 2015,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:47:30.563757+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:47:30.565361+00:00",
+      "owned_process_group": 2328,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated 3...111 switch matches.\n",
+      "finished_at_utc": "2026-09-12T21:47:30.822592+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:47:30.823224+00:00",
+      "owned_process_group": 2331,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:49:19.313917+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:49:19.314353+00:00",
+      "owned_process_group": 2662,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "finished_at_utc": "2026-09-12T21:49:19.448902+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "Verify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/verify-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:49:19.449518+00:00",
+      "owned_process_group": 2671,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:51:06.881167+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/verify-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:51:06.881607+00:00",
+      "owned_process_group": 2965,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "finished_at_utc": "2026-09-12T21:51:06.946502+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/extra-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:51:06.947040+00:00",
+      "owned_process_group": 2966,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:52:57.088795+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/extra-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:52:57.089190+00:00",
+      "owned_process_group": 3227,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 21527 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\nPassed: 3654 sparse double-group and cleanup boundary limits.\n",
+      "finished_at_utc": "2026-09-12T21:53:02.298109+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "ExtraVerify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/extra-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:53:02.298653+00:00",
+      "owned_process_group": 3241,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:54:49.573649+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/extra-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:54:49.574052+00:00",
+      "owned_process_group": 3493,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 21527 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\nPassed: 3654 sparse double-group and cleanup boundary limits.\n",
+      "finished_at_utc": "2026-09-12T21:54:53.693241+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "PrimeSieve.swift",
+        "tools/phase-split/PhaseSieve.swift",
+        "tools/phase-split/PhaseVerify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/phase-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:54:53.693800+00:00",
+      "owned_process_group": 3504,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:56:45.533544+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/phase-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:56:45.533982+00:00",
+      "owned_process_group": 3756,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed 62054 partial/full flag checks over 2698 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+      "finished_at_utc": "2026-09-12T21:56:46.937389+00:00"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "PrimeSieve.swift",
+        "tools/phase-split/PhaseSieve.swift",
+        "tools/phase-split/PhaseVerify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/phase-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:56:46.937965+00:00",
+      "owned_process_group": 3763,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-12T21:58:37.129059+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift/.build/unified-dense-128-verify/phase-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-unified-dense-128/experiments/swift",
+      "started_at_utc": "2026-09-12T21:58:37.129503+00:00",
+      "owned_process_group": 3998,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed 62054 partial/full flag checks over 2698 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+      "finished_at_utc": "2026-09-12T21:58:37.863674+00:00"
+    }
+  ],
+  "status": "passed",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "reused_control_assembly_evidence_commit": "8bb522faaed43acaeeacd168af898753dc481bb3",
+  "source_files": {
+    "experiments/swift/Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "experiments/swift/BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "experiments/swift/ExtraVerify.swift": "281c3edb14e59ad3fb1c50dafd27c34b4d53d0e94d95a15a60d892cf37b8afff",
+    "experiments/swift/PrimeSieve.swift": "2a031fb6888799d0a5b14f661fb713f6c7159d50261397b8688bef03f335f488",
+    "experiments/swift/Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "experiments/swift/tools/generate-dense-128.swift": "0b6f902b5eb759222863e1e8a5501322b051cb15bce310e0214061c6e9e21709",
+    "experiments/swift/tools/phase-split/PhaseBench.swift": "c798b820f228a205b2206ced08b84223069db7d1d46945669bad019c159eedcb",
+    "experiments/swift/tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "experiments/swift/tools/phase-split/PhaseVerify.swift": "9f3f7fe6c8f911e43da5ba7472505c12afec70e1b5546c26ad3dfbc9d9f16641"
+  },
+  "candidate_source_sha256": "2a031fb6888799d0a5b14f661fb713f6c7159d50261397b8688bef03f335f488",
+  "control_source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+  "before": {
+    "at_utc": "2026-09-12T21:45:42.921366+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 16.6,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 16.4,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 13.5,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 1999,
+        "cpu_percent": 10.3,
+        "executable": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 5.2,
+        "executable": "codex"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.8,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.8,
+        "executable": "claude"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.5,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.4,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.4,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 51355,
+        "cpu_percent": 0.4,
+        "executable": "codex-code-mode-host"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.2,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.2,
+        "executable": "milod"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 0.2,
+        "executable": "ChatGPT"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "assembly_sha256": "33734349a86eaae8c1508d5ab4e1a68f754d56da194c3e5cea2d796234e8b84b",
+  "control_assembly_sha256": "8a8ec1e81bf8f5095e4d09b65b5e8ecfaf407f253b90cdeb6264ec8d5c8ffe8f",
+  "whole_assembly_byte_identical": false,
+  "after": {
+    "at_utc": "2026-09-12T21:58:37.920409+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 9.4,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 713,
+        "cpu_percent": 3.6,
+        "executable": "NeptuneOneWallpaper"
+      },
+      {
+        "pid": 732,
+        "cpu_percent": 1.5,
+        "executable": "VTDecoderXPCService"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 0.9,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.7,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.7,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 4000,
+        "cpu_percent": 0.6,
+        "executable": "sleep"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.5,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 770,
+        "cpu_percent": 0.4,
+        "executable": "SafariBookmarksSyncAgent"
+      },
+      {
+        "pid": 574,
+        "cpu_percent": 0.3,
+        "executable": "searchpartyd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.3,
+        "executable": "milod"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.3,
+        "executable": "claude"
+      },
+      {
+        "pid": 683,
+        "cpu_percent": 0.2,
+        "executable": "nearbyd"
+      },
+      {
+        "pid": 34673,
+        "cpu_percent": 0.1,
+        "executable": "zsh"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 0.1,
+        "executable": "Codex (Service)"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T21:58:37.920600+00:00",
+  "lock_absent_after": true
+}
