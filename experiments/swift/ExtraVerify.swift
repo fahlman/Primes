@@ -1,6 +1,7 @@
 // Extra correctness checks for PrimeSieve, complementing Verify.swift. Compares complete
-// prime lists with one reference sieve at 500 seeded random limits from 2,049 to 2,000,000
-// and at every limit within 3 of a prime square up to 2,000,000. Run from experiments/swift:
+// prime lists with one reference sieve at every limit from 2,049 to 20,000, at 500 seeded
+// random limits from 2,049 to 2,000,000, and at every limit within 3 of a prime square up
+// to 2,000,000. Run from experiments/swift:
 //
 //   mkdir -p .build
 //   swiftc -O -sanitize=address PrimeSieve.swift ExtraVerify.swift -o .build/extra-verify-asan
@@ -45,6 +46,10 @@ struct ExtraVerify {
             precondition(sieve.primes().elementsEqual(expected(limit)), "Incorrect primes at \(limit)")
         }
 
+        // Every limit where dense word groups first appear, with every tail length.
+        for limit in 2_049...20_000 {
+            check(limit)
+        }
         var rng = SplitMix64(state: 0x5EED)
         for _ in 0..<500 {
             check(2_049 + Int(rng.next() % UInt64(maxLimit - 2_049)))
@@ -56,6 +61,6 @@ struct ExtraVerify {
                 squareLimits += 1
             }
         }
-        print("Passed: 500 random limits in 2,049...2,000,000 and \(squareLimits) limits within 3 of every prime square up to 2,000,000.")
+        print("Passed: every limit in 2,049...20,000, 500 random limits in 2,049...2,000,000, and \(squareLimits) limits within 3 of every prime square up to 2,000,000.")
     }
 }
