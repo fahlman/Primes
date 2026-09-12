@@ -7,10 +7,12 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
-`validate.py`, and only in `fahlman/Primes`. The original two native jobs run
-serially. The current trigger requests only native amd64 PhaseVerify WMO, the
-focused completion check described below, with the same 45-minute job limit and
-read-only repository permissions. Its unchanged concurrency group serializes
+`validate.py`, and only in `fahlman/Primes`. The two native jobs run serially.
+The current trigger requests the full six-check
+suite on amd64 and arm64 for cutoff 111 before integrating PR #16. The job limit
+is 60 minutes, providing room beyond the earlier 45-minute cutoff127 timeout;
+individual command limits remain 20 minutes. Repository permissions are read-only.
+Its unchanged concurrency group serializes
 runs without cancelling an active run.
 The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
@@ -18,8 +20,8 @@ Do not include these files or the inherited-CI guard in an upstream submission.
 
 ## Selecting exactly what is checked
 
-`SOLUTION_REVISION` in the workflow is pinned to the selected 128-bit
-wrapping-offset candidate, `bd3858cac9a306aa3b8d4729cf059959a7c70885`.
+`SOLUTION_REVISION` in the workflow is pinned to the reviewed and timed cutoff111
+candidate, `099e35afa8a2f01d79ef11f805d760e81d1d983a` (PR #16).
 This selects the source for Linux validation; it does not adopt or merge it.
 Change the pin explicitly when a different reviewed solution is selected.
 The workflow and solution are checked out into
@@ -87,10 +89,10 @@ ExtraVerify WMO had completed successfully. The original raw record remains
 the job cancellation interrupted the process; the Actions job record establishes
 the timeout. Its artifact and raw logs are preserved without modification.
 
-The focused follow-up keeps solution `bd3858c` and requests only
-`--checks phase-verify-wmo` on native amd64. It rebuilds the same Dockerfile and
-repeats the runtime smoke; it does not rerun the five completed checks. The
-20-minute per-command and 45-minute per-job limits remain.
+The completed focused follow-up kept solution `bd3858c` and requested only
+`--checks phase-verify-wmo` on native amd64. It rebuilt the same Dockerfile and
+repeated the runtime smoke without rerunning the five completed checks. That
+run retained the 20-minute per-command and 45-minute per-job limits.
 [Run 34697204142](https://github.com/fahlman/Primes/actions/runs/34697204142),
 workflow `5867ca7033d938c5977749fdf4f019e2696c6e2b`, completed successfully with
 `passed_targeted`: only PhaseVerify WMO was requested and completed. Its source
