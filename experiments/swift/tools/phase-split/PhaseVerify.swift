@@ -32,10 +32,11 @@ struct PhaseVerify {
                 for offset in -2...2 { limits.insert(max(0, boundary + offset)) }
             }
         }
-        // The copy remains adopted B; compare the new production 128-bit path
-        // to its full raw flags around alignment and first/second group edges.
-        // Include the earlier byte-rounded boundary, which exercises padding.
-        for p in stride(from: 65, through: 127, by: 2) {
+        // The copy remains adopted B. Include every new small-factor 128-bit
+        // alignment/group edge while retaining the earlier 65...127 inputs.
+        // Exact full-buffer comparison verifies that factors below 64 still
+        // stop at oddCount; byte-rounded boundaries exercise larger-factor padding.
+        for p in stride(from: 3, through: 127, by: 2) {
             var aligned = (p * p - 3) / 2
             while aligned & 127 != 0 { aligned += p }
             for boundary in [p * p, 2 * aligned + 3,

@@ -1,6 +1,6 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. The adopted implementation uses the 128-bit local handlers for every odd factor 65 through 111, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
+This branch evaluates one 128-bit dense handler for every odd factor from 3 through 111 against adopted development `1d0522115846d8c6487d49a9bf0e60b18b9d8599`. It is a single-threaded, class-owned, odd-only Sieve of Eratosthenes, with one composite flag per bit and fresh runtime-sized storage for every pass. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. Runtime factor discovery remains unchanged. This candidate is unverified and unmeasured; it has not been adopted.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
@@ -20,11 +20,30 @@ A reuses the exact 128-bit dispatch, helpers and generated switch from `307da10f
 
 In `bd3858c`, all odd cases 65 through 127 are present, without precomputed prime lists or multi-bit composite masks. Individual marks peel from p² to a 128-bit boundary, complete groups mark p chunks, and an individual tail runs through the last allocated byte. Raw unaligned loads/stores and per-lane little-endian conversion preserve the original byte representation and B's padding, including factor 101's mark for 1,000,001 at limit 1,000,000. Fresh allocation, dense handlers 3–63, enumeration, benchmark and observer are unchanged. Classification remains source-based; the compiler may combine individual source operations.
 
-The Swift generator checks the current 65–111 switch, containing 24 odd cases and 2,112 helper calls. After acquiring the timing lock, run from this directory:
+The adopted control's Swift generator covered the 65–111 switch, containing 24 odd cases and 2,112 helper calls. This branch changes its first factor to 3, covering 55 odd cases and 3,135 explicit helper calls. The 65–111 cases remain byte-identical. After acquiring the timing lock, run from this directory:
 
 ```sh
 swift tools/generate-dense-128.swift --check PrimeSieve.swift
 ```
+
+## Unified 128-bit handler candidate
+
+`swift/unified-dense-128` replaces the factor-3 byte handler and the 5–63 word handler with additional explicit cases in the existing 128-bit switch. It adds 31 odd cases and 1,023 helper calls; no chunk loop replaces the explicit calls. All 55 odd cases exist, including composites, and dispatch still occurs only after the sequential runtime candidate-bit test. The generator computes `(-128*j) mod p` for each chunk; it contains no prime list or composite masks. Each helper marks one multiple per source OR. Classification remains `algorithm=base,faithful=yes,bits=1`, one thread, based on source operations.
+
+The selected end is `oddCount` for factors below 64 and `byteCount << 3` for factors 65–111. This preserves the adopted raw-buffer contract: smaller factors do not set padding; larger factors may mark the entire final allocated byte. Starting at the bit for p², an individual prefix advances by p until an alignment boundary or that end. Odd p is coprime to 128, so alignment takes at most 127 marks. A complete group spans p chunks and marks exactly the 128 positions `0,p,...,127p` relative to its aligned start. Advancing by p chunks therefore starts at the next multiple without omissions or duplicate work within that factor.
+
+`fullWords = bitEnd >> 7` and `word + p <= fullWords` guarantee that every chunk lies wholly below the selected end. For each accessed chunk q, `q < fullWords <= byteCount / 16`, so `16*q <= byteCount - 16`; the existing wrapping offset `q &* 16` cannot overflow or cross the allocation. Unaligned loads/stores and per-lane little-endian conversion are unchanged. Fewer than p complete chunks remain after the group loop; the scalar tail handles at most 128 remaining marks up to the selected end.
+
+Allocation, initialization, release, observer, benchmark, enumeration, sparse marking above 111 and the old `PhaseSieve` reference are unchanged. Existing exhaustive, random, square and sparse-boundary verification inputs are retained. ExtraVerify and PhaseVerify extend their 128-bit boundary inputs down to factor 3, covering alignment and the first two groups; ExtraVerify also retains every tail-mark position. The full-buffer PhaseVerify comparison checks padding against the unchanged reference. These input changes have not been executed on this branch.
+
+Before timing, central verification must complete the following checklist under the timing lock:
+
+- Check generated source against the Swift generator and independently review all odd cases and both marking bounds.
+- Run Verify, ExtraVerify and PhaseVerify with ASAN and optimized WMO; require complete prime lists and full raw-buffer equality, including padding.
+- Inspect generated assembly with the real benchmark and separately compiled observer; require real sieve/observation/release work and review the unified dense handler's bounds and code shape.
+- Publish the exact committed candidate and independent review in its fork PR, then run only the agreed serial comparison against the committed development control if admitted.
+
+No build, Swift generator execution, correctness run, assembly inspection, timing, Linux validation or performance claim is included in this implementation commit. The history below describes earlier revisions, not this candidate.
 
 At historical cutoff 127 `bd3858c`, the generator's `--check` passed for all 32 cases and 3,072 calls. The rest of this paragraph describes that earlier candidate's local verification. `--write` remains available to regenerate only the marked block; it was not run for this follow-up. Verify passed under AddressSanitizer and optimized WMO. ExtraVerify passed under ASAN, retaining the original exhaustive, random and prime-square checks plus 3,654 sparse-group limits and 11,382 wide alignment/group/tail limits. PhaseVerify passed under WMO with 53,015 partial/full checks over 2,305 limits, including complete raw-buffer equality and padding. ExtraVerify WMO and PhaseVerify ASAN were not added to this local bracket. PhaseSieve stays the unchanged earlier B reference; its timing copy is stale for this candidate and must not profile it.
 

@@ -51,6 +51,7 @@ Our earlier versions are development controls: they measure the contribution of 
 | Square-root discovery bound at cutoff 127 | [PR #18](https://github.com/fahlman/Primes/pull/18), `76d82c2`; [review](https://github.com/fahlman/Primes/blob/9867dce8a60985272c85baa8596433b9719e243c/experiments/swift/reports/FollowupFourExperimentReview.md) | 0.039155 | Flat; does not qualify; closed as tested and rejected; unmerged |
 | Square-root discovery bound at adopted cutoff 111 | [PR #18](https://github.com/fahlman/Primes/pull/18), `968c249`; [review](https://github.com/fahlman/Primes/blob/31222e494667049240bb2fa3131d6af3acdd3f63/experiments/swift/reports/DiscoveryBound111Review.md) | 0.039115 | Flat; trial ranges overlap; closed as tested and rejected; unmerged |
 | Atomic sparse marks | [PR #19](https://github.com/fahlman/Primes/pull/19), `e889cd6`; [review](https://github.com/fahlman/Primes/blob/9867dce8a60985272c85baa8596433b9719e243c/experiments/swift/reports/FollowupFourExperimentReview.md) | 0.098332 | Slower; does not qualify; closed as tested and rejected; unmerged |
+| One explicit 128-bit dense handler for odd factors 3–111 | `swift/unified-dense-128`; [candidate proof/checklist](README.md#unified-128-bit-handler-candidate) | Unmeasured | Implementation candidate from `1d05221`; central source review, correctness, assembly and timing pending; unmerged |
 
 Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 

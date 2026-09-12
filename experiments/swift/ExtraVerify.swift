@@ -51,12 +51,13 @@ struct ExtraVerify {
             check(limit)
         }
 
-        // The 128-bit handlers can begin full groups beyond 30,000. Include
-        // alignment and first/second group edges for every odd handled value.
-        // A group's byte-rounded storage exists at limit 2*endBit-13, before
-        // every flag in its last byte is valid; also test 2*endBit+1 explicitly.
+        // The unified 128-bit handlers can begin full groups beyond 30,000,
+        // including smaller factors whose old 64-bit groups fit that range.
+        // Retain the earlier 65...127 inputs and add every odd factor 3...63.
+        // Retain byte-rounded edges at 2*endBit-13 for larger-factor padding;
+        // small factors require valid flags through the edge at 2*endBit+1.
         var vectorLimits = Set<Int>()
-        for factor in stride(from: 65, through: 127, by: 2) {
+        for factor in stride(from: 3, through: 127, by: 2) {
             var aligned = (factor * factor - 3) / 2
             while aligned & 127 != 0 { aligned += factor }
             let groupEnd = aligned + 128 * factor
