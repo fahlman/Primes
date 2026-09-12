@@ -37,45 +37,77 @@ final class PrimeSieve {
                     continue
                 }
 
-                // Consecutive odd multiples differ by p bit positions. Eight
-                // interleaved streams each keep a fixed mask and advance p bytes,
-                // with eight writes per iteration.
-                var start = (p * p - 3) / 2
-                let p2 = p + p
-                let p3 = p2 + p
-                let p4 = p3 + p
-                let p5 = p4 + p
-                let p6 = p5 + p
-                let p7 = p6 + p
-                let p8 = p7 + p
-                let unrolledEnd = end - p7
-
-                // Wrapping additions change no result here; they only drop overflow
-                // checks. The byte index stays below end + p, and the bit index start
-                // stays below (p * p - 3) / 2 + 8 * p, both far from Int.max.
-                for _ in 0..<8 {
-                    let mask = UInt8(1) << (start & 7)
-                    var byte = start >> 3
-
-                    while byte < unrolledEnd {
-                        bytes[byte] |= mask
-                        bytes[byte &+ p] |= mask
-                        bytes[byte &+ p2] |= mask
-                        bytes[byte &+ p3] |= mask
-                        bytes[byte &+ p4] |= mask
-                        bytes[byte &+ p5] |= mask
-                        bytes[byte &+ p6] |= mask
-                        bytes[byte &+ p7] |= mask
-                        byte &+= p8
-                    }
-                    while byte < end {
-                        bytes[byte] |= mask
-                        byte &+= p
-                    }
-                    start &+= p
+                // Factors above 63 leave at most one multiple in each 64-bit word.
+                // Eight consecutive multiples fall on all eight bit offsets within
+                // a byte, and their byte offsets repeat every p bytes, so one loop
+                // marks eight multiples per iteration, each with its own single-bit
+                // mask. The first multiple, p², falls at bit offset 7 when p ≡ 1 or
+                // 7 (mod 8) and at 3 when p ≡ 3 or 5, which fixes the masks; these
+                // four cases cover every odd factor.
+                let start = (p * p - 3) / 2
+                switch p & 7 {
+                case 1:
+                    markSparseMultiples(bytes, end: end, start: start, step: p,
+                                        0x80, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40)
+                case 3:
+                    markSparseMultiples(bytes, end: end, start: start, step: p,
+                                        0x08, 0x40, 0x02, 0x10, 0x80, 0x04, 0x20, 0x01)
+                case 5:
+                    markSparseMultiples(bytes, end: end, start: start, step: p,
+                                        0x08, 0x01, 0x20, 0x04, 0x80, 0x10, 0x02, 0x40)
+                default: // p & 7 == 7
+                    markSparseMultiples(bytes, end: end, start: start, step: p,
+                                        0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01)
                 }
             }
             p += 2
+        }
+    }
+
+    /// Fused byte marking for odd factors above 63, from bit `start` onward. Each
+    /// iteration marks the next eight multiples, one at each bit offset within a
+    /// byte, with that offset's single-bit mask `m0`...`m7`. Their byte offsets
+    /// `r1`...`r7` from the first repeat every p bytes. Each multiple gets its own OR.
+    @inline(__always)
+    private func markSparseMultiples(
+        _ bytes: UnsafeMutablePointer<UInt8>, end: Int, start: Int, step p: Int,
+        _ m0: UInt8, _ m1: UInt8, _ m2: UInt8, _ m3: UInt8,
+        _ m4: UInt8, _ m5: UInt8, _ m6: UInt8, _ m7: UInt8
+    ) {
+        let bit = start & 7
+        let r1 = (bit + p) >> 3
+        let r2 = (bit + 2 * p) >> 3
+        let r3 = (bit + 3 * p) >> 3
+        let r4 = (bit + 4 * p) >> 3
+        let r5 = (bit + 5 * p) >> 3
+        let r6 = (bit + 6 * p) >> 3
+        let r7 = (bit + 7 * p) >> 3
+        let groupEnd = end - r7
+        var byte = start >> 3
+
+        // Wrapping additions change no result here; they only drop overflow checks.
+        // The byte index stays below end + p and the bit index below 8 * end + p,
+        // both far from Int.max.
+        while byte < groupEnd {
+            bytes[byte] |= m0
+            bytes[byte &+ r1] |= m1
+            bytes[byte &+ r2] |= m2
+            bytes[byte &+ r3] |= m3
+            bytes[byte &+ r4] |= m4
+            bytes[byte &+ r5] |= m5
+            bytes[byte &+ r6] |= m6
+            bytes[byte &+ r7] |= m7
+            byte &+= p
+        }
+
+        // At most seven multiples remain. Like the group loop, the tail runs to the
+        // end of the last byte, so it can also set padding bits past the last
+        // candidate; enumeration ignores them.
+        let bitEnd = end << 3
+        var index = (byte << 3) + bit
+        while index < bitEnd {
+            bytes[index >> 3] |= UInt8(1) << (index & 7)
+            index &+= p
         }
     }
 
