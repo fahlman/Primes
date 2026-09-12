@@ -1,0 +1,72 @@
+{
+  "scope": "Derived audit of preserved evidence only; no new build/test/execution.",
+  "platform": "linux/amd64",
+  "overall_result": "incomplete_job_timeout",
+  "job_conclusion": "cancelled",
+  "job_started_at": "2026-09-12T12:50:17Z",
+  "job_completed_at": "2026-09-12T13:35:34Z",
+  "cancellation_logged_at_utc": "2026-09-12T13:35:30.654928+00:00",
+  "raw_validator_status": "running",
+  "exact_identity_matches": {
+    "solution_revision": true,
+    "workflow_revision": true,
+    "source_sha256": true,
+    "workflow_sha256": true
+  },
+  "runtime_smoke": {
+    "passes": 44649,
+    "seconds": 5.000053083,
+    "threads": 1,
+    "tags": "algorithm=base,faithful=yes,bits=1",
+    "prime_count": 78498,
+    "performance_evidence": false
+  },
+  "completed_commands": 27,
+  "failed_command_exit_codes": [],
+  "completed_verifiers": [
+    "run-verify-asan",
+    "run-extra-verify-asan",
+    "run-phase-verify-asan",
+    "run-verify-wmo",
+    "run-extra-verify-wmo"
+  ],
+  "missing_verifiers": [
+    "run-phase-verify-wmo"
+  ],
+  "command_elapsed_seconds": {
+    "solution-head": 0.004131,
+    "solution-clean": 0.064342,
+    "workflow-head": 0.004065,
+    "host-kernel": 0.001945,
+    "host-cpu": 0.008165,
+    "docker-version": 0.064599,
+    "docker-platform": 0.415247,
+    "pull-base-0": 29.031928,
+    "inspect-base-0": 0.01637,
+    "pull-base-1": 2.770461,
+    "inspect-base-1": 0.016428,
+    "build-compiler-stage": 474.428182,
+    "build-runtime-image": 0.415413,
+    "inspect-build-image": 0.016359,
+    "inspect-runtime-image": 0.016356,
+    "container-swift-version": 0.26502,
+    "runtime-smoke": 5.178821,
+    "compile-verify-asan": 315.925542,
+    "run-verify-asan": 0.365391,
+    "compile-extra-verify-asan": 333.677163,
+    "run-extra-verify-asan": 9.488962,
+    "compile-phase-verify-asan": 481.111371,
+    "run-phase-verify-asan": 3.522724,
+    "compile-verify-wmo": 379.034038,
+    "run-verify-wmo": 0.265727,
+    "compile-extra-verify-wmo": 339.052781,
+    "run-extra-verify-wmo": 3.774659,
+    "compile-phase-verify-wmo": null
+  },
+  "interrupted_command": "compile-phase-verify-wmo",
+  "interrupted_command_observed_seconds": 328.832816,
+  "post_run_source_hashes_present": false,
+  "lock_cleanup_recorded": false,
+  "artifact_id": 10299186009,
+  "artifact_sha256": "78680dbfcae62d8c297b218704e8748347b41a7583fe214fe648e3233a5d7afc"
+}

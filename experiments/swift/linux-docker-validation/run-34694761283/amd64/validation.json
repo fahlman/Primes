@@ -1,0 +1,787 @@
+{
+  "status": "running",
+  "started_at_utc": "2026-09-12T12:50:22.867982+00:00",
+  "purpose": "Linux/Docker correctness and runtime compatibility only; no speed claim.",
+  "requested_solution_revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+  "requested_platform": "linux/amd64",
+  "host_system": "Linux",
+  "host_machine": "x86_64",
+  "github": {
+    "GITHUB_REPOSITORY": "fahlman/Primes",
+    "GITHUB_SHA": "dc5ef6aef662d37c9ae7495272b1b0b945929428",
+    "GITHUB_REF": "refs/heads/swift/linux-docker-validation",
+    "GITHUB_RUN_ID": "34694761283",
+    "GITHUB_RUN_ATTEMPT": "1",
+    "GITHUB_SERVER_URL": "https://github.com",
+    "RUNNER_OS": "Linux",
+    "RUNNER_ARCH": "X64",
+    "ImageOS": "ubuntu24",
+    "ImageVersion": "20260907.300.1"
+  },
+  "commands": [
+    {
+      "name": "solution-head",
+      "command": [
+        "git",
+        "-C",
+        "/home/runner/work/Primes/Primes/solution",
+        "rev-parse",
+        "HEAD"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.868262+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/01-solution-head.stdout.log",
+      "stderr_log": "logs/01-solution-head.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:22.872393+00:00"
+    },
+    {
+      "name": "solution-clean",
+      "command": [
+        "git",
+        "-C",
+        "/home/runner/work/Primes/Primes/solution",
+        "status",
+        "--porcelain"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.872651+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/02-solution-clean.stdout.log",
+      "stderr_log": "logs/02-solution-clean.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:22.936993+00:00"
+    },
+    {
+      "name": "workflow-head",
+      "command": [
+        "git",
+        "-C",
+        "/home/runner/work/Primes/Primes/workflow",
+        "rev-parse",
+        "HEAD"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.937479+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/03-workflow-head.stdout.log",
+      "stderr_log": "logs/03-workflow-head.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:22.941544+00:00"
+    },
+    {
+      "name": "host-kernel",
+      "command": [
+        "uname",
+        "-a"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.942674+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/04-host-kernel.stdout.log",
+      "stderr_log": "logs/04-host-kernel.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:22.944619+00:00"
+    },
+    {
+      "name": "host-cpu",
+      "command": [
+        "lscpu"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.944900+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/05-host-cpu.stdout.log",
+      "stderr_log": "logs/05-host-cpu.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:22.953065+00:00"
+    },
+    {
+      "name": "docker-version",
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "started_at_utc": "2026-09-12T12:50:22.953370+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/06-docker-version.stdout.log",
+      "stderr_log": "logs/06-docker-version.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:23.017969+00:00"
+    },
+    {
+      "name": "docker-platform",
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{.OSType}}/{{.Architecture}}"
+      ],
+      "started_at_utc": "2026-09-12T12:50:23.018448+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/07-docker-platform.stdout.log",
+      "stderr_log": "logs/07-docker-platform.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:23.433695+00:00"
+    },
+    {
+      "name": "pull-base-0",
+      "command": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/amd64",
+        "swift:6.3.3"
+      ],
+      "started_at_utc": "2026-09-12T12:50:23.434531+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/08-pull-base-0.stdout.log",
+      "stderr_log": "logs/08-pull-base-0.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:52.466459+00:00"
+    },
+    {
+      "name": "inspect-base-0",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "swift:6.3.3"
+      ],
+      "started_at_utc": "2026-09-12T12:50:52.467034+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/09-inspect-base-0.stdout.log",
+      "stderr_log": "logs/09-inspect-base-0.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:52.483404+00:00"
+    },
+    {
+      "name": "pull-base-1",
+      "command": [
+        "docker",
+        "pull",
+        "--platform",
+        "linux/amd64",
+        "swift:6.3.3-slim"
+      ],
+      "started_at_utc": "2026-09-12T12:50:52.483944+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/10-pull-base-1.stdout.log",
+      "stderr_log": "logs/10-pull-base-1.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:55.254405+00:00"
+    },
+    {
+      "name": "inspect-base-1",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "swift:6.3.3-slim"
+      ],
+      "started_at_utc": "2026-09-12T12:50:55.255022+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/11-inspect-base-1.stdout.log",
+      "stderr_log": "logs/11-inspect-base-1.stderr.log",
+      "finished_at_utc": "2026-09-12T12:50:55.271450+00:00"
+    },
+    {
+      "name": "build-compiler-stage",
+      "command": [
+        "docker",
+        "build",
+        "--progress=plain",
+        "--pull=false",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "/home/runner/work/Primes/Primes/solution/experiments/swift/Dockerfile",
+        "--target",
+        "build",
+        "--tag",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "--iidfile",
+        "/home/runner/work/_temp/swift-linux-docker-evidence/build-image.id",
+        "/home/runner/work/Primes/Primes/solution/experiments/swift"
+      ],
+      "started_at_utc": "2026-09-12T12:50:55.272143+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/12-build-compiler-stage.stdout.log",
+      "stderr_log": "logs/12-build-compiler-stage.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:49.700325+00:00"
+    },
+    {
+      "name": "build-runtime-image",
+      "command": [
+        "docker",
+        "build",
+        "--progress=plain",
+        "--pull=false",
+        "--platform",
+        "linux/amd64",
+        "--file",
+        "/home/runner/work/Primes/Primes/solution/experiments/swift/Dockerfile",
+        "--tag",
+        "swift-validation-runtime:bd3858cac9a3-amd64",
+        "--iidfile",
+        "/home/runner/work/_temp/swift-linux-docker-evidence/runtime-image.id",
+        "/home/runner/work/Primes/Primes/solution/experiments/swift"
+      ],
+      "started_at_utc": "2026-09-12T12:58:49.700940+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/13-build-runtime-image.stdout.log",
+      "stderr_log": "logs/13-build-runtime-image.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:50.116353+00:00"
+    },
+    {
+      "name": "inspect-build-image",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T12:58:50.116973+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/14-inspect-build-image.stdout.log",
+      "stderr_log": "logs/14-inspect-build-image.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:50.133332+00:00"
+    },
+    {
+      "name": "inspect-runtime-image",
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "swift-validation-runtime:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T12:58:50.133878+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/15-inspect-runtime-image.stdout.log",
+      "stderr_log": "logs/15-inspect-runtime-image.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:50.150234+00:00"
+    },
+    {
+      "name": "container-swift-version",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "--version"
+      ],
+      "started_at_utc": "2026-09-12T12:58:50.150816+00:00",
+      "timeout_seconds": 60,
+      "exit_code": 0,
+      "stdout_log": "logs/16-container-swift-version.stdout.log",
+      "stderr_log": "logs/16-container-swift-version.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:50.415836+00:00"
+    },
+    {
+      "name": "runtime-smoke",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "swift-validation-runtime:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T12:58:50.416504+00:00",
+      "timeout_seconds": 120,
+      "exit_code": 0,
+      "stdout_log": "logs/17-runtime-smoke.stdout.log",
+      "stderr_log": "logs/17-runtime-smoke.stderr.log",
+      "finished_at_utc": "2026-09-12T12:58:55.595325+00:00"
+    },
+    {
+      "name": "compile-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-sanitize=address",
+        "/source/PrimeSieve.swift",
+        "/source/Verify.swift",
+        "-o",
+        "/validation/verify-asan"
+      ],
+      "started_at_utc": "2026-09-12T12:58:55.596150+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/18-compile-verify-asan.stdout.log",
+      "stderr_log": "logs/18-compile-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:04:11.521692+00:00"
+    },
+    {
+      "name": "run-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "/validation/verify-asan",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T13:04:11.522372+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/19-run-verify-asan.stdout.log",
+      "stderr_log": "logs/19-run-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:04:11.887763+00:00"
+    },
+    {
+      "name": "compile-extra-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-sanitize=address",
+        "/source/PrimeSieve.swift",
+        "/source/ExtraVerify.swift",
+        "-o",
+        "/validation/extra-verify-asan"
+      ],
+      "started_at_utc": "2026-09-12T13:04:11.888470+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/20-compile-extra-verify-asan.stdout.log",
+      "stderr_log": "logs/20-compile-extra-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:09:45.565633+00:00"
+    },
+    {
+      "name": "run-extra-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "/validation/extra-verify-asan",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T13:09:45.566355+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/21-run-extra-verify-asan.stdout.log",
+      "stderr_log": "logs/21-run-extra-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:09:55.055317+00:00"
+    },
+    {
+      "name": "compile-phase-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-sanitize=address",
+        "/source/PrimeSieve.swift",
+        "/source/tools/phase-split/PhaseSieve.swift",
+        "/source/tools/phase-split/PhaseVerify.swift",
+        "-o",
+        "/validation/phase-verify-asan"
+      ],
+      "started_at_utc": "2026-09-12T13:09:55.056127+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/22-compile-phase-verify-asan.stdout.log",
+      "stderr_log": "logs/22-compile-phase-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:17:56.167498+00:00"
+    },
+    {
+      "name": "run-phase-verify-asan",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "/validation/phase-verify-asan",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T13:17:56.168263+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/23-run-phase-verify-asan.stdout.log",
+      "stderr_log": "logs/23-run-phase-verify-asan.stderr.log",
+      "finished_at_utc": "2026-09-12T13:17:59.690987+00:00"
+    },
+    {
+      "name": "compile-verify-wmo",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-whole-module-optimization",
+        "/source/PrimeSieve.swift",
+        "/source/Verify.swift",
+        "-o",
+        "/validation/verify-wmo"
+      ],
+      "started_at_utc": "2026-09-12T13:17:59.691777+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/24-compile-verify-wmo.stdout.log",
+      "stderr_log": "logs/24-compile-verify-wmo.stderr.log",
+      "finished_at_utc": "2026-09-12T13:24:18.725815+00:00"
+    },
+    {
+      "name": "run-verify-wmo",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "/validation/verify-wmo",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T13:24:18.726517+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/25-run-verify-wmo.stdout.log",
+      "stderr_log": "logs/25-run-verify-wmo.stderr.log",
+      "finished_at_utc": "2026-09-12T13:24:18.992244+00:00"
+    },
+    {
+      "name": "compile-extra-verify-wmo",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-whole-module-optimization",
+        "/source/PrimeSieve.swift",
+        "/source/ExtraVerify.swift",
+        "-o",
+        "/validation/extra-verify-wmo"
+      ],
+      "started_at_utc": "2026-09-12T13:24:18.993035+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/26-compile-extra-verify-wmo.stdout.log",
+      "stderr_log": "logs/26-compile-extra-verify-wmo.stderr.log",
+      "finished_at_utc": "2026-09-12T13:29:58.045816+00:00"
+    },
+    {
+      "name": "run-extra-verify-wmo",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "/validation/extra-verify-wmo",
+        "swift-validation-build:bd3858cac9a3-amd64"
+      ],
+      "started_at_utc": "2026-09-12T13:29:58.046608+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": 0,
+      "stdout_log": "logs/27-run-extra-verify-wmo.stdout.log",
+      "stderr_log": "logs/27-run-extra-verify-wmo.stderr.log",
+      "finished_at_utc": "2026-09-12T13:30:01.821267+00:00"
+    },
+    {
+      "name": "compile-phase-verify-wmo",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--platform",
+        "linux/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly",
+        "--mount",
+        "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation",
+        "--workdir",
+        "/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:bd3858cac9a3-amd64",
+        "-O",
+        "-whole-module-optimization",
+        "/source/PrimeSieve.swift",
+        "/source/tools/phase-split/PhaseSieve.swift",
+        "/source/tools/phase-split/PhaseVerify.swift",
+        "-o",
+        "/validation/phase-verify-wmo"
+      ],
+      "started_at_utc": "2026-09-12T13:30:01.822112+00:00",
+      "timeout_seconds": 1200,
+      "exit_code": null,
+      "stdout_log": "logs/28-compile-phase-verify-wmo.stdout.log",
+      "stderr_log": "logs/28-compile-phase-verify-wmo.stderr.log"
+    }
+  ],
+  "run_url": "https://github.com/fahlman/Primes/actions/runs/34694761283",
+  "runner_local_lock": {
+    "path": "/tmp/primes-timing.lock",
+    "acquired_exclusively": true
+  },
+  "solution_revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+  "workflow_revision": "dc5ef6aef662d37c9ae7495272b1b0b945929428",
+  "source_sha256": {
+    "Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "PrimeSieve.swift": "d6368487ee284c955781fe6944c0d94bc35c265e5b40fc4e19cba21d66f6590d",
+    "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243"
+  },
+  "workflow_sha256": {
+    ".github/workflows/swift-linux-docker-validation.yml": "5e007b6a9c6fad5da6b41ba17ab5ce8f714e71c9122a8a4845364a4a99d0c678",
+    "experiments/swift/tools/linux-docker/validate.py": "470a9559b34b79bc1ee8ec1c6900d0795c905b0816e3a8fe9ddaf7df9542d468"
+  },
+  "docker_version": {
+    "Client": {
+      "Platform": {
+        "Name": "Docker Engine - Community"
+      },
+      "Version": "28.0.4",
+      "ApiVersion": "1.48",
+      "DefaultAPIVersion": "1.48",
+      "GitCommit": "b8034c0",
+      "GoVersion": "go1.23.7",
+      "Os": "linux",
+      "Arch": "amd64",
+      "BuildTime": "Tue Mar 25 15:07:16 2025",
+      "Context": "default"
+    },
+    "Server": {
+      "Platform": {
+        "Name": "Docker Engine - Community"
+      },
+      "Components": [
+        {
+          "Name": "Engine",
+          "Version": "28.0.4",
+          "Details": {
+            "ApiVersion": "1.48",
+            "Arch": "amd64",
+            "BuildTime": "Tue Mar 25 15:07:16 2025",
+            "Experimental": "false",
+            "GitCommit": "6430e49",
+            "GoVersion": "go1.23.7",
+            "KernelVersion": "6.17.0-1022-azure",
+            "MinAPIVersion": "1.24",
+            "Os": "linux"
+          }
+        },
+        {
+          "Name": "containerd",
+          "Version": "v2.3.4",
+          "Details": {
+            "GitCommit": "db8809540e1a7a9da5d518876894933ff55692ab"
+          }
+        },
+        {
+          "Name": "runc",
+          "Version": "1.5.1",
+          "Details": {
+            "GitCommit": "v1.5.1-0-g8f2685a4"
+          }
+        },
+        {
+          "Name": "docker-init",
+          "Version": "0.19.0",
+          "Details": {
+            "GitCommit": "de40ad0"
+          }
+        }
+      ],
+      "Version": "28.0.4",
+      "ApiVersion": "1.48",
+      "MinAPIVersion": "1.24",
+      "GitCommit": "6430e49",
+      "GoVersion": "go1.23.7",
+      "Os": "linux",
+      "Arch": "amd64",
+      "KernelVersion": "6.17.0-1022-azure",
+      "BuildTime": "2025-03-25T15:07:16.000000000+00:00"
+    }
+  },
+  "base_images": {
+    "swift:6.3.3": {
+      "Id": "sha256:5b35a37f651d1a5c79b0281e1f6b81e8402bdf758d185345cb3b3a591b1c4a61",
+      "RepoTags": [
+        "swift:6.3.3"
+      ],
+      "RepoDigests": [
+        "swift@sha256:dd115b20969a2acf74c8dcf6da7c4aeda086053c27453dad59052a65bafc8d0c"
+      ],
+      "Os": "linux",
+      "Architecture": "amd64",
+      "Created": "2026-09-09T02:45:32.087497483Z"
+    },
+    "swift:6.3.3-slim": {
+      "Id": "sha256:5e809982ff76144f9b0248a551387a9da5bd5b92772d96de29ead630b24dfe89",
+      "RepoTags": [
+        "swift:6.3.3-slim"
+      ],
+      "RepoDigests": [
+        "swift@sha256:d20e340aeaf7109919b2a15c95569470070cca4d34dae40dfa58339a2aa734df"
+      ],
+      "Os": "linux",
+      "Architecture": "amd64",
+      "Created": "2026-09-09T02:43:44.96042084Z"
+    }
+  },
+  "build_image": {
+    "Id": "sha256:0c693d957640618ed21cf1a2cf54ece6f7d23e9591b4d8c8075323932a5ba8bd",
+    "RepoTags": [
+      "swift-validation-build:bd3858cac9a3-amd64"
+    ],
+    "RepoDigests": [],
+    "Os": "linux",
+    "Architecture": "amd64",
+    "Created": "2026-09-12T12:58:48.963789283Z"
+  },
+  "runtime_image": {
+    "Id": "sha256:63aa0263638988d63a521f96697bec9a00bd304f706fbf710fd3449d75c3337f",
+    "RepoTags": [
+      "swift-validation-runtime:bd3858cac9a3-amd64"
+    ],
+    "RepoDigests": [],
+    "Os": "linux",
+    "Architecture": "amd64",
+    "Created": "2026-09-12T12:58:49.834156476Z"
+  },
+  "swift_version": "Swift version 6.3.3 (swift-6.3.3-RELEASE)\nTarget: x86_64-unknown-linux-gnu",
+  "runtime_smoke": {
+    "passes": 44649,
+    "seconds": 5.000053083,
+    "threads": 1,
+    "tags": "algorithm=base,faithful=yes,bits=1",
+    "prime_count": 78498,
+    "performance_evidence": false
+  }
+}
