@@ -90,7 +90,7 @@ final class PrimeSieve {
         // The byte index stays below end + p and the bit index below 8 * end + p,
         // both far from Int.max.
         // The second group's last address is byte + p + r7, bounded by end.
-        // Advance the same index between groups so both use the same eight bases.
+        // Advance the index between groups while reusing the eight source offsets.
         while byte < doubleGroupEnd {
             bytes[byte] |= m0
             bytes[byte &+ r1] |= m1
