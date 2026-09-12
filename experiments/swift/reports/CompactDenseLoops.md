@@ -43,3 +43,7 @@ Only factors 5 and 7 fully folded. Compacting those two alone would remove just 
 Raw results: `../compact-loop-evidence/timing-1a259a8.json`; conditions, command, exact source/runner/observer identities and executable hashes: `../compact-loop-evidence/timing-provenance-1a259a8.json`. Execution wrapper: `../compact-loop-evidence/time.py`.
 
 An independent Codex audit recomputed the medians and range separation, checked exact source/harness inputs, executable and review/verification hashes, all six validation outputs and the recorded order, and confirmed rejection.
+
+## Subsequent user-requested repeat
+
+The user later reported concurrent computer use during the original session and explicitly requested a repeat. The [separate retest report](CompactDenseLoopsRetest.md) preserves that follow-up: 366.526 µs for the same compact candidate versus 38.489 µs for the same control, with all six runs valid and every candidate trial slower. Its post-run monitoring check failed on compiler process-group identification during compilation; that caveat and the failed wrapper record are preserved. The PR remains closed and unmerged. Earlier results are not overwritten or pooled with the repeat.

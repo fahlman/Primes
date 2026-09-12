@@ -1,0 +1,62 @@
+{
+  "reviewer": "Codex independent reviewer /root/review_sieve; computations and record assembled by root",
+  "decision": "Retain rejection; keep PR20 closed and unmerged",
+  "benchmark_results_valid": true,
+  "full_monitoring_gate_passed": false,
+  "comparison_exit_code": 0,
+  "wrapper_exit_code": 1,
+  "wrapper_preserved_status": "failed",
+  "wrapper_preserved_error": "AssertionError: Unowned or unclassified build/test/benchmark sampled",
+  "raw_sha256": "b90e826db68130243733c38faa4b44a93652c107fdd7e648b1896742e86c22a0",
+  "provenance_sha256": "f771ada4b2a5ac05226efc0dc6b38fb5edcfaf665e157ea8bd254c954fa41af1",
+  "executed_wrapper_sha256": "05904850f762127b7fba8566062d2db83c015af3807dea2612b134b76dd186d3",
+  "source_harness_and_flags_match_original": true,
+  "binaries_match_original": true,
+  "prior_records_unchanged": true,
+  "samples": {
+    "control-111": {
+      "median_us": 38.48894057332881,
+      "range_us": [
+        38.35349501024032,
+        38.48968701743582
+      ],
+      "all_runs_valid": true
+    },
+    "compact-loops": {
+      "median_us": 366.5260409030933,
+      "range_us": [
+        364.5920409800204,
+        370.4421426878056
+      ],
+      "all_runs_valid": true
+    }
+  },
+  "run_order": [
+    [
+      "control-111",
+      "compact-loops"
+    ],
+    [
+      "compact-loops",
+      "control-111"
+    ],
+    [
+      "control-111",
+      "compact-loops"
+    ]
+  ],
+  "duration_ratio": 9.522892432042678,
+  "throughput_change_percent": -89.49898880895478,
+  "extra_us_per_sieve": 328.0371003297645,
+  "every_candidate_trial_slower": true,
+  "monitor_samples": 15,
+  "sampled_backup_idle_and_no_audio": true,
+  "lock_absent_after": true,
+  "limitations": [
+    "Compiler PID20937/PGID20937 was not in comparison group20924; recorded process-group data cannot retrospectively establish ownership. Preserve failed wrapper record.",
+    "Nine early compilation samples contain that compiler; six later benchmark samples contain only benchmark processes in owned group20924. Sampling does not prove zero interference between observations.",
+    "Desktop/OS activity remained; three two-variant rounds are not fully position-balanced.",
+    "User reported concurrent computer use during original session; exact timing and impact unknown. Sessions kept separate; no pooling or best-of selection."
+  ],
+  "no_additional_runs": true
+}

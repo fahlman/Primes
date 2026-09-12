@@ -1,0 +1,9 @@
+{
+  "candidate": "1a259a84a892cc1008de179ef332d66bd1c514bf",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reason": "User requested rerunning PR20 because another user was using this computer during the original session.",
+  "scope": "One six-trial rotated session, unchanged benchmark, same revisions and compiler; no pooled or best-of result; preserve original session.",
+  "backup_preparation": "Time Machine was initially active. Asked permission to stop/restart it, but before any reply a subsequent tmutil status reported Running=0. No backup commands that mutate state were issued by Codex.",
+  "review_basis": "Prior exact-revision source, correctness and assembly admission independently rechecked by Codex reviewer; runtime and check files unchanged at PR20 head.",
+  "disposition": "Determine from new session independently; no merge authorized by this timing request."
+}

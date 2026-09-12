@@ -1,0 +1,1600 @@
+{
+  "status": "failed",
+  "started_at_utc": "2026-09-12T23:32:06.039828+00:00",
+  "candidate": "1a259a84a892cc1008de179ef332d66bd1c514bf",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reason": "User explicitly requested a repeat because another user was using the computer during the original test. Exact timing and amount of earlier interference are unknown.",
+  "scope": "One fresh six-run AB/BA/AB session; rebuild both; preserve both sessions separately; no source changes, pooled statistics, best-of selection or further repeat.",
+  "review_reused": "Exact inputs unchanged; prior correctness, source and assembly admission independently rechecked by Codex review agent before this repeat.",
+  "prior_record_sha256": {
+    "verification-1a259a8.json": "b78345006c233971fcda92675d72230d98cfe318bf7265c1311de9d422705933",
+    "review-admission-1a259a8.json": "ad4d20a0d26ae4154b8e081ea67b4c61bafbe9dde2755ee0c394895cf882be46",
+    "timing-1a259a8.json": "16e7fc70c6592dfd66441985cabdd37e414bf5f25123ce4bf614e90ed95516e7",
+    "timing-provenance-1a259a8.json": "97b33292ec21ae9d8a6ac22c83a29981c8ae8e46012fbcfbea7d6a3b11c3692e",
+    "primes_run_support.py": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5"
+  },
+  "wrapper_sha256": "05904850f762127b7fba8566062d2db83c015af3807dea2612b134b76dd186d3",
+  "compare_script_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+  "monitor_interval_seconds": 5,
+  "monitor_samples": [
+    {
+      "at_utc": "2026-09-12T23:32:11.247599+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 731,
+          "cpu_percent": 76.8,
+          "executable": "frauddefensed"
+        },
+        {
+          "pid": 632,
+          "cpu_percent": 32.2,
+          "executable": "cloudd"
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 20.6,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 20.1,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 7.5,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.7,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.1,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.8,
+          "executable": "logd"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.7,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.5,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.3,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.2,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.2,
+          "executable": "milod"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:16.309300+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.3,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 22.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.8,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 2.7,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.2,
+          "executable": "launchd"
+        },
+        {
+          "pid": 74997,
+          "cpu_percent": 1.9,
+          "executable": "Claude"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.4,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 639,
+          "cpu_percent": 1.3,
+          "executable": "Dock"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.0,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 415,
+          "cpu_percent": 0.7,
+          "executable": "runningboardd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 74441,
+          "cpu_percent": 0.6,
+          "executable": "Safari"
+        },
+        {
+          "pid": 75024,
+          "cpu_percent": 0.6,
+          "executable": "Claude Helper (Renderer)"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.4,
+          "executable": "logd"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.3,
+          "executable": "opendirectoryd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.3,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:21.378359+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 19.5,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 15.3,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 612,
+          "cpu_percent": 6.8,
+          "executable": "BiomeAgent"
+        },
+        {
+          "pid": 75011,
+          "cpu_percent": 6.7,
+          "executable": "Claude Helper"
+        },
+        {
+          "pid": 75024,
+          "cpu_percent": 5.8,
+          "executable": "Claude Helper (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 5.0,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1003,
+          "cpu_percent": 4.7,
+          "executable": "siriinferenced"
+        },
+        {
+          "pid": 21024,
+          "cpu_percent": 4.7,
+          "executable": "(gh)"
+        },
+        {
+          "pid": 21025,
+          "cpu_percent": 4.7,
+          "executable": "gh"
+        },
+        {
+          "pid": 21023,
+          "cpu_percent": 4.6,
+          "executable": "gh"
+        },
+        {
+          "pid": 778,
+          "cpu_percent": 4.4,
+          "executable": "Spotlight"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 3.8,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 666,
+          "cpu_percent": 3.2,
+          "executable": "ContextStoreAgent"
+        },
+        {
+          "pid": 1374,
+          "cpu_percent": 3.1,
+          "executable": "intelligencecontextd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:26.442382+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 7244,
+          "cpu_percent": 94.2,
+          "executable": "duetexpertd"
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 21.6,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 21046,
+          "cpu_percent": 12.4,
+          "executable": "BackgroundShortcutRunner"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 7.5,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.5,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 3.3,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7132,
+          "cpu_percent": 2.5,
+          "executable": "BiomeAgent"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.9,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.8,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7192,
+          "cpu_percent": 0.6,
+          "executable": "bird"
+        },
+        {
+          "pid": 93192,
+          "cpu_percent": 0.6,
+          "executable": "trustd"
+        },
+        {
+          "pid": 7264,
+          "cpu_percent": 0.5,
+          "executable": "ContainerMetadataExtractor"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:31.505632+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.6,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 1.7,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.2,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.1,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.1,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.1,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.1,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 74997,
+          "cpu_percent": 0.1,
+          "executable": "Claude"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:36.568953+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 98.8,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 12.3,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.5,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 3.1,
+          "executable": "codex"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 2.6,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.9,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.0,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.6,
+          "executable": "claude"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.5,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.4,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.4,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.4,
+          "executable": "milod"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 98.8,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:41.628990+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.4,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 16.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 15.2,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.0,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 1.7,
+          "executable": "claude"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.3,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.2,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.4,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.2,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.2,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.2,
+          "executable": "milod"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.1,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.1,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 74997,
+          "cpu_percent": 0.1,
+          "executable": "Claude"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.4,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:46.692476+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 14.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 6.3,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 3.4,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.5,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 1.3,
+          "executable": "claude"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 365,
+          "cpu_percent": 0.5,
+          "executable": "mds"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.4,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 571,
+          "cpu_percent": 0.3,
+          "executable": "mds_stores"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.1,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.1,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.1,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 100.0,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:51.754282+00:00",
+      "top_processes": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.2,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.5,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.1,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 2.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.2,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.9,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 632,
+          "cpu_percent": 0.9,
+          "executable": "cloudd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.6,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.5,
+          "executable": "claude"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.4,
+          "executable": "milod"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.3,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 4087,
+          "cpu_percent": 0.3,
+          "executable": "PerfPowerServices"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.3,
+          "executable": "rapportd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 20937,
+          "cpu_percent": 99.2,
+          "executable": "swift-frontend",
+          "process_group": 20937
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:32:56.815799+00:00",
+      "top_processes": [
+        {
+          "pid": 21168,
+          "cpu_percent": 92.2,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.4,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 2.8,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.0,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 1.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.8,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.6,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.5,
+          "executable": "claude"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.4,
+          "executable": "logd"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 0.1,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 660,
+          "cpu_percent": 0.1,
+          "executable": "routined"
+        },
+        {
+          "pid": 678,
+          "cpu_percent": 0.1,
+          "executable": "com.apple.geod"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21168,
+          "cpu_percent": 92.2,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:33:01.879239+00:00",
+      "top_processes": [
+        {
+          "pid": 21188,
+          "cpu_percent": 93.2,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 21.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 2.7,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.2,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.1,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.9,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.9,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.6,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.5,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.5,
+          "executable": "milod"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.4,
+          "executable": "logd"
+        },
+        {
+          "pid": 436,
+          "cpu_percent": 0.4,
+          "executable": "socketfilterfw"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21188,
+          "cpu_percent": 93.2,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:33:06.942185+00:00",
+      "top_processes": [
+        {
+          "pid": 21216,
+          "cpu_percent": 95.8,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 13.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 3.1,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 1.7,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.6,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 1.1,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 388,
+          "cpu_percent": 0.6,
+          "executable": "dasd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 74997,
+          "cpu_percent": 0.6,
+          "executable": "Claude"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 0.4,
+          "executable": "codex"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 0.3,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 75013,
+          "cpu_percent": 0.3,
+          "executable": "Claude Helper"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.2,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.2,
+          "executable": "claude"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21216,
+          "cpu_percent": 95.8,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:33:12.003735+00:00",
+      "top_processes": [
+        {
+          "pid": 21241,
+          "cpu_percent": 95.9,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 15.3,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.9,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 4.3,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.6,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.8,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.7,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.5,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.4,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 574,
+          "cpu_percent": 0.3,
+          "executable": "searchpartyd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.2,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.2,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.2,
+          "executable": "rapportd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21241,
+          "cpu_percent": 95.9,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:33:17.065443+00:00",
+      "top_processes": [
+        {
+          "pid": 21264,
+          "cpu_percent": 98.6,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 11.2,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 3.1,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 2.4,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.3,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 1.2,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.7,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.6,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.4,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.4,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.3,
+          "executable": "logd"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 0.3,
+          "executable": "codex"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 0.2,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 75121,
+          "cpu_percent": 0.2,
+          "executable": "claude"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21264,
+          "cpu_percent": 98.6,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    },
+    {
+      "at_utc": "2026-09-12T23:33:22.128810+00:00",
+      "top_processes": [
+        {
+          "pid": 21287,
+          "cpu_percent": 96.3,
+          "executable": "benchmark",
+          "process_group": 20924
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 22.3,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 4.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50797,
+          "cpu_percent": 2.5,
+          "executable": "Codex (Service)"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 1.6,
+          "executable": "launchd"
+        },
+        {
+          "pid": 7220,
+          "cpu_percent": 1.5,
+          "executable": "WallpaperSequoiaExtension"
+        },
+        {
+          "pid": 401,
+          "cpu_percent": 1.0,
+          "executable": "bluetoothd"
+        },
+        {
+          "pid": 1525,
+          "cpu_percent": 0.7,
+          "executable": "SiriNCService"
+        },
+        {
+          "pid": 7155,
+          "cpu_percent": 0.4,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.3,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.3,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 835,
+          "cpu_percent": 0.3,
+          "executable": "milod"
+        },
+        {
+          "pid": 7145,
+          "cpu_percent": 0.3,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 683,
+          "cpu_percent": 0.2,
+          "executable": "nearbyd"
+        },
+        {
+          "pid": 7256,
+          "cpu_percent": 0.2,
+          "executable": "milod"
+        }
+      ],
+      "competing_build_test_benchmark": [
+        {
+          "pid": 21287,
+          "cpu_percent": 96.3,
+          "executable": "benchmark",
+          "process_group": 20924
+        }
+      ],
+      "audio_assertions": [],
+      "caffeinate_pids": [],
+      "backup_status": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n"
+    }
+  ],
+  "monitor_limit": "Periodic process/audio snapshots, not continuous tracing or proof that no human used the desktop. The same lightweight sampler spans both variants.",
+  "backup_before": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n",
+  "before": {
+    "at_utc": "2026-09-12T23:32:06.096009+00:00",
+    "top_processes": [
+      {
+        "pid": 50797,
+        "cpu_percent": 27.9,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 16.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 13.1,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 20911,
+        "cpu_percent": 4.6,
+        "executable": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 3.1,
+        "executable": "codex"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 2.2,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.5,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.9,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.6,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.4,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.4,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 51355,
+        "cpu_percent": 0.4,
+        "executable": "codex-code-mode-host"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 7145,
+        "cpu_percent": 0.3,
+        "executable": "rapportd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "cpu": "Apple M4 Pro",
+  "command": {
+    "command": [
+      "python3",
+      "/Users/ryan/Developer/Primes-compact-dense-retest/experiments/swift/compare_optimizations.py",
+      "--repo",
+      "/Users/ryan/Developer/Primes-compact-dense-retest",
+      "--variant",
+      "control-111=1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+      "--variant",
+      "compact-loops=1a259a84a892cc1008de179ef332d66bd1c514bf",
+      "--output",
+      "/Users/ryan/Developer/Primes-compact-dense-retest/experiments/swift/compact-loop-retest-evidence/timing-2026-09-12T233206.000568Z.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-compact-dense-retest/experiments/swift",
+    "started_at_utc": "2026-09-12T23:32:06.189666+00:00",
+    "owned_process_group": 20924,
+    "exit_code": 0,
+    "combined_stdout_stderr": "control-111: 0.038353 ms/pass (130367 passes)\ncompact-loops: 0.364592 ms/pass (13714 passes)\ncompact-loops: 0.370442 ms/pass (13498 passes)\ncontrol-111: 0.038489 ms/pass (129908 passes)\ncontrol-111: 0.038490 ms/pass (129905 passes)\ncompact-loops: 0.366526 ms/pass (13642 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"control-111\": 0.038488940573328814,\n    \"compact-loops\": 0.3665260409030933\n  },\n  \"speedup_over_first\": {\n    \"control-111\": 1.0,\n    \"compact-loops\": 0.10501011191045222\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T23:33:26.140408+00:00"
+  },
+  "binary_sha256": {
+    "control-111": "31fd5e6de9f702f99f86fa54e14b6c8655abb2b057977be4fce4d08ebc391b4f",
+    "compact-loops": "173d4ba48cfabd689d7db53b464efec2cce80a97df85b00f72d412a11ed20064"
+  },
+  "after": {
+    "at_utc": "2026-09-12T23:33:26.190513+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 19.2,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 4.8,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 2.6,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 1.8,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.3,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.2,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.3,
+        "executable": "logd"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 75121,
+        "cpu_percent": 0.2,
+        "executable": "claude"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 0.1,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 404,
+        "cpu_percent": 0.1,
+        "executable": "corebrightnessd"
+      },
+      {
+        "pid": 21306,
+        "cpu_percent": 0.1,
+        "executable": "sleep"
+      },
+      {
+        "pid": 337,
+        "cpu_percent": 0.0,
+        "executable": "smd"
+      },
+      {
+        "pid": 338,
+        "cpu_percent": 0.0,
+        "executable": "UserEventAgent"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "backup_after": "Backup session status:\n{\n    ClientID = \"com.apple.backupd\";\n    Percent = \"-1\";\n    Running = 0;\n}\n",
+  "result_sha256": "b90e826db68130243733c38faa4b44a93652c107fdd7e648b1896742e86c22a0",
+  "error": "AssertionError: Unowned or unclassified build/test/benchmark sampled",
+  "finished_at_utc": "2026-09-12T23:33:26.196184+00:00",
+  "lock_absent_after": true
+}
