@@ -1,3 +1,5 @@
+import Synchronization
+
 /// An odd-only Eratosthenes sieve with byte-striped composite marking.
 /// Every instance owns a freshly allocated sieve; no sieve state is cached.
 final class PrimeSieve {
@@ -49,21 +51,25 @@ final class PrimeSieve {
                 // marks two groups of eight multiples per iteration, each with its own single-bit
                 // mask. The first multiple, p², falls at bit offset 7 when p ≡ 1 or
                 // 7 (mod 8) and at 3 when p ≡ 3 or 5, which fixes the masks; these
-                // four cases cover every odd factor.
+                // four cases cover every odd factor. Each mark is an atomic OR on
+                // its byte, so the buffer is viewed as Atomic<UInt8> for this
+                // factor; the view changes no bytes and ends with the call.
                 let start = (p * p - 3) / 2
-                switch p & 7 {
-                case 1:
-                    markSparseMultiples(bytes, end: end, start: start, step: p,
-                                        0x80, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40)
-                case 3:
-                    markSparseMultiples(bytes, end: end, start: start, step: p,
-                                        0x08, 0x40, 0x02, 0x10, 0x80, 0x04, 0x20, 0x01)
-                case 5:
-                    markSparseMultiples(bytes, end: end, start: start, step: p,
-                                        0x08, 0x01, 0x20, 0x04, 0x80, 0x10, 0x02, 0x40)
-                default: // p & 7 == 7
-                    markSparseMultiples(bytes, end: end, start: start, step: p,
-                                        0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01)
+                bytes.withMemoryRebound(to: Atomic<UInt8>.self, capacity: end) { atoms in
+                    switch p & 7 {
+                    case 1:
+                        markSparseMultiples(atoms, end: end, start: start, step: p,
+                                            0x80, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40)
+                    case 3:
+                        markSparseMultiples(atoms, end: end, start: start, step: p,
+                                            0x08, 0x40, 0x02, 0x10, 0x80, 0x04, 0x20, 0x01)
+                    case 5:
+                        markSparseMultiples(atoms, end: end, start: start, step: p,
+                                            0x08, 0x01, 0x20, 0x04, 0x80, 0x10, 0x02, 0x40)
+                    default: // p & 7 == 7
+                        markSparseMultiples(atoms, end: end, start: start, step: p,
+                                            0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01)
+                    }
                 }
             }
             p += 2
@@ -73,10 +79,13 @@ final class PrimeSieve {
     /// Fused byte marking for odd factors above 127, from bit `start` onward. Each
     /// iteration marks two groups of eight multiples, each group visiting every
     /// bit offset with its single-bit mask `m0`...`m7`. Their byte offsets
-    /// `r1`...`r7` repeat every p bytes. Each multiple gets its own OR.
+    /// `r1`...`r7` repeat every p bytes. Each multiple gets its own atomic OR on
+    /// its byte: one `ldsetb` instruction on arm64, with no separate load, OR and
+    /// store. The sieve is single-threaded, so relaxed ordering asks for nothing
+    /// beyond the read-modify-write itself.
     @inline(__always)
     private func markSparseMultiples(
-        _ bytes: UnsafeMutablePointer<UInt8>, end: Int, start: Int, step p: Int,
+        _ atoms: UnsafeMutablePointer<Atomic<UInt8>>, end: Int, start: Int, step p: Int,
         _ m0: UInt8, _ m1: UInt8, _ m2: UInt8, _ m3: UInt8,
         _ m4: UInt8, _ m5: UInt8, _ m6: UInt8, _ m7: UInt8
     ) {
@@ -98,37 +107,37 @@ final class PrimeSieve {
         // The second group's last address is byte + p + r7, bounded by end.
         // Advance the index between groups while reusing the eight source offsets.
         while byte < doubleGroupEnd {
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            atoms[byte].bitwiseOr(m0, ordering: .relaxed)
+            atoms[byte &+ r1].bitwiseOr(m1, ordering: .relaxed)
+            atoms[byte &+ r2].bitwiseOr(m2, ordering: .relaxed)
+            atoms[byte &+ r3].bitwiseOr(m3, ordering: .relaxed)
+            atoms[byte &+ r4].bitwiseOr(m4, ordering: .relaxed)
+            atoms[byte &+ r5].bitwiseOr(m5, ordering: .relaxed)
+            atoms[byte &+ r6].bitwiseOr(m6, ordering: .relaxed)
+            atoms[byte &+ r7].bitwiseOr(m7, ordering: .relaxed)
             byte &+= p
 
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            atoms[byte].bitwiseOr(m0, ordering: .relaxed)
+            atoms[byte &+ r1].bitwiseOr(m1, ordering: .relaxed)
+            atoms[byte &+ r2].bitwiseOr(m2, ordering: .relaxed)
+            atoms[byte &+ r3].bitwiseOr(m3, ordering: .relaxed)
+            atoms[byte &+ r4].bitwiseOr(m4, ordering: .relaxed)
+            atoms[byte &+ r5].bitwiseOr(m5, ordering: .relaxed)
+            atoms[byte &+ r6].bitwiseOr(m6, ordering: .relaxed)
+            atoms[byte &+ r7].bitwiseOr(m7, ordering: .relaxed)
             byte &+= p
         }
 
         // At most one complete eight-mark group remains before the scalar tail.
         if byte < groupEnd {
-            bytes[byte] |= m0
-            bytes[byte &+ r1] |= m1
-            bytes[byte &+ r2] |= m2
-            bytes[byte &+ r3] |= m3
-            bytes[byte &+ r4] |= m4
-            bytes[byte &+ r5] |= m5
-            bytes[byte &+ r6] |= m6
-            bytes[byte &+ r7] |= m7
+            atoms[byte].bitwiseOr(m0, ordering: .relaxed)
+            atoms[byte &+ r1].bitwiseOr(m1, ordering: .relaxed)
+            atoms[byte &+ r2].bitwiseOr(m2, ordering: .relaxed)
+            atoms[byte &+ r3].bitwiseOr(m3, ordering: .relaxed)
+            atoms[byte &+ r4].bitwiseOr(m4, ordering: .relaxed)
+            atoms[byte &+ r5].bitwiseOr(m5, ordering: .relaxed)
+            atoms[byte &+ r6].bitwiseOr(m6, ordering: .relaxed)
+            atoms[byte &+ r7].bitwiseOr(m7, ordering: .relaxed)
             byte &+= p
         }
 
@@ -138,7 +147,7 @@ final class PrimeSieve {
         let bitEnd = end << 3
         var index = (byte << 3) + bit
         while index < bitEnd {
-            bytes[index >> 3] |= UInt8(1) << (index & 7)
+            atoms[index >> 3].bitwiseOr(UInt8(1) << (index & 7), ordering: .relaxed)
             index &+= p
         }
     }
