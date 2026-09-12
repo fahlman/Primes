@@ -27,7 +27,7 @@ final class PrimeSieve {
         while p <= limit / p {
             let candidate = (p - 3) / 2
             if bytes[candidate >> 3] & (UInt8(1) << (candidate & 7)) == 0 {
-                if p < 14 {
+                if p < 32 {
                     if p == 3 {
                         markDenseMultiples(of: p)
                     } else {
@@ -121,9 +121,9 @@ final class PrimeSieve {
         }
     }
 
-    /// Dense marking on 64-bit words for factors 5 through 13. Together with the
-    /// byte handler for 3, every odd value below 14 has a case, so no primality is
-    /// assumed; 9 is composite and never reaches this function.
+    /// Dense marking on 64-bit words for odd factors 5 through 31. Together with the
+    /// byte handler for 3, every odd value below 32 has a case, so no primality is
+    /// assumed; the composite values 9, 15, 21, 25, and 27 never reach this function.
     private func markWordDenseMultiples(of p: Int) {
         let bytes = storage
         var bit = (p * p - 3) / 2
@@ -209,8 +209,251 @@ final class PrimeSieve {
                 markWord(words, word + 12, first: 12, step: 13)
                 word += 13
             }
+        case 15:
+            while word + 15 <= fullWords {
+                markWord(words, word, first: 0, step: 15)
+                markWord(words, word + 1, first: 11, step: 15)
+                markWord(words, word + 2, first: 7, step: 15)
+                markWord(words, word + 3, first: 3, step: 15)
+                markWord(words, word + 4, first: 14, step: 15)
+                markWord(words, word + 5, first: 10, step: 15)
+                markWord(words, word + 6, first: 6, step: 15)
+                markWord(words, word + 7, first: 2, step: 15)
+                markWord(words, word + 8, first: 13, step: 15)
+                markWord(words, word + 9, first: 9, step: 15)
+                markWord(words, word + 10, first: 5, step: 15)
+                markWord(words, word + 11, first: 1, step: 15)
+                markWord(words, word + 12, first: 12, step: 15)
+                markWord(words, word + 13, first: 8, step: 15)
+                markWord(words, word + 14, first: 4, step: 15)
+                word += 15
+            }
+        case 17:
+            while word + 17 <= fullWords {
+                markWord(words, word, first: 0, step: 17)
+                markWord(words, word + 1, first: 4, step: 17)
+                markWord(words, word + 2, first: 8, step: 17)
+                markWord(words, word + 3, first: 12, step: 17)
+                markWord(words, word + 4, first: 16, step: 17)
+                markWord(words, word + 5, first: 3, step: 17)
+                markWord(words, word + 6, first: 7, step: 17)
+                markWord(words, word + 7, first: 11, step: 17)
+                markWord(words, word + 8, first: 15, step: 17)
+                markWord(words, word + 9, first: 2, step: 17)
+                markWord(words, word + 10, first: 6, step: 17)
+                markWord(words, word + 11, first: 10, step: 17)
+                markWord(words, word + 12, first: 14, step: 17)
+                markWord(words, word + 13, first: 1, step: 17)
+                markWord(words, word + 14, first: 5, step: 17)
+                markWord(words, word + 15, first: 9, step: 17)
+                markWord(words, word + 16, first: 13, step: 17)
+                word += 17
+            }
+        case 19:
+            while word + 19 <= fullWords {
+                markWord(words, word, first: 0, step: 19)
+                markWord(words, word + 1, first: 12, step: 19)
+                markWord(words, word + 2, first: 5, step: 19)
+                markWord(words, word + 3, first: 17, step: 19)
+                markWord(words, word + 4, first: 10, step: 19)
+                markWord(words, word + 5, first: 3, step: 19)
+                markWord(words, word + 6, first: 15, step: 19)
+                markWord(words, word + 7, first: 8, step: 19)
+                markWord(words, word + 8, first: 1, step: 19)
+                markWord(words, word + 9, first: 13, step: 19)
+                markWord(words, word + 10, first: 6, step: 19)
+                markWord(words, word + 11, first: 18, step: 19)
+                markWord(words, word + 12, first: 11, step: 19)
+                markWord(words, word + 13, first: 4, step: 19)
+                markWord(words, word + 14, first: 16, step: 19)
+                markWord(words, word + 15, first: 9, step: 19)
+                markWord(words, word + 16, first: 2, step: 19)
+                markWord(words, word + 17, first: 14, step: 19)
+                markWord(words, word + 18, first: 7, step: 19)
+                word += 19
+            }
+        case 21:
+            while word + 21 <= fullWords {
+                markWord(words, word, first: 0, step: 21)
+                markWord(words, word + 1, first: 20, step: 21)
+                markWord(words, word + 2, first: 19, step: 21)
+                markWord(words, word + 3, first: 18, step: 21)
+                markWord(words, word + 4, first: 17, step: 21)
+                markWord(words, word + 5, first: 16, step: 21)
+                markWord(words, word + 6, first: 15, step: 21)
+                markWord(words, word + 7, first: 14, step: 21)
+                markWord(words, word + 8, first: 13, step: 21)
+                markWord(words, word + 9, first: 12, step: 21)
+                markWord(words, word + 10, first: 11, step: 21)
+                markWord(words, word + 11, first: 10, step: 21)
+                markWord(words, word + 12, first: 9, step: 21)
+                markWord(words, word + 13, first: 8, step: 21)
+                markWord(words, word + 14, first: 7, step: 21)
+                markWord(words, word + 15, first: 6, step: 21)
+                markWord(words, word + 16, first: 5, step: 21)
+                markWord(words, word + 17, first: 4, step: 21)
+                markWord(words, word + 18, first: 3, step: 21)
+                markWord(words, word + 19, first: 2, step: 21)
+                markWord(words, word + 20, first: 1, step: 21)
+                word += 21
+            }
+        case 23:
+            while word + 23 <= fullWords {
+                markWord(words, word, first: 0, step: 23)
+                markWord(words, word + 1, first: 5, step: 23)
+                markWord(words, word + 2, first: 10, step: 23)
+                markWord(words, word + 3, first: 15, step: 23)
+                markWord(words, word + 4, first: 20, step: 23)
+                markWord(words, word + 5, first: 2, step: 23)
+                markWord(words, word + 6, first: 7, step: 23)
+                markWord(words, word + 7, first: 12, step: 23)
+                markWord(words, word + 8, first: 17, step: 23)
+                markWord(words, word + 9, first: 22, step: 23)
+                markWord(words, word + 10, first: 4, step: 23)
+                markWord(words, word + 11, first: 9, step: 23)
+                markWord(words, word + 12, first: 14, step: 23)
+                markWord(words, word + 13, first: 19, step: 23)
+                markWord(words, word + 14, first: 1, step: 23)
+                markWord(words, word + 15, first: 6, step: 23)
+                markWord(words, word + 16, first: 11, step: 23)
+                markWord(words, word + 17, first: 16, step: 23)
+                markWord(words, word + 18, first: 21, step: 23)
+                markWord(words, word + 19, first: 3, step: 23)
+                markWord(words, word + 20, first: 8, step: 23)
+                markWord(words, word + 21, first: 13, step: 23)
+                markWord(words, word + 22, first: 18, step: 23)
+                word += 23
+            }
+        case 25:
+            while word + 25 <= fullWords {
+                markWord(words, word, first: 0, step: 25)
+                markWord(words, word + 1, first: 11, step: 25)
+                markWord(words, word + 2, first: 22, step: 25)
+                markWord(words, word + 3, first: 8, step: 25)
+                markWord(words, word + 4, first: 19, step: 25)
+                markWord(words, word + 5, first: 5, step: 25)
+                markWord(words, word + 6, first: 16, step: 25)
+                markWord(words, word + 7, first: 2, step: 25)
+                markWord(words, word + 8, first: 13, step: 25)
+                markWord(words, word + 9, first: 24, step: 25)
+                markWord(words, word + 10, first: 10, step: 25)
+                markWord(words, word + 11, first: 21, step: 25)
+                markWord(words, word + 12, first: 7, step: 25)
+                markWord(words, word + 13, first: 18, step: 25)
+                markWord(words, word + 14, first: 4, step: 25)
+                markWord(words, word + 15, first: 15, step: 25)
+                markWord(words, word + 16, first: 1, step: 25)
+                markWord(words, word + 17, first: 12, step: 25)
+                markWord(words, word + 18, first: 23, step: 25)
+                markWord(words, word + 19, first: 9, step: 25)
+                markWord(words, word + 20, first: 20, step: 25)
+                markWord(words, word + 21, first: 6, step: 25)
+                markWord(words, word + 22, first: 17, step: 25)
+                markWord(words, word + 23, first: 3, step: 25)
+                markWord(words, word + 24, first: 14, step: 25)
+                word += 25
+            }
+        case 27:
+            while word + 27 <= fullWords {
+                markWord(words, word, first: 0, step: 27)
+                markWord(words, word + 1, first: 17, step: 27)
+                markWord(words, word + 2, first: 7, step: 27)
+                markWord(words, word + 3, first: 24, step: 27)
+                markWord(words, word + 4, first: 14, step: 27)
+                markWord(words, word + 5, first: 4, step: 27)
+                markWord(words, word + 6, first: 21, step: 27)
+                markWord(words, word + 7, first: 11, step: 27)
+                markWord(words, word + 8, first: 1, step: 27)
+                markWord(words, word + 9, first: 18, step: 27)
+                markWord(words, word + 10, first: 8, step: 27)
+                markWord(words, word + 11, first: 25, step: 27)
+                markWord(words, word + 12, first: 15, step: 27)
+                markWord(words, word + 13, first: 5, step: 27)
+                markWord(words, word + 14, first: 22, step: 27)
+                markWord(words, word + 15, first: 12, step: 27)
+                markWord(words, word + 16, first: 2, step: 27)
+                markWord(words, word + 17, first: 19, step: 27)
+                markWord(words, word + 18, first: 9, step: 27)
+                markWord(words, word + 19, first: 26, step: 27)
+                markWord(words, word + 20, first: 16, step: 27)
+                markWord(words, word + 21, first: 6, step: 27)
+                markWord(words, word + 22, first: 23, step: 27)
+                markWord(words, word + 23, first: 13, step: 27)
+                markWord(words, word + 24, first: 3, step: 27)
+                markWord(words, word + 25, first: 20, step: 27)
+                markWord(words, word + 26, first: 10, step: 27)
+                word += 27
+            }
+        case 29:
+            while word + 29 <= fullWords {
+                markWord(words, word, first: 0, step: 29)
+                markWord(words, word + 1, first: 23, step: 29)
+                markWord(words, word + 2, first: 17, step: 29)
+                markWord(words, word + 3, first: 11, step: 29)
+                markWord(words, word + 4, first: 5, step: 29)
+                markWord(words, word + 5, first: 28, step: 29)
+                markWord(words, word + 6, first: 22, step: 29)
+                markWord(words, word + 7, first: 16, step: 29)
+                markWord(words, word + 8, first: 10, step: 29)
+                markWord(words, word + 9, first: 4, step: 29)
+                markWord(words, word + 10, first: 27, step: 29)
+                markWord(words, word + 11, first: 21, step: 29)
+                markWord(words, word + 12, first: 15, step: 29)
+                markWord(words, word + 13, first: 9, step: 29)
+                markWord(words, word + 14, first: 3, step: 29)
+                markWord(words, word + 15, first: 26, step: 29)
+                markWord(words, word + 16, first: 20, step: 29)
+                markWord(words, word + 17, first: 14, step: 29)
+                markWord(words, word + 18, first: 8, step: 29)
+                markWord(words, word + 19, first: 2, step: 29)
+                markWord(words, word + 20, first: 25, step: 29)
+                markWord(words, word + 21, first: 19, step: 29)
+                markWord(words, word + 22, first: 13, step: 29)
+                markWord(words, word + 23, first: 7, step: 29)
+                markWord(words, word + 24, first: 1, step: 29)
+                markWord(words, word + 25, first: 24, step: 29)
+                markWord(words, word + 26, first: 18, step: 29)
+                markWord(words, word + 27, first: 12, step: 29)
+                markWord(words, word + 28, first: 6, step: 29)
+                word += 29
+            }
+        case 31:
+            while word + 31 <= fullWords {
+                markWord(words, word, first: 0, step: 31)
+                markWord(words, word + 1, first: 29, step: 31)
+                markWord(words, word + 2, first: 27, step: 31)
+                markWord(words, word + 3, first: 25, step: 31)
+                markWord(words, word + 4, first: 23, step: 31)
+                markWord(words, word + 5, first: 21, step: 31)
+                markWord(words, word + 6, first: 19, step: 31)
+                markWord(words, word + 7, first: 17, step: 31)
+                markWord(words, word + 8, first: 15, step: 31)
+                markWord(words, word + 9, first: 13, step: 31)
+                markWord(words, word + 10, first: 11, step: 31)
+                markWord(words, word + 11, first: 9, step: 31)
+                markWord(words, word + 12, first: 7, step: 31)
+                markWord(words, word + 13, first: 5, step: 31)
+                markWord(words, word + 14, first: 3, step: 31)
+                markWord(words, word + 15, first: 1, step: 31)
+                markWord(words, word + 16, first: 30, step: 31)
+                markWord(words, word + 17, first: 28, step: 31)
+                markWord(words, word + 18, first: 26, step: 31)
+                markWord(words, word + 19, first: 24, step: 31)
+                markWord(words, word + 20, first: 22, step: 31)
+                markWord(words, word + 21, first: 20, step: 31)
+                markWord(words, word + 22, first: 18, step: 31)
+                markWord(words, word + 23, first: 16, step: 31)
+                markWord(words, word + 24, first: 14, step: 31)
+                markWord(words, word + 25, first: 12, step: 31)
+                markWord(words, word + 26, first: 10, step: 31)
+                markWord(words, word + 27, first: 8, step: 31)
+                markWord(words, word + 28, first: 6, step: 31)
+                markWord(words, word + 29, first: 4, step: 31)
+                markWord(words, word + 30, first: 2, step: 31)
+                word += 31
+            }
         default:
-            preconditionFailure("Word-dense marking requires an odd factor from 5 to 13")
+            preconditionFailure("Word-dense marking requires an odd factor from 5 to 31")
         }
 
         // Fewer than p complete words remain, plus any partial final word.
