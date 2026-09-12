@@ -8,10 +8,10 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
 `validate.py`, and only in `fahlman/Primes`. The original two native jobs run
-serially. The current workflow prepares one focused amd64 follow-up described
-below, with the same 45-minute job limit and read-only repository permissions.
-Its unchanged concurrency group queues it behind the existing run without
-cancelling that run.
+serially. The current trigger requests only native amd64 PhaseVerify WMO, the
+focused completion check described below, with the same 45-minute job limit and
+read-only repository permissions. Its unchanged concurrency group serializes
+runs without cancelling an active run.
 The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
 Do not include these files or the inherited-CI guard in an upstream submission.
@@ -87,14 +87,20 @@ ExtraVerify WMO had completed successfully. The original raw record remains
 the job cancellation interrupted the process; the Actions job record establishes
 the timeout. Its artifact and raw logs are preserved without modification.
 
-The prepared follow-up keeps solution `bd3858c` and requests only
+The focused follow-up keeps solution `bd3858c` and requests only
 `--checks phase-verify-wmo` on native amd64. It rebuilds the same Dockerfile and
 repeats the runtime smoke; it does not rerun the five completed checks. The
-20-minute per-command and 45-minute per-job limits remain. This follow-up is
-pending review and has not been launched. Aggregate amd64 coverage may be
-established only after reconciling the original five successful checks and the
-targeted final check against the same source hashes. The original arm64 job
-continues independently; no arm64 success is claimed here.
+20-minute per-command and 45-minute per-job limits remain.
+[Run 34697204142](https://github.com/fahlman/Primes/actions/runs/34697204142),
+workflow `5867ca7033d938c5977749fdf4f019e2696c6e2b`, completed successfully with
+`passed_targeted`: only PhaseVerify WMO was requested and completed. Its source
+hashes, compiler version and base-image IDs/digests match the original amd64
+evidence. The original arm64 job also passed all six checks. Independent audits
+confirm full six-check coverage on each native architecture for exact solution
+`bd3858cac9a306aa3b8d4729cf059959a7c70885`, with amd64 coverage assembled across
+the original five checks and the focused final check. The original timeout is
+retained as a failed run. See the [complete report](../../reports/LinuxDockerValidation.md)
+and [aggregate coverage record](../../linux-docker-validation/aggregate-coverage.json).
 
 Implementation and static review do not establish Linux support. Full Linux
 verification requires successful evidence for all six checks on each native

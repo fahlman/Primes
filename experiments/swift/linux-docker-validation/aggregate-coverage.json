@@ -1,0 +1,89 @@
+{
+  "scope": "Aggregate compatibility/correctness audit for one immutable source; not performance evidence.",
+  "status": "all_six_checks_completed_on_each_native_architecture",
+  "solution_revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+  "source_sha256": {
+    "Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "PrimeSieve.swift": "d6368487ee284c955781fe6944c0d94bc35c265e5b40fc4e19cba21d66f6590d",
+    "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243"
+  },
+  "workflow_revisions": {
+    "34694761283": "dc5ef6aef662d37c9ae7495272b1b0b945929428",
+    "34697204142": "5867ca7033d938c5977749fdf4f019e2696c6e2b"
+  },
+  "check_coverage": {
+    "linux/amd64": {
+      "verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "extra-verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "phase-verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "verify-wmo": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "extra-verify-wmo": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "phase-verify-wmo": {
+        "run_id": "34697204142",
+        "exit_code": 0
+      }
+    },
+    "linux/arm64": {
+      "verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "extra-verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "phase-verify-asan": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "verify-wmo": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "extra-verify-wmo": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      },
+      "phase-verify-wmo": {
+        "run_id": "34694761283",
+        "exit_code": 0
+      }
+    }
+  },
+  "successful_verifier_executions": 12,
+  "source_hashes_match_across_all_three_records": true,
+  "amd64_base_image_ids_and_repository_digests_match_between_runs": true,
+  "original_amd64_timeout_preserved": {
+    "job_id": 103556227050,
+    "job_conclusion": "cancelled",
+    "raw_validator_status": "running",
+    "last_command_exit_code": null,
+    "post_run_source_hashes_present": false
+  },
+  "raw_records": [
+    "run-34694761283/amd64/validation.json",
+    "run-34694761283/arm64/validation.json",
+    "run-34697204142/amd64-phase-verify-wmo/validation.json"
+  ],
+  "performance_evidence": false
+}

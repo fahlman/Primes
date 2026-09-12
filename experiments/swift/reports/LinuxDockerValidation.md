@@ -1,10 +1,11 @@
 # Native Linux and Docker validation
 
-Validation is in progress. The original native amd64 job built and ran the
-unchanged Docker image and passed five correctness checks, but its 45-minute
-limit interrupted compilation of the final PhaseVerify WMO check. The original
-arm64 job is still running. One reviewed follow-up requests only the missing
-amd64 check. No complete Linux validation or Linux performance gain is claimed.
+Native Linux/Docker validation is complete for the pinned source below. The
+unchanged Docker image built and ran successfully on amd64 and arm64, and all
+six correctness checks have successful evidence on each architecture. The amd64
+coverage combines five checks from the original job with the final PhaseVerify
+WMO check from one focused follow-up. The original 45-minute timeout is retained
+as a failed run. Hosted smoke runs are compatibility evidence only.
 
 The solution is exactly `bd3858cac9a306aa3b8d4729cf059959a7c70885`, the 128-bit
 wrapping-offset candidate in [PR #14](https://github.com/fahlman/Primes/pull/14).
@@ -13,8 +14,8 @@ This report does not adopt or merge either PR.
 
 | Run | Workflow revision | Scope | Recorded result |
 |---|---|---|---|
-| [34694761283](https://github.com/fahlman/Primes/actions/runs/34694761283) | `dc5ef6aef662d37c9ae7495272b1b0b945929428` | Native amd64 and arm64, six checks each, serial | amd64 timed out during final compile; arm64 running |
-| [34697204142](https://github.com/fahlman/Primes/actions/runs/34697204142) | `5867ca7033d938c5977749fdf4f019e2696c6e2b` | Native amd64, PhaseVerify WMO only | Pending behind original run |
+| [34694761283](https://github.com/fahlman/Primes/actions/runs/34694761283) | `dc5ef6aef662d37c9ae7495272b1b0b945929428` | Native amd64 and arm64, six checks each, serial | amd64 timed out during final compile; arm64 passed all six |
+| [34697204142](https://github.com/fahlman/Primes/actions/runs/34697204142) | `5867ca7033d938c5977749fdf4f019e2696c6e2b` | Native amd64, PhaseVerify WMO only | Passed targeted check; completes aggregate amd64 coverage |
 
 The target checkout is separate from the workflow checkout. The Dockerfile,
 sieve, runner, observer and verification sources all come from the same pinned
@@ -96,15 +97,107 @@ records the timeout and durations without rewriting the raw checkpoint.
 An independent Codex subagent reconciled the hashes, successful checks,
 timestamps and incomplete final-check status with no evidence inconsistency.
 
-## Remaining coverage and limits
+## Native arm64 evidence
+
+[Job 103556226966](https://github.com/fahlman/Primes/actions/runs/34694761283/job/103556226966)
+ran from 13:35:39 to 14:07:07 UTC and passed in 31 minutes 28 seconds. Its native
+`ubuntu-24.04-arm` runner exposed four Neoverse-N2 cores, reported `aarch64`,
+and used runner image `20260907.118.1`. Docker and all images reported native
+`linux/arm64`; Swift 6.3.3 reported target `aarch64-unknown-linux-gnu`.
+
+All 29 commands exited 0. Verify, ExtraVerify and PhaseVerify passed in both
+ASAN and WMO modes with the same coverage described above; both PhaseVerify
+modes passed 53,015 flag checks across 2,305 limits. All six verification
+executions had empty stderr. Initial solution/workflow identities and all
+source hashes matched the exact pinned Git objects, final source hashes matched
+the initial hashes, and the record confirms removal of the runner-local lock.
+
+| Arm64 command | Elapsed seconds |
+|---|---:|
+| Docker compiler-stage build | 285.180 |
+| Verify ASAN compile / run | 252.991 / 0.316 |
+| ExtraVerify ASAN compile / run | 231.866 / 6.479 |
+| PhaseVerify ASAN compile / run | 264.074 / 2.620 |
+| Verify WMO compile / run | 285.779 / 0.215 |
+| ExtraVerify WMO compile / run | 255.915 / 3.122 |
+| PhaseVerify WMO compile / run | 253.817 / 1.270 |
+
+The six verifier compilations took 1,544.442 seconds and their executions took
+14.023 seconds. The runtime smoke validated 78,498 primes, one thread and exact
+tags after 5.000095772 seconds. The two base-image repository digests match the
+original amd64 run's manifest digests, with native arm64 image IDs recorded
+separately. The built compiler image ID is
+`sha256:fe452512398deaad851ea435114f3726dfda65b42be37a8637e899afd34c7f38`;
+the runtime image ID is
+`sha256:d1dbcdd19ed6c03a4b5d9c3ae4c4a0fc1110cef8c88158ac53bf65bbc5d248cc`.
+
+The [arm64 artifact 10299213736](https://github.com/fahlman/Primes/actions/runs/34694761283/artifacts/10299213736)
+ZIP SHA256 matched GitHub's advertised digest,
+`98a996e48194702ff68ae6bb1d82ec5b64a71c7a1235202c9cb628ad23872fbe`,
+and every extracted file matched its archived bytes. The original
+[validation.json](../linux-docker-validation/run-34694761283/arm64/validation.json),
+command/job logs and metadata are preserved alongside a separate
+[derived audit](../linux-docker-validation/run-34694761283/arm64-audit.json).
+An independent Codex subagent reconciled the complete arm64 evidence with no
+blocking findings.
+
+## Focused amd64 completion and aggregate coverage
 
 The focused follow-up was independently reviewed before publication. Its
 validator defaults to all six checks; explicit `--checks phase-verify-wmo`
 selects only the missing check and records requested, completed and unrequested
 checks. A successful selected run uses `passed_targeted`, not full-suite
-`passed`. The final record must reconcile the original five successful amd64
-checks and the targeted final check against the same source hashes, and compare
-the base-image digests across runs. The full native arm64 result is separate.
+`passed`.
+
+[Job 103565585644](https://github.com/fahlman/Primes/actions/runs/34697204142/job/103565585644)
+ran from 14:07:12 to 14:18:32 UTC and passed in 11 minutes 20 seconds, after the
+original arm64 job had completed. The native amd64 runner exposed four x86_64
+CPUs identified as AMD EPYC 7763, with the same Ubuntu runner-image version and
+Swift 6.3.3 x86_64 target as the original amd64 job. All 19 commands exited 0.
+The compiler-stage Docker build took 309.973 seconds; PhaseVerify WMO compilation
+took 321.246 seconds and its execution took 1.619 seconds. The check reported
+53,015 flag checks across 2,305 limits with empty stderr. The runtime smoke
+validated 78,498 primes, one thread and exact tags after 5.000087686 seconds.
+
+The record says `passed_targeted`, with requested and completed checks exactly
+`[phase-verify-wmo]`; the other five are explicitly unrequested. All eight source
+hashes match the original amd64 and arm64 records and the exact `bd3858c` Git
+objects. The focused workflow hashes match `5867ca7`. Final source hashes match,
+and lock removal is recorded. The final PhaseVerify WMO compile command matches
+the original interrupted command, including flags, sources and read-only mount.
+Both base-image IDs and repository digests exactly match the original amd64 run.
+
+The focused compiler image ID is
+`sha256:4c6e36a34cc07a7c1333b6917987e270e27454739e890ce1822e71355b6ec0e1`;
+the runtime image ID is
+`sha256:da46c924688060da886cb100c7e2fb5489bdef1cd90bdb1c0977ef36fb543e65`.
+Both report `linux/amd64`. The [focused artifact 10299771414](https://github.com/fahlman/Primes/actions/runs/34697204142/artifacts/10299771414)
+ZIP matched GitHub's advertised SHA256,
+`02f19ae48f81eca8469193ecf36e288281aeabdb13a93bcbcf2787f4122348c2`,
+and every extracted byte matched the archive. Its original
+[validation.json](../linux-docker-validation/run-34697204142/amd64-phase-verify-wmo/validation.json),
+logs, job/run metadata and separate
+[derived audit](../linux-docker-validation/run-34697204142/amd64-targeted-audit.json)
+are preserved. An independent Codex subagent audited the original-five plus
+focused-one amd64 coverage with no blocking findings.
+
+| Successful check | Native amd64 run | Native arm64 run |
+|---|---|---|
+| Verify ASAN | 34694761283 | 34694761283 |
+| ExtraVerify ASAN | 34694761283 | 34694761283 |
+| PhaseVerify ASAN | 34694761283 | 34694761283 |
+| Verify WMO | 34694761283 | 34694761283 |
+| ExtraVerify WMO | 34694761283 | 34694761283 |
+| PhaseVerify WMO | 34697204142 | 34694761283 |
+
+The [aggregate coverage record](../linux-docker-validation/aggregate-coverage.json)
+maps all 12 successful native verifier executions to the two runs. This is
+source-specific compatibility/correctness coverage across jobs. The original
+amd64 job remains cancelled, with its unfinished compile exit code `null` and
+absent final rehash/cleanup fields preserved. The original matrix therefore
+remains failed despite successful aggregate completion. The
+[evidence manifest](../linux-docker-validation/evidence-manifest.json) records
+SHA256 hashes for the preserved files.
 
 [Claude's independent review](https://github.com/fahlman/Primes/pull/14#issuecomment-5646170915)
 also reported substantial M4 compilation cost. That is separate context;
