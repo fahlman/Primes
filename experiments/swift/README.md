@@ -67,7 +67,7 @@ Verify, ExtraVerify and PhaseVerify passed under both AddressSanitizer and optim
 
 [Review and decision](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/reports/SixteenWriteFusedReview.md), [raw results](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-results-59262fe-307da10.json), and [verification evidence](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-verification.json) are published for [PR #12](https://github.com/fahlman/Primes/pull/12). Those results describe the adopted development source, before this follow-up.
 
-The diagnostic copy still describes B. Its full-buffer verifier provides a reference for this candidate, but its timings do not profile the sixteen-write loop. The historical results below describe adopted or earlier versions and are separate from this session.
+The preserved historical diagnostic copy describes B. Its full-buffer verifier provides a correctness reference, but its timings do not profile the sixteen-write loop. Future phase work uses the [current-source diagnostic workflow](tools/phase-split/README.md). The historical results below describe adopted or earlier versions and are separate from this session.
 
 ## Current results and project baseline
 
@@ -81,7 +81,7 @@ The adopted implementation is **cutoff 111, source `099e35a`**, integrated throu
 
 Cutoff 111 delivered **3.667% more throughput**, saving **1.409 µs** against the then-adopted development control. Against 127 in the same session, it gained **0.540%** and saved **0.208 µs**. Every 111 trial beat every trial of both controls. Its separation from 127 was only 0.036377 µs; the registered non-overlap screen is not a significance test. [Review and immutable measurements](https://github.com/fahlman/Primes/blob/9867dce8a60985272c85baa8596433b9719e243c/experiments/swift/reports/FollowupFourExperimentReview.md). The earlier PR #12 results remain preserved in the preceding history section and their linked records.
 
-The [phase diagnostic](tools/phase-split/README.md) still copies earlier B (`8f108f5`). Its full-buffer comparison remains a correctness reference, but the [historical breakdown](reports/FusedSparseBandBreakdown.md) does not profile this implementation. Normalized source equality is required before using a diagnostic copy for current phase timings.
+The [current phase workflow](tools/phase-split/README.md) generates its diagnostic from current production using exactly three reversible substitutions, records both source identities, and rejects stale inputs before or after execution. It includes the through-111 stage and a short `--check` mode; no new phase timings are claimed. The unchanged earlier B (`8f108f5`) copy and verifier remain an independent full-buffer correctness reference. The [historical breakdown](reports/FusedSparseBandBreakdown.md) does not profile this implementation.
 
 ## Latest follow-up experiments
 
