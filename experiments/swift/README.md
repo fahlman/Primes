@@ -8,11 +8,19 @@ The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread
 
 ## 128-bit handler candidate
 
-Branch `swift/dense-128-65-127` starts from development `7509c8791f6d35e5a354a77060756afdd5dd8391`, whose sieve is adopted B `8f108f5`. This is an independent, unmeasured candidate. Compilation, generator execution, correctness checks, assembly review and timing are pending; the results below describe earlier implementations.
+**This implementation regressed; retain development for this experiment.** Exact candidate `307da10fe930e2bbdb46254770833026277e4cf3` completed generator checking, compilation, correctness checks, independent source and assembly review, and one shared timing session. It starts from development `7509c8791f6d35e5a354a77060756afdd5dd8391`, whose sieve is adopted B `8f108f5`. No adoption or merge is part of this evaluation.
+
+| Shared-session variant | Median microseconds per pass |
+|---|---:|
+| Development control `7509c87` | 40.044 |
+| Independent sixteen-write candidate `59262fe` | 39.553 |
+| This 128-bit candidate `307da10` | 42.365 |
+
+The 128-bit candidate delivered **5.48% less throughput** than development and took **2.321 microseconds more per pass**. Every 128-bit trial was slower than every development trial. All nine rotated runs validated correctly on Apple M4 Pro with Swift 6.3.3 and identical benchmark settings. Spotlight was near 99% CPU in the before/after snapshots, so exact percentages remain provisional. This comparison evaluates this implementation, not every possible 128-bit handler. See the [review and full methodology](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/reports/Dense128Review.md) and [raw timing samples](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-results-59262fe-307da10.json). The historical comparisons later in this README describe earlier sessions and implementations.
 
 The new path marks from p² to a 128-bit boundary individually, then handles complete groups of p chunks, then marks the remaining tail individually. Every generated odd case from 65 through 127 supplies the first bit offset `(-128*j) mod p` for chunk j. There are no mask tables or precombined composite masks. Unaligned raw loads and stores preserve the byte allocation, and each UInt64 lane is converted from/to little-endian. The peel and tail extend through the last allocated byte, retaining B's padding bits, including factor 101's mark for 1,000,001 at limit 1,000,000.
 
-`SIMD2<UInt64>` avoids requiring UInt128's newer macOS availability. Its use does not establish vectorized machine code or a speedup. The benchmark, observer, allocation, enumeration, byte-3 handler and 64-bit handlers are unchanged.
+`SIMD2<UInt64>` avoids requiring UInt128's newer macOS availability. Assembly inspection found 1,024 vector ORs in the new helper, but also offset-overflow checks and substantial spills/reloads; the helper contains 36,370 static instructions. These observations do not isolate the cause of the regression. The benchmark, observer, allocation, enumeration, byte-3 handler and 64-bit handlers are unchanged.
 
 The auditable Swift generator changes only its marked switch block. It covers every odd value without testing primality. After acquiring the timing lock, run from this directory:
 
@@ -21,7 +29,7 @@ swift tools/generate-dense-128.swift --check PrimeSieve.swift
 swift tools/generate-dense-128.swift --write PrimeSieve.swift
 ```
 
-The first command checks source fidelity; the second regenerates the switch. Neither has been executed for this source-only handoff. `ExtraVerify.swift` adds deduplicated alignment, full-group and all tail-mark boundary cases beyond its existing exhaustive range. The existing phase verifier adds selected wide-group boundaries and compares the candidate's full raw buffer, including padding, with unchanged adopted B.
+The `--check` command passed, confirming that the generated switch matches the committed source; `--write` was not run. Verify, ExtraVerify and PhaseVerify all passed under both `-O -sanitize=address` and `-O -whole-module-optimization`. ExtraVerify included 11,382 additional deduplicated alignment, full-group and tail limits. PhaseVerify passed 53,015 checks over 2,305 limits, including full raw-buffer equality with unchanged adopted B and its padding bits. Independent source and assembly reviews reported no blocking findings. Exact commands, outputs, source and assembly hashes, and review links are in the [verification record](https://github.com/fahlman/Primes/blob/1bf1be7f46d3ab716c236a3ddc4c4b0a6d35eabf/experiments/swift/sparse-next-verification.json). The unchanged B phase copy remains stale for timing this candidate.
 
 ## Run instructions
 
