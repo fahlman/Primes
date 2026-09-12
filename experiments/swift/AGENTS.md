@@ -14,11 +14,11 @@ Our earlier versions are development controls: they measure the contribution of 
 
 ## Current best
 
-- `swift/dense-small-factors`: combined candidate `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4) in merge commit `3191a53`.
-- One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–13 have dense word handlers (the runtime composite test excludes 9); larger factors use eight fixed-mask byte streams with four writes per iteration and wrapping index arithmetic.
-- Direct upstream comparison: 0.059299 ms per pass versus 0.207650 ms for the fastest upstream entry, striped UInt8: **3.50x throughput** in three rotated five-second trials. [Report](reports/UpstreamBaselineComparison.md), [raw results and provenance](upstream-baseline-e8ba734.json). Desktop activity makes the precise ratio provisional.
-- Separate development-control session: 0.058781 ms per pass, 38.72% more throughput than `0d0a142`. Wrapping added 9.48% over the combined word handlers alone. These are gains over our earlier versions, not upstream.
-- Latest [review](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/reports/CombinedReview.md), [raw timing results](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-results-e8ba734.json), and [verification evidence](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-verification-e8ba734.json) are published in `8d77381` on `swift/combined-review`.
+- `swift/dense-small-factors`: through-63 candidate `19aa38a`, adopted through [PR #8](https://github.com/fahlman/Primes/pull/8) in merge commit `5cd948e`. PRs #5, #7 and #8 were merged in that order with merge commits, preserving the reviewed source commits; no rebase was needed.
+- One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–63 have dense word handlers, dispatched only after the runtime composite test; larger factors use eight fixed-mask byte streams with four writes per iteration and wrapping index arithmetic.
+- Latest development comparison: **0.042376 ms per pass**, **9.92% more throughput** than through-47 `404d1cb` (0.046580 ms), and **36.87% more** than development control `0c370b5` (0.058000 ms), in one rotated session. Every through-63 trial beat every through-47 trial; all nine runs validated correctly. Apple M4 Pro, Swift 6.3.3; desktop activity makes precise percentages provisional. The gain includes compiler outlining effects, which were not isolated.
+- Latest [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md), [raw timing results](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-results-19aa38a.json) and [verification evidence](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json) are published in `ff6e8bf` on `swift/word-dense-49-63-review`.
+- The most recent direct upstream comparison measured the earlier `e8ba734`: 0.059299 ms versus 0.207650 ms for upstream striped UInt8, **3.50x throughput**. [Report](reports/UpstreamBaselineComparison.md), [raw results](upstream-baseline-e8ba734.json). It identifies the upstream baseline but does not measure the current through-63 candidate's upstream advantage; do not combine ratios across sessions.
 
 ## Experiments
 
@@ -32,7 +32,10 @@ Our earlier versions are development controls: they measure the contribution of 
 | 2: 64-bit dense marking for odd factors 9–13 | [PR #3](https://github.com/fahlman/Primes/pull/3), `7b63048` | 0.071580 | Included in experiment 4; individual PR superseded |
 | 3: 64-bit words for the 5 and 7 handlers | [PR #1](https://github.com/fahlman/Primes/pull/1), `62e5a59` | 0.074382 | Included in experiment 4; individual PR superseded |
 | 4A: combined word handlers for odd factors 5–13 | [PR #4](https://github.com/fahlman/Primes/pull/4), `f43c436` | 0.064351 | Intermediate step, superseded by 4B |
-| 4B: combined word handlers plus wrapping arithmetic | [PR #4](https://github.com/fahlman/Primes/pull/4), `e8ba734` | 0.058781 | Adopted; current best |
+| 4B: combined word handlers plus wrapping arithmetic | [PR #4](https://github.com/fahlman/Primes/pull/4), `e8ba734` | 0.058781 | Adopted; extended by experiments 5–7 |
+| 5: word handlers for odd factors 15–31 | [PR #5](https://github.com/fahlman/Primes/pull/5), `7ee6500`; [review](https://github.com/fahlman/Primes/blob/a334f451ed91e08fb74b3b7d08c7291ea58e2848/experiments/swift/reports/WordDense15Through31Review.md) | 0.049446 | Adopted in `98b21c6`; incorporated into experiment 7 |
+| 6: word handlers for odd factors 33–47 | [PR #7](https://github.com/fahlman/Primes/pull/7), `404d1cb`; [review](https://github.com/fahlman/Primes/blob/9093317190d9e004db9685f742a976caf0693ebc/experiments/swift/reports/WordDense33Through47Review.md) | 0.046554 | Adopted in `8861ddb`; incorporated into experiment 7 |
+| 7: word handlers for odd factors 49–63 | [PR #8](https://github.com/fahlman/Primes/pull/8), `19aa38a`; [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md) | 0.042376 | Adopted in `5cd948e`; current best |
 
 Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 

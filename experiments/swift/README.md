@@ -16,7 +16,7 @@ sh ./run.sh
 
 The script compiles with `-O -whole-module-optimization` and runs fresh one-million sieves for at least five seconds. Build time, validation, enumeration, and printing are outside the timed interval. Allocation, initialization, marking, opaque observation, and release are inside every timed pass.
 
-Example from the direct upstream comparison on Apple M4 Pro with Swift 6.3.3:
+Historical example from the `e8ba734` direct upstream comparison on Apple M4 Pro with Swift 6.3.3:
 
 ```text
 fahlman_swift_dense_striped;84792;5.000039292;1;algorithm=base,faithful=yes,bits=1
@@ -33,14 +33,27 @@ The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The im
 
 ## Current results and project baseline
 
-The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. Our adopted implementation is `e8ba734`, merged through [PR #4](https://github.com/fahlman/Primes/pull/4).
+The adopted implementation is **through-63 `19aa38a`**, merged through [PR #8](https://github.com/fahlman/Primes/pull/8) as `5cd948e`, after [PR #5](https://github.com/fahlman/Primes/pull/5) (`98b21c6`) and [PR #7](https://github.com/fahlman/Primes/pull/7) (`8861ddb`). All three used merge commits, preserving the reviewed candidates without rebasing.
 
-| Implementation | Median milliseconds per pass | Our throughput advantage |
+| Latest development comparison | Median milliseconds per pass |
+|---|---:|
+| Development control `0c370b5` | 0.058000 |
+| Through 47 `404d1cb` | 0.046580 |
+| Adopted through 63 `19aa38a` | **0.042376** |
+
+Through 63 delivered **9.92% more throughput than through 47**, saving **4.204 µs per sieve**, and **36.87% more throughput than development control `0c370b5`**. All nine runs in this rotated M4 Pro / Swift 6.3.3 session validated correctly, and every through-63 trial beat every through-47 trial. The gain includes compiler outlining effects, which were not isolated. Desktop activity makes exact percentages provisional. [Review and reproduction](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md), [raw timing](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-results-19aa38a.json), [verification](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json).
+
+## Most recent direct upstream comparison
+
+The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). It has not been repeated for through-63 `19aa38a`.
+
+
+| Implementation | Median milliseconds per pass | e8ba734 throughput advantage |
 |---|---:|---:|
 | Upstream Bool (`bits=8`) | 0.295470 | 4.98x |
 | Upstream packed UInt8 (`bits=1`) | 0.347904 | 5.87x |
 | Upstream striped UInt8 (`bits=1`), project baseline | 0.207650 | 3.50x |
-| Adopted candidate (`bits=1`) | 0.059299 | — |
+| Earlier candidate `e8ba734` (`bits=1`) | 0.059299 | — |
 
 Three rotated five-second trials per implementation, Apple M4 Pro, Swift 6.3.3, same compiler flags and allocation-through-release Swift runner. All 12 executions validated 78,498 primes. Background desktop and backup activity makes the precise ratios provisional. These results compare adapted upstream kernels under the common runner. [Full report, adapter details, and reproduction](reports/UpstreamBaselineComparison.md); [raw results and provenance](upstream-baseline-e8ba734.json).
 
@@ -58,7 +71,7 @@ Before these experiments, our original development control beat all three reposi
 | Packed UInt8 | 2.91x |
 | Striped UInt8 | 1.73x |
 
-Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The current candidate was compared directly with all three upstream entries in the newer session above; do not combine ratios across the two sessions.
+Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; through-63 `19aa38a` has only the recorded development comparisons so far. Do not combine ratios across sessions.
 
 To compare the current implementation with all three original entries:
 
@@ -74,7 +87,7 @@ The earlier two-way comparison remains available through `compare.py` and `compa
 
 ## Validation
 
-The adopted candidate passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including small limits, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered limits 2,049–20,000, 500 random limits, and 1,561 prime-square boundaries. See the [combined verification record](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-verification-e8ba734.json).
+The adopted candidate `19aa38a` passed complete-array comparisons against an independent Boolean sieve with AddressSanitizer and the benchmark optimization flags, including small limits, larger boundaries, one million, and ten million. Additional AddressSanitizer checks covered every limit 2,049–30,000, 500 random limits, and 1,561 prime-square boundaries. All 30 word cases reproduced exactly from the generator; assembly confirmed the separate word handler and real observer call. See the [through-63 verification record](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/word-dense-49-63-verification-19aa38a.json). Integration preserved these tested source files byte-for-byte.
 
 ```sh
 mkdir -p .build
