@@ -1,0 +1,16 @@
+{
+  "candidate": "1a259a84a892cc1008de179ef332d66bd1c514bf",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Codex independent review agent /root/review_sieve",
+  "verdict": "reject; all candidate trials slower than every control trial",
+  "control_median_microseconds": 38.298216269005394,
+  "candidate_median_microseconds": 362.4775855019934,
+  "duration_ratio": 9.464607514772045,
+  "throughput_reduction_percent": 89.4343215137106,
+  "audit": "Exact sources, frozen runner/observer, compiled inputs, binary hashes, verification/review hashes, all six outputs and recorded order match.",
+  "limitations": [
+    "Desktop activity at endpoint snapshots",
+    "Three two-variant rotations are not fully position-balanced",
+    "No package/Linux gate reached after local failure"
+  ]
+}

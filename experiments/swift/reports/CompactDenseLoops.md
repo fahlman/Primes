@@ -1,6 +1,6 @@
 # Compact dense-loop experiment
 
-Status: exact candidate `1a259a84a892cc1008de179ef332d66bd1c514bf` passed verification and independent Codex source/assembly review; admitted to the one registered timing session. Submission remains paused.
+Status: **tested and rejected; unmerged**. Exact candidate `1a259a84a892cc1008de179ef332d66bd1c514bf` passed source review, all correctness checks and assembly admission, but lost the single registered timing comparison. Preserve the branch and evidence. Submission remains paused.
 
 Control: `1d0522115846d8c6487d49a9bf0e60b18b9d8599`, whose sieve is the adopted cutoff-111 source `099e35a`.
 
@@ -24,3 +24,22 @@ All 17 commands exited zero: generator check, control/candidate assembly builds,
 Only factors 5 and 7 fully fold the chunk loop. The other 52 cases retain runtime chunk iteration and remainder arithmetic (multiply/shift sequences, not division instructions). Both dense helpers are now inlined into `runSieve`, whose frame grows from 240 to 912 bytes. The four sparse loops remain 51 instructions per 16 stores without stack accesses; `completedPass` retains the real observer and release calls. These facts require timing rather than a performance prediction.
 
 Raw evidence is in `../compact-loop-evidence/`: verification commands and output, both assembly files, execution wrapper/support, and independent admission record. The inherited all-language CI runs 34719247028 and 34719248503 were cancelled because they enumerate `Prime*/Dockerfile` and do not exercise this experiment. The dedicated local checks above were all executed; native Linux and packaged-source checks are conditional on surviving the local screen.
+
+## Timing result: rejected
+
+One serial session on Apple M4 Pro / Swift 6.3.3 compared exact control `1d0522115846d8c6487d49a9bf0e60b18b9d8599` with exact compact candidate `1a259a84a892cc1008de179ef332d66bd1c514bf`, using unchanged `compare_optimizations.py`, the frozen `25402d4` runner and observer, and `-O -whole-module-optimization`. The lock covered all compilation and trials, and the command used unique `--output`. Order: control/candidate, candidate/control, control/candidate. All six five-second runs validated 78,498 primes, one thread and the required base/faithful/bits tags.
+
+| Variant | Median µs/sieve | Three-trial range µs/sieve |
+|---|---:|---:|
+| Adopted cutoff 111 | 38.298 | 38.241–38.347 |
+| Compact loops | 362.478 | 329.493–377.518 |
+
+The compact version took **9.465 times as long**, reducing throughput by **89.434%** and adding **324.179 µs per sieve**. Every candidate trial was slower than every control trial. This is a development comparison, not a new upstream-baseline comparison.
+
+An earlier preflight stopped on transient audio activity before compilation or timing; `timing-preflight-audio-1a259a8.json` preserves that attempt. No measured run was discarded or repeated. The successful session's pre/post snapshots show no competing build/test/benchmark or audio activity, but conditions were sampled only at endpoints, the desktop/OS remained active, and three rotations of two variants are not fully position-balanced. Candidate trial variation limits precise attribution; the large, consistently separated regression is sufficient to reject this refactor.
+
+Only factors 5 and 7 fully folded. Compacting those two alone would remove just six source lines, so no hybrid follow-up was started. The candidate failed the registered local screen; no submission-package or native Linux test was started for it, and no conclusion is claimed about Linux performance. Explicit calls are retained. The useful independent maintenance change is the unified generator in [PR #21](https://github.com/fahlman/Primes/pull/21), with unchanged executable source and byte-identical complete benchmark assembly.
+
+Raw results: `../compact-loop-evidence/timing-1a259a8.json`; conditions, command, exact source/runner/observer identities and executable hashes: `../compact-loop-evidence/timing-provenance-1a259a8.json`. Execution wrapper: `../compact-loop-evidence/time.py`.
+
+An independent Codex audit recomputed the medians and range separation, checked exact source/harness inputs, executable and review/verification hashes, all six validation outputs and the recorded order, and confirmed rejection.

@@ -1,0 +1,187 @@
+{
+  "candidate": "1a259a84a892cc1008de179ef332d66bd1c514bf",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "started_at_utc": "2026-09-12T21:18:55.729697+00:00",
+  "status": "failed",
+  "verification_sha256": "b78345006c233971fcda92675d72230d98cfe318bf7265c1311de9d422705933",
+  "review_admission_sha256": "ad4d20a0d26ae4154b8e081ea67b4c61bafbe9dde2755ee0c394895cf882be46",
+  "before": {
+    "at_utc": "2026-09-12T21:18:55.771868+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 19.8,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 17.4,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 96464,
+        "cpu_percent": 13.3,
+        "executable": "Python"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 10.0,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 424,
+        "cpu_percent": 8.5,
+        "executable": "coreaudiod"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 7.2,
+        "executable": "codex"
+      },
+      {
+        "pid": 819,
+        "cpu_percent": 5.9,
+        "executable": "corespeechd"
+      },
+      {
+        "pid": 739,
+        "cpu_percent": 4.0,
+        "executable": "NotificationCenter"
+      },
+      {
+        "pid": 571,
+        "cpu_percent": 3.5,
+        "executable": "mds_stores"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.2,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 96457,
+        "cpu_percent": 2.3,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.7,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 365,
+        "cpu_percent": 1.5,
+        "executable": "mds"
+      },
+      {
+        "pid": 693,
+        "cpu_percent": 1.0,
+        "executable": "imagent"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.9,
+        "executable": "bluetoothd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [
+      "pid 424(coreaudiod): [0x00149e3200018527] 00:00:02 PreventUserIdleSystemSleep named: \"com.apple.audio.AVVCAggregateDevice-819-282475249.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice",
+      "pid 424(coreaudiod): [0x00149e3200018548] 00:00:02 PreventUserIdleSystemSleep named: \"com.apple.audio.BuiltInSpeakerDevice.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice"
+    ],
+    "caffeinate_pids": []
+  },
+  "error": "AssertionError: Audio activity observed",
+  "after": {
+    "at_utc": "2026-09-12T21:18:55.811391+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 19.8,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 17.4,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 96464,
+        "cpu_percent": 13.3,
+        "executable": "Python"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 10.0,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 424,
+        "cpu_percent": 8.5,
+        "executable": "coreaudiod"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 7.2,
+        "executable": "codex"
+      },
+      {
+        "pid": 819,
+        "cpu_percent": 5.9,
+        "executable": "corespeechd"
+      },
+      {
+        "pid": 739,
+        "cpu_percent": 4.0,
+        "executable": "NotificationCenter"
+      },
+      {
+        "pid": 571,
+        "cpu_percent": 3.5,
+        "executable": "mds_stores"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.2,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 96457,
+        "cpu_percent": 2.3,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 1.7,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 365,
+        "cpu_percent": 1.5,
+        "executable": "mds"
+      },
+      {
+        "pid": 693,
+        "cpu_percent": 1.0,
+        "executable": "imagent"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.9,
+        "executable": "bluetoothd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [
+      "pid 424(coreaudiod): [0x00149e3200018527] 00:00:02 PreventUserIdleSystemSleep named: \"com.apple.audio.AVVCAggregateDevice-819-282475249.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice",
+      "pid 424(coreaudiod): [0x00149e3200018548] 00:00:02 PreventUserIdleSystemSleep named: \"com.apple.audio.BuiltInSpeakerDevice.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice"
+    ],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-12T21:18:55.811567+00:00",
+  "lock_absent_after": true
+}
