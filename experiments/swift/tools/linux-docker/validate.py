@@ -25,6 +25,10 @@ WORKFLOW_FILES = [
     ".github/workflows/swift-linux-docker-validation.yml",
     "experiments/swift/tools/linux-docker/validate.py",
 ]
+CHECK_NAMES = [
+    "verify-asan", "extra-verify-asan", "phase-verify-asan",
+    "verify-wmo", "extra-verify-wmo", "phase-verify-wmo",
+]
 
 
 def utc():
@@ -44,9 +48,16 @@ def main():
     parser.add_argument("--platform", choices=["linux/amd64", "linux/arm64"], required=True)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--build-output", type=Path, required=True)
+    parser.add_argument("--checks", nargs="+", choices=CHECK_NAMES,
+                        help="Run only these checks; omitted means the complete six-check suite.")
     args = parser.parse_args()
     if not re.fullmatch(r"[0-9a-f]{40}", args.solution_revision):
         parser.error("The solution revision must be a complete lowercase commit SHA.")
+    selection = args.checks if args.checks is not None else CHECK_NAMES
+    if len(selection) != len(set(selection)):
+        parser.error("Each requested check must appear only once.")
+    requested_checks = [name for name in CHECK_NAMES if name in selection]
+    check_scope = "full_suite" if requested_checks == CHECK_NAMES else "targeted"
 
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=False)
@@ -63,6 +74,10 @@ def main():
         "purpose": "Linux/Docker correctness and runtime compatibility only; no speed claim.",
         "requested_solution_revision": args.solution_revision,
         "requested_platform": args.platform,
+        "check_scope": check_scope,
+        "requested_checks": requested_checks,
+        "completed_checks": [],
+        "unrequested_checks": [name for name in CHECK_NAMES if name not in requested_checks],
         "host_system": platform.system(), "host_machine": platform.machine(),
         "github": {key: os.environ.get(key) for key in [
             "GITHUB_REPOSITORY", "GITHUB_SHA", "GITHUB_REF", "GITHUB_RUN_ID",
@@ -211,16 +226,23 @@ def main():
                 ("phase-verify", ["tools/phase-split/PhaseSieve.swift",
                                   "tools/phase-split/PhaseVerify.swift"]),
             ]:
+                check_name = f"{name}-{mode}"
+                if check_name not in requested_checks:
+                    continue
                 executable = f"/validation/{name}-{mode}"
                 run(f"compile-{name}-{mode}", checking + ["--entrypoint", "swiftc", builder,
                     *flags, "/source/PrimeSieve.swift", *["/source/" + s for s in sources],
                     "-o", executable])
                 run(f"run-{name}-{mode}", checking + ["--entrypoint", executable, builder])
+                record["completed_checks"].append(check_name)
+                save()
 
+        if record["completed_checks"] != requested_checks:
+            raise RuntimeError("The completed checks do not match the requested checks.")
         record["source_sha256_after"] = hashes(package, SOURCE_FILES)
         if record["source_sha256_after"] != record["source_sha256"]:
             raise RuntimeError("The checked-out source changed during validation.")
-        record["status"] = "passed"
+        record["status"] = "passed" if check_scope == "full_suite" else "passed_targeted"
     except Exception as error:
         record["status"] = "failed"
         record["error"] = f"{type(error).__name__}: {error}"

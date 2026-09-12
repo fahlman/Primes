@@ -20,6 +20,7 @@ env:
 
 jobs:
   validate:
+    name: Complete native amd64 PhaseVerify WMO
     if: github.repository == 'fahlman/Primes'
     timeout-minutes: 45
     strategy:
@@ -29,8 +30,6 @@ jobs:
         include:
           - runner: ubuntu-24.04
             architecture: amd64
-          - runner: ubuntu-24.04-arm
-            architecture: arm64
     runs-on: ${{ matrix.runner }}
     steps:
       - name: Check out workflow revision
@@ -57,6 +56,7 @@ jobs:
             --solution-revision "$SOLUTION_REVISION" \
             --workflow-root "$GITHUB_WORKSPACE/workflow" \
             --platform "$VALIDATION_PLATFORM" \
+            --checks phase-verify-wmo \
             --output "$RUNNER_TEMP/swift-linux-docker-evidence" \
             --build-output "$RUNNER_TEMP/swift-linux-docker-checks"
 
@@ -64,7 +64,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
-          name: swift-linux-${{ matrix.architecture }}-${{ env.SOLUTION_REVISION }}
+          name: swift-linux-${{ matrix.architecture }}-phase-verify-wmo-${{ env.SOLUTION_REVISION }}
           path: ${{ runner.temp }}/swift-linux-docker-evidence/
           if-no-files-found: warn
           retention-days: 30

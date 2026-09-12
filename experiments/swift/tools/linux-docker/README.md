@@ -7,8 +7,11 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
-`validate.py`, and only in `fahlman/Primes`. Its two matrix jobs run serially,
-with a 45-minute limit per architecture and read-only repository permissions.
+`validate.py`, and only in `fahlman/Primes`. The original two native jobs run
+serially. The current workflow prepares one focused amd64 follow-up described
+below, with the same 45-minute job limit and read-only repository permissions.
+Its unchanged concurrency group queues it behind the existing run without
+cancelling that run.
 The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
 Do not include these files or the inherited-CI guard in an upstream submission.
@@ -48,12 +51,21 @@ thread, exact `algorithm=base,faithful=yes,bits=1` tags, and the runner's 78,498
 validation message. This five-second smoke run is compatibility evidence only.
 Hosted hardware and its output must not be used for the project's M4 speed claims.
 
-The build-stage image then compiles and runs Verify, ExtraVerify and PhaseVerify
-under both `-O -sanitize=address` and `-O -whole-module-optimization`. The entire
-source mount is read-only. A separate writable temporary mount contains only the
+By default, the build-stage image compiles and runs Verify, ExtraVerify and
+PhaseVerify under both `-O -sanitize=address` and `-O -whole-module-optimization`.
+The optional `--checks` argument accepts one or more unique names from
+`verify-asan`, `extra-verify-asan`, `phase-verify-asan`, `verify-wmo`,
+`extra-verify-wmo`, and `phase-verify-wmo`. Omitting it retains all six checks.
+The record lists requested, completed and unrequested checks, and explicitly
+labels full-suite or targeted coverage. Full-suite success is `passed`;
+targeted success is `passed_targeted` and does not establish unrequested checks.
+Every selected run still builds the unchanged Dockerfile and validates its
+runtime smoke output first. The entire source mount is read-only. A separate
+writable temporary mount contains only the
 new check executables. Every compile and execution has a separate recorded exit
 status and stdout/stderr log. A failing command stops that architecture's job;
-the other architecture still runs. Failures are preserved and require diagnosis;
+any other configured architecture still runs. Failures are preserved and require
+diagnosis;
 the script does not weaken checks, retry, or change the source automatically.
 
 ## Evidence and execution status
@@ -66,9 +78,28 @@ status, and start/finish times. Compiled test executables are not uploaded.
 Copy the completed artifacts and Actions run URLs into the fork's permanent
 review/report record before artifact expiration.
 
-Implementation and static review do not establish Linux support. No successful
-execution is claimed until both native jobs complete and their evidence is
-reviewed. Push the branch only after the authorized local timing sessions finish.
+The original run at workflow `dc5ef6aef662d37c9ae7495272b1b0b945929428`,
+[34694761283](https://github.com/fahlman/Primes/actions/runs/34694761283), reached
+the 45-minute amd64 job limit while compiling the last check, PhaseVerify WMO.
+Its unchanged Dockerfile, runtime smoke, all three ASAN checks, Verify WMO and
+ExtraVerify WMO had completed successfully. The original raw record remains
+`running`, without a final command exit code or post-run source hashes, because
+the job cancellation interrupted the process; the Actions job record establishes
+the timeout. Its artifact and raw logs are preserved without modification.
+
+The prepared follow-up keeps solution `bd3858c` and requests only
+`--checks phase-verify-wmo` on native amd64. It rebuilds the same Dockerfile and
+repeats the runtime smoke; it does not rerun the five completed checks. The
+20-minute per-command and 45-minute per-job limits remain. This follow-up is
+pending review and has not been launched. Aggregate amd64 coverage may be
+established only after reconciling the original five successful checks and the
+targeted final check against the same source hashes. The original arm64 job
+continues independently; no arm64 success is claimed here.
+
+Implementation and static review do not establish Linux support. Full Linux
+verification requires successful evidence for all six checks on each native
+architecture, with matching source hashes for any split runs. Push the branch
+only after the authorized local timing sessions finish.
 There is no manual-dispatch trigger or requirement to merge this workflow into
 the default branch to run it.
 
