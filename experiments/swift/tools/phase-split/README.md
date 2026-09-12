@@ -1,5 +1,11 @@
 # Fused-sparse phase diagnostics
 
+On branch `swift/dense-128-65-127`, this timing copy remains adopted B and is
+**stale for profiling the new 128-bit candidate**. It is intentionally unchanged
+as a correctness reference: `PhaseVerify.swift` compares full raw buffers,
+including padding, at additional 128-bit alignment/group boundaries. Do not
+interpret this copy's timing modes as the changed candidate's phase costs.
+
 `PhaseSieve.swift` copies adopted production `8f108f5` (merged in `703dc12`,
 unchanged in development `1edbea7`). Only the class name, `runSieve` signature,
 and its extra factor cutoff differ. Normalize those three substitutions and

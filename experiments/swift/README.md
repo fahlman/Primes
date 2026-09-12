@@ -1,10 +1,27 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. The runtime-discovered factor 3 uses specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Factors 5 through 63 use the same approach on 64-bit words; the cases for the composite values 9, 15, 21, 25, 27, 33, 35, 39, 45, 49, 51, 55, 57, and 63 are never reached. Larger factors use one fused loop per factor: each iteration marks the next eight multiples, one at each bit offset within a byte, with a fixed single-bit mask for each. There is no presieving, cached sieve state, or wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. The runtime-discovered factor 3 uses specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Odd factors 5 through 63 retain the adopted 64-bit handlers. This candidate adds 128-bit local chunks for every odd factor 65 through 127, dispatched only after the same runtime candidate test; composite cases are included but never reached. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane before the chunk is stored. Factors above 127 retain the adopted fused sparse loop, marking eight successive multiples per iteration. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
-The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
+The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Classification rests on the source: every multiple has an individual single-bit OR even if the compiler merges operations. Small-factor specialization preserves runtime discovery, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
+
+## 128-bit handler candidate
+
+Branch `swift/dense-128-65-127` starts from development `7509c8791f6d35e5a354a77060756afdd5dd8391`, whose sieve is adopted B `8f108f5`. This is an independent, unmeasured candidate. Compilation, generator execution, correctness checks, assembly review and timing are pending; the results below describe earlier implementations.
+
+The new path marks from p² to a 128-bit boundary individually, then handles complete groups of p chunks, then marks the remaining tail individually. Every generated odd case from 65 through 127 supplies the first bit offset `(-128*j) mod p` for chunk j. There are no mask tables or precombined composite masks. Unaligned raw loads and stores preserve the byte allocation, and each UInt64 lane is converted from/to little-endian. The peel and tail extend through the last allocated byte, retaining B's padding bits, including factor 101's mark for 1,000,001 at limit 1,000,000.
+
+`SIMD2<UInt64>` avoids requiring UInt128's newer macOS availability. Its use does not establish vectorized machine code or a speedup. The benchmark, observer, allocation, enumeration, byte-3 handler and 64-bit handlers are unchanged.
+
+The auditable Swift generator changes only its marked switch block. It covers every odd value without testing primality. After acquiring the timing lock, run from this directory:
+
+```sh
+swift tools/generate-dense-128.swift --check PrimeSieve.swift
+swift tools/generate-dense-128.swift --write PrimeSieve.swift
+```
+
+The first command checks source fidelity; the second regenerates the switch. Neither has been executed for this source-only handoff. `ExtraVerify.swift` adds deduplicated alignment, full-group and all tail-mark boundary cases beyond its existing exhaustive range. The existing phase verifier adds selected wide-group boundaries and compares the candidate's full raw buffer, including padding, with unchanged adopted B.
 
 ## Run instructions
 
@@ -43,7 +60,7 @@ The adopted implementation is **experiment 8B, `8f108f5`**, merged through [PR #
 
 B delivered **6.01% more throughput than development**, saving **2.453 µs per sieve**, and **4.27% more throughput than A**. All nine runs in this rotated M4 Pro / Swift 6.3.3 session validated correctly, and every B trial beat every A and development trial. Desktop activity makes exact percentages provisional; instruction counts do not isolate the cause of the gains. See the [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md), [raw results](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-results-8f108f5.json), and [verification evidence](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json).
 
-The [phase diagnostic](tools/phase-split/README.md) copies adopted B and includes cumulative stops through factors 3, 63, 251 and 499, plus allocation-only and full-pass controls. The [refreshed breakdown](reports/FusedSparseBandBreakdown.md) measured copied full at 39.962 µs versus production at 40.183 µs, passing the predefined 3% control; approximately 67.5% lies in sparse factors 67–997. These are diagnostic estimates from a separate session, not a new optimization comparison. Its normalized source must match production before profiling; identical output flags alone do not prove timing-code fidelity. The earlier [through-63 breakdown](reports/PhaseBreakdownThrough63.md) and [sparse-band measurements](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md) describe `19aa38a` and remain historical evidence.
+The [phase diagnostic](tools/phase-split/README.md) still copies adopted B and is stale for timing this branch's 128-bit candidate. It remains a useful correctness reference through the verifier's full-buffer comparison. Do not use its unchanged cumulative timing copy to profile this candidate. The [refreshed B breakdown](reports/FusedSparseBandBreakdown.md) measured copied full at 39.962 µs versus production at 40.183 µs, passing the predefined 3% control; approximately 67.5% lay in B's sparse factors 67–997. Those estimates describe B in a separate session, not this candidate. A timing copy's normalized source must match production before profiling; identical output flags alone do not prove timing-code fidelity. Earlier reports remain historical evidence.
 
 ## Most recent direct upstream comparison
 

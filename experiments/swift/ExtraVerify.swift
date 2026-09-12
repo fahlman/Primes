@@ -50,6 +50,31 @@ struct ExtraVerify {
         for limit in 2_049...30_000 {
             check(limit)
         }
+
+        // The 128-bit handlers can begin full groups beyond 30,000. Include
+        // alignment and first/second group edges for every odd handled value.
+        // A group's byte-rounded storage exists at limit 2*endBit-13, before
+        // every flag in its last byte is valid; also test 2*endBit+1 explicitly.
+        var vectorLimits = Set<Int>()
+        for factor in stride(from: 65, through: 127, by: 2) {
+            var aligned = (factor * factor - 3) / 2
+            while aligned & 127 != 0 { aligned += factor }
+            let groupEnd = aligned + 128 * factor
+            for boundary in [factor * factor, 2 * aligned + 3,
+                             2 * groupEnd - 13, 2 * groupEnd + 1,
+                             2 * (groupEnd + 128 * factor) - 13,
+                             2 * (groupEnd + 128 * factor) + 1] {
+                for offset in -2...2 { vectorLimits.insert(boundary + offset) }
+            }
+            // Exercise every possible next tail-mark position, including the
+            // transition from 127 to 128 marks, on both sides of its number.
+            for mark in 0..<128 {
+                let nextNumber = 2 * (groupEnd + mark * factor) + 3
+                for offset in -1...1 { vectorLimits.insert(nextNumber + offset) }
+            }
+        }
+        for limit in vectorLimits.sorted() { check(limit) }
+
         var rng = SplitMix64(state: 0x5EED)
         for _ in 0..<500 {
             check(2_049 + Int(rng.next() % UInt64(maxLimit - 2_049)))
@@ -61,6 +86,6 @@ struct ExtraVerify {
                 squareLimits += 1
             }
         }
-        print("Passed: every limit in 2,049...30,000, 500 random limits in 2,049...2,000,000, and \(squareLimits) limits within 3 of every prime square up to 2,000,000.")
+        print("Passed: every limit in 2,049...30,000, \(vectorLimits.count) deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and \(squareLimits) limits within 3 of every prime square up to 2,000,000.")
     }
 }
