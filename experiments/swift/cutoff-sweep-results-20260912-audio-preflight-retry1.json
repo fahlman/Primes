@@ -1,0 +1,220 @@
+{
+  "recorded_at_utc": "2026-09-12T15:04:25.656495+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu": "Apple M4 Pro",
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "flags": [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "variants": {
+    "development63": {
+      "revision": "f6b5c5b794de7c040c85ab3d88ca524961525f27",
+      "source_sha256": "e1b7f259877c88d4cdb5eed472f1fa5eb10d076a9f90f281331e8c259e875f25"
+    },
+    "cutoff79": {
+      "revision": "7f261701ce8c031ec0104b00631c4dba74289ff3",
+      "source_sha256": "dfa7fc3c085e9f832f8a72dab6dedc87a3129cea0305ceb009db719f99c18e02"
+    },
+    "cutoff95": {
+      "revision": "2dc1d42d0840e1ec1488e57f4504264bfa055762",
+      "source_sha256": "0d026f2d883c1be1a1aed131481770468fe388eef15e3b211f8f4644504e88f0"
+    },
+    "cutoff111": {
+      "revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448"
+    },
+    "cutoff127": {
+      "revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "source_sha256": "d6368487ee284c955781fe6944c0d94bc35c265e5b40fc4e19cba21d66f6590d"
+    }
+  },
+  "run_order": [
+    [
+      "development63",
+      "cutoff79",
+      "cutoff95",
+      "cutoff111",
+      "cutoff127"
+    ],
+    [
+      "cutoff79",
+      "cutoff95",
+      "cutoff111",
+      "cutoff127",
+      "development63"
+    ],
+    [
+      "cutoff95",
+      "cutoff111",
+      "cutoff127",
+      "development63",
+      "cutoff79"
+    ]
+  ],
+  "samples": {
+    "development63": [
+      {
+        "output": "development63;124613;5.000039792;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 124613,
+        "seconds": 5.000039792,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 26796547",
+        "milliseconds_per_pass": 0.04012454392398867
+      },
+      {
+        "output": "development63;125492;5.000024125;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 125492,
+        "seconds": 5.000024125,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 26975681",
+        "milliseconds_per_pass": 0.039843369497657224
+      },
+      {
+        "output": "development63;125534;5.00000475;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 125534,
+        "seconds": 5.00000475,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 26984051",
+        "milliseconds_per_pass": 0.03982988473242309
+      }
+    ],
+    "cutoff79": [
+      {
+        "output": "cutoff79;127560;5.000010167;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127560,
+        "seconds": 5.000010167,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27397142",
+        "milliseconds_per_pass": 0.03919732021793666
+      },
+      {
+        "output": "cutoff79;128473;5.000027375;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128473,
+        "seconds": 5.000027375,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27587449",
+        "milliseconds_per_pass": 0.038918896382897576
+      },
+      {
+        "output": "cutoff79;128749;5.000034917;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128749,
+        "seconds": 5.000034917,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27644990",
+        "milliseconds_per_pass": 0.038835524291450804
+      }
+    ],
+    "cutoff95": [
+      {
+        "output": "cutoff95;129152;5.000037959;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129152,
+        "seconds": 5.000037959,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27728976",
+        "milliseconds_per_pass": 0.03871436724944252
+      },
+      {
+        "output": "cutoff95;129597;5.000023458;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129597,
+        "seconds": 5.000023458,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27822828",
+        "milliseconds_per_pass": 0.038581321002801
+      },
+      {
+        "output": "cutoff95;129301;5.000019;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129301,
+        "seconds": 5.000019,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27760849",
+        "milliseconds_per_pass": 0.03866960812368041
+      }
+    ],
+    "cutoff111": [
+      {
+        "output": "cutoff111;129622;5.000015833;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129622,
+        "seconds": 5.000015833,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27828435",
+        "milliseconds_per_pass": 0.038573821056610766
+      },
+      {
+        "output": "cutoff111;130093;5.000014208;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 130093,
+        "seconds": 5.000014208,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27926316",
+        "milliseconds_per_pass": 0.038434152552404816
+      },
+      {
+        "output": "cutoff111;130221;5.000027917;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 130221,
+        "seconds": 5.000027917,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27953512",
+        "milliseconds_per_pass": 0.0383964791930641
+      }
+    ],
+    "cutoff127": [
+      {
+        "output": "cutoff127;128858;5.0;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128858,
+        "seconds": 5.0,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27667405",
+        "milliseconds_per_pass": 0.038802402644771763
+      },
+      {
+        "output": "cutoff127;129394;5.000007417;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129394,
+        "seconds": 5.000007417,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27780744",
+        "milliseconds_per_pass": 0.03864172540457826
+      },
+      {
+        "output": "cutoff127;129500;5.000020667;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 129500,
+        "seconds": 5.000020667,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27802183",
+        "milliseconds_per_pass": 0.0386101982007722
+      }
+    ]
+  },
+  "median_ms": {
+    "development63": 0.039843369497657224,
+    "cutoff79": 0.038918896382897576,
+    "cutoff95": 0.03866960812368041,
+    "cutoff111": 0.038434152552404816,
+    "cutoff127": 0.03864172540457826
+  },
+  "speedup_over_first": {
+    "development63": 1.0,
+    "cutoff79": 1.0237538368422465,
+    "cutoff95": 1.0303535885396788,
+    "cutoff111": 1.0366657478223553,
+    "cutoff127": 1.0310970610265915
+  }
+}

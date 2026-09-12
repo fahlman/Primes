@@ -1,0 +1,69 @@
+{
+  "baseline": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+  "kind": "independent static source audit; no Swift build or runtime test",
+  "variants": [
+    {
+      "revision": "7f261701ce8c031ec0104b00631c4dba74289ff3",
+      "cutoff": 79,
+      "source_sha256": "dfa7fc3c085e9f832f8a72dab6dedc87a3129cea0305ceb009db719f99c18e02",
+      "case_count": 8,
+      "call_count": 576,
+      "generated_switch_matches_independent_formula": true,
+      "all_remaining_runtime_code_identical_except_dispatch_bound": true,
+      "unchanged_from_baseline": {
+        "Benchmark.swift": true,
+        "BenchmarkObserver.swift": true,
+        "Verify.swift": true,
+        "ExtraVerify.swift": true,
+        "tools/phase-split/PhaseSieve.swift": true,
+        "tools/phase-split/PhaseVerify.swift": true,
+        "run.sh": true,
+        "Dockerfile": true,
+        "compare_optimizations.py": true,
+        "compare_all.py": true
+      }
+    },
+    {
+      "revision": "2dc1d42d0840e1ec1488e57f4504264bfa055762",
+      "cutoff": 95,
+      "source_sha256": "0d026f2d883c1be1a1aed131481770468fe388eef15e3b211f8f4644504e88f0",
+      "case_count": 16,
+      "call_count": 1280,
+      "generated_switch_matches_independent_formula": true,
+      "all_remaining_runtime_code_identical_except_dispatch_bound": true,
+      "unchanged_from_baseline": {
+        "Benchmark.swift": true,
+        "BenchmarkObserver.swift": true,
+        "Verify.swift": true,
+        "ExtraVerify.swift": true,
+        "tools/phase-split/PhaseSieve.swift": true,
+        "tools/phase-split/PhaseVerify.swift": true,
+        "run.sh": true,
+        "Dockerfile": true,
+        "compare_optimizations.py": true,
+        "compare_all.py": true
+      }
+    },
+    {
+      "revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "cutoff": 111,
+      "source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+      "case_count": 24,
+      "call_count": 2112,
+      "generated_switch_matches_independent_formula": true,
+      "all_remaining_runtime_code_identical_except_dispatch_bound": true,
+      "unchanged_from_baseline": {
+        "Benchmark.swift": true,
+        "BenchmarkObserver.swift": true,
+        "Verify.swift": true,
+        "ExtraVerify.swift": true,
+        "tools/phase-split/PhaseSieve.swift": true,
+        "tools/phase-split/PhaseVerify.swift": true,
+        "run.sh": true,
+        "Dockerfile": true,
+        "compare_optimizations.py": true,
+        "compare_all.py": true
+      }
+    }
+  ]
+}

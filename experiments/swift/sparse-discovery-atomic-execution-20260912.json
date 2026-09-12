@@ -1,0 +1,226 @@
+{
+  "session": "sparse-discovery-atomic",
+  "attempt": "initial",
+  "started_at_utc": "2026-09-12T15:05:17.254300+00:00",
+  "review_record_sha256": "cab4df8c129d6f2d454d78de3910eef9df017111847f2a72ff6ac1d922e4b172",
+  "review_record": "followup-four-review.json",
+  "variants": {
+    "baseline127": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+    "sparse32": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+    "discovery": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+    "atomic": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f"
+  },
+  "unique_output": "sparse-discovery-atomic-results-20260912.json",
+  "compiler_log": "sparse-discovery-atomic-compiler-20260912.jsonl",
+  "harness_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+  "wrapper_sha256": "6a3128ed4708cb2574275620c35461d7f32e6ba77d640952df2bc24c67595b7f",
+  "shim_sha256": "b0b1dc0b6e1cf41f5aa3fc154c698f49236c0992dc8cd0774e23805673531510",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "conditions_scope": "Snapshots before compilation and after comparison; no continuous monitoring.",
+  "exclusive_lock_before_compilation": true,
+  "before": {
+    "at_utc": "2026-09-12T15:05:17.292176+00:00",
+    "top_processes": [
+      {
+        "pid": 44972,
+        "cpu_percent": 11.8,
+        "executable": "Python"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 10.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 713,
+        "cpu_percent": 4.7,
+        "executable": "NeptuneOneWallpaper"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 4.1,
+        "executable": "codex"
+      },
+      {
+        "pid": 732,
+        "cpu_percent": 2.3,
+        "executable": "VTDecoderXPCService"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.0,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.9,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 51355,
+        "cpu_percent": 0.9,
+        "executable": "codex-code-mode-host"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.8,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.7,
+        "executable": "logd"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 53900,
+        "cpu_percent": 0.7,
+        "executable": "claude"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.5,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.4,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.4,
+        "executable": "milod"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": [
+      12406
+    ]
+  },
+  "swift_version_before": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "command": {
+    "command": [
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "-u",
+      "compare_optimizations.py",
+      "--variant",
+      "baseline127=bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "--variant",
+      "sparse32=af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "--variant",
+      "discovery=76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "--variant",
+      "atomic=e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "--output",
+      "/Users/ryan/Developer/Primes-followup-four-review/experiments/swift/sparse-discovery-atomic-results-20260912.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-followup-four-review/experiments/swift",
+    "started_at_utc": "2026-09-12T15:05:17.357762+00:00",
+    "owned_process_group": 44988,
+    "exit_code": 0,
+    "combined_stdout_stderr": "baseline127: 0.039154 ms/pass (127702 passes)\nsparse32: 0.041983 ms/pass (119096 passes)\ndiscovery: 0.039241 ms/pass (127419 passes)\natomic: 0.098471 ms/pass (50777 passes)\nsparse32: 0.042015 ms/pass (119006 passes)\ndiscovery: 0.039056 ms/pass (128020 passes)\natomic: 0.098332 ms/pass (50849 passes)\nbaseline127: 0.039168 ms/pass (127656 passes)\ndiscovery: 0.039155 ms/pass (127699 passes)\natomic: 0.097855 ms/pass (51097 passes)\nbaseline127: 0.039234 ms/pass (127440 passes)\nsparse32: 0.041845 ms/pass (119488 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"baseline127\": 0.03916796834461365,\n    \"sparse32\": 0.04198313720024182,\n    \"discovery\": 0.03915462500880978,\n    \"atomic\": 0.09833175267950206\n  },\n  \"speedup_over_first\": {\n    \"baseline127\": 1.0,\n    \"sparse32\": 0.9329452479408338,\n    \"discovery\": 1.0003407856875368,\n    \"atomic\": 0.3983247249977929\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T15:14:03.259671+00:00"
+  },
+  "raw_sha256": "a115cb6fbb97626a2cefd68b5c35991bbd941a658a46a96e066c2a81c10e25a7",
+  "executable_sha256": {
+    "baseline127": "7810bcbc1cdce9d0e28b10a10b27d329ca645fb1c67a70b30b143cd0b121d254",
+    "sparse32": "da16053beeacd8f29b6dd9cb36d5f26ab2b18abe461dcac47bf7ba7c9463d988",
+    "discovery": "a55f12bf86dff7e65c536c496c7ec8740b2ad97c11c74e33ee1d7a67ca83e8a5",
+    "atomic": "8c6781d25b1a4c25ba8c87ae241827c3fc9c6b976d48eab0836e36ac033a49b5"
+  },
+  "compiler_log_sha256": "87257e5f9aab9a5ba03df83e9d9f7c7f7abff4c74193b0ba03fddd0351c610d1",
+  "status": "completed",
+  "after": {
+    "at_utc": "2026-09-12T15:14:03.300083+00:00",
+    "top_processes": [
+      {
+        "pid": 16696,
+        "cpu_percent": 4.2,
+        "executable": "backupd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 4.1,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 47521,
+        "cpu_percent": 2.4,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 641,
+        "cpu_percent": 2.3,
+        "executable": "SystemUIServer"
+      },
+      {
+        "pid": 642,
+        "cpu_percent": 2.0,
+        "executable": "Finder"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 1.5,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.0,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.9,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 0.9,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.8,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.6,
+        "executable": "milod"
+      },
+      {
+        "pid": 683,
+        "cpu_percent": 0.5,
+        "executable": "nearbyd"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 0.5,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 53900,
+        "cpu_percent": 0.5,
+        "executable": "claude"
+      },
+      {
+        "pid": 46192,
+        "cpu_percent": 0.4,
+        "executable": "sleep"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": [
+      12406
+    ]
+  },
+  "finished_at_utc": "2026-09-12T15:14:03.300543+00:00",
+  "lock_absent_after": true
+}

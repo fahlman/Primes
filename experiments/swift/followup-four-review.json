@@ -1,0 +1,115 @@
+{
+  "status": "source_review_complete",
+  "scope": "Exact review and two registered sessions; no merges or extra optimizations",
+  "prior_correctness_provenance": "User and Claude report full checklist success for each exact commit. Available saved pass logs were inspected and archived, without independently recorded source hashes or exit codes from those executions. Root did not rerun the full suites. Cutoff79/95 earlier logs were not available. Fresh measurement builds and benchmark validation will be recorded separately.",
+  "independent_source_reviewers": [
+    "Codex root",
+    "Codex review_sieve for PR16/17/18",
+    "Codex cpp_zig_review for PR19"
+  ],
+  "source_audit": "cutoff-sweep-source-audit.json",
+  "peer_artifact_manifest": "followup-four-peer-artifacts.json",
+  "variants": [
+    {
+      "name": "cutoff79",
+      "pr": 16,
+      "revision": "7f261701ce8c031ec0104b00631c4dba74289ff3",
+      "source_sha256": "dfa7fc3c085e9f832f8a72dab6dedc87a3129cea0305ceb009db719f99c18e02",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": false,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/16#issuecomment-5646578917"
+    },
+    {
+      "name": "cutoff95",
+      "pr": 16,
+      "revision": "2dc1d42d0840e1ec1488e57f4504264bfa055762",
+      "source_sha256": "0d026f2d883c1be1a1aed131481770468fe388eef15e3b211f8f4644504e88f0",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": false,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/16#issuecomment-5646578917"
+    },
+    {
+      "name": "cutoff111",
+      "pr": 16,
+      "revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": true,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/16#issuecomment-5646578917"
+    },
+    {
+      "name": "sparse32",
+      "pr": 17,
+      "revision": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "source_sha256": "fe44badbab2c6f2384839ab796660f40829b8b77b4b48e122b226c429b856332",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": true,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/17#issuecomment-5646578990"
+    },
+    {
+      "name": "discovery",
+      "pr": 18,
+      "revision": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "source_sha256": "90ba2beeb7ba488094b7b1a1c5370298aa76d8ea040fb61390e34f765d743e82",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": true,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/18#issuecomment-5646579067"
+    },
+    {
+      "name": "atomic",
+      "pr": 19,
+      "revision": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "source_sha256": "0b5b46f754519d8eac881b9717c5c409c4de7db711c891a6221f77a87e666ddd",
+      "source_review": "admitted",
+      "blocking_findings": [],
+      "targeted_correctness_check_required": false,
+      "prior_correctness": "reported_pass",
+      "saved_logs_inspected": true,
+      "pre_timing_review_comment": "https://github.com/fahlman/Primes/pull/19#issuecomment-5646584493"
+    }
+  ],
+  "admission_rule": "Every candidate trial must be faster than every control trial; non-overlap is a chosen admission screen, not a statistical significance test. Otherwise no merge. Cutoffs compared with127 and63 separately; other3 compared with127. No cross-session ratios.",
+  "sessions": [
+    {
+      "name": "cutoff-sweep",
+      "order": [
+        "development63=f6b5c5b",
+        "cutoff79=7f26170",
+        "cutoff95=2dc1d42",
+        "cutoff111=099e35a",
+        "cutoff127=bd3858c"
+      ],
+      "rounds": 3,
+      "minimum_seconds_per_run": 5,
+      "run_count": 15
+    },
+    {
+      "name": "sparse-discovery-atomic",
+      "order": [
+        "baseline127=bd3858c",
+        "sparse32=af83aa1",
+        "discovery=76d82c2",
+        "atomic=e889cd6"
+      ],
+      "rounds": 3,
+      "minimum_seconds_per_run": 5,
+      "run_count": 12
+    }
+  ],
+  "timing_at_registration": "not_started"
+}

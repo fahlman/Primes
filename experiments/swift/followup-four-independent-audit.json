@@ -1,0 +1,13 @@
+{
+  "recorded_at_utc": "2026-09-12T15:16:53.627071+00:00",
+  "audit_mode": "Independent read-only Codex subagent review; no additional builds/tests/timing",
+  "timing_reviewer": "review_sieve",
+  "timing_conclusion": "An independent Codex subagent audited both completed sessions: 15 cutoff runs and 12 sparse/discovery/atomic runs. Source identities, frozen harness, compiler records, validation, rotations, arithmetic and cleanup were consistent. Cutoff 111 alone qualified against cutoff 127 under the registered non-overlap screen, gaining 0.540074% throughput and saving 0.207573 \u00b5s. Cutoff 79, sparse32 and atomic were slower; cutoff 95 and discovery did not clearly separate. The initial cutoff audio-preflight failure is preserved and produced no compilation or measurements. Endpoint snapshots recorded no monitored build/test/benchmark conflict or audio assertion, but do not provide continuous monitoring. Rotations were not fully position-balanced, and admission is not a statistical-significance claim. Comparisons remain within their respective sessions; no merge is implied.",
+  "provenance_reviewer": "cpp_zig_review",
+  "provenance_conclusion": "No material inaccuracies or provenance blockers in the completed report sections. All six source hashes, all 56 archived peer files, registration and tool hashes verified. Second-session arithmetic audited separately by review_sieve.",
+  "material_findings": [],
+  "raw_sha256": {
+    "cutoff-sweep-results-20260912-audio-preflight-retry1.json": "804916960ac23275c2d814ca937d0955ef512bc373a116526b5ff02095bc97a8",
+    "sparse-discovery-atomic-results-20260912.json": "a115cb6fbb97626a2cefd68b5c35991bbd941a658a46a96e066c2a81c10e25a7"
+  }
+}

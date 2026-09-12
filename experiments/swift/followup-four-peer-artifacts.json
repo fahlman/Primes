@@ -1,0 +1,382 @@
+{
+  "purpose": "Preserve inspected peer artifacts, not independent execution provenance",
+  "provenance_limitation": "The user and Claude report full-checklist success at exact commits. These existing files do not independently record command exit codes or source hashes from when they were produced. Root did not execute these checks. Older cutoff79/95 artifacts are not present in the current cutoff worktree.",
+  "variants": [
+    {
+      "variant": "cutoff111",
+      "pr": "https://github.com/fahlman/Primes/pull/16",
+      "claimed_revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "observed_worktree_head": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "observed_source_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+      "original_directory": "/Users/ryan/Developer/Primes-dense-128-cutoff/experiments/swift/.build",
+      "files": [
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/PrimeSwift.s",
+          "sha256": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5",
+          "bytes": 703366,
+          "original_mtime_ns": 1789220823652890310
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-asm.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220774532333442
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-extra-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220601531086593
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-observer.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220774368429329
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-phase-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220656017099377
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-phase-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220716529713272
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220498466061796
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/build-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220551074402523
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/extra-verify-asan.log",
+          "sha256": "3808c0cb8b6c97cb7682a9b2724b9b65a2c1e27764ae85b304296b007b85a230",
+          "bytes": 261,
+          "original_mtime_ns": 1789220655974976749
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/generator-check.log",
+          "sha256": "7e1c0c64b3a5777417b657637b93d9c2d6089a96f9eff86982a2c4e5d6bc6faa",
+          "bytes": 35,
+          "original_mtime_ns": 1789220498461387104
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/phase-verify-asan.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789220716483182040
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/phase-verify.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789220774365122771
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/verify-asan.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789220551048128474
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/cutoff111/verify.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789220601527263866
+        }
+      ]
+    },
+    {
+      "variant": "sparse32",
+      "pr": "https://github.com/fahlman/Primes/pull/17",
+      "claimed_revision": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "observed_worktree_head": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "observed_source_sha256": "fe44badbab2c6f2384839ab796660f40829b8b77b4b48e122b226c429b856332",
+      "original_directory": "/Users/ryan/Developer/Primes-sparse-32-writes/experiments/swift/.build",
+      "files": [
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/PrimeSwift.s",
+          "sha256": "326111ebc014545cb125c2d20a1852249bc3d3aec703f2629b6ee69c2b20b83c",
+          "bytes": 877876,
+          "original_mtime_ns": 1789221587338985279
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-asm.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221468662036362
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-extra-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221072825319509
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-observer.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221468494923485
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-phase-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221205081894559
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-phase-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221341527381660
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220824246523907
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/build-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789220946050329400
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/extra-verify-asan.log",
+          "sha256": "3808c0cb8b6c97cb7682a9b2724b9b65a2c1e27764ae85b304296b007b85a230",
+          "bytes": 261,
+          "original_mtime_ns": 1789221205029290712
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/generator-check.log",
+          "sha256": "0b74c2d204aa6e86e1d259c2da1aeb4c4f2009fae843aaf71067df22f0c35324",
+          "bytes": 35,
+          "original_mtime_ns": 1789220824242478345
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/phase-verify-asan.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789221341462698087
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/phase-verify.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789221468491584885
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/verify-asan.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789220946024975648
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/sparse32/verify.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789221072821835075
+        }
+      ]
+    },
+    {
+      "variant": "discovery",
+      "pr": "https://github.com/fahlman/Primes/pull/18",
+      "claimed_revision": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "observed_worktree_head": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "observed_source_sha256": "90ba2beeb7ba488094b7b1a1c5370298aa76d8ea040fb61390e34f765d743e82",
+      "original_directory": "/Users/ryan/Developer/Primes-discovery-bound/experiments/swift/.build",
+      "files": [
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/PrimeSwift.s",
+          "sha256": "804d49a5e9f358561f53fe2e4da984a6cde310d9717fd02b794b3d6333a4cff5",
+          "bytes": 863462,
+          "original_mtime_ns": 1789222341819697065
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-asm.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222220766109487
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-extra-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221834777672778
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-observer.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222220605245561
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-phase-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221964761812851
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-phase-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222095320725736
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221587938630684
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/build-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789221710391180573
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/extra-verify-asan.log",
+          "sha256": "3808c0cb8b6c97cb7682a9b2724b9b65a2c1e27764ae85b304296b007b85a230",
+          "bytes": 261,
+          "original_mtime_ns": 1789221964716868886
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/generator-check.log",
+          "sha256": "0b74c2d204aa6e86e1d259c2da1aeb4c4f2009fae843aaf71067df22f0c35324",
+          "bytes": 35,
+          "original_mtime_ns": 1789221587934316307
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/phase-verify-asan.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789222095273266501
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/phase-verify.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789222220602017203
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/verify-asan.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789221710365740130
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/discovery/verify.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789221834774119293
+        }
+      ]
+    },
+    {
+      "variant": "atomic",
+      "pr": "https://github.com/fahlman/Primes/pull/19",
+      "claimed_revision": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "observed_worktree_head": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "observed_source_sha256": "0b5b46f754519d8eac881b9717c5c409c4de7db711c891a6221f77a87e666ddd",
+      "original_directory": "/Users/ryan/Developer/Primes-atomic-marks/experiments/swift/.build",
+      "files": [
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/PrimeSwift.s",
+          "sha256": "92c207dfd66adf2bc9dc879fc66009ac31b309a01ff65171bf65ff77d83b3f3f",
+          "bytes": 866861,
+          "original_mtime_ns": 1789223118148153392
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-asm.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789223000095334000
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-extra-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222616076332460
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-observer.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222999934293197
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-phase-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222742596729685
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-phase-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222873733663324
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-verify-asan.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222369097251329
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/build-verify.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0,
+          "original_mtime_ns": 1789222494980929399
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/extra-verify-asan.log",
+          "sha256": "3808c0cb8b6c97cb7682a9b2724b9b65a2c1e27764ae85b304296b007b85a230",
+          "bytes": 261,
+          "original_mtime_ns": 1789222742550020415
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/generator-check.log",
+          "sha256": "0b74c2d204aa6e86e1d259c2da1aeb4c4f2009fae843aaf71067df22f0c35324",
+          "bytes": 35,
+          "original_mtime_ns": 1789222369092875754
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/phase-verify-asan.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789222873684419409
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/phase-verify.log",
+          "sha256": "3e67973322c054a359c54180024deaba01d594aa82e7a184bd2d3ad903f4452f",
+          "bytes": 130,
+          "original_mtime_ns": 1789222999931140006
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/verify-asan.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789222494955518290
+        },
+        {
+          "path": "followup-four-evidence/peer-artifacts/atomic/verify.log",
+          "sha256": "44c47544867bdf0481371027d823c00d3abfe35a30c2020db5532cd186ad3818",
+          "bytes": 96,
+          "original_mtime_ns": 1789222616072687224
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "raw_file": "cutoff-sweep-results-20260912-audio-preflight-retry1.json",
+  "raw_sha256": "804916960ac23275c2d814ca937d0955ef512bc373a116526b5ff02095bc97a8",
+  "variants": {
+    "development63": {
+      "revision": "f6b5c5b794de7c040c85ab3d88ca524961525f27",
+      "samples_us": [
+        40.12454392398867,
+        39.84336949765722,
+        39.82988473242309
+      ],
+      "median_us": 39.84336949765722,
+      "passes_per_second_from_median": 25098.278900804304
+    },
+    "cutoff79": {
+      "revision": "7f261701ce8c031ec0104b00631c4dba74289ff3",
+      "samples_us": [
+        39.197320217936664,
+        38.91889638289758,
+        38.8355242914508
+      ],
+      "median_us": 38.91889638289758,
+      "passes_per_second_from_median": 25694.459322835206
+    },
+    "cutoff95": {
+      "revision": "2dc1d42d0840e1ec1488e57f4504264bfa055762",
+      "samples_us": [
+        38.714367249442525,
+        38.581321002801,
+        38.669608123680405
+      ],
+      "median_us": 38.669608123680405,
+      "passes_per_second_from_median": 25860.10173161342
+    },
+    "cutoff111": {
+      "revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "samples_us": [
+        38.57382105661077,
+        38.43415255240482,
+        38.396479193064096
+      ],
+      "median_us": 38.43415255240482,
+      "passes_per_second_from_median": 26018.52606575633
+    },
+    "cutoff127": {
+      "revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "samples_us": [
+        38.80240264477176,
+        38.64172540457826,
+        38.6101982007722
+      ],
+      "median_us": 38.64172540457826,
+      "passes_per_second_from_median": 25878.76161144503
+    }
+  },
+  "comparisons": {
+    "cutoff127": {
+      "development63": {
+        "throughput_change_percent": -3.0159198587599856,
+        "saved_us_per_sieve": -1.2016440930789614,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": true,
+        "classification": "separated_slower"
+      },
+      "cutoff79": {
+        "throughput_change_percent": -0.7121758427896197,
+        "saved_us_per_sieve": -0.2771709783193188,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": true,
+        "classification": "separated_slower"
+      },
+      "cutoff95": {
+        "throughput_change_percent": -0.0721049952535413,
+        "saved_us_per_sieve": -0.027882719102144904,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "not_clearly_separated"
+      },
+      "cutoff111": {
+        "throughput_change_percent": 0.5400739664818133,
+        "saved_us_per_sieve": 0.2075728521734419,
+        "every_candidate_trial_faster_than_every_control_trial": true,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "qualifies"
+      }
+    },
+    "development63": {
+      "cutoff79": {
+        "throughput_change_percent": 2.37538368422463,
+        "saved_us_per_sieve": 0.9244731147596426,
+        "every_candidate_trial_faster_than_every_control_trial": true,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "qualifies"
+      },
+      "cutoff95": {
+        "throughput_change_percent": 3.0353588539678844,
+        "saved_us_per_sieve": 1.1737613739768165,
+        "every_candidate_trial_faster_than_every_control_trial": true,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "qualifies"
+      },
+      "cutoff111": {
+        "throughput_change_percent": 3.66657478223551,
+        "saved_us_per_sieve": 1.4092169452524033,
+        "every_candidate_trial_faster_than_every_control_trial": true,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "qualifies"
+      },
+      "cutoff127": {
+        "throughput_change_percent": 3.109706102659149,
+        "saved_us_per_sieve": 1.2016440930789614,
+        "every_candidate_trial_faster_than_every_control_trial": true,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "qualifies"
+      }
+    }
+  },
+  "interpretation": "Same-session medians and registered non-overlap admission; no statistical significance or cross-platform claim."
+}

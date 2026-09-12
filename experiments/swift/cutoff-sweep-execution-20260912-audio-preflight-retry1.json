@@ -1,0 +1,230 @@
+{
+  "session": "cutoff-sweep",
+  "attempt": "audio-preflight-retry1",
+  "started_at_utc": "2026-09-12T14:59:51.124878+00:00",
+  "review_record_sha256": "cab4df8c129d6f2d454d78de3910eef9df017111847f2a72ff6ac1d922e4b172",
+  "review_record": "followup-four-review.json",
+  "variants": {
+    "development63": "f6b5c5b794de7c040c85ab3d88ca524961525f27",
+    "cutoff79": "7f261701ce8c031ec0104b00631c4dba74289ff3",
+    "cutoff95": "2dc1d42d0840e1ec1488e57f4504264bfa055762",
+    "cutoff111": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+    "cutoff127": "bd3858cac9a306aa3b8d4729cf059959a7c70885"
+  },
+  "unique_output": "cutoff-sweep-results-20260912-audio-preflight-retry1.json",
+  "compiler_log": "cutoff-sweep-compiler-20260912-audio-preflight-retry1.jsonl",
+  "harness_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+  "wrapper_sha256": "6a3128ed4708cb2574275620c35461d7f32e6ba77d640952df2bc24c67595b7f",
+  "shim_sha256": "b0b1dc0b6e1cf41f5aa3fc154c698f49236c0992dc8cd0774e23805673531510",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "conditions_scope": "Snapshots before compilation and after comparison; no continuous monitoring.",
+  "exclusive_lock_before_compilation": true,
+  "before": {
+    "at_utc": "2026-09-12T14:59:51.163859+00:00",
+    "top_processes": [
+      {
+        "pid": 44170,
+        "cpu_percent": 13.5,
+        "executable": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 4.9,
+        "executable": "codex"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 3.1,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 1.8,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.0,
+        "executable": "logd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 1.0,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 51355,
+        "cpu_percent": 1.0,
+        "executable": "codex-code-mode-host"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.9,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 9347,
+        "cpu_percent": 0.8,
+        "executable": "claude"
+      },
+      {
+        "pid": 70724,
+        "cpu_percent": 0.8,
+        "executable": "claude"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 53900,
+        "cpu_percent": 0.7,
+        "executable": "claude"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.6,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 97335,
+        "cpu_percent": 0.6,
+        "executable": "claude"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": [
+      12406
+    ]
+  },
+  "swift_version_before": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "command": {
+    "command": [
+      "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+      "-u",
+      "compare_optimizations.py",
+      "--variant",
+      "development63=f6b5c5b794de7c040c85ab3d88ca524961525f27",
+      "--variant",
+      "cutoff79=7f261701ce8c031ec0104b00631c4dba74289ff3",
+      "--variant",
+      "cutoff95=2dc1d42d0840e1ec1488e57f4504264bfa055762",
+      "--variant",
+      "cutoff111=099e35afa8a2f01d79ef11f805d760e81d1d983a",
+      "--variant",
+      "cutoff127=bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "--output",
+      "/Users/ryan/Developer/Primes-followup-four-review/experiments/swift/cutoff-sweep-results-20260912-audio-preflight-retry1.json"
+    ],
+    "cwd": "/Users/ryan/Developer/Primes-followup-four-review/experiments/swift",
+    "started_at_utc": "2026-09-12T14:59:51.399038+00:00",
+    "owned_process_group": 44191,
+    "exit_code": 0,
+    "combined_stdout_stderr": "development63: 0.040125 ms/pass (124613 passes)\ncutoff79: 0.039197 ms/pass (127560 passes)\ncutoff95: 0.038714 ms/pass (129152 passes)\ncutoff111: 0.038574 ms/pass (129622 passes)\ncutoff127: 0.038802 ms/pass (128858 passes)\ncutoff79: 0.038919 ms/pass (128473 passes)\ncutoff95: 0.038581 ms/pass (129597 passes)\ncutoff111: 0.038434 ms/pass (130093 passes)\ncutoff127: 0.038642 ms/pass (129394 passes)\ndevelopment63: 0.039843 ms/pass (125492 passes)\ncutoff95: 0.038670 ms/pass (129301 passes)\ncutoff111: 0.038396 ms/pass (130221 passes)\ncutoff127: 0.038610 ms/pass (129500 passes)\ndevelopment63: 0.039830 ms/pass (125534 passes)\ncutoff79: 0.038836 ms/pass (128749 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"development63\": 0.039843369497657224,\n    \"cutoff79\": 0.038918896382897576,\n    \"cutoff95\": 0.03866960812368041,\n    \"cutoff111\": 0.038434152552404816,\n    \"cutoff127\": 0.03864172540457826\n  },\n  \"speedup_over_first\": {\n    \"development63\": 1.0,\n    \"cutoff79\": 1.0237538368422465,\n    \"cutoff95\": 1.0303535885396788,\n    \"cutoff111\": 1.0366657478223553,\n    \"cutoff127\": 1.0310970610265915\n  }\n}\n",
+    "finished_at_utc": "2026-09-12T15:04:25.762196+00:00"
+  },
+  "raw_sha256": "804916960ac23275c2d814ca937d0955ef512bc373a116526b5ff02095bc97a8",
+  "executable_sha256": {
+    "development63": "0002242b6d9c7f6915884e280ff99a128595c43f5f12113c49ea2ff1bc21e76e",
+    "cutoff79": "5530a369a988515e470039568e4d0a79df8008db56f74866460260578ffb737c",
+    "cutoff95": "0593318c8c35ab2eeefa3c9117cb535f474557fa6ce915621dc16cda8218d91a",
+    "cutoff111": "cabfd22de430819a250fb59716a93ba1866b850f7369d3b368d2786f69dd85b1",
+    "cutoff127": "d16b6a704ad21f045107c8b63f10a6966f1e1b4936458d6982ddcec1dd382f80"
+  },
+  "compiler_log_sha256": "b9508e87575745da51730f564868b311e7f09df155b16bc1ba892e9a7a767748",
+  "status": "completed",
+  "after": {
+    "at_utc": "2026-09-12T15:04:25.800092+00:00",
+    "top_processes": [
+      {
+        "pid": 50834,
+        "cpu_percent": 9.9,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 2.7,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 1.6,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 1.5,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.4,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 618,
+        "cpu_percent": 0.9,
+        "executable": "rapportd"
+      },
+      {
+        "pid": 835,
+        "cpu_percent": 0.7,
+        "executable": "milod"
+      },
+      {
+        "pid": 1525,
+        "cpu_percent": 0.7,
+        "executable": "SiriNCService"
+      },
+      {
+        "pid": 683,
+        "cpu_percent": 0.6,
+        "executable": "nearbyd"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 0.5,
+        "executable": "logd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.3,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 0.2,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 9347,
+        "cpu_percent": 0.2,
+        "executable": "claude"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 0.2,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 0.2,
+        "executable": "codex"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": [
+      12406
+    ]
+  },
+  "finished_at_utc": "2026-09-12T15:04:25.800377+00:00",
+  "lock_absent_after": true
+}

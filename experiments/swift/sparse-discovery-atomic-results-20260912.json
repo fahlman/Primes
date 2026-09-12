@@ -1,0 +1,182 @@
+{
+  "recorded_at_utc": "2026-09-12T15:14:03.151790+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit",
+  "machine": "arm64",
+  "cpu": "Apple M4 Pro",
+  "swift_version": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "flags": [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision": "25402d46ba991b39451724d3873d326626981e3f",
+  "runner_sha256": "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "observer_sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "variants": {
+    "baseline127": {
+      "revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "source_sha256": "d6368487ee284c955781fe6944c0d94bc35c265e5b40fc4e19cba21d66f6590d"
+    },
+    "sparse32": {
+      "revision": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "source_sha256": "fe44badbab2c6f2384839ab796660f40829b8b77b4b48e122b226c429b856332"
+    },
+    "discovery": {
+      "revision": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "source_sha256": "90ba2beeb7ba488094b7b1a1c5370298aa76d8ea040fb61390e34f765d743e82"
+    },
+    "atomic": {
+      "revision": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "source_sha256": "0b5b46f754519d8eac881b9717c5c409c4de7db711c891a6221f77a87e666ddd"
+    }
+  },
+  "run_order": [
+    [
+      "baseline127",
+      "sparse32",
+      "discovery",
+      "atomic"
+    ],
+    [
+      "sparse32",
+      "discovery",
+      "atomic",
+      "baseline127"
+    ],
+    [
+      "discovery",
+      "atomic",
+      "baseline127",
+      "sparse32"
+    ]
+  ],
+  "samples": {
+    "baseline127": [
+      {
+        "output": "baseline127;127702;5.000020166;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127702,
+        "seconds": 5.000020166,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27426581",
+        "milliseconds_per_pass": 0.039153812516640296
+      },
+      {
+        "output": "baseline127;127656;5.000026167;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127656,
+        "seconds": 5.000026167,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27416853",
+        "milliseconds_per_pass": 0.03916796834461365
+      },
+      {
+        "output": "baseline127;127440;5.000002167;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127440,
+        "seconds": 5.000002167,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27372793",
+        "milliseconds_per_pass": 0.03923416640772128
+      }
+    ],
+    "sparse32": [
+      {
+        "output": "sparse32;119096;5.000023708;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 119096,
+        "seconds": 5.000023708,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 25591927",
+        "milliseconds_per_pass": 0.04198313720024182
+      },
+      {
+        "output": "sparse32;119006;5.000039167;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 119006,
+        "seconds": 5.000039167,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 25571939",
+        "milliseconds_per_pass": 0.04201501745290153
+      },
+      {
+        "output": "sparse32;119488;5.000017417;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 119488,
+        "seconds": 5.000017417,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 25676968",
+        "milliseconds_per_pass": 0.041845351976767545
+      }
+    ],
+    "discovery": [
+      {
+        "output": "discovery;127419;5.000023875;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127419,
+        "seconds": 5.000023875,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27368545",
+        "milliseconds_per_pass": 0.03924080298071716
+      },
+      {
+        "output": "discovery;128020;5.000004375;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 128020,
+        "seconds": 5.000004375,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27493591",
+        "milliseconds_per_pass": 0.03905643161224808
+      },
+      {
+        "output": "discovery;127699;5.000006459;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 127699,
+        "seconds": 5.000006459,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 27425954",
+        "milliseconds_per_pass": 0.03915462500880978
+      }
+    ],
+    "atomic": [
+      {
+        "output": "atomic;50777;5.000051125;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 50777,
+        "seconds": 5.000051125,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 10884319",
+        "milliseconds_per_pass": 0.09847078647812986
+      },
+      {
+        "output": "atomic;50849;5.000071292;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 50849,
+        "seconds": 5.000071292,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 10900378",
+        "milliseconds_per_pass": 0.09833175267950206
+      },
+      {
+        "output": "atomic;51097;5.000080125;1;algorithm=base,faithful=yes,bits=1",
+        "passes": 51097,
+        "seconds": 5.000080125,
+        "threads": 1,
+        "tags": "algorithm=base,faithful=yes,bits=1",
+        "validation": "Validated: 78498 primes; checksum: 10954761",
+        "milliseconds_per_pass": 0.09785467101786799
+      }
+    ]
+  },
+  "median_ms": {
+    "baseline127": 0.03916796834461365,
+    "sparse32": 0.04198313720024182,
+    "discovery": 0.03915462500880978,
+    "atomic": 0.09833175267950206
+  },
+  "speedup_over_first": {
+    "baseline127": 1.0,
+    "sparse32": 0.9329452479408338,
+    "discovery": 1.0003407856875368,
+    "atomic": 0.3983247249977929
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "raw_file": "sparse-discovery-atomic-results-20260912.json",
+  "raw_sha256": "a115cb6fbb97626a2cefd68b5c35991bbd941a658a46a96e066c2a81c10e25a7",
+  "variants": {
+    "baseline127": {
+      "revision": "bd3858cac9a306aa3b8d4729cf059959a7c70885",
+      "samples_us": [
+        39.15381251664029,
+        39.16796834461365,
+        39.23416640772128
+      ],
+      "median_us": 39.16796834461365,
+      "passes_per_second_from_median": 25531.06638571718
+    },
+    "sparse32": {
+      "revision": "af83aa15d86f0a15155349bcaa76ebd4710fc357",
+      "samples_us": [
+        41.98313720024182,
+        42.01501745290153,
+        41.845351976767546
+      ],
+      "median_us": 41.98313720024182,
+      "passes_per_second_from_median": 23819.0870594168
+    },
+    "discovery": {
+      "revision": "76d82c275e3d84bdcbc69ec5ca9267a7414bd328",
+      "samples_us": [
+        39.240802980717156,
+        39.05643161224808,
+        39.15462500880978
+      ],
+      "median_us": 39.15462500880978,
+      "passes_per_second_from_median": 25539.767007728977
+    },
+    "atomic": {
+      "revision": "e889cd6b51bcd3f0de025d13541662b6f49c7c5f",
+      "samples_us": [
+        98.47078647812987,
+        98.33175267950206,
+        97.85467101786799
+      ],
+      "median_us": 98.33175267950206,
+      "passes_per_second_from_median": 10169.65499699119
+    }
+  },
+  "comparisons": {
+    "baseline127": {
+      "sparse32": {
+        "throughput_change_percent": -6.705475205916622,
+        "saved_us_per_sieve": -2.8151688556281727,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": true,
+        "classification": "separated_slower"
+      },
+      "discovery": {
+        "throughput_change_percent": 0.03407856875365933,
+        "saved_us_per_sieve": 0.013343335803867262,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": false,
+        "classification": "not_clearly_separated"
+      },
+      "atomic": {
+        "throughput_change_percent": -60.16752750022071,
+        "saved_us_per_sieve": -59.16378433488841,
+        "every_candidate_trial_faster_than_every_control_trial": false,
+        "every_candidate_trial_slower_than_every_control_trial": true,
+        "classification": "separated_slower"
+      }
+    }
+  },
+  "interpretation": "Same-session medians and registered non-overlap admission; no statistical significance or cross-platform claim."
+}
