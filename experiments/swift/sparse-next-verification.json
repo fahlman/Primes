@@ -1,0 +1,1337 @@
+{
+  "development_revision": "7509c8791f6d35e5a354a77060756afdd5dd8391",
+  "production_source_revision": "8f108f5dfe48d3c79bbe06d147a4097039635dc4",
+  "hardware": "Apple M4 Pro",
+  "swift": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0",
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t26.6.2\nBuildVersion:\t\t25G83",
+  "protocol": "Two independent candidates against development; source review and correctness/assembly before timing. One exclusive-lock three-variant, three-round rotated five-second session with unique --output. A clear win requires every candidate trial faster than every development trial; overlapping ranges remain inconclusive. No repeat unless execution or validity fails. Atomic marking deferred; no adoption/merge authorized by this evaluation. If both candidates clearly beat development but their ranges overlap, prefer the simpler sixteen-write candidate.",
+  "variants": {
+    "sixteen": {
+      "revision": "59262fe2592c893bba05f8ceba64df13dad36df7",
+      "worktree": "/Users/ryan/Developer/Primes-fused-sixteen-writes",
+      "build_path": "/Users/ryan/Developer/Primes-fused-sixteen-writes/experiments/swift/.build",
+      "started_at_utc": "2026-09-12T08:39:28.179572+00:00",
+      "status": "passed",
+      "benchmark_observer_and_b_reference_unchanged": true,
+      "source_sha256": {
+        "PrimeSieve.swift": "e1b7f259877c88d4cdb5eed472f1fa5eb10d076a9f90f281331e8c259e875f25",
+        "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+        "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+        "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+        "ExtraVerify.swift": "a201cd5c6c810bc4c07a03d43dc23a8567c30c35097b252e7d074f80019d3d2f",
+        "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+        "tools/phase-split/PhaseVerify.swift": "b2274fa3a1aba743f237838f24fa142945b913f2b58a40d39795390bf6bb7aa0",
+        "compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844"
+      },
+      "checks": [
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "Verify.swift",
+            "-o",
+            ".build/verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:39:28.180175+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:39:34.940164+00:00"
+        },
+        {
+          "command": [
+            ".build/verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:39:34.940480+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+          "finished_at_utc": "2026-09-12T08:39:35.102592+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "Verify.swift",
+            "-o",
+            ".build/verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:39:35.102975+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:39:41.588222+00:00"
+        },
+        {
+          "command": [
+            ".build/verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:39:41.588508+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+          "finished_at_utc": "2026-09-12T08:39:41.635180+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "ExtraVerify.swift",
+            "-o",
+            ".build/extra-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:39:41.635540+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:39:48.773039+00:00"
+        },
+        {
+          "command": [
+            ".build/extra-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:39:48.773369+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\nPassed: 3654 sparse double-group and cleanup boundary limits.\n",
+          "finished_at_utc": "2026-09-12T08:39:50.685394+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "ExtraVerify.swift",
+            "-o",
+            ".build/extra-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:39:50.685794+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:39:57.565504+00:00"
+        },
+        {
+          "command": [
+            ".build/extra-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:39:57.565824+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\nPassed: 3654 sparse double-group and cleanup boundary limits.\n",
+          "finished_at_utc": "2026-09-12T08:39:58.865328+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "tools/phase-split/PhaseSieve.swift",
+            "tools/phase-split/PhaseVerify.swift",
+            "-o",
+            ".build/phase-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:39:58.865704+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:40:12.920463+00:00"
+        },
+        {
+          "command": [
+            ".build/phase-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:40:12.920842+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed 34983 partial/full flag checks over 1521 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:40:13.480831+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "tools/phase-split/PhaseSieve.swift",
+            "tools/phase-split/PhaseVerify.swift",
+            "-o",
+            ".build/phase-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:40:13.481346+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:40:27.062364+00:00"
+        },
+        {
+          "command": [
+            ".build/phase-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:40:27.062729+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed 34983 partial/full flag checks over 1521 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:40:27.307705+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-parse-as-library",
+            "-module-name",
+            "BenchmarkObserver",
+            "-emit-module",
+            "-emit-module-path",
+            ".build/BenchmarkObserver.swiftmodule",
+            "-emit-object",
+            "BenchmarkObserver.swift",
+            "-o",
+            ".build/BenchmarkObserver.o"
+          ],
+          "started_at_utc": "2026-09-12T08:40:27.308146+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:40:27.462679+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "-I",
+            ".build",
+            "PrimeSieve.swift",
+            "Benchmark.swift",
+            "-S",
+            "-o",
+            ".build/PrimeSwift.s"
+          ],
+          "started_at_utc": "2026-09-12T08:40:27.463063+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:40:34.109515+00:00"
+        }
+      ],
+      "lock_acquired_exclusively_before_compilation": true,
+      "finished_at_utc": "2026-09-12T08:40:34.109964+00:00",
+      "lock_removed_in_finally": true,
+      "verification_revision": "66798104181845e1a98066288c73d3f477c69905",
+      "verification_source_sha256": {
+        "PrimeSieve.swift": "68ad301bc9669110e668eb216fe53d42c3fd2612f43fddbc53e292d869bc5703",
+        "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+        "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+        "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+        "ExtraVerify.swift": "a201cd5c6c810bc4c07a03d43dc23a8567c30c35097b252e7d074f80019d3d2f",
+        "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+        "tools/phase-split/PhaseVerify.swift": "b2274fa3a1aba743f237838f24fa142945b913f2b58a40d39795390bf6bb7aa0",
+        "compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844"
+      },
+      "comment_only_update": {
+        "command": {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "-I",
+            ".build",
+            "PrimeSieve.swift",
+            "Benchmark.swift",
+            "-S",
+            "-o",
+            ".build/PrimeSwift.s"
+          ],
+          "started_at_utc": "2026-09-12T08:43:57.652403+00:00",
+          "revision": "59262fe2592c893bba05f8ceba64df13dad36df7",
+          "exit_code": 0,
+          "stdout": "",
+          "stderr": "",
+          "finished_at_utc": "2026-09-12T08:44:04.210193+00:00"
+        },
+        "only_change": "Clarify source offsets versus compiler-selected address bases",
+        "assembly_byte_identical": true,
+        "assembly_sha256": "5d888259d28c49e72cdf115fc0a21529e4152ef346fb24c67b831b443eb18fb2"
+      }
+    },
+    "dense128": {
+      "revision": "307da10fe930e2bbdb46254770833026277e4cf3",
+      "worktree": "/Users/ryan/Developer/Primes-dense-128-65-127",
+      "build_path": "/Users/ryan/Developer/Primes-dense-128-65-127/experiments/swift/.build",
+      "started_at_utc": "2026-09-12T08:44:17.302519+00:00",
+      "status": "passed",
+      "benchmark_observer_and_b_reference_unchanged": true,
+      "source_sha256": {
+        "PrimeSieve.swift": "6e6e4a22c98b8982d62f9d11885d47519a20361921fea44707be180d04242a17",
+        "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+        "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+        "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+        "ExtraVerify.swift": "006d6b4cbbdb131b3da5ca6fb2844dddf858fc9902a2af341a6ee750f60422a5",
+        "tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+        "tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+        "compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+        "tools/generate-dense-128.swift": "7b6fef312871a9ff3293477c5f67de427169feeec5a8afe754ba6b790ece6272"
+      },
+      "checks": [
+        {
+          "command": [
+            "swift",
+            "tools/generate-dense-128.swift",
+            "--check",
+            "PrimeSieve.swift"
+          ],
+          "started_at_utc": "2026-09-12T08:44:17.303249+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Generated 65...127 switch matches.\n",
+          "finished_at_utc": "2026-09-12T08:44:18.570099+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "Verify.swift",
+            "-o",
+            ".build/verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:44:18.570754+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:46:17.547619+00:00"
+        },
+        {
+          "command": [
+            ".build/verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:46:17.548254+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+          "finished_at_utc": "2026-09-12T08:46:17.717634+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "Verify.swift",
+            "-o",
+            ".build/verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:46:17.718204+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:48:20.140111+00:00"
+        },
+        {
+          "command": [
+            ".build/verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:48:20.140578+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+          "finished_at_utc": "2026-09-12T08:48:20.188981+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "ExtraVerify.swift",
+            "-o",
+            ".build/extra-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:48:20.189529+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:50:23.448270+00:00"
+        },
+        {
+          "command": [
+            ".build/extra-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:50:23.448747+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 11382 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:50:24.874635+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "ExtraVerify.swift",
+            "-o",
+            ".build/extra-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:50:24.875250+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:52:23.250129+00:00"
+        },
+        {
+          "command": [
+            ".build/extra-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:52:23.250644+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 11382 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:52:24.116317+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-sanitize=address",
+            "PrimeSieve.swift",
+            "tools/phase-split/PhaseSieve.swift",
+            "tools/phase-split/PhaseVerify.swift",
+            "-o",
+            ".build/phase-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:52:24.116886+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:54:33.713744+00:00"
+        },
+        {
+          "command": [
+            ".build/phase-verify-asan"
+          ],
+          "started_at_utc": "2026-09-12T08:54:33.714249+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed 53015 partial/full flag checks over 2305 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:54:35.007288+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "PrimeSieve.swift",
+            "tools/phase-split/PhaseSieve.swift",
+            "tools/phase-split/PhaseVerify.swift",
+            "-o",
+            ".build/phase-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:54:35.007921+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:56:39.196275+00:00"
+        },
+        {
+          "command": [
+            ".build/phase-verify-wmo"
+          ],
+          "started_at_utc": "2026-09-12T08:56:39.196776+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "Passed 53015 partial/full flag checks over 2305 limits; allocation zeroing; full raw-buffer equality; 78,498 primes at 1,000,000.\n",
+          "finished_at_utc": "2026-09-12T08:56:39.880457+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-parse-as-library",
+            "-module-name",
+            "BenchmarkObserver",
+            "-emit-module",
+            "-emit-module-path",
+            ".build/BenchmarkObserver.swiftmodule",
+            "-emit-object",
+            "BenchmarkObserver.swift",
+            "-o",
+            ".build/BenchmarkObserver.o"
+          ],
+          "started_at_utc": "2026-09-12T08:56:39.881102+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:56:40.037711+00:00"
+        },
+        {
+          "command": [
+            "swiftc",
+            "-O",
+            "-whole-module-optimization",
+            "-I",
+            ".build",
+            "PrimeSieve.swift",
+            "Benchmark.swift",
+            "-S",
+            "-o",
+            ".build/PrimeSwift.s"
+          ],
+          "started_at_utc": "2026-09-12T08:56:40.038293+00:00",
+          "exit_code": 0,
+          "combined_stdout_stderr": "",
+          "finished_at_utc": "2026-09-12T08:58:36.966790+00:00"
+        }
+      ],
+      "lock_acquired_exclusively_before_compilation": true,
+      "finished_at_utc": "2026-09-12T08:58:36.967409+00:00",
+      "lock_removed_in_finally": true
+    }
+  },
+  "assembly_review": {
+    "sixteen": {
+      "assembly_sha256": "5d888259d28c49e72cdf115fc0a21529e4152ef346fb24c67b831b443eb18fb2",
+      "functions": [
+        {
+          "symbol": "_$s10PrimeSwift0A5SieveC03runC0yyF",
+          "instructions": 905,
+          "body_sha256": "44a5b5fe6bf99065184e8d6513a819bad1846a6c558eeb465cd2cfa8b6c4b529",
+          "calls": [
+            "bl\t_$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF"
+          ],
+          "tail_calls": [],
+          "vector_orr_16b": 3,
+          "st3_16b": 1,
+          "sparse_loops": [
+            {
+              "label": "LBB2_36",
+              "instructions": 51,
+              "byte_stores": 16,
+              "assembly": [
+                "ldrb\tw15, [x21, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x21, x9]",
+                "ldrb\tw15, [x14, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x14, x9]",
+                "ldrb\tw15, [x13, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x13, x9]",
+                "ldrb\tw15, [x20, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x20, x9]",
+                "ldrb\tw15, [x10, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x10, x9]",
+                "ldrb\tw15, [x25, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x25, x9]",
+                "ldrb\tw15, [x22, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x22, x9]",
+                "ldrb\tw15, [x28, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x28, x9]",
+                "ldrb\tw15, [x2, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x2, x9]",
+                "ldrb\tw15, [x3, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x3, x9]",
+                "ldrb\tw15, [x4, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x4, x9]",
+                "ldrb\tw15, [x5, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x5, x9]",
+                "ldrb\tw15, [x6, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x6, x9]",
+                "ldrb\tw15, [x7, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x7, x9]",
+                "ldrb\tw15, [x30, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x30, x9]",
+                "ldrb\tw15, [x26, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x26, x9]",
+                "add\tx9, x9, x12",
+                "cmp\tx9, x1",
+                "b.lt\tLBB2_36"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_36"
+              ]
+            },
+            {
+              "label": "LBB2_55",
+              "instructions": 51,
+              "byte_stores": 16,
+              "assembly": [
+                "ldrb\tw15, [x21, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x21, x9]",
+                "ldrb\tw15, [x14, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x14, x9]",
+                "ldrb\tw15, [x13, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x13, x9]",
+                "ldrb\tw15, [x10, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x10, x9]",
+                "ldrb\tw15, [x20, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x20, x9]",
+                "ldrb\tw15, [x25, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x25, x9]",
+                "ldrb\tw15, [x22, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x22, x9]",
+                "ldrb\tw15, [x28, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x28, x9]",
+                "ldrb\tw15, [x2, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x2, x9]",
+                "ldrb\tw15, [x3, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x3, x9]",
+                "ldrb\tw15, [x4, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x4, x9]",
+                "ldrb\tw15, [x5, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x5, x9]",
+                "ldrb\tw15, [x6, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x6, x9]",
+                "ldrb\tw15, [x7, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x7, x9]",
+                "ldrb\tw15, [x30, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x30, x9]",
+                "ldrb\tw15, [x26, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x26, x9]",
+                "add\tx9, x9, x12",
+                "cmp\tx9, x1",
+                "b.lt\tLBB2_55"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_55"
+              ]
+            },
+            {
+              "label": "LBB2_72",
+              "instructions": 51,
+              "byte_stores": 16,
+              "assembly": [
+                "ldrb\tw15, [x21, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x21, x9]",
+                "ldrb\tw15, [x14, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x14, x9]",
+                "ldrb\tw15, [x13, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x13, x9]",
+                "ldrb\tw15, [x10, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x10, x9]",
+                "ldrb\tw15, [x20, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x20, x9]",
+                "ldrb\tw15, [x25, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x25, x9]",
+                "ldrb\tw15, [x22, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x22, x9]",
+                "ldrb\tw15, [x28, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x28, x9]",
+                "ldrb\tw15, [x2, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x2, x9]",
+                "ldrb\tw15, [x3, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x3, x9]",
+                "ldrb\tw15, [x4, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x4, x9]",
+                "ldrb\tw15, [x5, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x5, x9]",
+                "ldrb\tw15, [x6, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x6, x9]",
+                "ldrb\tw15, [x7, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x7, x9]",
+                "ldrb\tw15, [x30, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x30, x9]",
+                "ldrb\tw15, [x26, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x26, x9]",
+                "add\tx9, x9, x12",
+                "cmp\tx9, x1",
+                "b.lt\tLBB2_72"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_72"
+              ]
+            },
+            {
+              "label": "LBB2_89",
+              "instructions": 51,
+              "byte_stores": 16,
+              "assembly": [
+                "ldrb\tw15, [x21, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x21, x9]",
+                "ldrb\tw15, [x14, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x14, x9]",
+                "ldrb\tw15, [x13, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x13, x9]",
+                "ldrb\tw15, [x10, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x10, x9]",
+                "ldrb\tw15, [x20, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x20, x9]",
+                "ldrb\tw15, [x25, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x25, x9]",
+                "ldrb\tw15, [x22, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x22, x9]",
+                "ldrb\tw15, [x28, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x28, x9]",
+                "ldrb\tw15, [x2, x9]",
+                "orr\tw15, w15, #0x80",
+                "strb\tw15, [x2, x9]",
+                "ldrb\tw15, [x3, x9]",
+                "orr\tw15, w15, #0x40",
+                "strb\tw15, [x3, x9]",
+                "ldrb\tw15, [x4, x9]",
+                "orr\tw15, w15, #0x20",
+                "strb\tw15, [x4, x9]",
+                "ldrb\tw15, [x5, x9]",
+                "orr\tw15, w15, #0x10",
+                "strb\tw15, [x5, x9]",
+                "ldrb\tw15, [x6, x9]",
+                "orr\tw15, w15, #0x8",
+                "strb\tw15, [x6, x9]",
+                "ldrb\tw15, [x7, x9]",
+                "orr\tw15, w15, #0x4",
+                "strb\tw15, [x7, x9]",
+                "ldrb\tw15, [x30, x9]",
+                "orr\tw15, w15, #0x2",
+                "strb\tw15, [x30, x9]",
+                "ldrb\tw15, [x26, x9]",
+                "orr\tw15, w15, #0x1",
+                "strb\tw15, [x26, x9]",
+                "add\tx9, x9, x12",
+                "cmp\tx9, x1",
+                "b.lt\tLBB2_89"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_89"
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "_$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF",
+          "instructions": 2530,
+          "body_sha256": "3b2481b4ebc73d612947b89f9b6e4915cb3436db142516cbdc6dc6924ef0367d",
+          "calls": [],
+          "tail_calls": [],
+          "vector_orr_16b": 495,
+          "st3_16b": 0
+        },
+        {
+          "symbol": "_$s10PrimeSwift13completedPass5limit6offsets6UInt64VSi_SitF",
+          "instructions": 30,
+          "body_sha256": "32ca408a218b2d4843e5cd25fe56b8b18ef57c0148b22f2822ace24e1630a670",
+          "calls": [
+            "bl\t_$s10PrimeSwift0A5SieveCMa",
+            "bl\t_swift_initStackObject",
+            "bl\t_$s10PrimeSwift0A5SieveC5limitACSi_tcfc",
+            "bl\t_$s10PrimeSwift0A5SieveC03runC0yyF",
+            "bl\t_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF",
+            "bl\t_swift_release"
+          ],
+          "tail_calls": [],
+          "vector_orr_16b": 0,
+          "st3_16b": 0
+        }
+      ]
+    },
+    "dense128": {
+      "assembly_sha256": "596660ed66be175ca349f91aeac7ab6e0aab3ebfaf8b395e9b1488c601b66a9e",
+      "functions": [
+        {
+          "symbol": "_$s10PrimeSwift0A5SieveC03runC0yyF",
+          "instructions": 581,
+          "body_sha256": "747fe61dbe335c761789c88a11150b237ef2de6225d350f96d72d9ca4d3f2ad2",
+          "calls": [
+            "bl\t_$s10PrimeSwift0A5SieveC24markVectorDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF",
+            "bl\t_$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF"
+          ],
+          "tail_calls": [],
+          "vector_orr_16b": 3,
+          "st3_16b": 1,
+          "sparse_loops": [
+            {
+              "label": "LBB2_39",
+              "instructions": 27,
+              "byte_stores": 8,
+              "assembly": [
+                "ldrb\tw0, [x21, x10]",
+                "orr\tw0, w0, #0x80",
+                "strb\tw0, [x21, x10]",
+                "ldrb\tw0, [x17, x10]",
+                "orr\tw0, w0, #0x1",
+                "strb\tw0, [x17, x10]",
+                "ldrb\tw0, [x12, x10]",
+                "orr\tw0, w0, #0x2",
+                "strb\tw0, [x12, x10]",
+                "ldrb\tw0, [x13, x10]",
+                "orr\tw0, w0, #0x4",
+                "strb\tw0, [x13, x10]",
+                "ldrb\tw0, [x16, x10]",
+                "orr\tw0, w0, #0x8",
+                "strb\tw0, [x16, x10]",
+                "ldrb\tw0, [x15, x10]",
+                "orr\tw0, w0, #0x10",
+                "strb\tw0, [x15, x10]",
+                "ldrb\tw0, [x14, x10]",
+                "orr\tw0, w0, #0x20",
+                "strb\tw0, [x14, x10]",
+                "ldrb\tw0, [x9, x10]",
+                "orr\tw0, w0, #0x40",
+                "strb\tw0, [x9, x10]",
+                "add\tx10, x10, x19",
+                "cmp\tx10, x11",
+                "b.lt\tLBB2_39"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_39"
+              ]
+            },
+            {
+              "label": "LBB2_53",
+              "instructions": 27,
+              "byte_stores": 8,
+              "assembly": [
+                "ldrb\tw0, [x21, x10]",
+                "orr\tw0, w0, #0x8",
+                "strb\tw0, [x21, x10]",
+                "ldrb\tw0, [x17, x10]",
+                "orr\tw0, w0, #0x40",
+                "strb\tw0, [x17, x10]",
+                "ldrb\tw0, [x12, x10]",
+                "orr\tw0, w0, #0x2",
+                "strb\tw0, [x12, x10]",
+                "ldrb\tw0, [x13, x10]",
+                "orr\tw0, w0, #0x10",
+                "strb\tw0, [x13, x10]",
+                "ldrb\tw0, [x16, x10]",
+                "orr\tw0, w0, #0x80",
+                "strb\tw0, [x16, x10]",
+                "ldrb\tw0, [x15, x10]",
+                "orr\tw0, w0, #0x4",
+                "strb\tw0, [x15, x10]",
+                "ldrb\tw0, [x14, x10]",
+                "orr\tw0, w0, #0x20",
+                "strb\tw0, [x14, x10]",
+                "ldrb\tw0, [x9, x10]",
+                "orr\tw0, w0, #0x1",
+                "strb\tw0, [x9, x10]",
+                "add\tx10, x10, x19",
+                "cmp\tx10, x11",
+                "b.lt\tLBB2_53"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_53"
+              ]
+            },
+            {
+              "label": "LBB2_67",
+              "instructions": 27,
+              "byte_stores": 8,
+              "assembly": [
+                "ldrb\tw0, [x21, x10]",
+                "orr\tw0, w0, #0x8",
+                "strb\tw0, [x21, x10]",
+                "ldrb\tw0, [x17, x10]",
+                "orr\tw0, w0, #0x1",
+                "strb\tw0, [x17, x10]",
+                "ldrb\tw0, [x12, x10]",
+                "orr\tw0, w0, #0x20",
+                "strb\tw0, [x12, x10]",
+                "ldrb\tw0, [x13, x10]",
+                "orr\tw0, w0, #0x4",
+                "strb\tw0, [x13, x10]",
+                "ldrb\tw0, [x16, x10]",
+                "orr\tw0, w0, #0x80",
+                "strb\tw0, [x16, x10]",
+                "ldrb\tw0, [x15, x10]",
+                "orr\tw0, w0, #0x10",
+                "strb\tw0, [x15, x10]",
+                "ldrb\tw0, [x14, x10]",
+                "orr\tw0, w0, #0x2",
+                "strb\tw0, [x14, x10]",
+                "ldrb\tw0, [x9, x10]",
+                "orr\tw0, w0, #0x40",
+                "strb\tw0, [x9, x10]",
+                "add\tx10, x10, x19",
+                "cmp\tx10, x11",
+                "b.lt\tLBB2_67"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_67"
+              ]
+            },
+            {
+              "label": "LBB2_81",
+              "instructions": 27,
+              "byte_stores": 8,
+              "assembly": [
+                "ldrb\tw0, [x21, x10]",
+                "orr\tw0, w0, #0x80",
+                "strb\tw0, [x21, x10]",
+                "ldrb\tw0, [x17, x10]",
+                "orr\tw0, w0, #0x40",
+                "strb\tw0, [x17, x10]",
+                "ldrb\tw0, [x12, x10]",
+                "orr\tw0, w0, #0x20",
+                "strb\tw0, [x12, x10]",
+                "ldrb\tw0, [x13, x10]",
+                "orr\tw0, w0, #0x10",
+                "strb\tw0, [x13, x10]",
+                "ldrb\tw0, [x16, x10]",
+                "orr\tw0, w0, #0x8",
+                "strb\tw0, [x16, x10]",
+                "ldrb\tw0, [x15, x10]",
+                "orr\tw0, w0, #0x4",
+                "strb\tw0, [x15, x10]",
+                "ldrb\tw0, [x14, x10]",
+                "orr\tw0, w0, #0x2",
+                "strb\tw0, [x14, x10]",
+                "ldrb\tw0, [x9, x10]",
+                "orr\tw0, w0, #0x1",
+                "strb\tw0, [x9, x10]",
+                "add\tx10, x10, x19",
+                "cmp\tx10, x11",
+                "b.lt\tLBB2_81"
+              ],
+              "stack_accesses": [],
+              "branches": [
+                "b.lt\tLBB2_81"
+              ]
+            }
+          ]
+        },
+        {
+          "symbol": "_$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF",
+          "instructions": 2530,
+          "body_sha256": "3b2481b4ebc73d612947b89f9b6e4915cb3436db142516cbdc6dc6924ef0367d",
+          "calls": [],
+          "tail_calls": [],
+          "vector_orr_16b": 495,
+          "st3_16b": 0
+        },
+        {
+          "symbol": "_$s10PrimeSwift0A5SieveC24markVectorDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF",
+          "instructions": 36370,
+          "body_sha256": "5fa6812eaaa9a08db93310e3026e8a5e5f79890b908d764bb4756cf92295f34c",
+          "calls": [],
+          "tail_calls": [],
+          "vector_orr_16b": 1024,
+          "st3_16b": 0
+        },
+        {
+          "symbol": "_$s10PrimeSwift13completedPass5limit6offsets6UInt64VSi_SitF",
+          "instructions": 30,
+          "body_sha256": "e2479aa92e68adccc9865945c230b0d6b060cba0088f5ce5cbba6b480e9209bb",
+          "calls": [
+            "bl\t_$s10PrimeSwift0A5SieveCMa",
+            "bl\t_swift_initStackObject",
+            "bl\t_$s10PrimeSwift0A5SieveC5limitACSi_tcfc",
+            "bl\t_$s10PrimeSwift0A5SieveC03runC0yyF",
+            "bl\t_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF",
+            "bl\t_swift_release"
+          ],
+          "tail_calls": [],
+          "vector_orr_16b": 0,
+          "st3_16b": 0
+        }
+      ],
+      "wide_handler_details": {
+        "mnemonic_counts": {
+          "stp": 279,
+          "sub": 840,
+          "ldp": 11,
+          "lsl": 35,
+          "mov": 318,
+          "madd": 1,
+          "lsr": 3074,
+          "cmp": 3141,
+          "b.ge": 35,
+          "tst": 1,
+          "b.eq": 1,
+          "and": 2,
+          "asr": 4,
+          "ldrb": 2,
+          "orr": 2050,
+          "strb": 2,
+          "cmn": 1,
+          "add": 6772,
+          "b.vc": 1,
+          "brk": 3076,
+          "b.hi": 1,
+          "ldr": 6531,
+          "adrp": 1025,
+          "adr": 1,
+          "ldrsw": 1,
+          "br": 1,
+          "b.lt": 32,
+          "movk": 32,
+          "str": 4968,
+          "b.lo": 3073,
+          "orr.16b": 1024,
+          "b": 32,
+          "adds": 1,
+          "b.vs": 1,
+          "ret": 1
+        },
+        "stack_frame_bytes": 1056,
+        "stack_access_instructions": 4619,
+        "variable_shift_instructions": [
+          "lsl\tw12, w11, w12",
+          "lsl\tw12, w11, w12"
+        ],
+        "first_group_loop_excerpt": "LBB4_9:                                 ; =>This Inner Loop Header: Depth=1\n\tadd\tx12, x11, x10\n\tsub\tx6, x12, #32\n\tlsr\tx6, x6, #60\n\tcmp\tx6, #15\n\tb.lo\tLBB4_3184\n; %bb.10:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5]\n\tldr\tq0, [sp, #880]                  ; 16-byte Folded Reload\n\torr.16b\tv15, v15, v0\n\tstr\tq15, [x5]\n\tsub\tx12, x12, #31\n\tlsr\tx12, x12, #60\n\tcmp\tx12, #15\n\tb.lo\tLBB4_3185\n; %bb.11:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #16]\n\torr.16b\tv15, v15, v1\n\tstr\tq15, [x5, #16]\n\tadd\tx12, x11, x10\n\tsub\tx6, x12, #30\n\tlsr\tx6, x6, #60\n\tcmp\tx6, #15\n\tb.lo\tLBB4_3186\n; %bb.12:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #32]\n\torr.16b\tv15, v15, v2\n\tstr\tq15, [x5, #32]\n\tsub\tx12, x12, #29\n\tlsr\tx12, x12, #60\n\tcmp\tx12, #15\n\tb.lo\tLBB4_3187\n; %bb.13:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #48]\n\torr.16b\tv15, v15, v3\n\tstr\tq15, [x5, #48]\n\tadd\tx12, x11, x10\n\tsub\tx6, x12, #28\n\tlsr\tx6, x6, #60\n\tcmp\tx6, #15\n\tb.lo\tLBB4_3188\n; %bb.14:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #64]\n\torr.16b\tv15, v15, v4\n\tstr\tq15, [x5, #64]\n\tsub\tx12, x12, #27\n\tlsr\tx12, x12, #60\n\tcmp\tx12, #15\n\tb.lo\tLBB4_3189\n; %bb.15:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #80]\n\torr.16b\tv15, v15, v5\n\tstr\tq15, [x5, #80]\n\tadd\tx12, x11, x10\n\tsub\tx6, x12, #26\n\tlsr\tx6, x6, #60\n\tcmp\tx6, #15\n\tb.lo\tLBB4_3190\n; %bb.16:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #96]\n\torr.16b\tv15, v15, v6\n\tstr\tq15, [x5, #96]\n\tsub\tx12, x12, #25\n\tlsr\tx12, x12, #60\n\tcmp\tx12, #15\n\tb.lo\tLBB4_3191\n; %bb.17:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #112]\n\torr.16b\tv15, v15, v7\n\tstr\tq15, [x5, #112]\n\tadd\tx12, x11, x10\n\tsub\tx6, x12, #24\n\tlsr\tx6, x6, #60\n\tcmp\tx6, #15\n\tb.lo\tLBB4_3192\n; %bb.18:                               ;   in Loop: Header=BB4_9 Depth=1\n\tldr\tq15, [x5, #128]\n\torr.16b\tv15, v15, v16\n\tstr\tq15, [x5, #128]\n\tsub\tx12, x12, #23"
+      }
+    }
+  },
+  "protocol_peer_review": {
+    "reviewer": "Codex subagent /root/cpp_zig_review",
+    "blocking_findings": [],
+    "resolved_finding": "Require empty competing-process and audio snapshots after the session as well as before; preserve raw output and mark failure or required condition review if either guard fails."
+  },
+  "reviews": {
+    "sixteen": {
+      "pr": 12,
+      "revision": "59262fe2592c893bba05f8ceba64df13dad36df7",
+      "reviewer": "Codex with independent Codex subagent /root/cpp_zig_review",
+      "blocking_findings": [],
+      "posted_before_timing": true,
+      "source_review_url": "https://github.com/fahlman/Primes/pull/12#issuecomment-5644805672",
+      "assembly_review_url": "https://github.com/fahlman/Primes/pull/12#issuecomment-5644822391",
+      "source_review_body": "Codex reviewed exact candidate `66798104181845e1a98066288c73d3f477c69905` against development `7509c87`, with an **independent Codex subagent source review**. **No blocking findings. Timing has not started.**\n\nWith `G = end - r7`, `byte < G - p` keeps the second group's last address below `end`. Two p-byte advances mark the same successive multiples in the same order as B. Loop exit leaves at most one eight-mark cleanup group; afterward an eighth remaining mark would lie outside storage, proving the scalar tail remains at most seven marks. B's byte-rounded padding set is preserved.\n\nThe targeted checks cover8/16/24/32-mark boundaries, the earliest allocation of each last byte, and\u00b11neighbors. Prime-list checks verify semantic results; the separate unchanged Phase full-buffer comparison verifies padding. Runtime discovery, factors3\u201363, allocation/release, runner, observer and source-based `base,faithful=yes,bits=1` remain unchanged. Documentation correctly identifies Phase as the B reference.\n\nRoot Codex has now executed Verify, ExtraVerify and PhaseVerify under both ASAN and optimized WMO, all exit0. Verify checked complete prime arrays through small limits plus1M/10M. ExtraVerify retained all limits2049\u201330000,500randoms and1561prime-square cases, and added3654group/cleanup boundaries. PhaseVerify passed34983partial/full checks over1521limits with raw-buffer equality including padding. Source hashes and full command records will be published with the timing results. Assembly review is in progress before the planned comparison.\n",
+      "assembly_review_body": "Codex and an independent Codex subagent completed assembly review. **No blockers for timing candidate `59262fe2592c893bba05f8ceba64df13dad36df7`.**\n\nThis commit changes one comment from fully verified `6679810`, clarifying source offsets versus compiler-selected address bases. The independent reviewer confirmed no executable change, and root Codex recompiled: the complete assembly file is byte-identical (SHA-256 `5d888259d28c49e72cdf115fc0a21529e4152ef346fb24c67b831b443eb18fb2`). The published correctness evidence above remains applicable.\n\n- Each of four main loops is **51 instructions**: 16 byte loads, 16 immediate single-bit ORs, 16 byte stores, then index advance, comparison and branch. There are no calls or stack accesses inside these loops. Two B iterations take 54 instructions.\n- The complete `runSieve` grows from **566 to 905 instructions**. Setup spills some offsets; each optional eight-mark cleanup contains two stack-pair reloads. Therefore, absence of spills applies only to the main loops.\n- The dense-word helper remains **2,530 instructions**, and the completed-pass wrapper remains **30 instructions**, both identical to the inspected B assembly. The real observer call and release remain.\n- Scalar tails retain the expected variable single-bit masks. Source bounds and padding proof are unchanged.\n\nExtra setup, cleanup and code size could offset the loop saving. No timing has started and no gain is inferred from the instruction count. The planned session will compare current development, this candidate and the separate 128-bit candidate in PR #13 after both pass all checks.\n"
+    },
+    "dense128": {
+      "pr": 13,
+      "revision": "307da10fe930e2bbdb46254770833026277e4cf3",
+      "reviewer": "Codex with independent Codex subagent /root/review_sieve; implemented by /root/fast_u8",
+      "blocking_findings": [],
+      "posted_before_timing": true,
+      "source_review_url": "https://github.com/fahlman/Primes/pull/13#issuecomment-5644832523",
+      "source_review_body": "Codex reviewed exact candidate `307da10fe930e2bbdb46254770833026277e4cf3` against development `7509c8791f6d35e5a354a77060756afdd5dd8391`, with an **independent Codex subagent source review**. **No blocking source findings. Timing has not started.**\n\nThe independent review checked all **32 odd cases, 65\u2013127**, and **3,072 helper calls**: chunk index, `(-128*j) mod p` first-bit offset, step, group bound and advance all match. Each complete group marks exactly 128 successive multiples. Root Codex also ran the committed Swift generator with `--check`; it reproduces the source exactly.\n\nThe p\u00b2 prefix reaches a 128-bit boundary within 127 marks. Full groups keep every 16-byte access inside allocated storage. The tail resumes at the next multiple and contains at most 128 marks. Using the byte-rounded endpoint preserves B's padding without marking below p\u00b2. Lane indices stay in 0\u20131 and shifts in 0\u201363; each source update sets one bit while preserving existing flags. The standard library's bitwise-copyable raw load/store APIs support unaligned access; per-lane little-endian conversion preserves byte order. This follows [SE-0349](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0349-unaligned-loads-and-stores.md) and [raw-memory access semantics](https://github.com/swiftlang/swift-evolution/blob/main/proposals/0107-unsaferawpointer.md#raw-memory-access).\n\nSequential runtime discovery, handlers 3\u201363, sparse marking above 127, fresh class-owned allocation, enumeration, runner and observer are unchanged. Source-based `algorithm=base,faithful=yes,bits=1` remains defensible; the compiler may combine individually expressed ORs.\n\nThe added tests cover alignment, first/second groups and successive tail marks. For p=127, byte rounding permits the first full group at limit **80,883**, while **80,897** makes all its flags valid. Both are covered, as are second-group boundaries **113,395 / 113,409**. The unchanged B phase copy is explicitly a full-buffer reference, not a timing profile of this candidate.\n\nCorrectness execution and assembly checks are still running serially under the lock. Their complete results will be posted before timing and published with the final report. No gain is claimed from the source-store counts.\n",
+      "assembly_review_url": "https://github.com/fahlman/Primes/pull/13#issuecomment-5644894259",
+      "assembly_review_body": "Codex completed execution and assembly review of exact candidate `307da10fe930e2bbdb46254770833026277e4cf3`, with an independent Codex subagent review. **No correctness or rules blockers for timing. There is substantial code-generation overhead; no speedup is claimed.**\n\nVerify, ExtraVerify and PhaseVerify passed under both AddressSanitizer and `-O -whole-module-optimization`, all commands exiting zero. The Swift generator's `--check` also passed. ExtraVerify includes 11,382 additional alignment/group/tail limits, every limit 2,049\u201330,000, 500 deterministic random limits and 1,561 prime-square cases. PhaseVerify passed **53,015 checks over 2,305 limits**, including complete buffer equality with adopted B and padding. Full command output and hashes will be published with timing.\n\nThe M4 assembly shows:\n\n- `runSieve`: **581 instructions**. Its four sparse loops above 127 remain **27 instructions per eight marks**, with no calls or stack accesses inside those loops.\n- The existing 64-bit helper remains **2,530 instructions**, byte-identical at the assembly-body level to the reviewed sixteen-write build. The completed-pass wrapper remains **30 instructions**, identical after label renumbering, with a real observer call followed by release.\n- The new 128-bit helper is **36,370 instructions**, with no calls. It contains **1,024 vector OR instructions**, plus scalar ORs for chunks whose marks affect one lane. Compiler-generated constant masks are derived from the individual source ORs.\n- It also retains an overflow check for each generated `word * 16` offset, extensive stack spills/reloads, and a **1,056-byte stack frame**. Two variable shifts remain in the scalar prefix/tail. These costs make source-store counts a poor speed prediction.\n- The independent reviewer counted **623 instructions / 49 stack accesses** in p=67's group loop and **1,072 / 108** in p=127's. All 32 group loops have no calls or variable shifts. Static function totals include failure paths and are not per-pass instruction counts.\n\nThis evaluates the implementation as committed; a poor result would not establish that every possible 128-bit implementation is slow. The source and benchmark will remain frozen for the comparison.\n\n**Predefined shared protocol for PRs #12 and #13:** one exclusive timing-lock hold, including compilation; unchanged `compare_optimizations.py` and frozen runner/observer; three rotated five-second rounds of development `7509c87`, sixteen-write `59262fe`, and this candidate `307da10`, with a unique `--output`. A clear win requires every candidate trial to beat every development trial. If both win but their ranges overlap, prefer the simpler sixteen-write candidate. This is a bounded admission rule, not a statistical significance test. No repeat unless execution or validity fails. Atomic marking stays deferred; no merge or adoption is part of this evaluation.\n"
+    }
+  },
+  "assembly_verdicts": {
+    "sixteen": {
+      "reviewer": "Codex and independent Codex subagent /root/cpp_zig_review",
+      "blocking_findings": [],
+      "summary": "The four main sparse loops compile to **51 instructions per sixteen marks**, versus 54 for two B iterations, without calls or stack accesses inside those loops. Complete `runSieve` grows from 566 to **905 instructions**. Setup spills offsets and each optional eight-mark cleanup has two stack-pair reloads; the spill-free claim applies only to the main loops. The word helper remains **2,530 instructions** and completedPass **30**, retaining the real observer call and release."
+    },
+    "dense128": {
+      "reviewer": "Codex and independent Codex subagent /root/review_sieve",
+      "blocking_findings": [],
+      "summary": "`runSieve` has **581 instructions** and retains four **27-instruction / eight-mark sparse loops** without calls or stack accesses inside them. The word helper remains **2,530 instructions**, matching B; completedPass remains **30** with a real observer call followed by release. The new 128-bit helper has **36,370 instructions**, including **1,024 vector ORs** and **2,048 scalar single-lane ORs**, with compiler-generated masks. Its 32 group loops have no calls or variable shifts, but contain offset-overflow checks and substantial spills/reloads; the stack frame is **1,056 bytes**. The p=67 group has **623 instructions / 49 stack accesses**, and p=127 has **1,072 / 108**. Two variable shifts remain in the scalar prefix and tail. Static function totals include failure paths and are not per-pass counts. These are code-generation costs, not correctness blockers; this experiment evaluates this implementation, not every possible 128-bit handler."
+    }
+  },
+  "orchestration_scripts_sha256": {
+    "sparse-next-checks.py": "25b07363c9c71b0db0e1182b4d583634513ce772b89339766b720674a36ff405",
+    "sparse-next-timing.py": "6f2ba5087892bf6c274463bdf89df1cd4f7bb5bf288d65f3fa99d973307aca46",
+    "sparse-next-analysis.py": "f0db3ed6444ce1b4efe84e73c8e1eedc1dc536359ea429fe6fea3eec3f16a42b",
+    "sparse-next-assembly.py": "4227169423d431cf6e39db50b73192a7af8dca502c88d8fee16248c8b9e0b382"
+  },
+  "timing_session": {
+    "started_at_utc": "2026-09-12T09:02:40.966049+00:00",
+    "lock_path": "/tmp/primes-timing.lock",
+    "lock_acquired_exclusively_before_compilation": true,
+    "output_file": "sparse-next-results-59262fe-307da10.json",
+    "comparison_script_sha256": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+    "commands": [
+      {
+        "command": [
+          "/Applications/Xcode.app/Contents/Developer/usr/bin/python3",
+          "-u",
+          "compare_optimizations.py",
+          "--variant",
+          "development=7509c8791f6d35e5a354a77060756afdd5dd8391",
+          "--variant",
+          "sixteen=59262fe2592c893bba05f8ceba64df13dad36df7",
+          "--variant",
+          "dense128=307da10fe930e2bbdb46254770833026277e4cf3",
+          "--output",
+          "/Users/ryan/Developer/Primes-sparse-next-review/experiments/swift/sparse-next-results-59262fe-307da10.json"
+        ],
+        "cwd": "/Users/ryan/Developer/Primes-sparse-next-review/experiments/swift",
+        "started_at_utc": "2026-09-12T09:02:41.013644+00:00",
+        "exit_code": 0,
+        "combined_stdout_stderr": "development: 0.040044 ms/pass (124864 passes)\nsixteen: 0.039543 ms/pass (126444 passes)\ndense128: 0.042365 ms/pass (118022 passes)\nsixteen: 0.039558 ms/pass (126396 passes)\ndense128: 0.042351 ms/pass (118062 passes)\ndevelopment: 0.040058 ms/pass (124820 passes)\ndense128: 0.042375 ms/pass (117994 passes)\ndevelopment: 0.040044 ms/pass (124863 passes)\nsixteen: 0.039553 ms/pass (126412 passes)\nswift-driver version: 1.148.6 {\n  \"median_ms\": {\n    \"development\": 0.04004399655622562,\n    \"sixteen\": 0.03955346604752714,\n    \"dense128\": 0.04236502940129806\n  },\n  \"speedup_over_first\": {\n    \"development\": 1.0,\n    \"sixteen\": 1.0124017073019356,\n    \"dense128\": 0.9452134725769522\n  }\n}\n",
+        "finished_at_utc": "2026-09-12T09:05:34.597063+00:00"
+      }
+    ],
+    "conditions_scope": "Snapshots before comparison compilation and after the session; no continuous monitoring. Root serializes all agent builds/tests and timing.",
+    "before": {
+      "recorded_at_utc": "2026-09-12T09:02:41.013428+00:00",
+      "top_processes": [
+        {
+          "pid": 84148,
+          "cpu_percent": 99.3,
+          "executable": "spotlightknowledged"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 5.4,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50821,
+          "cpu_percent": 3.6,
+          "executable": "codex"
+        },
+        {
+          "pid": 86880,
+          "cpu_percent": 1.2,
+          "executable": "Python"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 1.0,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 624,
+          "cpu_percent": 0.7,
+          "executable": "trustd"
+        },
+        {
+          "pid": 53634,
+          "cpu_percent": 0.7,
+          "executable": "Claude"
+        },
+        {
+          "pid": 9347,
+          "cpu_percent": 0.6,
+          "executable": "claude"
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 0.5,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 517,
+          "cpu_percent": 0.5,
+          "executable": "mDNSResponder"
+        },
+        {
+          "pid": 365,
+          "cpu_percent": 0.4,
+          "executable": "mds"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.4,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 0.4,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 53900,
+          "cpu_percent": 0.4,
+          "executable": "claude"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.3,
+          "executable": "notifyd"
+        }
+      ],
+      "competing_build_test_benchmark_processes": [],
+      "audio_assertions": [],
+      "caffeinate_pids": [
+        82742
+      ]
+    },
+    "after": {
+      "recorded_at_utc": "2026-09-12T09:05:34.635283+00:00",
+      "top_processes": [
+        {
+          "pid": 84148,
+          "cpu_percent": 99.7,
+          "executable": "spotlightknowledged"
+        },
+        {
+          "pid": 50834,
+          "cpu_percent": 1.5,
+          "executable": "Codex (Renderer)"
+        },
+        {
+          "pid": 50787,
+          "cpu_percent": 1.0,
+          "executable": "ChatGPT"
+        },
+        {
+          "pid": 70724,
+          "cpu_percent": 0.7,
+          "executable": "claude"
+        },
+        {
+          "pid": 377,
+          "cpu_percent": 0.4,
+          "executable": "opendirectoryd"
+        },
+        {
+          "pid": 402,
+          "cpu_percent": 0.3,
+          "executable": "notifyd"
+        },
+        {
+          "pid": 409,
+          "cpu_percent": 0.3,
+          "executable": "WindowServer"
+        },
+        {
+          "pid": 1,
+          "cpu_percent": 0.2,
+          "executable": "launchd"
+        },
+        {
+          "pid": 53900,
+          "cpu_percent": 0.2,
+          "executable": "claude"
+        },
+        {
+          "pid": 97335,
+          "cpu_percent": 0.2,
+          "executable": "claude"
+        },
+        {
+          "pid": 336,
+          "cpu_percent": 0.1,
+          "executable": "logd"
+        },
+        {
+          "pid": 565,
+          "cpu_percent": 0.1,
+          "executable": "com.apple.DriverKit-AppleBCMWLAN"
+        },
+        {
+          "pid": 618,
+          "cpu_percent": 0.1,
+          "executable": "rapportd"
+        },
+        {
+          "pid": 677,
+          "cpu_percent": 0.1,
+          "executable": "sharingd"
+        },
+        {
+          "pid": 9347,
+          "cpu_percent": 0.1,
+          "executable": "claude"
+        }
+      ],
+      "competing_build_test_benchmark_processes": [],
+      "audio_assertions": [],
+      "caffeinate_pids": [
+        82742
+      ]
+    },
+    "raw_output_sha256": "1258487eccbc4f43188133b59c40be1e961cbd4299a12d63b1c10e95abf3e0de",
+    "executables_sha256": {
+      "development": "33003dce99d8a2f0629640064bc63318ab8002d6cdbfac29ff468350a3ba8051",
+      "sixteen": "b58842c9440d6293e32920e31f35c599255d7d497ad4b7b0bf65aea9d67a9170",
+      "dense128": "7601b5303f750be2b6868bf7e8b9fd52fbd23b56f67bb0bd81bc3aae7e800cea"
+    },
+    "status": "completed",
+    "finished_at_utc": "2026-09-12T09:05:34.635778+00:00",
+    "lock_removed_in_finally": true
+  },
+  "analysis": {
+    "rows": {
+      "development": {
+        "revision": "7509c8791f6d35e5a354a77060756afdd5dd8391",
+        "trial_microseconds": [
+          40.04376261372373,
+          40.05788267905785,
+          40.04399655622562
+        ],
+        "median_microseconds": 40.04399655622562,
+        "min_microseconds": 40.04376261372373,
+        "max_microseconds": 40.05788267905785,
+        "passes_per_second": 24972.532364393344,
+        "throughput_change_vs_development_percent": 0.0,
+        "microseconds_saved_vs_development": 0.0
+      },
+      "sixteen": {
+        "revision": "59262fe2592c893bba05f8ceba64df13dad36df7",
+        "trial_microseconds": [
+          39.543441499794376,
+          39.55841363650749,
+          39.55346604752714
+        ],
+        "median_microseconds": 39.55346604752714,
+        "min_microseconds": 39.543441499794376,
+        "max_microseconds": 39.55841363650749,
+        "passes_per_second": 25282.23440136467,
+        "throughput_change_vs_development_percent": 1.2401707301935794,
+        "microseconds_saved_vs_development": 0.4905305086984839,
+        "clear_win": true,
+        "clear_regression": false,
+        "verdict": "clear_win"
+      },
+      "dense128": {
+        "revision": "307da10fe930e2bbdb46254770833026277e4cf3",
+        "trial_microseconds": [
+          42.36502940129806,
+          42.35078778946655,
+          42.37534605996915
+        ],
+        "median_microseconds": 42.36502940129806,
+        "min_microseconds": 42.35078778946655,
+        "max_microseconds": 42.37534605996915,
+        "passes_per_second": 23604.374035188564,
+        "throughput_change_vs_development_percent": -5.478652742304768,
+        "microseconds_saved_vs_development": -2.3210328450724376,
+        "clear_win": false,
+        "clear_regression": true,
+        "verdict": "clear_regression"
+      }
+    },
+    "cross_comparison": {
+      "dense128_throughput_change_vs_sixteen_percent": -6.636519302603805,
+      "dense128_all_trials_faster_than_sixteen": false,
+      "sixteen_all_trials_faster_than_dense128": true
+    },
+    "recommendation": "sixteen",
+    "decision_rule": "A clear win requires every trial faster than every development trial. If both win but their ranges overlap, prefer the simpler sixteen-write candidate. This is a bounded admission rule, not a statistical significance test."
+  },
+  "final_evidence_peer_review": {
+    "reviewer": "Independent Codex subagent /root/cpp_zig_review",
+    "blocking_findings": [],
+    "summary": "Recomputed all timings from seconds and passes, confirmed all-trial separation and valid nine-run rotation, exact git/source/frozen-runner/observer/assembly/executable/raw hashes, verification completed before timing, empty competing-process and audio lists in both snapshots, same caffeinate PID, successful session and lock release. Reports accurately disclose Spotlight activity, provisional percentages, development versus upstream, and evaluation-only status. No extra builds, tests or benchmarks were run by the reviewer."
+  }
+}

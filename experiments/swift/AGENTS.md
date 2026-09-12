@@ -39,6 +39,8 @@ Our earlier versions are development controls: they measure the contribution of 
 | 7: word handlers for odd factors 49–63 | [PR #8](https://github.com/fahlman/Primes/pull/8), `19aa38a`; [review](https://github.com/fahlman/Primes/blob/ff6e8bf141ec6d8b91ec0eb0f3e8ce38848dad96/experiments/swift/reports/WordDense49Through63Review.md) | 0.042376 | Adopted in `5cd948e`; dense handlers retained in 8B |
 | 8A: eight writes per sparse fixed-mask stream | [PR #11](https://github.com/fahlman/Primes/pull/11), `47b4af1` | 0.042549 | Not selected; 8B won the direct comparison |
 | 8B: fused sparse streams above 63 | [PR #11](https://github.com/fahlman/Primes/pull/11), `8f108f5`; [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md) | 0.040806 | Adopted in `703dc12`; current best |
+| Sixteen-write fused sparse loop | [PR #12](https://github.com/fahlman/Primes/pull/12), `59262fe`; [review](reports/SixteenWriteFusedReview.md) | 0.039553 | Evaluated; +1.24% throughput over development 7509c87, pending integration decision |
+| 128-bit handlers for odd factors 65–127 | [PR #13](https://github.com/fahlman/Primes/pull/13), `307da10`; [review](reports/Dense128Review.md) | 0.042365 | Evaluated; -5.48% throughput over development 7509c87, recommend retaining development |
 
 Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 
