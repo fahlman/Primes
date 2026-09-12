@@ -31,11 +31,11 @@ docker run --rm faster-prime-swift
 
 The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The image tags were checked for amd64 and arm64. Docker is not installed on the test Mac, so the container build and Linux runtime remain untested.
 
-## Sixteen-write fused-loop candidate
+## Adopted sixteen-write fused loop
 
 This branch tests two fused groups per sparse-loop iteration against adopted B at development `7509c87`. The bound `byte < end - r7 - p` protects the second group's last address; advancing by two groups leaves at most one complete eight-mark cleanup group. The scalar tail preserves B's byte-rounded padding behavior. Runtime factor discovery, factors 3–63, storage, benchmark and observer are unchanged.
 
-Exact measured source **`59262fe`** delivered **1.24% more throughput**, saving **0.491 µs per sieve**: median **39.553 µs** versus development **40.044 µs**. Every candidate trial beat every development trial in one shared, rotated session on Apple M4 Pro / Swift 6.3.3, with three five-second runs each. The independent 128-bit candidate measured 42.365 µs in that session. Spotlight was near 99% CPU in both condition snapshots, so the exact percentages are provisional. This experiment is evaluated and recommended for integration; it has not been adopted or merged.
+Exact measured source **`59262fe`** delivered **1.24% more throughput**, saving **0.491 µs per sieve**: median **39.553 µs** versus development **40.044 µs**. Every candidate trial beat every development trial in one shared, rotated session on Apple M4 Pro / Swift 6.3.3, with three five-second runs each. The independent 128-bit candidate measured 42.365 µs in that session. Spotlight was near 99% CPU in both condition snapshots, so the exact percentages are provisional. This implementation was adopted through PR #12 in merge commit `83751ea`, which preserves the exact reviewed sieve, runner and observer.
 
 Verify, ExtraVerify and PhaseVerify passed under both AddressSanitizer and optimized WMO, including 3,654 additional sparse-group boundaries and 34,983 phase checks over 1,521 limits with full-buffer equality and padding. These checks ran at `6679810`; final `59262fe` changes one comment only, independently reviewed with byte-identical recompiled assembly. The main loops use 51 instructions per sixteen marks, versus 54 for two B iterations; setup and cleanup still incur additional work. The real observer call and release remain. These counts do not isolate the cause of the measured gain.
 
@@ -45,21 +45,21 @@ The diagnostic copy still describes B. Its full-buffer verifier provides a refer
 
 ## Current results and project baseline
 
-The adopted implementation is **experiment 8B, `8f108f5`**, merged through [PR #11](https://github.com/fahlman/Primes/pull/11) as `703dc12`. It retains the dense handlers through 63 and uses fused streams for larger factors. The merge preserves the reviewed commits and produces B's exact source.
+The adopted implementation is the **sixteen-write fused sparse loop, source `59262fe`**, merged through [PR #12](https://github.com/fahlman/Primes/pull/12) as `83751ea`. It retains dense handlers through 63 and marks sixteen successive sparse multiples per main iteration.
 
 | Latest development comparison | Median milliseconds per pass |
 |---|---:|
-| Development control `4483965` | 0.043259 |
-| Alternative 8A, eight writes per stream `47b4af1` | 0.042549 |
-| Adopted 8B, fused sparse streams `8f108f5` | **0.040806** |
+| Development control `7509c87` | 0.040044 |
+| Adopted sixteen-write loop `59262fe` | **0.039553** |
+| Independent 128-bit candidate `307da10` | 0.042365 |
 
-B delivered **6.01% more throughput than development**, saving **2.453 µs per sieve**, and **4.27% more throughput than A**. All nine runs in this rotated M4 Pro / Swift 6.3.3 session validated correctly, and every B trial beat every A and development trial. Desktop activity makes exact percentages provisional; instruction counts do not isolate the cause of the gains. See the [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md), [raw results](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-results-8f108f5.json), and [verification evidence](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json).
+The adopted candidate delivered **1.24% more throughput**, saving **0.491 µs per sieve**, with every trial beating every development trial. The 128-bit candidate delivered **5.48% less throughput** and remains unmerged. All nine rotated M4 Pro / Swift 6.3.3 runs validated correctly. Spotlight activity makes exact percentages provisional. See the [review](reports/SixteenWriteFusedReview.md), [raw results](sparse-next-results-59262fe-307da10.json), and [verification](sparse-next-verification.json).
 
-The [phase diagnostic](tools/phase-split/README.md) copies adopted B and includes cumulative stops through factors 3, 63, 251 and 499, plus allocation-only and full-pass controls. The [refreshed breakdown](reports/FusedSparseBandBreakdown.md) measured copied full at 39.962 µs versus production at 40.183 µs, passing the predefined 3% control; approximately 67.5% lies in sparse factors 67–997. These are diagnostic estimates from a separate session, not a new optimization comparison. Its normalized source must match production before profiling; identical output flags alone do not prove timing-code fidelity. The earlier [through-63 breakdown](reports/PhaseBreakdownThrough63.md) and [sparse-band measurements](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md) describe `19aa38a` and remain historical evidence.
+The [phase diagnostic](tools/phase-split/README.md) still copies earlier B (`8f108f5`). Its full-buffer comparison remains a correctness reference, but the [historical breakdown](reports/FusedSparseBandBreakdown.md) does not profile this implementation. Normalized source equality is required before using a diagnostic copy for current phase timings.
 
 ## Most recent direct upstream comparison
 
-The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). It has not been repeated for adopted `8f108f5`.
+The project baseline is upstream **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest of its three Swift entries in our shared-runner comparison. The session below measured the earlier `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4). It has not yet been repeated for adopted `59262fe`.
 
 
 | Implementation | Median milliseconds per pass | e8ba734 throughput advantage |
@@ -85,7 +85,7 @@ Before these experiments, our original development control beat all three reposi
 | Packed UInt8 | 2.91x |
 | Striped UInt8 | 1.73x |
 
-Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; adopted `8f108f5` has only the recorded development comparison so far. Do not combine ratios across sessions.
+Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` was compared directly with all three upstream entries in the session above; adopted `59262fe` has only its recorded development comparison so far. Do not combine ratios across sessions.
 
 To compare the current implementation with all three original entries:
 
