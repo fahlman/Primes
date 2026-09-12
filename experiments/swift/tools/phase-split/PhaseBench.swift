@@ -1,6 +1,6 @@
-// Cumulative diagnostics for the adopted through-63 sieve. See README.md here.
+// Cumulative diagnostics for the adopted fused-sparse sieve. See README.md here.
 // Every workload includes fresh allocation/zeroing, opaque observation and release.
-// Five modes rotate across three rounds of five seconds; partial modes are not
+// Seven modes rotate across three rounds of five seconds; partial modes are not
 // complete sieves. Subtract cumulative medians only as approximate stage costs.
 import Dispatch
 import Foundation
@@ -17,6 +17,20 @@ func fullPass(_ limit: Int, _ offset: Int) -> UInt64 {
 func copiedFullPass(_ limit: Int, _ offset: Int) -> UInt64 {
     let sieve = PhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: .max)
+    return sieve.withStorage { observe($0, at: offset) }
+}
+
+@inline(never)
+func through499Pass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = PhaseSieve(limit: limit)
+    sieve.runSieve(throughFactor: 499)
+    return sieve.withStorage { observe($0, at: offset) }
+}
+
+@inline(never)
+func through251Pass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = PhaseSieve(limit: limit)
+    sieve.runSieve(throughFactor: 251)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
@@ -102,6 +116,8 @@ struct PhaseBench {
         let modes: [(String, (Int, Int) -> UInt64)] = [
             ("production_full", fullPass),
             ("copied_full", copiedFullPass),
+            ("through_499", through499Pass),
+            ("through_251", through251Pass),
             ("through_63", through63Pass),
             ("through_3", through3Pass),
             ("allocation_only", allocationPass),

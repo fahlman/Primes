@@ -19,7 +19,7 @@ Our earlier versions are development controls: they measure the contribution of 
 - Latest development comparison: **0.040806 ms per pass**, **6.01% more throughput** than development control `4483965` (0.043259 ms), saving **2.453 µs per sieve**. B also delivered **4.27% more throughput** than alternative 8A `47b4af1` (0.042549 ms). Every B trial beat every A and development trial; all nine runs validated correctly. Apple M4 Pro, Swift 6.3.3; desktop activity makes exact percentages provisional. Instruction counts do not isolate the cause of the gains.
 - Latest [review](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseStreamExperiment8Review.md), [raw results](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-results-8f108f5.json), and [verification evidence](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/sparse-stream-verification-8f108f5.json) are published in `a7fc27f` on `swift/sparse-stream-review`.
 - The most recent direct upstream comparison measured the earlier `e8ba734`: 0.059299 ms versus 0.207650 ms for upstream striped UInt8, **3.50x throughput**. [Report](reports/UpstreamBaselineComparison.md), [raw results](upstream-baseline-e8ba734.json). It identifies the upstream baseline but does not measure the current `8f108f5` candidate's upstream advantage; do not combine ratios across sessions.
-- The phase diagnostic still copies `19aa38a`. Refresh and review that copy before profiling current B; matching full output flags alone does not establish timing-code fidelity. PR #10's band extension remains separate from this adoption.
+- The [current seven-mode phase breakdown](reports/FusedSparseBandBreakdown.md), refreshed through [PR #10](https://github.com/fahlman/Primes/pull/10), copies adopted B (`8f108f5`). Normalized source equality, ASAN/WMO checks and independent source/assembly review passed. In its own diagnostic session, copied full measured 39.962 µs versus production 40.183 µs (-0.549%, within the 3% criterion); sparse factors 67–997 account for approximately 26.986 µs (67.5%). These cumulative estimates do not replace the optimization comparison above. Recheck source fidelity after production changes.
 
 ## Experiments
 
@@ -54,7 +54,7 @@ Measurements are from each experiment's recorded session; use the linked reports
 | `run.sh`, `Dockerfile` | Build and run with the benchmark flags. |
 | `compare_optimizations.py` | Timing comparison of committed revisions, using the frozen runner and observer from commit `25402d4`. |
 | `compare_all.py` | Timing comparison against the three upstream entries, downloaded at commit `22bfea9`. |
-| `tools/phase-split/` | Historical cumulative diagnostic copied from `19aa38a`; refresh and review before profiling adopted `8f108f5`. See its README for validation and measurement limits. |
+| `tools/phase-split/` | Seven-mode cumulative diagnostic copied from adopted `8f108f5`, including sparse-band cutoffs at 251 and 499. See its README for source-fidelity checks and measurement limits. |
 | `reports/`, `*.json` | Recorded results. Don't overwrite them unintentionally. |
 
 ## Sieve rules
