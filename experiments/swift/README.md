@@ -1,10 +1,14 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. This follow-up restores the previously tested 128-bit local handlers for every odd factor 65 through 127, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 127 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. This follow-up restores the previously tested 128-bit local handlers for every odd factor 65 through 127, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 127 use a thirty-two-write fused loop: four groups of eight multiples per iteration, then up to three eight-mark cleanup groups, then the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
+
+## Thirty-two-write fused loop
+
+Branch `swift/sparse-32-writes` is stacked on unmerged `bd3858c` and changes only `markSparseMultiples`. The main loop marks four groups of eight multiples per iteration instead of two; its bound `byte < end - r7 - 3p` protects the fourth group's last address. Up to three complete groups are then cleaned up one at a time before the unchanged scalar tail, so the marks and the padding bits are the same as before. The sixteen-write loop gained 1.24% over eight writes; whether thirty-two gains again is what the timing session answers.
 
 ## Focused 128-bit wrapping-offset follow-up
 

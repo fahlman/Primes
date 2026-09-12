@@ -71,7 +71,7 @@ final class PrimeSieve {
     }
 
     /// Fused byte marking for odd factors above 127, from bit `start` onward. Each
-    /// iteration marks two groups of eight multiples, each group visiting every
+    /// iteration marks four groups of eight multiples, each group visiting every
     /// bit offset with its single-bit mask `m0`...`m7`. Their byte offsets
     /// `r1`...`r7` repeat every p bytes. Each multiple gets its own OR.
     @inline(__always)
@@ -89,15 +89,35 @@ final class PrimeSieve {
         let r6 = (bit + 6 * p) >> 3
         let r7 = (bit + 7 * p) >> 3
         let groupEnd = end - r7
-        let doubleGroupEnd = groupEnd - p
+        let quadGroupEnd = groupEnd - 3 * p
         var byte = start >> 3
 
         // Wrapping additions change no result here; they only drop overflow checks.
         // The byte index stays below end + p and the bit index below 8 * end + p,
         // both far from Int.max.
-        // The second group's last address is byte + p + r7, bounded by end.
+        // The fourth group's last address is byte + 3p + r7, bounded by end.
         // Advance the index between groups while reusing the eight source offsets.
-        while byte < doubleGroupEnd {
+        while byte < quadGroupEnd {
+            bytes[byte] |= m0
+            bytes[byte &+ r1] |= m1
+            bytes[byte &+ r2] |= m2
+            bytes[byte &+ r3] |= m3
+            bytes[byte &+ r4] |= m4
+            bytes[byte &+ r5] |= m5
+            bytes[byte &+ r6] |= m6
+            bytes[byte &+ r7] |= m7
+            byte &+= p
+
+            bytes[byte] |= m0
+            bytes[byte &+ r1] |= m1
+            bytes[byte &+ r2] |= m2
+            bytes[byte &+ r3] |= m3
+            bytes[byte &+ r4] |= m4
+            bytes[byte &+ r5] |= m5
+            bytes[byte &+ r6] |= m6
+            bytes[byte &+ r7] |= m7
+            byte &+= p
+
             bytes[byte] |= m0
             bytes[byte &+ r1] |= m1
             bytes[byte &+ r2] |= m2
@@ -119,8 +139,8 @@ final class PrimeSieve {
             byte &+= p
         }
 
-        // At most one complete eight-mark group remains before the scalar tail.
-        if byte < groupEnd {
+        // At most three complete eight-mark groups remain before the scalar tail.
+        while byte < groupEnd {
             bytes[byte] |= m0
             bytes[byte &+ r1] |= m1
             bytes[byte &+ r2] |= m2
