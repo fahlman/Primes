@@ -29,7 +29,7 @@ docker build -t faster-prime-swift .
 docker run --rm faster-prime-swift
 ```
 
-The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. The image tags were checked for amd64 and arm64. Docker is not installed on the test Mac, so the container build and Linux runtime remain untested.
+The Dockerfile uses official `swift:6.3.3` and `swift:6.3.3-slim` images. Its unchanged build and runtime passed on native Linux amd64 and arm64 for exact candidate **`bd3858c` in PR #14**, which remains unmerged. Verify, ExtraVerify and PhaseVerify each passed under ASAN and WMO on both architectures. Amd64 coverage combines five checks from the original job with the final PhaseVerify WMO check from a focused follow-up after the original 45-minute limit interrupted compilation. Compilation dominated the elapsed time; the original timeout and all successful evidence are preserved in the [Linux validation report](https://github.com/fahlman/Primes/blob/f1b456a0e7ab0120db26a3f0e6e8ce9307d50af9/experiments/swift/reports/LinuxDockerValidation.md). This coverage applies to that candidate revision. Docker has not been installed or run locally as part of this work; hosted results establish correctness and compatibility only.
 
 ## Adopted sixteen-write fused loop
 
