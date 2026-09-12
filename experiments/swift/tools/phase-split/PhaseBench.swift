@@ -1,16 +1,7 @@
-// Times each stage of a pass for reports/IndependentReview.md, with the same
-// allocation-to-release boundary and opaque observer as Benchmark.swift. Five workloads
-// rotate across three rounds of two seconds each, and medians are printed. Stage costs
-// are differences between cumulative workloads. Build and run from experiments/swift:
-//
-//   mkdir -p .build
-//   swiftc -O -parse-as-library -module-name BenchmarkObserver -emit-module \
-//     -emit-module-path .build/BenchmarkObserver.swiftmodule \
-//     -emit-object BenchmarkObserver.swift -o .build/BenchmarkObserver.o
-//   swiftc -O -whole-module-optimization -I .build PrimeSieve.swift \
-//     tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseBench.swift \
-//     .build/BenchmarkObserver.o -o .build/phase-split
-//   .build/phase-split
+// Cumulative diagnostics for the adopted through-63 sieve. See README.md here.
+// Every workload includes fresh allocation/zeroing, opaque observation and release.
+// Five modes rotate across three rounds of five seconds; partial modes are not
+// complete sieves. Subtract cumulative medians only as approximate stage costs.
 import Dispatch
 import Foundation
 import BenchmarkObserver
@@ -19,13 +10,6 @@ import BenchmarkObserver
 func fullPass(_ limit: Int, _ offset: Int) -> UInt64 {
     let sieve = PrimeSieve(limit: limit)
     sieve.runSieve()
-    return sieve.withStorage { observe($0, at: offset) }
-}
-
-@inline(never)
-func densePass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
-    sieve.runDensePhase()
     return sieve.withStorage { observe($0, at: offset) }
 }
 
@@ -44,12 +28,39 @@ func through63Pass(_ limit: Int, _ offset: Int) -> UInt64 {
 }
 
 @inline(never)
-func allocationPass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PrimeSieve(limit: limit)
+func through3Pass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = PhaseSieve(limit: limit)
+    sieve.runSieve(throughFactor: 3)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
-func microsecondsPerPass(_ pass: (Int, Int) -> UInt64, seconds: UInt64) -> (Double, UInt64) {
+@inline(never)
+func allocationPass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = PhaseSieve(limit: limit)
+    return sieve.withStorage { observe($0, at: offset) }
+}
+
+struct Sample: Encodable {
+    let round: Int
+    let position: Int
+    let mode: String
+    let passes: Int
+    let elapsedNanoseconds: UInt64
+    let microsecondsPerPass: Double
+    let checksum: UInt64
+}
+
+struct Results: Encodable {
+    let schemaVersion = 1
+    let limit = 1_000_000
+    let secondsPerRun = 5
+    let rounds = 3
+    let fullValidationPrimeCount: Int
+    let fullCopyBytesEqual: Bool
+    let samples: [Sample]
+}
+
+func measure(_ pass: (Int, Int) -> UInt64, mode: String, round: Int, position: Int) -> Sample {
     let limit = 1_000_000
     let byteCount = ((limit - 1) / 2 + 7) / 8
     var passes = 0
@@ -60,33 +71,58 @@ func microsecondsPerPass(_ pass: (Int, Int) -> UInt64, seconds: UInt64) -> (Doub
         checksum &+= pass(limit, passes % byteCount)
         passes += 1
         elapsed = DispatchTime.now().uptimeNanoseconds - start
-    } while elapsed < seconds * 1_000_000_000
-    return (Double(elapsed) / 1_000 / Double(passes), checksum)
+    } while elapsed < 5_000_000_000
+    return Sample(round: round, position: position, mode: mode, passes: passes,
+                  elapsedNanoseconds: elapsed,
+                  microsecondsPerPass: Double(elapsed) / 1_000 / Double(passes), checksum: checksum)
 }
 
 @main
 struct PhaseBench {
-    static func main() {
+    static func main() throws {
+        let arguments = CommandLine.arguments
+        guard arguments.count == 3, arguments[1] == "--output" else {
+            fatalError("Usage: phase-split --output UNIQUE_RESULTS.json")
+        }
+        let output = URL(fileURLWithPath: arguments[2])
+        precondition(!FileManager.default.fileExists(atPath: output.path), "Refusing to overwrite results")
+        // All validation and enumeration is outside timing.
+        let fullCount: Int = {
+            let sieve = PrimeSieve(limit: 1_000_000)
+            sieve.runSieve()
+            let copy = PhaseSieve(limit: 1_000_000)
+            copy.runSieve(throughFactor: .max)
+            let equal = sieve.withStorage { expected in
+                copy.withStorage { actual in memcmp(expected!, actual!, 62_500) == 0 }
+            }
+            precondition(equal, "Copied full flags differ from production")
+            return sieve.primes().count
+        }()
+        precondition(fullCount == 78_498)
         let modes: [(String, (Int, Int) -> UInt64)] = [
-            ("full pass", fullPass),
-            ("copied full loop (control)", copiedFullPass),
-            ("allocation, factors <= 63", through63Pass),
-            ("allocation, 3/5/7, release", densePass),
-            ("allocation and release only", allocationPass),
+            ("production_full", fullPass),
+            ("copied_full", copiedFullPass),
+            ("through_63", through63Pass),
+            ("through_3", through3Pass),
+            ("allocation_only", allocationPass),
         ]
-        var samples: [String: [Double]] = [:]
+        var samples: [Sample] = []
         for round in 0..<3 {
-            for index in modes.indices {
-                let (name, pass) = modes[(index + round) % modes.count]
-                let (microseconds, checksum) = microsecondsPerPass(pass, seconds: 2)
-                samples[name, default: []].append(microseconds)
-                FileHandle.standardError.write(Data("round \(round + 1) \(name): \(microseconds) us (checksum \(checksum))\n".utf8))
+            for position in modes.indices {
+                let (name, pass) = modes[(position + round) % modes.count]
+                let sample = measure(pass, mode: name, round: round + 1, position: position + 1)
+                samples.append(sample)
+                FileHandle.standardError.write(Data("round \(sample.round) \(name): \(sample.microsecondsPerPass) us/pass; \(sample.passes) passes; checksum \(sample.checksum)\n".utf8))
             }
         }
+        let results = Results(fullValidationPrimeCount: fullCount, fullCopyBytesEqual: true, samples: samples)
+        let encoder = JSONEncoder()
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        try encoder.encode(results).write(to: output, options: .withoutOverwriting)
         for (name, _) in modes {
-            let sorted = samples[name]!.sorted()
-            print(name.padding(toLength: 30, withPad: " ", startingAt: 0)
-                  + String(format: "median %7.2f us/pass   (min %.2f, max %.2f)", sorted[1], sorted[0], sorted[2]))
+            let sorted = samples.filter { $0.mode == name }.map(\.microsecondsPerPass).sorted()
+            print(name.padding(toLength: 20, withPad: " ", startingAt: 0)
+                  + String(format: "median %8.3f us/pass (min %.3f, max %.3f)", sorted[1], sorted[0], sorted[2]))
         }
     }
 }
