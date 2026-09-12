@@ -20,13 +20,11 @@ func generatedSwitch() -> String {
     for factor in stride(from: firstFactor, through: lastFactor, by: 2) {
         lines.append("        case \(factor):")
         lines.append("            while word + \(factor) <= fullWords {")
-        for chunk in 0..<factor {
-            // A group starts on a multiple aligned to 128 bits. The next
-            // multiple in chunk j is at (-128*j) mod factor within that chunk.
-            let first = (factor - (128 * chunk) % factor) % factor
-            let index = chunk == 0 ? "word" : "word + \(chunk)"
-            lines.append("                markVectorWord(words, \(index), first: \(first), step: \(factor))")
-        }
+        // Keep a case-literal loop so this experiment tests compiler unrolling
+        // and constant folding, while every odd factor retains a handler.
+        lines.append("                for j in 0..<\(factor) {")
+        lines.append("                    markVectorWord(words, word + j, first: (\(factor) - (128 * j) % \(factor)) % \(factor), step: \(factor))")
+        lines.append("                }")
         lines.append("                word += \(factor)")
         lines.append("            }")
     }
