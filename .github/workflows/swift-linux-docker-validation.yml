@@ -1,0 +1,70 @@
+name: Swift Linux Docker validation
+
+on:
+  push:
+    branches: [swift/linux-docker-validation]
+    paths:
+      - .github/workflows/swift-linux-docker-validation.yml
+      - experiments/swift/tools/linux-docker/validate.py
+
+permissions:
+  contents: read
+
+concurrency:
+  group: swift-linux-docker-validation
+  cancel-in-progress: false
+
+env:
+  # The solution under test is independent of the workflow commit.
+  SOLUTION_REVISION: e3f5a412d832e7fd25b1354dcf027e1dbf7ab29c
+
+jobs:
+  validate:
+    if: github.repository == 'fahlman/Primes'
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        include:
+          - runner: ubuntu-24.04
+            architecture: amd64
+          - runner: ubuntu-24.04-arm
+            architecture: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Check out workflow revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          path: workflow
+          persist-credentials: false
+
+      - name: Check out exact solution revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: fahlman/Primes
+          ref: ${{ env.SOLUTION_REVISION }}
+          path: solution
+          persist-credentials: false
+
+      - name: Build Dockerfile and validate Swift on native Linux
+        env:
+          VALIDATION_PLATFORM: linux/${{ matrix.architecture }}
+        run: |
+          python3 workflow/experiments/swift/tools/linux-docker/validate.py \
+            --solution-root "$GITHUB_WORKSPACE/solution" \
+            --solution-revision "$SOLUTION_REVISION" \
+            --workflow-root "$GITHUB_WORKSPACE/workflow" \
+            --platform "$VALIDATION_PLATFORM" \
+            --output "$RUNNER_TEMP/swift-linux-docker-evidence" \
+            --build-output "$RUNNER_TEMP/swift-linux-docker-checks"
+
+      - name: Preserve validation evidence even on failure
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: swift-linux-${{ matrix.architecture }}-${{ env.SOLUTION_REVISION }}
+          path: ${{ runner.temp }}/swift-linux-docker-evidence/
+          if-no-files-found: warn
+          retention-days: 30
