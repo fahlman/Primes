@@ -4632,7 +4632,9 @@ final class PrimeSieve {
     private func markVectorWord(
         _ words: UnsafeMutableRawPointer, _ word: Int, first: Int, step p: Int
     ) {
-        let offset = word * 16
+        // Callers guarantee 0 <= word < byteCount / 16, hence
+        // 16 * word <= byteCount - 16; wrapping cannot change the offset.
+        let offset = word &* 16
         var value = words.loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)
         value[0] = UInt64(littleEndian: value[0])
         value[1] = UInt64(littleEndian: value[1])
