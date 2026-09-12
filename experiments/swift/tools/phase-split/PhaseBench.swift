@@ -101,7 +101,12 @@ func measure(_ pass: (Int, Int) -> UInt64, mode: String, round: Int, position: I
 
 @main
 struct PhaseBench {
-    static func main() throws {
+    static func main() {
+        do { try run() }
+        catch { phaseExitWithError(error) }
+    }
+
+    static func run() throws {
         let arguments = CommandLine.arguments
         let checkOnly = arguments.count == 2 && arguments[1] == "--check"
         guard checkOnly || (arguments.count == 3 && arguments[1] == "--output") else {
@@ -109,7 +114,9 @@ struct PhaseBench {
         }
         let output = checkOnly ? nil : URL(fileURLWithPath: arguments[2])
         if let output = output {
-            precondition(!FileManager.default.fileExists(atPath: output.path), "Refusing to overwrite results")
+            guard !FileManager.default.fileExists(atPath: output.path) else {
+                throw phaseSourceError("Refusing to overwrite results: \(output.path)")
+            }
         }
         try CurrentPhaseBuild.identity.check()
         // Source checks, validation and enumeration are all outside timing.

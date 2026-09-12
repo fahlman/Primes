@@ -3,7 +3,12 @@ import Foundation
 
 @main
 struct GenerateCurrentPhaseSieve {
-    static func main() throws {
+    static func main() {
+        do { try run() }
+        catch { phaseExitWithError(error) }
+    }
+
+    static func run() throws {
         let arguments = Array(CommandLine.arguments.dropFirst())
         guard arguments.count == 4, arguments[0] == "--source", arguments[2] == "--output" else {
             throw phaseSourceError("Usage: generate-current-phase --source PrimeSieve.swift --output NEW_DIRECTORY")

@@ -23,7 +23,15 @@ func reference(limit: Int, throughFactor cap: Int) -> [Bool] {
 
 @main
 struct CurrentPhaseVerify {
-    static func main() throws {
+    static func main() {
+        do { try run() }
+        catch { phaseExitWithError(error) }
+    }
+
+    static func run() throws {
+        guard CommandLine.arguments.count == 1 else {
+            throw phaseSourceError("Usage: verify-current (no arguments)")
+        }
         try CurrentPhaseBuild.identity.check()
         var limits = Set(0...1_024)
         // Both sides of squares and each dense case's first two full groups

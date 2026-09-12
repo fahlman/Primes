@@ -1,4 +1,14 @@
 import Foundation
+#if canImport(Darwin)
+import Darwin
+#elseif canImport(Glibc)
+import Glibc
+#endif
+
+func phaseExitWithError(_ error: Error) -> Never {
+    FileHandle.standardError.write(Data("error: \(error.localizedDescription)\n".utf8))
+    exit(1)
+}
 
 // Git blob identities include Git's object header; these are not SHA256 file hashes.
 // Git is already required by the experiment workflow. No package dependency is added.
