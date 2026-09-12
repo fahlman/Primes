@@ -15,9 +15,11 @@ Do not include these files or the inherited-CI guard in an upstream submission.
 
 ## Selecting exactly what is checked
 
-`SOLUTION_REVISION` in the workflow is a complete commit SHA, initially
-`e3f5a412d832e7fd25b1354dcf027e1dbf7ab29c`. Change it explicitly when a different
-reviewed solution is selected. The workflow and solution are checked out into
+`SOLUTION_REVISION` in the workflow is pinned to the selected 128-bit
+wrapping-offset candidate, `bd3858cac9a306aa3b8d4729cf059959a7c70885`.
+This selects the source for Linux validation; it does not adopt or merge it.
+Change the pin explicitly when a different reviewed solution is selected.
+The workflow and solution are checked out into
 separate directories. The validator checks both revisions and requires a clean
 solution checkout, then hashes the Dockerfile, sieve, runner, observer and every
 verification source. All mounted test sources come from that same solution

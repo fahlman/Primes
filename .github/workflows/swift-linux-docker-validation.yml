@@ -16,7 +16,7 @@ concurrency:
 
 env:
   # The solution under test is independent of the workflow commit.
-  SOLUTION_REVISION: e3f5a412d832e7fd25b1354dcf027e1dbf7ab29c
+  SOLUTION_REVISION: bd3858cac9a306aa3b8d4729cf059959a7c70885
 
 jobs:
   validate:
