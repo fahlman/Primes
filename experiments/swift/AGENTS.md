@@ -59,6 +59,7 @@ Measurements are from each experiment's recorded session; use the linked reports
 | File | Role |
 |---|---|
 | `PrimeSieve.swift` | The sieve class: one bit per odd candidate, bit 0 stands for 3, and a set bit means composite. |
+| `tools/generate-dense.swift` | Canonical generator for both marked explicit dense switches: every odd factor 5–63 at 64 bits and 65–111 at 128 bits. Use `--check PrimeSieve.swift` or `--write PrimeSieve.swift` under the timing lock. The old `generate-dense-128.swift` filename forwards to it. |
 | `Benchmark.swift` | The timed runner. |
 | `BenchmarkObserver.swift` | An opaque one-byte read, compiled as a separate module so the optimizer can't remove sieve work. It computes no part of the sieve. |
 | `Verify.swift` | Complete-array checks against an independent Boolean sieve. |
