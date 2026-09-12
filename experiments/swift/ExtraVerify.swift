@@ -61,6 +61,24 @@ struct ExtraVerify {
                 squareLimits += 1
             }
         }
+        // Exercise entry and cleanup around the first four eight-mark groups for
+        // every active sparse factor. Include both the last mark itself and the
+        // earlier limit where its final byte first exists (padding is markable).
+        var groupLimits = Set<Int>()
+        for q in allPrimes where q > 63 && q * q <= maxLimit {
+            let start = (q * q - 3) / 2
+            for marks in [8, 16, 24, 32] {
+                let lastBit = start + (marks - 1) * q
+                for boundary in [2 * lastBit + 3, 16 * (lastBit >> 3) + 3] {
+                    for delta in -1...1 {
+                        let limit = boundary + delta
+                        if limit <= maxLimit { groupLimits.insert(limit) }
+                    }
+                }
+            }
+        }
+        for limit in groupLimits.sorted() { check(limit) }
         print("Passed: every limit in 2,049...30,000, 500 random limits in 2,049...2,000,000, and \(squareLimits) limits within 3 of every prime square up to 2,000,000.")
+        print("Passed: \(groupLimits.count) sparse double-group and cleanup boundary limits.")
     }
 }

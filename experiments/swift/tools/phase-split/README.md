@@ -1,5 +1,9 @@
 # Fused-sparse phase diagnostics
 
+On the `swift/fused-sixteen-writes` candidate branch, this copy remains the adopted
+eight-write B reference. Its full-buffer checks can validate the candidate, but
+its phase timings do not describe the candidate's sixteen-write sparse loop.
+
 `PhaseSieve.swift` copies adopted production `8f108f5` (merged in `703dc12`,
 unchanged in development `1edbea7`). Only the class name, `runSieve` signature,
 and its extra factor cutoff differ. Normalize those three substitutions and

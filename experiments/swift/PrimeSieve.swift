@@ -40,7 +40,7 @@ final class PrimeSieve {
                 // Factors above 63 leave at most one multiple in each 64-bit word.
                 // Eight consecutive multiples fall on all eight bit offsets within
                 // a byte, and their byte offsets repeat every p bytes, so one loop
-                // marks eight multiples per iteration, each with its own single-bit
+                // marks two groups of eight multiples per iteration, each with its own single-bit
                 // mask. The first multiple, p², falls at bit offset 7 when p ≡ 1 or
                 // 7 (mod 8) and at 3 when p ≡ 3 or 5, which fixes the masks; these
                 // four cases cover every odd factor.
@@ -65,9 +65,9 @@ final class PrimeSieve {
     }
 
     /// Fused byte marking for odd factors above 63, from bit `start` onward. Each
-    /// iteration marks the next eight multiples, one at each bit offset within a
-    /// byte, with that offset's single-bit mask `m0`...`m7`. Their byte offsets
-    /// `r1`...`r7` from the first repeat every p bytes. Each multiple gets its own OR.
+    /// iteration marks two groups of eight multiples, each group visiting every
+    /// bit offset with its single-bit mask `m0`...`m7`. Their byte offsets
+    /// `r1`...`r7` repeat every p bytes. Each multiple gets its own OR.
     @inline(__always)
     private func markSparseMultiples(
         _ bytes: UnsafeMutablePointer<UInt8>, end: Int, start: Int, step p: Int,
@@ -83,12 +83,38 @@ final class PrimeSieve {
         let r6 = (bit + 6 * p) >> 3
         let r7 = (bit + 7 * p) >> 3
         let groupEnd = end - r7
+        let doubleGroupEnd = groupEnd - p
         var byte = start >> 3
 
         // Wrapping additions change no result here; they only drop overflow checks.
         // The byte index stays below end + p and the bit index below 8 * end + p,
         // both far from Int.max.
-        while byte < groupEnd {
+        // The second group's last address is byte + p + r7, bounded by end.
+        // Advance the same index between groups so both use the same eight bases.
+        while byte < doubleGroupEnd {
+            bytes[byte] |= m0
+            bytes[byte &+ r1] |= m1
+            bytes[byte &+ r2] |= m2
+            bytes[byte &+ r3] |= m3
+            bytes[byte &+ r4] |= m4
+            bytes[byte &+ r5] |= m5
+            bytes[byte &+ r6] |= m6
+            bytes[byte &+ r7] |= m7
+            byte &+= p
+
+            bytes[byte] |= m0
+            bytes[byte &+ r1] |= m1
+            bytes[byte &+ r2] |= m2
+            bytes[byte &+ r3] |= m3
+            bytes[byte &+ r4] |= m4
+            bytes[byte &+ r5] |= m5
+            bytes[byte &+ r6] |= m6
+            bytes[byte &+ r7] |= m7
+            byte &+= p
+        }
+
+        // At most one complete eight-mark group remains before the scalar tail.
+        if byte < groupEnd {
             bytes[byte] |= m0
             bytes[byte &+ r1] |= m1
             bytes[byte &+ r2] |= m2
