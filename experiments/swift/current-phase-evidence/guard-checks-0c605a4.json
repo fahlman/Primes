@@ -1,0 +1,67 @@
+{
+  "candidate": "0c605a4d6d74a4f7515612035c1fdb51749fd0ca",
+  "status": "passed",
+  "started_at_utc": "2026-09-12T22:13:17.777963+00:00",
+  "commands": [
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/generate-current-phase",
+        "--source",
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/ambiguous-source.swift",
+        "--output",
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/ambiguous-inputs"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift",
+      "started_at_utc": "2026-09-12T22:13:17.778545+00:00",
+      "owned_process_group": 6262,
+      "exit_code": 1,
+      "combined_stdout_stderr": "error: Expected exactly one supported source anchor and no existing replacement: final class PrimeSieve {. Review the transformation for this production revision.\n",
+      "finished_at_utc": "2026-09-12T22:13:17.786362+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/generate-current-phase",
+        "--source",
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/PrimeSieve.swift",
+        "--output",
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/inputs"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift",
+      "started_at_utc": "2026-09-12T22:13:17.786857+00:00",
+      "owned_process_group": 6263,
+      "exit_code": 1,
+      "combined_stdout_stderr": "error: Refusing to overwrite generated input directory: /Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/inputs\n",
+      "finished_at_utc": "2026-09-12T22:13:17.790020+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/phase-current",
+        "--output",
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/existing-results.json"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift",
+      "started_at_utc": "2026-09-12T22:13:17.790455+00:00",
+      "owned_process_group": 6264,
+      "exit_code": 1,
+      "combined_stdout_stderr": "error: Refusing to overwrite results: /Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/existing-results.json\n",
+      "finished_at_utc": "2026-09-12T22:13:17.793655+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift/.build/phase-0c605a4/phase-current",
+        "--invalid"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-current-phase-tools/experiments/swift",
+      "started_at_utc": "2026-09-12T22:13:17.793767+00:00",
+      "owned_process_group": 6265,
+      "exit_code": 1,
+      "combined_stdout_stderr": "error: Usage: phase-current --check | --output UNIQUE_RESULTS.json\n",
+      "finished_at_utc": "2026-09-12T22:13:17.796905+00:00"
+    }
+  ],
+  "timed_trials": 0,
+  "source_and_generated_inputs_unchanged": true,
+  "existing_result_preserved": true,
+  "finished_at_utc": "2026-09-12T22:13:17.797111+00:00",
+  "lock_absent_after": true
+}

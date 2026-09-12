@@ -1,6 +1,6 @@
-// Cumulative diagnostics for the adopted fused-sparse sieve. See README.md here.
+// Cumulative diagnostics derived from current production. See README.md here.
 // Every workload includes fresh allocation/zeroing, opaque observation and release.
-// Seven modes rotate across three rounds of five seconds; partial modes are not
+// Eight modes rotate across three rounds of five seconds; partial modes are not
 // complete sieves. Subtract cumulative medians only as approximate stage costs.
 import Dispatch
 import Foundation
@@ -14,43 +14,50 @@ func fullPass(_ limit: Int, _ offset: Int) -> UInt64 {
 }
 
 @inline(never)
-func copiedFullPass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+func derivedFullPass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = CurrentPhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: .max)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
 @inline(never)
 func through499Pass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+    let sieve = CurrentPhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: 499)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
 @inline(never)
 func through251Pass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+    let sieve = CurrentPhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: 251)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
 @inline(never)
+func through111Pass(_ limit: Int, _ offset: Int) -> UInt64 {
+    let sieve = CurrentPhaseSieve(limit: limit)
+    sieve.runSieve(throughFactor: 111)
+    return sieve.withStorage { observe($0, at: offset) }
+}
+
+@inline(never)
 func through63Pass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+    let sieve = CurrentPhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: 63)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
 @inline(never)
 func through3Pass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+    let sieve = CurrentPhaseSieve(limit: limit)
     sieve.runSieve(throughFactor: 3)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
 @inline(never)
 func allocationPass(_ limit: Int, _ offset: Int) -> UInt64 {
-    let sieve = PhaseSieve(limit: limit)
+    let sieve = CurrentPhaseSieve(limit: limit)
     return sieve.withStorage { observe($0, at: offset) }
 }
 
@@ -65,12 +72,13 @@ struct Sample: Encodable {
 }
 
 struct Results: Encodable {
-    let schemaVersion = 1
+    let schemaVersion = 2
     let limit = 1_000_000
     let secondsPerRun = 5
     let rounds = 3
     let fullValidationPrimeCount: Int
-    let fullCopyBytesEqual: Bool
+    let fullDerivedBytesEqual: Bool
+    let sourceIdentity: PhaseSourceIdentity
     let samples: [Sample]
 }
 
@@ -93,35 +101,57 @@ func measure(_ pass: (Int, Int) -> UInt64, mode: String, round: Int, position: I
 
 @main
 struct PhaseBench {
-    static func main() throws {
+    static func main() {
+        do { try run() }
+        catch { phaseExitWithError(error) }
+    }
+
+    static func run() throws {
         let arguments = CommandLine.arguments
-        guard arguments.count == 3, arguments[1] == "--output" else {
-            fatalError("Usage: phase-split --output UNIQUE_RESULTS.json")
+        let checkOnly = arguments.count == 2 && arguments[1] == "--check"
+        guard checkOnly || (arguments.count == 3 && arguments[1] == "--output") else {
+            throw phaseSourceError("Usage: phase-current --check | --output UNIQUE_RESULTS.json")
         }
-        let output = URL(fileURLWithPath: arguments[2])
-        precondition(!FileManager.default.fileExists(atPath: output.path), "Refusing to overwrite results")
-        // All validation and enumeration is outside timing.
+        let output = checkOnly ? nil : URL(fileURLWithPath: arguments[2])
+        if let output = output {
+            guard !FileManager.default.fileExists(atPath: output.path) else {
+                throw phaseSourceError("Refusing to overwrite results: \(output.path)")
+            }
+        }
+        try CurrentPhaseBuild.identity.check()
+        // Source checks, validation and enumeration are all outside timing.
         let fullCount: Int = {
             let sieve = PrimeSieve(limit: 1_000_000)
             sieve.runSieve()
-            let copy = PhaseSieve(limit: 1_000_000)
+            let copy = CurrentPhaseSieve(limit: 1_000_000)
             copy.runSieve(throughFactor: .max)
             let equal = sieve.withStorage { expected in
                 copy.withStorage { actual in memcmp(expected!, actual!, 62_500) == 0 }
             }
-            precondition(equal, "Copied full flags differ from production")
+            precondition(equal, "Derived full flags differ from production")
             return sieve.primes().count
         }()
         precondition(fullCount == 78_498)
         let modes: [(String, (Int, Int) -> UInt64)] = [
             ("production_full", fullPass),
-            ("copied_full", copiedFullPass),
+            ("derived_full", derivedFullPass),
             ("through_499", through499Pass),
             ("through_251", through251Pass),
+            ("through_111", through111Pass),
             ("through_63", through63Pass),
             ("through_3", through3Pass),
             ("allocation_only", allocationPass),
         ]
+        if checkOnly {
+            // One execution of each wrapper; this is a smoke check, not timing
+            // evidence or a substitute for CurrentPhaseVerify's partial checks.
+            for (name, pass) in modes {
+                print("\(name): checksum \(pass(1_000_000, 62_499))")
+            }
+            try CurrentPhaseBuild.identity.check()
+            print("Checked all eight wrappers; full raw flags agree; 78,498 primes; source identities unchanged. No timed trials run.")
+            return
+        }
         var samples: [Sample] = []
         for round in 0..<3 {
             for position in modes.indices {
@@ -131,10 +161,12 @@ struct PhaseBench {
                 FileHandle.standardError.write(Data("round \(sample.round) \(name): \(sample.microsecondsPerPass) us/pass; \(sample.passes) passes; checksum \(sample.checksum)\n".utf8))
             }
         }
-        let results = Results(fullValidationPrimeCount: fullCount, fullCopyBytesEqual: true, samples: samples)
+        try CurrentPhaseBuild.identity.check()
+        let results = Results(fullValidationPrimeCount: fullCount, fullDerivedBytesEqual: true,
+                              sourceIdentity: CurrentPhaseBuild.identity, samples: samples)
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try encoder.encode(results).write(to: output, options: .withoutOverwriting)
+        try encoder.encode(results).write(to: output!, options: .withoutOverwriting)
         for (name, _) in modes {
             let sorted = samples.filter { $0.mode == name }.map(\.microsecondsPerPass).sorted()
             print(name.padding(toLength: 20, withPad: " ", startingAt: 0)
