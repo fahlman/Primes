@@ -1,4 +1,4 @@
-// Cumulative diagnostics for the adopted through-63 sieve. See README.md here.
+// Cumulative diagnostics for the adopted fused-sparse sieve. See README.md here.
 // Every workload includes fresh allocation/zeroing, opaque observation and release.
 // Seven modes rotate across three rounds of five seconds; partial modes are not
 // complete sieves. Subtract cumulative medians only as approximate stage costs.

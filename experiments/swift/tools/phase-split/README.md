@@ -1,17 +1,16 @@
-# Through-63 phase diagnostics
+# Fused-sparse phase diagnostics
 
-Production now uses fused sparse streams at `8f108f5`. This diagnostic still copies
-`19aa38a` and must be refreshed and reviewed before profiling current production.
-The recorded through-63 measurements remain historical evidence.
+`PhaseSieve.swift` copies adopted production `8f108f5` (merged in `703dc12`,
+unchanged in development `1edbea7`). Only the class name, `runSieve` signature,
+and its extra factor cutoff differ. Normalize those three substitutions and
+remove the six-line diagnostic header to compare it with `PrimeSieve.swift`
+before use after a source change. Production sieve, submission runner and
+observer are unchanged by this diagnostic update.
 
-The [recorded through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) includes
-raw samples, source verification and measurement limits.
-
-`PhaseSieve.swift` copies the adopted sieve at `19aa38a` (unchanged in development
-commit `fac788e`). Only the class name, `runSieve` signature and its extra factor
-cutoff differ. Normalize those three substitutions and remove the diagnostic
-header to compare it with `PrimeSieve.swift` before using it after a source change.
-The production sieve, submission runner and observer are unchanged.
+The [earlier through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) and
+[earlier sparse-band report](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md)
+describe `19aa38a` and remain historical evidence. They do not profile the current
+fused sparse loops. New runs require unique output files.
 
 The seven cumulative workloads are allocation only, through factor 3, through
 factor 63, through factor 251, through factor 499, the copied full sieve, and the
@@ -23,17 +22,20 @@ Allocation also includes observation, release, the clock and runner overhead.
 Each difference includes factor discovery and any effects of stopping early, so
 these are approximate costs, not timers inside one pass.
 
-At 1,000,000 the three sparse bands differ mainly in stream length. Counts of the
-production loops' byte writes and streams (eight per factor):
+At 1,000,000, the three sparse bands differ in factor count, stride and loop
+length. Counts of B's source byte writes, with one fused traversal per factor:
 
-| Band | Factors | Byte writes | Streams | Writes per stream |
-|---|---:|---:|---:|---:|
-| 67–251 | 36 | 132,120 | 288 | 459 |
-| 257–499 | 41 | 48,828 | 328 | 149 |
-| 503–997 | 73 | 23,431 | 584 | 40 |
+| Band | Factor loops | Byte writes | Rounded writes per factor loop |
+|---|---:|---:|---:|
+| 67–251 | 36 | 132,120 | 3,670 |
+| 257–499 | 41 | 48,828 | 1,191 |
+| 503–997 | 73 | 23,431 | 321 |
 
-Stride, address order and the share of tail writes also change between bands, so
-band costs describe where time goes; they don't predict which loop change wins.
+Writes include repeated composite marks and final-byte padding. They are source
+operations, not unique composites or measured hardware stores. The eight
+per-factor bit phases are fused; the old counts of 288/328/584 independent
+streams do not describe B. Stride, address order and tail share vary between
+bands, so normalized band costs do not isolate a universal per-loop overhead.
 
 `PhaseVerify.swift` compares every valid odd flag against an independent Boolean
 reference at each cutoff, checks full buffers including padding against
