@@ -52,6 +52,8 @@ Our earlier versions are development controls: they measure the contribution of 
 | Square-root discovery bound at adopted cutoff 111 | [PR #18](https://github.com/fahlman/Primes/pull/18), `968c249`; [review](https://github.com/fahlman/Primes/blob/31222e494667049240bb2fa3131d6af3acdd3f63/experiments/swift/reports/DiscoveryBound111Review.md) | 0.039115 | Flat; trial ranges overlap; closed as tested and rejected; unmerged |
 | Atomic sparse marks | [PR #19](https://github.com/fahlman/Primes/pull/19), `e889cd6`; [review](https://github.com/fahlman/Primes/blob/9867dce8a60985272c85baa8596433b9719e243c/experiments/swift/reports/FollowupFourExperimentReview.md) | 0.098332 | Slower; does not qualify; closed as tested and rejected; unmerged |
 
+| Runtime 128-bit recurrence for odd factors 65–111 | `swift/vector-recurrence`; [plan](reports/VectorRecurrenceReview.md) | pending | Source candidate only; independent review, correctness, assembly and one timing comparison pending; unmerged |
+
 Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 
 ## Files

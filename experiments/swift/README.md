@@ -1,10 +1,18 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. The adopted implementation uses the 128-bit local handlers for every odd factor 65 through 111, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. This candidate uses one runtime 128-bit chunk loop for every odd factor 65 through 111, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
+
+## Runtime recurrence candidate: verification and timing pending
+
+Branch `swift/vector-recurrence` is one unmerged experiment against current development `1d0522115846d8c6487d49a9bf0e60b18b9d8599`. It replaces the explicit 65–111 switch and its inline helper with a runtime chunk loop. After the unchanged p² alignment peel, `first` starts at zero and stays in `0..<p`. Each full chunk marks `first` and, when present, `first+p` individually; ordinary Swift shifting produces zero for an absent second mark. The next offset is `t = first+p-128`, corrected to `t+p` only when negative. The scalar tail resumes at `word*128+first`, preserving arbitrary chunk exits and byte padding.
+
+The replaced region falls from 2,271 to 56 source lines, and the complete sieve from 3,679 to 1,464 lines. All source before that region and from `primes()` onward remains byte-identical to development, including factor discovery, the byte/64-bit handlers, sparse marking, allocation and enumeration. The runner and separate observer are unchanged. Source classification remains `algorithm=base,faithful=yes,bits=1`, one thread: each composite receives its own source operation, with no prime knowledge, cached state, tables or combined masks.
+
+No Swift compilation, correctness run, assembly inspection or timing has been performed for this candidate yet. Existing verifiers remain unchanged; [RecurrenceVerify.swift](RecurrenceVerify.swift) adds one full recurrence period for every odd factor and raw-buffer comparisons at arbitrary chunk boundaries for runtime-prime factors, including padding at one million. The historical PhaseSieve remains a correctness reference whose timing copy is stale for this candidate. The [experiment plan and proof](reports/VectorRecurrenceReview.md) specify one comparison against current development: three rotated five-second trials per variant, after independent review and correctness/assembly gates. Flat or slower results are not adopted; no repeat timing or follow-up optimization is included. Source reduction is not a performance prediction. Historical measurements below apply only to their named revisions.
 
 ## 128-bit cutoff sweep
 
@@ -20,11 +28,7 @@ A reuses the exact 128-bit dispatch, helpers and generated switch from `307da10f
 
 In `bd3858c`, all odd cases 65 through 127 are present, without precomputed prime lists or multi-bit composite masks. Individual marks peel from p² to a 128-bit boundary, complete groups mark p chunks, and an individual tail runs through the last allocated byte. Raw unaligned loads/stores and per-lane little-endian conversion preserve the original byte representation and B's padding, including factor 101's mark for 1,000,001 at limit 1,000,000. Fresh allocation, dense handlers 3–63, enumeration, benchmark and observer are unchanged. Classification remains source-based; the compiler may combine individual source operations.
 
-The Swift generator checks the current 65–111 switch, containing 24 odd cases and 2,112 helper calls. After acquiring the timing lock, run from this directory:
-
-```sh
-swift tools/generate-dense-128.swift --check PrimeSieve.swift
-```
+The unchanged historical `tools/generate-dense-128.swift` describes development's 65–111 switch, containing 24 odd cases and 2,112 helper calls. Its `--check` and `--write` modes do not apply to this recurrence candidate because the generated block has been removed. The tool remains available for the earlier explicit-handler source; it is not a gate for this branch.
 
 At historical cutoff 127 `bd3858c`, the generator's `--check` passed for all 32 cases and 3,072 calls. The rest of this paragraph describes that earlier candidate's local verification. `--write` remains available to regenerate only the marked block; it was not run for this follow-up. Verify passed under AddressSanitizer and optimized WMO. ExtraVerify passed under ASAN, retaining the original exhaustive, random and prime-square checks plus 3,654 sparse-group limits and 11,382 wide alignment/group/tail limits. PhaseVerify passed under WMO with 53,015 partial/full checks over 2,305 limits, including complete raw-buffer equality and padding. ExtraVerify WMO and PhaseVerify ASAN were not added to this local bracket. PhaseSieve stays the unchanged earlier B reference; its timing copy is stale for this candidate and must not profile it.
 
