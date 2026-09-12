@@ -1,0 +1,21 @@
+{
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Independent Codex agent /root/review_sieve, checked by coordinating Codex",
+  "source_sha256": "4256badbc50f242eca8156b8e9daa41b86f22c3af05b298268ab5419c70eaba2",
+  "source_review": "passed",
+  "preserved_prefix_suffix_and_ten_supporting_files_equal": true,
+  "runtime_category": "algorithm=base,faithful=yes,bits=1; one thread",
+  "recurrence_invariant": "0 <= first < p; t=first+p-128; add p once if negative",
+  "second_mark": "separate single-bit OR in upper lane; ordinary UInt64 overshift yields zero",
+  "tail": "word*128+first",
+  "new_math_cases": 2112,
+  "verification_and_assembly_pending_at_source_review": true,
+  "review_comment": "https://github.com/fahlman/Primes/pull/25#issuecomment-5649305320",
+  "ordinary_shift_contract": {
+    "source": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface",
+    "sha256": "dbd42cceeec645bf2b0ea08e87762e9581637cacd95cd62f2b6c05b136aca824",
+    "lines": "12981-13011",
+    "finding": "FixedWidthInteger._nonMaskingLeftShift returns zero when rhs >= Self.bitWidth"
+  }
+}

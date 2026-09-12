@@ -1,0 +1,32 @@
+{
+  "candidate": "616d0bdc184dd91c1dd30be0c7883f2880e057ce",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "admitted_for_timing": true,
+  "reviewer": "Independent Codex source reviewer /root/review_sieve and assembly/evidence reviewer /root/cpp_zig_review, checked by coordinating Codex",
+  "verification_sha256": "e8f33fb5a0df47c9a93231e4d04f1b4fd2df81eb67e95e16537cb88ea8a0f73e",
+  "assembly_sha256": "57d7d23435f1cc3a72371e7857a1d91a779d936a97f0183acb83c2e3ca7a29f2",
+  "all_19_commands_exit_zero": true,
+  "all_eight_verifier_runs_passed": true,
+  "recurrence_math_cases": 2112,
+  "recurrence_raw_buffer_cases": 1261,
+  "runSieve_instructions": 995,
+  "control_runSieve_instructions": 907,
+  "runSieve_frame_bytes": 288,
+  "control_frame_bytes": 240,
+  "recurrence_loop_instructions_including_backedge": 23,
+  "recurrence_loop_stack_temporary_accesses": 4,
+  "word_handler_instructions": 2530,
+  "word_handler_normalized_unchanged": true,
+  "sparse_loops": {
+    "count": 4,
+    "instructions_each": 51,
+    "stores_each": 16,
+    "hot_loop_stack_accesses": 0
+  },
+  "completedPass_instructions": 30,
+  "real_observer_then_release": true,
+  "recurrence_and_second_mark_correction_use_no_data_dependent_branch": true,
+  "assembly_identity_claimed": false,
+  "orchestration_review": "Timing postconditions and provenance fixes reviewed; no blockers",
+  "timing_completed": false
+}
