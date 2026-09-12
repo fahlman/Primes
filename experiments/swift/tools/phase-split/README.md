@@ -1,5 +1,8 @@
 # Through-63 phase diagnostics
 
+The [recorded through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) includes
+raw samples, source verification and measurement limits.
+
 `PhaseSieve.swift` copies the adopted sieve at `19aa38a` (unchanged in development
 commit `fac788e`). Only the class name, `runSieve` signature and its extra factor
 cutoff differ. Normalize those three substitutions and remove the diagnostic
