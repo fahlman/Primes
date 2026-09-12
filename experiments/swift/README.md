@@ -1,6 +1,6 @@
 # Swift solution by fahlman
 
-This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. The runtime-discovered factor 3 uses specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Factors 5 through 13 use the same approach on 64-bit words; 9 has a case but is never reached, because it's composite. Larger factors use eight fixed-mask streams with four writes per inner iteration. There is no presieving, cached sieve state, or wheel.
+This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. The runtime-discovered factor 3 uses specialized byte marking: each individual composite bit is marked in a local byte, which is written back once. Factors 5 through 31 use the same approach on 64-bit words; the cases for the composite values 9, 15, 21, 25, and 27 are never reached. Larger factors use eight fixed-mask streams with four writes per inner iteration. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
