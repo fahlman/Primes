@@ -14,6 +14,7 @@ Our earlier versions are development controls: they measure the contribution of 
 
 ## Current best
 
+- Compact loop refactor `1a259a8`, [PR #20](https://github.com/fahlman/Primes/pull/20), was tested and rejected, closed unmerged with its branch preserved: 362.478 µs versus adopted cutoff-111 control `1d05221` at 38.298 µs, 89.434% less throughput in one M4 Pro / Swift 6.3.3 session; every candidate trial lost. Explicit generated calls remain. [Immutable review and evidence](https://github.com/fahlman/Primes/blob/1972c27a09ed12f519bffc21be6a6ef78adb2ae8/experiments/swift/reports/CompactDenseLoops.md). Unified-generator maintenance is in [PR #21](https://github.com/fahlman/Primes/pull/21), verified with byte-identical complete benchmark assembly and awaiting integration.
 - `swift/dense-small-factors`: cutoff 111, exact measured source `099e35a`, adopted through [PR #16](https://github.com/fahlman/Primes/pull/16) in merge commit `380a942`. It incorporates PR #14's 128-bit marking and proven-safe wrapping byte offsets; the earlier 127 cutoff is superseded. Integration preserves the reviewed sieve, generator, runner, observer and verifier bytes.
 - One bit per odd candidate, `algorithm=base,faithful=yes,bits=1`, one thread. Runtime-discovered factor 3 uses dense byte marking, odd factors 5–63 use dense 64-bit handlers, and odd factors 65–111 use dense 128-bit handlers. Factors above 111 retain sixteen individual marks per main iteration, an optional eight-mark cleanup and a scalar tail of at most seven marks. Sequential factor discovery and fresh class-owned storage remain.
 - Earlier sixteen-write comparison: **0.039553 ms per pass**, **1.24% more throughput** than development control `7509c87` (0.040044 ms), saving **0.491 µs per sieve**. Every candidate trial beat every development trial; all nine runs validated correctly. The independent 128-bit candidate `307da10` measured 0.042365 ms, **5.48% less throughput** than development, and remains unmerged. Apple M4 Pro, Swift 6.3.3; Spotlight activity makes exact percentages provisional. Instruction counts do not isolate the causes.
@@ -29,6 +30,8 @@ Our earlier versions are development controls: they measure the contribution of 
 
 | Experiment | Branch or record | Median ms per pass | Status |
 |---|---|---:|---|
+| Compact dense case-literal loops | [PR #20](https://github.com/fahlman/Primes/pull/20), `1a259a8`; [review](https://github.com/fahlman/Primes/blob/1972c27a09ed12f519bffc21be6a6ef78adb2ae8/experiments/swift/reports/CompactDenseLoops.md) | 0.362478 | Rejected versus adopted 111 at 0.038298; closed unmerged; branch preserved |
+| Unified dense-switch generator | [PR #21](https://github.com/fahlman/Primes/pull/21), `9c5d7e5`; [review](reports/DenseGeneratorReview.md) | Not timed | Complete benchmark assembly byte-identical; ready for integration, unmerged |
 | Eight fixed-mask streams, four writes each | `swift/baseline` (`25402d4`) | 0.1198 | Superseded |
 | Direct array access; cached square root | [EqualTermsSwiftComparison.md](reports/EqualTermsSwiftComparison.md) | no reliable gain | Rejected |
 | Stream fusion | `swift/stream-fusion` (`f0cd82d`) | 0.1212 | Rejected |
