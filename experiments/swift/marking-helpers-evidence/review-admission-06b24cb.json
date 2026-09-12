@@ -1,0 +1,41 @@
+{
+  "candidate": "06b24cba796ce60fae80e6823d9858ef014f1fe8",
+  "control": "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+  "reviewer": "Codex independent review agent /root/cpp_zig_review",
+  "admitted_for_timing": true,
+  "source": "All sparse marks, masks, order, advances and scalar alignment/endpoints/checked-vs-wrapping arithmetic preserved. Source-based base/faithful classification unchanged.",
+  "verification": "All16 commands exited0; all6 actual ASan/WMO verifier executions passed, including full raw-buffer padding equality.",
+  "assembly": {
+    "control_instructions": [
+      907,
+      2530,
+      8061
+    ],
+    "candidate_instructions": [
+      954,
+      2537,
+      8069
+    ],
+    "function_order": [
+      "runSieve",
+      "word",
+      "vector"
+    ],
+    "runSieve_frame_bytes": [
+      240,
+      272
+    ],
+    "runSieve_stack_accesses": [
+      50,
+      56
+    ],
+    "normalized_instruction_bodies_unchanged": 29,
+    "function_symbols": 32,
+    "sparse_main_loop_instructions": 51,
+    "sparse_main_loop_marks": 16,
+    "sparse_main_loop_stack_accesses": 0,
+    "completedPass_instructions": 30,
+    "real_initializer_sieve_observer_release_calls": true,
+    "residual_new_helper_calls": false
+  }
+}

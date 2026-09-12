@@ -21,7 +21,7 @@ A second inline helper shares the seven scalar alignment and tail loops. It retu
 
 Both explicit dense switches, dense group geometry, runtime factor discovery, allocation, word/vector operations, enumeration, runner, observer, and verifiers are unchanged. Source-based classification remains `algorithm=base,faithful=yes,bits=1`, one thread: each composite still receives its own single-bit operation, with fresh class-owned storage per pass.
 
-`PrimeSieve.swift` falls from 3,679 to 3,670 lines. Excluding the two explicit switches, handwritten source falls from 322 to 313 lines; excluding blank and comment lines as well gives 232 to 218. Assembly identity is not assumed: local-function captures and the scalar helper's constant options still need compiler review. All six correctness checks, independent review, assembly comparison, and any required timing remain pending central execution. No performance result is claimed for this refactor.
+`PrimeSieve.swift` falls from 3,679 to 3,670 lines. Excluding the two explicit switches, handwritten source falls from 322 to 313 lines; excluding blank and comment lines as well gives 232 to 218. Assembly identity is not assumed: local-function captures and the scalar helper's constant options still need compiler review. All six correctness checks and independent source/assembly review passed. Assembly differs, so timing is pending; see [the exact-revision review](reports/MarkingHelpersReview.md). No performance result is claimed yet.
 
 ## 128-bit cutoff sweep
 
