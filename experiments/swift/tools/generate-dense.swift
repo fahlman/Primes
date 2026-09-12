@@ -102,7 +102,7 @@ do {
             try source.write(to: file, atomically: true, encoding: .utf8)
             print("Updated both generated dense switches.")
         } else {
-            print("Generated 64-bit 5...63 and 128-bit 65...111 switches match.")
+            print("Generated \(switches.map(\.label).joined(separator: " and ")) switches match.")
         }
     }
 } catch {
