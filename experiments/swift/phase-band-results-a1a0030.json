@@ -1,0 +1,199 @@
+{
+  "fullCopyBytesEqual" : true,
+  "fullValidationPrimeCount" : 78498,
+  "limit" : 1000000,
+  "rounds" : 3,
+  "samples" : [
+    {
+      "checksum" : 25788327,
+      "elapsedNanoseconds" : 5000017625,
+      "microsecondsPerPass" : 41.66750800013334,
+      "mode" : "production_full",
+      "passes" : 119998,
+      "position" : 1,
+      "round" : 1
+    },
+    {
+      "checksum" : 25570235,
+      "elapsedNanoseconds" : 5000016250,
+      "microsecondsPerPass" : 42.017649456293384,
+      "mode" : "copied_full",
+      "passes" : 118998,
+      "position" : 2,
+      "round" : 1
+    },
+    {
+      "checksum" : 27367325,
+      "elapsedNanoseconds" : 5000024875,
+      "microsecondsPerPass" : 38.61858065836629,
+      "mode" : "through_499",
+      "passes" : 129472,
+      "position" : 3,
+      "round" : 1
+    },
+    {
+      "checksum" : 32433682,
+      "elapsedNanoseconds" : 5000021250,
+      "microsecondsPerPass" : 31.593714457222294,
+      "mode" : "through_251",
+      "passes" : 158260,
+      "position" : 4,
+      "round" : 1
+    },
+    {
+      "checksum" : 72403828,
+      "elapsedNanoseconds" : 5000000875,
+      "microsecondsPerPass" : 12.969060690005785,
+      "mode" : "through_63",
+      "passes" : 385533,
+      "position" : 5,
+      "round" : 1
+    },
+    {
+      "checksum" : 272209250,
+      "elapsedNanoseconds" : 5000001250,
+      "microsecondsPerPass" : 1.5612957533702903,
+      "mode" : "through_3",
+      "passes" : 3202469,
+      "position" : 6,
+      "round" : 1
+    },
+    {
+      "checksum" : 0,
+      "elapsedNanoseconds" : 5000000167,
+      "microsecondsPerPass" : 0.7622506894557256,
+      "mode" : "allocation_only",
+      "passes" : 6559522,
+      "position" : 7,
+      "round" : 1
+    },
+    {
+      "checksum" : 25250718,
+      "elapsedNanoseconds" : 5000007041,
+      "microsecondsPerPass" : 42.54166559745431,
+      "mode" : "copied_full",
+      "passes" : 117532,
+      "position" : 1,
+      "round" : 2
+    },
+    {
+      "checksum" : 27086365,
+      "elapsedNanoseconds" : 5000013458,
+      "microsecondsPerPass" : 39.0232769942792,
+      "mode" : "through_499",
+      "passes" : 128129,
+      "position" : 2,
+      "round" : 2
+    },
+    {
+      "checksum" : 32156961,
+      "elapsedNanoseconds" : 5000014375,
+      "microsecondsPerPass" : 31.86711689462212,
+      "mode" : "through_251",
+      "passes" : 156902,
+      "position" : 3,
+      "round" : 2
+    },
+    {
+      "checksum" : 71735576,
+      "elapsedNanoseconds" : 5000009291,
+      "microsecondsPerPass" : 13.090057572584234,
+      "mode" : "through_63",
+      "passes" : 381970,
+      "position" : 4,
+      "round" : 2
+    },
+    {
+      "checksum" : 268805037,
+      "elapsedNanoseconds" : 5000001417,
+      "microsecondsPerPass" : 1.5810681114462977,
+      "mode" : "through_3",
+      "passes" : 3162420,
+      "position" : 5,
+      "round" : 2
+    },
+    {
+      "checksum" : 0,
+      "elapsedNanoseconds" : 5000000208,
+      "microsecondsPerPass" : 0.7671029755923184,
+      "mode" : "allocation_only",
+      "passes" : 6518030,
+      "position" : 6,
+      "round" : 2
+    },
+    {
+      "checksum" : 25229429,
+      "elapsedNanoseconds" : 5000019500,
+      "microsecondsPerPass" : 42.57727319175026,
+      "mode" : "production_full",
+      "passes" : 117434,
+      "position" : 7,
+      "round" : 2
+    },
+    {
+      "checksum" : 26953124,
+      "elapsedNanoseconds" : 5000014250,
+      "microsecondsPerPass" : 39.21979692047032,
+      "mode" : "through_499",
+      "passes" : 127487,
+      "position" : 1,
+      "round" : 3
+    },
+    {
+      "checksum" : 31987706,
+      "elapsedNanoseconds" : 5000020000,
+      "microsecondsPerPass" : 32.0339558573854,
+      "mode" : "through_251",
+      "passes" : 156085,
+      "position" : 2,
+      "round" : 3
+    },
+    {
+      "checksum" : 71552739,
+      "elapsedNanoseconds" : 5000001750,
+      "microsecondsPerPass" : 13.12353639811546,
+      "mode" : "through_63",
+      "passes" : 380995,
+      "position" : 3,
+      "round" : 3
+    },
+    {
+      "checksum" : 266866673,
+      "elapsedNanoseconds" : 5000001208,
+      "microsecondsPerPass" : 1.5925523377866393,
+      "mode" : "through_3",
+      "passes" : 3139615,
+      "position" : 4,
+      "round" : 3
+    },
+    {
+      "checksum" : 0,
+      "elapsedNanoseconds" : 5000000166,
+      "microsecondsPerPass" : 0.7671591110958361,
+      "mode" : "allocation_only",
+      "passes" : 6517553,
+      "position" : 5,
+      "round" : 3
+    },
+    {
+      "checksum" : 25154950,
+      "elapsedNanoseconds" : 5000015208,
+      "microsecondsPerPass" : 42.7012307140478,
+      "mode" : "production_full",
+      "passes" : 117093,
+      "position" : 6,
+      "round" : 3
+    },
+    {
+      "checksum" : 24984352,
+      "elapsedNanoseconds" : 5000001208,
+      "microsecondsPerPass" : 42.989314647315744,
+      "mode" : "copied_full",
+      "passes" : 116308,
+      "position" : 7,
+      "round" : 3
+    }
+  ],
+  "schemaVersion" : 1,
+  "secondsPerRun" : 5
+}
