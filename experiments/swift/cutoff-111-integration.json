@@ -1,0 +1,46 @@
+{
+  "reviewed_timed_linux_source": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+  "integration_head_before_linux": "f15dad09a0488fb93c900eef96b0906ffcfa051d",
+  "development_parent": "ce3a8e3ce0b438dcbc82de78c883261db8ac9559",
+  "source_sha256": {
+    "experiments/swift/.dockerignore": "c4c4ea06d9024d6c221e732954d9356892e1ff6794089037efacf2f4e89d29a8",
+    "experiments/swift/Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "experiments/swift/BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "experiments/swift/Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "experiments/swift/ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "experiments/swift/PrimeSieve.swift": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+    "experiments/swift/Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "experiments/swift/compare.py": "51755e1f1bc908fae6b8c8e5664b8d5f4e16c5c452a8c40dfe6d9290c6803392",
+    "experiments/swift/compare_all.py": "1dbf3bfc4c8e047b51560d0ee54c989c883128c53b23cf8c763586fca9a83f62",
+    "experiments/swift/compare_optimizations.py": "1cbc22dd4792f50bb7be85bbbe74a7ad543479b0cbc404affb344d3150bf5844",
+    "experiments/swift/run.sh": "3498a80bd27adab9e4bede9430598ce1ddab8b251c5041fa284e73fa3a205ba6",
+    "experiments/swift/tools/generate-dense-128.swift": "ef71c0e2f9610cf0bb3d8dccc6b6eb4816f0ea39370b91223137d352da234e91",
+    "experiments/swift/tools/phase-split/PhaseBench.swift": "c798b820f228a205b2206ced08b84223069db7d1d46945669bad019c159eedcb",
+    "experiments/swift/tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "experiments/swift/tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243"
+  },
+  "head_changes_vs_source": [
+    "experiments/swift/AGENTS.md",
+    "experiments/swift/README.md"
+  ],
+  "independent_reviewer": "Codex subagent review_sieve",
+  "blocking_findings": [],
+  "status": "adopted",
+  "authorized_action": "Merge PR16 with a merge commit after exact-source Linux correctness succeeds on amd64 and arm64; leavePR17-19 unmerged",
+  "merge_commit": "380a9420d870db609b1bc58f2fa389b575b4972c",
+  "merge_parents": [
+    "ce3a8e3ce0b438dcbc82de78c883261db8ac9559",
+    "f15dad09a0488fb93c900eef96b0906ffcfa051d"
+  ],
+  "linux_run": 34702902662,
+  "linux_report": "https://github.com/fahlman/Primes/blob/a196d5e609a29ff65efbb8bc43c0d61c2d6a33e9/experiments/swift/reports/Cutoff111LinuxValidation.md",
+  "integration_source_bytes_preserved": true,
+  "pr14_disposition": "Underlying marking and wrapping source incorporated through PR16; cutoff127 superseded",
+  "other_prs": "PR17,18,19 remain open and unmerged",
+  "inherited_ci": {
+    "run_id": 34704355518,
+    "head_sha": "380a9420d870db609b1bc58f2fa389b575b4972c",
+    "cancellation_requested": true,
+    "reason": "Inherited all-language CI does not test experiments/swift. The exact-source dedicated native Linux suite and recorded M4 checks completed successfully; no required Swift verification was skipped."
+  }
+}

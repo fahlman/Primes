@@ -1,5 +1,6 @@
-// Generate only the 65...127 switch in PrimeSieve.swift. The generator covers
-// every odd factor; it does not test primality or construct composite masks.
+// Generate only the 128-bit switch in PrimeSieve.swift, for every odd value from
+// firstFactor through lastFactor. The generator covers every odd value in that
+// range; it does not test primality or construct composite masks.
 // Run from experiments/swift after acquiring the project's timing lock:
 //   swift tools/generate-dense-128.swift --check PrimeSieve.swift
 //   swift tools/generate-dense-128.swift --write PrimeSieve.swift
@@ -8,10 +9,15 @@ import Foundation
 
 let beginMarker = "        // BEGIN GENERATED DENSE 128"
 let endMarker = "        // END GENERATED DENSE 128"
+// The dispatch in runSieve must send exactly the odd values firstFactor through
+// lastFactor here; larger factors take the fused sparse loop.
+let firstFactor = 65
+let lastFactor = 111
+let rangeLabel = "\(firstFactor)...\(lastFactor)"
 
 func generatedSwitch() -> String {
     var lines = [beginMarker, "        switch p {"]
-    for factor in stride(from: 65, through: 127, by: 2) {
+    for factor in stride(from: firstFactor, through: lastFactor, by: 2) {
         lines.append("        case \(factor):")
         lines.append("            while word + \(factor) <= fullWords {")
         for chunk in 0..<factor {
@@ -25,7 +31,7 @@ func generatedSwitch() -> String {
         lines.append("            }")
     }
     lines.append("        default:")
-    lines.append("            preconditionFailure(\"Vector-dense marking requires an odd factor from 65 to 127\")")
+    lines.append("            preconditionFailure(\"Vector-dense marking requires an odd factor from \(firstFactor) to \(lastFactor)\")")
     lines.append("        }")
     lines.append(endMarker)
     return lines.joined(separator: "\n") + "\n"
@@ -53,13 +59,13 @@ if arguments.isEmpty {
     if arguments[0] == "--check" {
         guard source[range] == generated else {
             throw NSError(domain: "GenerateDense128", code: 3, userInfo: [
-                NSLocalizedDescriptionKey: "The generated 65...127 switch does not match the source"
+                NSLocalizedDescriptionKey: "The generated \(rangeLabel) switch does not match the source"
             ])
         }
-        print("Generated 65...127 switch matches.")
+        print("Generated \(rangeLabel) switch matches.")
     } else {
         let updated = source.replacingCharacters(in: range, with: generated)
         try updated.write(to: file, atomically: true, encoding: .utf8)
-        print("Updated generated 65...127 switch.")
+        print("Updated generated \(rangeLabel) switch.")
     }
 }
