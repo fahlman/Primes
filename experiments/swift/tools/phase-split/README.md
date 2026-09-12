@@ -53,6 +53,11 @@ validates full-buffer equality and 78,498 primes at one million, then executes
 each of the eight wrappers once. It emits no timing samples and does not
 replace the partial-flag verifier.
 
+Tool misuse and stale inputs exit with a concise error. Genuine flag/count
+mismatches are invariant failures and still trap through `precondition`.
+A recorded `fullDerivedBytesEqual: true` means that the check passed; a failed
+comparison stops before any successful result is written.
+
 Compile and run `CurrentPhaseVerify.swift` with both AddressSanitizer and the
 benchmark optimization flags, using the same generated input:
 

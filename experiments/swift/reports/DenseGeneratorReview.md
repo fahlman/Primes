@@ -27,3 +27,5 @@ The compact loop experiment is separate, in PR #20. This change retains all expl
 ## Integration review follow-up
 
 Commit `26c88ef` addresses Claude’s two non-blocking notes: the success message derives its ranges from the existing switch labels, and the rejected PR #20 entry is retained in the Experiments table rather than leading Current best. The canonical and compatibility `--check` commands both passed under the timing lock; `dense-generator-evidence/integration-checks.json` preserves the outputs and exact revision. The sieve is byte-identical to the previously reviewed PR head, and removing the two marker comments still restores adopted source exactly. No runtime or assembly change and no additional timing campaign.
+
+Adopted via PR #21 merge commit `7be57ca`. The subsequent PR #24 integration rebuilt current-source phase diagnostics from the marker-comment source and passed all eight short wrapper checks; see `maintenance-integration-evidence/checks-2ee7b3a.json`.

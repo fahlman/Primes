@@ -1,0 +1,45 @@
+{
+  "revision": "2ee7b3a54c5e10cb87962e271f2185a72332ac20",
+  "status": "passed",
+  "commands": [
+    {
+      "command": [
+        "sh",
+        "tools/phase-split/build-current.sh",
+        "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift/.build/maintenance-integration"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift",
+      "started_at_utc": "2026-09-12T23:53:28.274002+00:00",
+      "owned_process_group": 26156,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated current diagnostic from production Git blob 099a5e9abc3d9c49a8faa7f792b794929ae13124; exactly three reversible substitutions.\nBuilt /Users/ryan/Developer/Primes-maintenance-integration/experiments/swift/.build/maintenance-integration/phase-current; no diagnostic workloads have been run.\n",
+      "finished_at_utc": "2026-09-12T23:55:03.820336+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift/.build/maintenance-integration/phase-current",
+        "--check"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift",
+      "started_at_utc": "2026-09-12T23:55:03.820401+00:00",
+      "owned_process_group": 26482,
+      "exit_code": 0,
+      "combined_stdout_stderr": "production_full: checksum 255\nderived_full: checksum 255\nthrough_499: checksum 223\nthrough_251: checksum 223\nthrough_111: checksum 223\nthrough_63: checksum 95\nthrough_3: checksum 73\nallocation_only: checksum 0\nChecked all eight wrappers; full raw flags agree; 78,498 primes; source identities unchanged. No timed trials run.\n",
+      "finished_at_utc": "2026-09-12T23:55:04.136393+00:00"
+    }
+  ],
+  "source_sha256": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+  "source_without_markers_sha256": "f5b7d8f32b5aa53010e39869855e75033b3c998cb70829722bd2ef93a3352448",
+  "prior_full_verification_reused": "Source/reference/tooling bytes unchanged from reviewed commits; no new timing or full verifier campaign.",
+  "started_at_utc": "2026-09-12T23:53:28.273450+00:00",
+  "exact_reverse_transformation": true,
+  "source_identity": {
+    "derivedGitBlob": "5e9dd0a41afbae4c7592b35f16e3fd125e5ecae6",
+    "derivedPath": "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift/.build/maintenance-integration/inputs/CurrentPhaseSieve.swift",
+    "productionGitBlob": "099a5e9abc3d9c49a8faa7f792b794929ae13124",
+    "productionPath": "/Users/ryan/Developer/Primes-maintenance-integration/experiments/swift/PrimeSieve.swift"
+  },
+  "binary_sha256": "ff5c7d5c0c37ad36d469e4b80488e9cc84606061d00677700eda4f68ae3b7956",
+  "lock_absent_after": true,
+  "finished_at_utc": "2026-09-12T23:55:04.138868+00:00"
+}
