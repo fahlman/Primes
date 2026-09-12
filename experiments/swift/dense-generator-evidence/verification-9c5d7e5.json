@@ -1,0 +1,165 @@
+{
+  "candidate": "9c5d7e541499294c49b0a256441347555b9410eb",
+  "started_at_utc": "2026-09-12T21:19:40.870388+00:00",
+  "commands": [
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:40.892243+00:00",
+      "owned_process_group": 96581,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-12T21:19:41.214398+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:41.214839+00:00",
+      "owned_process_group": 96583,
+      "exit_code": 1,
+      "combined_stdout_stderr": "The generated 64-bit 5...63 switch does not match the source\n",
+      "finished_at_utc": "2026-09-12T21:19:41.485305+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:41.485375+00:00",
+      "owned_process_group": 96585,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:19:41.795081+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:41.795491+00:00",
+      "owned_process_group": 96586,
+      "exit_code": 1,
+      "combined_stdout_stderr": "The generated 128-bit 65...111 switch does not match the source\n",
+      "finished_at_utc": "2026-09-12T21:19:42.100134+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:42.100202+00:00",
+      "owned_process_group": 96591,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:19:42.409547+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:42.409748+00:00",
+      "owned_process_group": 96592,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-12T21:19:42.872203+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:42.872512+00:00",
+      "owned_process_group": 96597,
+      "exit_code": 1,
+      "combined_stdout_stderr": "The generated 64-bit 5...63 switch does not match the source\n",
+      "finished_at_utc": "2026-09-12T21:19:43.339529+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-64.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:43.339607+00:00",
+      "owned_process_group": 96599,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:19:43.810261+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:43.810716+00:00",
+      "owned_process_group": 96601,
+      "exit_code": 1,
+      "combined_stdout_stderr": "The generated 128-bit 65...111 switch does not match the source\n",
+      "finished_at_utc": "2026-09-12T21:19:44.276809+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense-128.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/error-128.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:44.276885+00:00",
+      "owned_process_group": 96605,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Updated both generated dense switches.\n",
+      "finished_at_utc": "2026-09-12T21:19:44.751435+00:00"
+    },
+    {
+      "command": [
+        "swift",
+        "tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Developer/Primes-dense-generator/experiments/swift/.build/generator-proof/missing-final.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-dense-generator/experiments/swift",
+      "started_at_utc": "2026-09-12T21:19:44.751919+00:00",
+      "owned_process_group": 96607,
+      "exit_code": 1,
+      "combined_stdout_stderr": "Missing, duplicated, or reversed 128-bit generated-block markers\n",
+      "finished_at_utc": "2026-09-12T21:19:44.989194+00:00"
+    }
+  ],
+  "status": "passed",
+  "reused_assembly_proof": "verification-ce33c7d.json: PrimeSieve.swift is unchanged",
+  "source_sha256": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+  "finished_at_utc": "2026-09-12T21:19:44.989596+00:00",
+  "lock_absent_after": true
+}
