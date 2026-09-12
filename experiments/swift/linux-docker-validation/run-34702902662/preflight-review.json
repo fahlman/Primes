@@ -1,0 +1,15 @@
+{
+  "solution_revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+  "workflow_revision": "cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126",
+  "reviewer": "Codex root and cpp_zig_review",
+  "source_unchanged_since_m4_review": true,
+  "changes": [
+    "Pin exact099e35a",
+    "Run all six existing checks on nativeamd64 and arm64 serially",
+    "60-minute job limit; unchanged20-minute command limit",
+    "Per-architecture full-suite artifacts"
+  ],
+  "validator_changed": false,
+  "approval": "User authorized exact Linux verification followed by merging PR16 if successful",
+  "status": "dispatched_not_yet_validated"
+}

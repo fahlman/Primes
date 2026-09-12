@@ -1,0 +1,6 @@
+{
+  "status": "incomplete",
+  "errors": [
+    "CalledProcessError: Command '['gh', 'api', '--method', 'GET', 'repos/fahlman/Primes/actions/jobs/103577690048/logs']' returned non-zero exit status 1."
+  ]
+}

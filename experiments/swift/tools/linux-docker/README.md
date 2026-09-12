@@ -18,6 +18,8 @@ The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
 Do not include these files or the inherited-CI guard in an upstream submission.
 
+The current cutoff111 [run34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) passed both native jobs, with all six checks and the unchanged Docker runtime on each. See [the exact-cutoff report](../../reports/Cutoff111LinuxValidation.md); prior cutoff127 evidence remains preserved separately.
+
 ## Selecting exactly what is checked
 
 `SOLUTION_REVISION` in the workflow is pinned to the reviewed and timed cutoff111
