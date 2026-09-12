@@ -8,10 +8,10 @@ Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8b
 
 ## Current best
 
-- `swift/dense-small-factors`: sieve source from commit `b45c0c1`, results recorded in `5833376`.
-- One bit per odd candidate. Runtime-discovered factors 3, 5, and 7 use dense byte marking; larger factors use eight fixed-mask streams with four writes per iteration.
-- 0.0824 ms per pass, the median of three rotated five-second trials on the reference machine: 1.45× the saved baseline. Not yet timed against the upstream entries in the same session.
-- Latest review: [reports/IndependentReview.md](reports/IndependentReview.md), of commit `5833376`.
+- `swift/dense-small-factors`: combined candidate `e8ba734`, adopted through [PR #4](https://github.com/fahlman/Primes/pull/4) in merge commit `3191a53`.
+- One bit per odd candidate. Runtime-discovered factor 3 uses dense byte marking; odd factors 5–13 have dense word handlers (the runtime composite test excludes 9); larger factors use eight fixed-mask byte streams with four writes per iteration and wrapping index arithmetic.
+- 0.058781 ms per pass, the median of three rotated five-second trials on the reference machine: 38.72% more throughput than `0d0a142` in that session. Wrapping added 9.48% over the combined word handlers alone. Desktop activity and timing variation make the precise percentages provisional. This candidate has not yet been timed against the three upstream Swift entries in the same session.
+- Latest [review](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/reports/CombinedReview.md), [raw timing results](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-results-e8ba734.json), and [verification evidence](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/combined-verification-e8ba734.json) are published in `8d77381` on `swift/combined-review`.
 
 ## Experiments
 
@@ -20,12 +20,14 @@ Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8b
 | Eight fixed-mask streams, four writes each | `swift/baseline` (`25402d4`) | 0.1198 | Superseded |
 | Direct array access; cached square root | [EqualTermsSwiftComparison.md](reports/EqualTermsSwiftComparison.md) | no reliable gain | Rejected |
 | Stream fusion | `swift/stream-fusion` (`f0cd82d`) | 0.1212 | Rejected |
-| Dense byte marking for 3, 5, and 7 | `swift/dense-small-factors` (`b45c0c1`) | 0.0824 | Current best |
-| Wrapping index arithmetic in the byte-stream loops | — | — | Proposed (review item 1) |
-| 64-bit dense marking for odd factors 9–31, starting with 9–13 | — | — | Proposed (review item 2) |
-| 64-bit words for the 5 and 7 handlers | — | — | Proposed (review item 3) |
+| Dense byte marking for 3, 5, and 7 | `b45c0c1`; results in `5833376` | 0.0824 | Superseded by experiment 4 |
+| 1: wrapping index arithmetic in the byte-stream loops | [PR #2](https://github.com/fahlman/Primes/pull/2), `de38d53` | 0.079761 | Included in experiment 4; individual PR superseded |
+| 2: 64-bit dense marking for odd factors 9–13 | [PR #3](https://github.com/fahlman/Primes/pull/3), `7b63048` | 0.071580 | Included in experiment 4; individual PR superseded |
+| 3: 64-bit words for the 5 and 7 handlers | [PR #1](https://github.com/fahlman/Primes/pull/1), `62e5a59` | 0.074382 | Included in experiment 4; individual PR superseded |
+| 4A: combined word handlers for odd factors 5–13 | [PR #4](https://github.com/fahlman/Primes/pull/4), `f43c436` | 0.064351 | Intermediate step, superseded by 4B |
+| 4B: combined word handlers plus wrapping arithmetic | [PR #4](https://github.com/fahlman/Primes/pull/4), `e8ba734` | 0.058781 | Adopted; current best |
 
-Keep the branches and results of rejected experiments.
+Measurements are from each experiment's recorded session; use the linked reports for comparisons made in the same session. Keep the branches and results of rejected or superseded experiments.
 
 ## Files
 
