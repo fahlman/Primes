@@ -24,7 +24,15 @@ final class PrimeSieve {
         let end = byteCount
         var p = 3
 
-        while p <= limit / p {
+        // p * p <= limit exactly when p <= the integer square root of limit, so
+        // computing that root once replaces a division on every odd candidate.
+        // The floating-point estimate is corrected to the exact root using the
+        // same comparison the loop used to make, p <= limit / p.
+        var sqrtLimit = limit > 0 ? Int(Double(limit).squareRoot()) : 0
+        while sqrtLimit > 0 && sqrtLimit > limit / sqrtLimit { sqrtLimit -= 1 }
+        while sqrtLimit + 1 <= limit / (sqrtLimit + 1) { sqrtLimit += 1 }
+
+        while p <= sqrtLimit {
             let candidate = (p - 3) / 2
             if bytes[candidate >> 3] & (UInt8(1) << (candidate & 7)) == 0 {
                 if p < 64 {
