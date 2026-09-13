@@ -74,8 +74,9 @@ request performs one complete pass; the benchmark default remains five seconds.
 
 ## Verification
 
-The striped package includes an independent Boolean reference verifier and
-additional alignment, group, tail, random-limit, and prime-square checks. From
+The striped package includes one verifier against an independent Boolean
+sieve, covering small limits, alignment, group and tail boundaries, random
+limits, prime-square boundaries, one million and ten million. From
 `PrimeSwift_1bitStriped_u8`:
 
 ```sh
@@ -85,8 +86,6 @@ swiftc -O -sanitize=address Sources/PrimeSieveSwift/PrimeSieve.swift Tools/Verif
 .build/verify-asan
 swiftc -O -whole-module-optimization Sources/PrimeSieveSwift/PrimeSieve.swift Tools/Verify.swift -o .build/verify
 .build/verify
-swiftc -O -sanitize=address Sources/PrimeSieveSwift/PrimeSieve.swift Tools/ExtraVerify.swift -o .build/extra-verify-asan
-.build/extra-verify-asan
 ```
 
 ## Editing the generated sieve

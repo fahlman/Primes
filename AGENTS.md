@@ -89,8 +89,6 @@ Run these from `tools/swift`, holding the timing lock. Set `swift_package=../../
    mkdir -p .build
    swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/Verify.swift" -o .build/verify-asan && .build/verify-asan
    swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/Verify.swift" -o .build/verify && .build/verify
-   swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/ExtraVerify.swift" -o .build/extra-verify-asan && .build/extra-verify-asan
-   swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/ExtraVerify.swift" -o .build/extra-verify && .build/extra-verify
    swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" phase-split/PhaseSieve.swift phase-split/PhaseVerify.swift -o .build/phase-verify-asan && .build/phase-verify-asan
    swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" phase-split/PhaseSieve.swift phase-split/PhaseVerify.swift -o .build/phase-verify && .build/phase-verify
    ```
