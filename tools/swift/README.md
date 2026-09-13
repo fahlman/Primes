@@ -2,7 +2,7 @@
 
 The adopted sieve is [PrimeSieve.swift](../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift) in the striped Swift package. The [solution README](../../PrimeSwift/solution_1/README.md) covers the implementation, package build, CLI and generator. This directory contains fork-only benchmarks, comparisons and diagnostics; it is excluded from the upstream submission.
 
-The package owns its editable template and generator in `Tools`, and compiles the generated sieve directly. Its `Verify.swift` and `ExtraVerify.swift` are the canonical correctness checks. There is one copy of the sieve, observer, template and each verifier.
+The package owns its editable template and generator in `Tools`, and compiles the generated sieve directly. Its `Verify.swift` is the canonical correctness check. There is one copy of the sieve, observer, template and verifier.
 
 ## Build and verify
 

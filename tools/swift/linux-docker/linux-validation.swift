@@ -16,8 +16,10 @@ import Glibc
 import Darwin
 #endif
 
-let checkNames = ["verify-asan", "extra-verify-asan", "phase-verify-asan",
-                  "verify-wmo", "extra-verify-wmo", "phase-verify-wmo"]
+/// The check names for a layout: every check under ASan, then every check under WMO.
+func checkNames(for layout: SourceLayout) -> [String] {
+    ["asan", "wmo"].flatMap { mode in layout.checks.map { "\($0.0)-\(mode)" } }
+}
 let lockPath = "/tmp/primes-timing.lock"
 let ownerLabel = "org.fahlman.primes.validation-owner"
 
@@ -43,10 +45,9 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
             name: "solution-package", rootPath: ".", dockerfile: "tools/swift/Dockerfile", core: core,
             sourceFiles: ["tools/swift/Dockerfile", "tools/swift/Dockerfile.dockerignore", core,
                           "tools/swift/Benchmark.swift", package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
-                          package + "/Tools/Verify.swift", package + "/Tools/ExtraVerify.swift",
+                          package + "/Tools/Verify.swift",
                           "tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"],
             checks: [("verify", [package + "/Tools/Verify.swift"]),
-                     ("extra-verify", [package + "/Tools/ExtraVerify.swift"]),
                      ("phase-verify", ["tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"])])
     }
     return SourceLayout(
@@ -489,7 +490,7 @@ func validate(_ arguments: [String]) throws {
             var names: [String] = []
             index += 1
             while index < arguments.count, !arguments[index].hasPrefix("--") { names.append(arguments[index]); index += 1 }
-            guard !names.isEmpty, names.allSatisfy({ checkNames.contains($0) }) else { throw RuntimeError("--checks takes names from \(checkNames.joined(separator: ", "))") }
+            guard !names.isEmpty else { throw RuntimeError("--checks takes at least one check name") }
             guard Set(names).count == names.count else { throw RuntimeError("Each requested check must appear only once.") }
             checks = names
             continue
@@ -504,14 +505,19 @@ func validate(_ arguments: [String]) throws {
           let outputPath = options["--output"], let buildPath = options["--build-output"] else { throw RuntimeError(usage) }
     guard matches("[0-9a-f]{40}", solutionRevision) else { throw RuntimeError("The solution revision must be a complete lowercase commit SHA.") }
     guard ["linux/amd64", "linux/arm64"].contains(platform) else { throw RuntimeError("--platform must be linux/amd64 or linux/arm64") }
-    let requestedChecks = checkNames.filter { (checks ?? checkNames).contains($0) }
-    let checkScope = requestedChecks == checkNames ? "full_suite" : "targeted"
+    let solution = URL(fileURLWithPath: solutionRoot).standardizedFileURL
+    let layout = try sourceLayout(solution)
+    let allChecks = checkNames(for: layout)
+    if let checks, let unknown = checks.first(where: { !allChecks.contains($0) }) {
+        throw RuntimeError("--checks takes names from \(allChecks.joined(separator: ", ")); \(unknown) is not one of them")
+    }
+    let requestedChecks = allChecks.filter { (checks ?? allChecks).contains($0) }
+    let checkScope = requestedChecks == allChecks ? "full_suite" : "targeted"
 
     let output = URL(fileURLWithPath: outputPath).standardizedFileURL
     try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
     guard try FileManager.default.contentsOfDirectory(atPath: output.path).isEmpty else { throw RuntimeError("Output directory must be new and empty: \(output.path)") }
     try FileManager.default.createDirectory(at: output.appendingPathComponent("logs"), withIntermediateDirectories: false)
-    let solution = URL(fileURLWithPath: solutionRoot).standardizedFileURL
     let workflow = URL(fileURLWithPath: workflowRoot).standardizedFileURL
     let builds = URL(fileURLWithPath: buildPath).standardizedFileURL
     let environment = ProcessInfo.processInfo.environment
@@ -527,7 +533,7 @@ func validate(_ arguments: [String]) throws {
         "purpose": "Linux/Docker correctness and runtime compatibility only; no speed claim.",
         "requested_solution_revision": solutionRevision, "requested_platform": platform,
         "check_scope": checkScope, "requested_checks": requestedChecks, "completed_checks": [String](),
-        "unrequested_checks": checkNames.filter { !requestedChecks.contains($0) },
+        "unrequested_checks": allChecks.filter { !requestedChecks.contains($0) },
         "host_system": hostSystem, "host_machine": hostMachine, "github": github,
     ], path: output.appendingPathComponent("validation.json"))
     if let server = environment["GITHUB_SERVER_URL"], let repository = environment["GITHUB_REPOSITORY"], let runID = environment["GITHUB_RUN_ID"],
@@ -571,7 +577,6 @@ func validate(_ arguments: [String]) throws {
         let workflowHead = try run("workflow-head", ["git", "-C", workflow.path, "rev-parse", "HEAD"], timeout: 60).stdout.trimmingCharacters(in: .whitespacesAndNewlines)
         journal["workflow_revision"] = workflowHead
         if let expected = environment["GITHUB_SHA"], !expected.isEmpty, workflowHead != expected { throw RuntimeError("Workflow checkout does not match the event revision.") }
-        let layout = try sourceLayout(solution)
         let sourceRoot = solution.appendingPathComponent(layout.rootPath).standardizedFileURL
         let dockerfileURL = sourceRoot.appendingPathComponent(layout.dockerfile)
         journal["source_layout"] = layout.name
