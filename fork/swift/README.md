@@ -11,7 +11,7 @@ Use Swift 6.3.3. Acquire `/tmp/primes-timing.lock` under the [working rules](../
 ```sh
 swift_package=../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
 swift "$swift_package/Tools/generate-dense.swift" --check "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift"
-swift "$swift_package/Tools/check-dense-generator.swift"
+swift check-dense-generator.swift
 sh ./run.sh
 ```
 
