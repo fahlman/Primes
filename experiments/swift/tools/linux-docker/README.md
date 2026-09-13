@@ -7,12 +7,6 @@ earlier Python pair, keeping the same commands, checks, evidence record and
 cleanup rules; the Python versions remain in Git history and in the evidence they
 produced.
 
-The validator and its lifecycle tests are one Swift script,
-`linux-validation.swift`, with the subcommands `validate` and `test-lifecycle`; it
-runs on the runner host, whose Ubuntu images ship Swift 6.3.3. It is a port of the
-earlier Python pair, keeping the same commands, checks, evidence record and
-cleanup rules; the Python versions remain in Git history and in the evidence they
-produced.
 
 This workflow validates the committed Swift Dockerfile and existing correctness
 checks on native Linux amd64 and arm64. It uses Docker already installed on the
