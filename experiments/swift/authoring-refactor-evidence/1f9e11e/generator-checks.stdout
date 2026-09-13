@@ -1,0 +1,1655 @@
+{
+  "command_count" : 98,
+  "commands" : [
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift"
+      ],
+      "case" : "stdout-blocks",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 218410,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift"
+      ],
+      "case" : "check-current",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift"
+      ],
+      "case" : "template-before-mode",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "template-after-path",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-word.swift"
+      ],
+      "case" : "corrupt-word-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-word.swift"
+      ],
+      "case" : "corrupt-word-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-vector.swift"
+      ],
+      "case" : "corrupt-vector-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-vector.swift"
+      ],
+      "case" : "corrupt-vector-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-both-blocks.swift"
+      ],
+      "case" : "corrupt-both-blocks-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-both-blocks.swift"
+      ],
+      "case" : "corrupt-both-blocks-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-handwritten.swift"
+      ],
+      "case" : "corrupt-handwritten-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-corrupt-handwritten.swift"
+      ],
+      "case" : "corrupt-handwritten-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-dispatch-cutoff.swift"
+      ],
+      "case" : "word-dispatch-cutoff-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-dispatch-cutoff.swift"
+      ],
+      "case" : "word-dispatch-cutoff-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-dispatch-cutoff.swift"
+      ],
+      "case" : "vector-dispatch-cutoff-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-dispatch-cutoff.swift"
+      ],
+      "case" : "vector-dispatch-cutoff-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source-utf8-bom.swift"
+      ],
+      "case" : "source-utf8-bom-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source-utf8-bom.swift"
+      ],
+      "case" : "source-utf8-bom-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-marker.swift"
+      ],
+      "case" : "missing-marker--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 128-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-marker.swift"
+      ],
+      "case" : "missing-marker--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 128-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-marker.swift"
+      ],
+      "case" : "duplicate-marker--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-marker.swift"
+      ],
+      "case" : "duplicate-marker--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-reversed-markers.swift"
+      ],
+      "case" : "reversed-markers--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-reversed-markers.swift"
+      ],
+      "case" : "reversed-markers--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-overlapping-markers.swift"
+      ],
+      "case" : "overlapping-markers--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Generated blocks must be separate, with the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-overlapping-markers.swift"
+      ],
+      "case" : "overlapping-markers--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Generated blocks must be separate, with the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-insertion-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-insertion.swift.in"
+      ],
+      "case" : "missing-insertion",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 64-bit insertion line\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-insertion-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-insertion.swift.in"
+      ],
+      "case" : "duplicate-insertion",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 128-bit insertion line\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-reversed-insertions-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-reversed-insertions.swift.in"
+      ],
+      "case" : "reversed-insertions",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Template insertions must put the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-dispatch-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-missing-dispatch-token.swift.in"
+      ],
+      "case" : "missing-dispatch-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 64-bit dispatch token\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-dispatch-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-duplicate-dispatch-token.swift.in"
+      ],
+      "case" : "duplicate-dispatch-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 128-bit dispatch token\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unknown-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unknown-token.swift.in"
+      ],
+      "case" : "unknown-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Unrecognized template token or insertion\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-dispatch-shape-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-dispatch-shape.swift.in"
+      ],
+      "case" : "dispatch-shape",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed runtime-tested dense dispatch\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-swapped-dispatch-handlers-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-swapped-dispatch-handlers.swift.in"
+      ],
+      "case" : "swapped-dispatch-handlers",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed runtime-tested dense dispatch\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-helper-width-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-helper-width.swift.in"
+      ],
+      "case" : "word-helper-width",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed markWord bit width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-helper-width-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-helper-width.swift.in"
+      ],
+      "case" : "vector-helper-width",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed markVectorWord bit width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-storage-type-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-word-storage-type.swift.in"
+      ],
+      "case" : "word-storage-type",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Changed markWord storage width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-storage-type-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-vector-storage-type.swift.in"
+      ],
+      "case" : "vector-storage-type",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Changed markVectorWord storage width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--unknown",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift"
+      ],
+      "case" : "unknown-mode",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check"
+      ],
+      "case" : "missing-path",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift",
+        "extra"
+      ],
+      "case" : "extra-argument",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--template"
+      ],
+      "case" : "missing-template-path",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "template-without-mode",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift"
+      ],
+      "case" : "duplicate-modes",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-source with spaces.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "duplicate-template-options",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift.in"
+      ],
+      "case" : "unicode-byte-mismatch",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift.in"
+      ],
+      "case" : "unicode-byte-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-unicode.swift.in"
+      ],
+      "case" : "unicode-repaired-check",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/canonical-does-not-exist.swift"
+      ],
+      "case" : "missing-source",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "The file “canonical-does-not-exist.swift” couldn’t be opened because there is no such file.\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift"
+      ],
+      "case" : "stdout-blocks",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 218410,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift"
+      ],
+      "case" : "check-current",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift"
+      ],
+      "case" : "template-before-mode",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "template-after-path",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-word.swift"
+      ],
+      "case" : "corrupt-word-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-word.swift"
+      ],
+      "case" : "corrupt-word-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-vector.swift"
+      ],
+      "case" : "corrupt-vector-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-vector.swift"
+      ],
+      "case" : "corrupt-vector-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-both-blocks.swift"
+      ],
+      "case" : "corrupt-both-blocks-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-both-blocks.swift"
+      ],
+      "case" : "corrupt-both-blocks-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-handwritten.swift"
+      ],
+      "case" : "corrupt-handwritten-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-corrupt-handwritten.swift"
+      ],
+      "case" : "corrupt-handwritten-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-dispatch-cutoff.swift"
+      ],
+      "case" : "word-dispatch-cutoff-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-dispatch-cutoff.swift"
+      ],
+      "case" : "word-dispatch-cutoff-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-dispatch-cutoff.swift"
+      ],
+      "case" : "vector-dispatch-cutoff-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-dispatch-cutoff.swift"
+      ],
+      "case" : "vector-dispatch-cutoff-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source-utf8-bom.swift"
+      ],
+      "case" : "source-utf8-bom-check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source-utf8-bom.swift"
+      ],
+      "case" : "source-utf8-bom-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-marker.swift"
+      ],
+      "case" : "missing-marker--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 128-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-marker.swift"
+      ],
+      "case" : "missing-marker--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 128-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-marker.swift"
+      ],
+      "case" : "duplicate-marker--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-marker.swift"
+      ],
+      "case" : "duplicate-marker--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-reversed-markers.swift"
+      ],
+      "case" : "reversed-markers--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-reversed-markers.swift"
+      ],
+      "case" : "reversed-markers--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or reversed 64-bit generated-block markers\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-overlapping-markers.swift"
+      ],
+      "case" : "overlapping-markers--check",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Generated blocks must be separate, with the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-overlapping-markers.swift"
+      ],
+      "case" : "overlapping-markers--write",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Generated blocks must be separate, with the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-insertion-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-insertion.swift.in"
+      ],
+      "case" : "missing-insertion",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 64-bit insertion line\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-insertion-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-insertion.swift.in"
+      ],
+      "case" : "duplicate-insertion",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 128-bit insertion line\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-reversed-insertions-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-reversed-insertions.swift.in"
+      ],
+      "case" : "reversed-insertions",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Template insertions must put the 64-bit block first\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-dispatch-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-missing-dispatch-token.swift.in"
+      ],
+      "case" : "missing-dispatch-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 64-bit dispatch token\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-dispatch-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-duplicate-dispatch-token.swift.in"
+      ],
+      "case" : "duplicate-dispatch-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed 128-bit dispatch token\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unknown-token-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unknown-token.swift.in"
+      ],
+      "case" : "unknown-token",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Unrecognized template token or insertion\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-dispatch-shape-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-dispatch-shape.swift.in"
+      ],
+      "case" : "dispatch-shape",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed runtime-tested dense dispatch\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-swapped-dispatch-handlers-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-swapped-dispatch-handlers.swift.in"
+      ],
+      "case" : "swapped-dispatch-handlers",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed runtime-tested dense dispatch\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-helper-width-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-helper-width.swift.in"
+      ],
+      "case" : "word-helper-width",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed markWord bit width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-helper-width-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-helper-width.swift.in"
+      ],
+      "case" : "vector-helper-width",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Missing, duplicated, or changed markVectorWord bit width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-storage-type-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-word-storage-type.swift.in"
+      ],
+      "case" : "word-storage-type",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Changed markWord storage width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-storage-type-target.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-vector-storage-type.swift.in"
+      ],
+      "case" : "vector-storage-type",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Changed markVectorWord storage width\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--unknown",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift"
+      ],
+      "case" : "unknown-mode",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check"
+      ],
+      "case" : "missing-path",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift",
+        "extra"
+      ],
+      "case" : "extra-argument",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--template"
+      ],
+      "case" : "missing-template-path",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "template-without-mode",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift"
+      ],
+      "case" : "duplicate-modes",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-source with spaces.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/template with spaces.swift.in"
+      ],
+      "case" : "duplicate-template-options",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift.in"
+      ],
+      "case" : "unicode-byte-mismatch",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "PrimeSieve.swift differs from its complete template rendering\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift.in"
+      ],
+      "case" : "unicode-byte-repair",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 73,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--check",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift",
+        "--template",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-unicode.swift.in"
+      ],
+      "case" : "unicode-repaired-check",
+      "exit_code" : 0,
+      "expected_exit_code" : 0,
+      "stderr" : "",
+      "stdout_bytes" : 81,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    },
+    {
+      "argv" : [
+        "\/usr\/bin\/env",
+        "swift",
+        "\/Users\/ryan\/Developer\/Primes-authoring-template\/experiments\/swift\/tools\/generate-dense-128.swift",
+        "--write",
+        "\/var\/folders\/f_\/gksy_zv907bb8lchdg3521cm0000gp\/T\/dense-generator-check-A70351D9-5B99-4423-BFBE-F01355BA1D9C\/shim-does-not-exist.swift"
+      ],
+      "case" : "missing-source",
+      "exit_code" : 1,
+      "expected_exit_code" : 1,
+      "stderr" : "The file “shim-does-not-exist.swift” couldn’t be opened because there is no such file.\n",
+      "stdout_bytes" : 0,
+      "termination_reason" : "exit",
+      "tool" : "generate-dense-128.swift"
+    }
+  ],
+  "purpose" : "Generator CLI and independent schedule checks only; no sieve execution.",
+  "schedule" : {
+    "helper_calls" : 3132,
+    "individual_marks" : 4992,
+    "odd_factors" : 54
+  },
+  "status" : "passed",
+  "temporary_fixtures_removed" : true
+}
