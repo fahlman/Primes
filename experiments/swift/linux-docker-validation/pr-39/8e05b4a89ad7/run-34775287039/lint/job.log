@@ -1,0 +1,223 @@
+Lint the solution Dockerfile as upstream's CI does	Set up job	﻿2026-09-13T18:49:29.9489785Z Current runner version: '2.337.0'
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9506295Z ##[group]Runner Image Provisioner
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9506943Z Hosted Compute Agent
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9507397Z Version: 20260828.587
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9507830Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9508326Z Build Date: 2026-08-28T16:44:25Z
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9509058Z Worker ID: {e30df4bc-ddd7-4a55-8d9c-9f5b2be842d9}
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9509618Z Azure Region: centralus
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9510037Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9511032Z ##[group]Operating System
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9511459Z Ubuntu
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9511879Z 24.04.5
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9512238Z LTS
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9512582Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9512953Z ##[group]Runner Image
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9513342Z Image: ubuntu-24.04
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9513730Z Version: 20260907.300.1
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9514428Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9515625Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9516257Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9517243Z ##[group]GITHUB_TOKEN Permissions
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9518985Z Contents: read
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9519417Z Metadata: read
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9519785Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9521225Z Secret source: Actions
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9521947Z Cache mode: write
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9522532Z Prepare workflow directory
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9785251Z Prepare all required actions
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:29.9818708Z Getting action download info
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:30.2235875Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:31.1825230Z Download action repository 'jbergstroem/hadolint-gh-action@d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b' (SHA:d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b)
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:31.6160472Z Getting action download info
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:31.7063466Z Download action repository 'github/codeql-action@cdefb33c0f6224e58673d9004f47f7cb3e328b89' (SHA:cdefb33c0f6224e58673d9004f47f7cb3e328b89)
+Lint the solution Dockerfile as upstream's CI does	Set up job	2026-09-13T18:49:33.1178716Z Complete job name: Lint the solution Dockerfile as upstream's CI does
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	﻿2026-09-13T18:49:33.1661629Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1662190Z with:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1662542Z   repository: fahlman/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1662838Z   ref: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1663140Z   persist-credentials: false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1665127Z   token: ***
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1665376Z   ssh-strict: true
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1665652Z   ssh-user: git
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1665893Z   clean: true
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1666138Z   sparse-checkout-cone-mode: true
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1666452Z   fetch-depth: 1
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1666715Z   fetch-tags: false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1667014Z   show-progress: true
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1667258Z   lfs: false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1667498Z   submodules: false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1667766Z   set-safe-directory: true
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1668043Z   allow-unsafe-pr-checkout: false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1668416Z env:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1668702Z   SOLUTION_REVISION: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.1669321Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2476974Z Syncing repository: fahlman/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2479077Z ##[group]Getting Git version info
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2479702Z Working directory is '/home/runner/work/Primes/Primes'
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2480623Z [command]/usr/bin/git version
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2761776Z git version 2.55.0
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2777932Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2792433Z Temporarily overriding HOME='/home/runner/work/_temp/91c19b13-75b8-4176-971b-c7a066879659' before making global git config changes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2793508Z Adding repository directory to the temporary git global config as a safe directory
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2797080Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2839946Z Deleting the contents of '/home/runner/work/Primes/Primes'
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2842261Z ##[group]Determining repository object format
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2843487Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2844177Z ##[group]Initializing the repository
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.2846137Z [command]/usr/bin/git init /home/runner/work/Primes/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5692810Z hint: Using 'master' as the name for the initial branch. This default branch name
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5693819Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5694337Z hint: to use in all of your new repositories, which will suppress this warning,
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5694722Z hint: call:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5695058Z hint:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5695390Z hint: 	git config --global init.defaultBranch <name>
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5695731Z hint:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5696079Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5696609Z hint: 'development'. The just-created branch can be renamed via this command:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5697013Z hint:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5697227Z hint: 	git branch -m <name>
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5697459Z hint:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5697747Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5698166Z Initialized empty Git repository in /home/runner/work/Primes/Primes/.git/
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.5704390Z [command]/usr/bin/git remote add origin https://github.com/fahlman/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6034785Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6035338Z ##[group]Disabling automatic garbage collection
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6035688Z [command]/usr/bin/git config --local gc.auto 0
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6051170Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6051745Z ##[group]Setting up auth
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6052177Z Removing SSH command configuration
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6056899Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.6080028Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7182222Z Removing HTTP extra header
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7186866Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7211309Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7353168Z Removing includeIf entries pointing to credentials config files
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7358952Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7381709Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7528631Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7556396Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/.git.path /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7577277Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7602067Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7623456Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7786124Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7786754Z ##[group]Fetching the repository
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:33.7791599Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6844414Z From https://github.com/fahlman/Primes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6845174Z  * branch            8e05b4a89ad7706eced6ef8827e62a15c37e5b29 -> FETCH_HEAD
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6855183Z [command]/usr/bin/git rev-parse --verify --quiet 8e05b4a89ad7706eced6ef8827e62a15c37e5b29^{object}
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6877801Z 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6879214Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6879584Z ##[group]Determining the checkout info
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6880080Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6883548Z [command]/usr/bin/git sparse-checkout disable
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6922217Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6943470Z ##[group]Checking out the ref
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.6946247Z [command]/usr/bin/git checkout --progress --force 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8481792Z Note: switching to '8e05b4a89ad7706eced6ef8827e62a15c37e5b29'.
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8482236Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8482482Z You are in 'detached HEAD' state. You can look around, make experimental
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8482854Z changes and commit them, and you can discard any commits you make in this
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8483270Z state without impacting any branches by switching back to a branch.
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8483460Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8483595Z If you want to create a new branch to retain commits you create, you may
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8483906Z do so (now or later) by using -c with the switch command. Example:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484089Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484219Z   git switch -c <new-branch-name>
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484374Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484482Z Or undo this operation with:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484620Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484723Z   git switch -
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8484851Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8485012Z Turn off this advice by setting config variable advice.detachedHead to false
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8485245Z 
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8485419Z HEAD is now at 8e05b4a Merge pull request #38 from fahlman/swift/review-fixes
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8768096Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8799241Z [command]/usr/bin/git log -1 --format=%H
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8817727Z 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8825090Z ##[group]Removing auth
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8825334Z Removing SSH command configuration
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8827777Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8849210Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.8997694Z Removing HTTP extra header
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9001845Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9026167Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9171224Z Removing includeIf entries pointing to credentials config files
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9174664Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9194640Z includeif.gitdir:/home/runner/work/Primes/Primes/.git.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9195947Z includeif.gitdir:/home/runner/work/Primes/Primes/.git/worktrees/*.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9196565Z includeif.gitdir:/github/workspace/.git.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9196971Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9202924Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/.git.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9225200Z /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9233565Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/.git.path /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9255390Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/.git/worktrees/*.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9271188Z /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9277915Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9303371Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9318623Z /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9325042Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9353167Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9368247Z /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9373435Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9395932Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9536227Z Removing credentials config '/home/runner/work/_temp/git-credentials-8ced46d4-98bb-4183-b4b0-7cadf2dcd367.config'
+Lint the solution Dockerfile as upstream's CI does	Check out exact solution revision	2026-09-13T18:49:34.9543004Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	﻿2026-09-13T18:49:34.9726626Z ##[group]Run jbergstroem/hadolint-gh-action@d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9726949Z with:
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9727135Z   dockerfile: PrimeSwift/solution_1/Dockerfile
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9727360Z   output_format: tty
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9727523Z   error_level: 0
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9727696Z   config_file: ./config/hadolint.yml
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9727891Z   annotate: true
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9728044Z   version: 2.14.0
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9728218Z   advanced_security: false
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9728392Z env:
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9728588Z   SOLUTION_REVISION: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9729067Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9775926Z ##[start-action display=Download hadolint and make it available in path;id=__jbergstroem_hadolint-gh-action.__run]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9814090Z ##[group]Run /home/runner/work/_actions/jbergstroem/hadolint-gh-action/d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b/install.sh
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9814723Z ^[[36;1m/home/runner/work/_actions/jbergstroem/hadolint-gh-action/d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b/install.sh^[[0m
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9838242Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9838515Z env:
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9838727Z   SOLUTION_REVISION: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9839187Z   version: 2.14.0
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:34.9839347Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6157454Z 1::debug::Hadolint 2.14.0 installed successfully
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6176816Z ##[end-action id=__jbergstroem_hadolint-gh-action.__run;outcome=success;conclusion=success;duration_ms=639]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6181810Z ##[start-action display=Invoke hadolint.sh;id=__jbergstroem_hadolint-gh-action.run]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6198334Z ##[group]Run /home/runner/work/_actions/jbergstroem/hadolint-gh-action/d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b/hadolint.sh
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6199092Z ^[[36;1m/home/runner/work/_actions/jbergstroem/hadolint-gh-action/d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b/hadolint.sh^[[0m
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6219288Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6219544Z env:
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6219751Z   SOLUTION_REVISION: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220015Z   dockerfile: PrimeSwift/solution_1/Dockerfile
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220225Z   config_file: ./config/hadolint.yml
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220409Z   error_level: 0
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220558Z   annotate: true
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220703Z   output_format: tty
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6220862Z   version: 2.14.0
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6221014Z   advanced_security: false
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6221173Z ##[endgroup]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6487684Z hadolint_output=""
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6653349Z 
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6683099Z ##[end-action id=__jbergstroem_hadolint-gh-action.run;outcome=success;conclusion=success;duration_ms=50]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6690088Z ##[start-action display=Upload SARIF file to GitHub Advanced Security;id=__jbergstroem_hadolint-gh-action.__github_codeql-action]
+Lint the solution Dockerfile as upstream's CI does	Lint Dockerfile	2026-09-13T18:49:35.6704242Z ##[end-action id=__jbergstroem_hadolint-gh-action.__github_codeql-action;outcome=skipped;conclusion=skipped;duration_ms=0]
+Lint the solution Dockerfile as upstream's CI does	Post Lint Dockerfile	﻿2026-09-13T18:49:35.6800696Z Post job cleanup.
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	﻿2026-09-13T18:49:35.6848583Z Post job cleanup.
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7451381Z [command]/usr/bin/git version
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7477537Z git version 2.55.0
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7502962Z Temporarily overriding HOME='/home/runner/work/_temp/b8eb7277-e968-4509-bf55-ee9b007a3973' before making global git config changes
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7503879Z Adding repository directory to the temporary git global config as a safe directory
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7506583Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7530728Z Removing SSH command configuration
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7535595Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7559679Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7709483Z Removing HTTP extra header
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7713190Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7734778Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7879071Z Removing includeIf entries pointing to credentials config files
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7882895Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Lint the solution Dockerfile as upstream's CI does	Post Check out exact solution revision	2026-09-13T18:49:35.7905317Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Lint the solution Dockerfile as upstream's CI does	Complete job	﻿2026-09-13T18:49:35.8579792Z Cleaning up orphan processes

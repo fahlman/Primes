@@ -1,0 +1,11 @@
+
+Passes: 9754, Time: 5.000092029571533, Avg: 0.000512619646255027, Limit: 1000000, Count: 78498, Valid: true
+
+yellowcub_1bit_UInt8;9754;5.000092029571533;1;algorithm=base,faithful=yes,bits=1
+
+yellowcub_fahlman_striped_UInt8;41059;5.000086133;1;algorithm=base,faithful=yes,bits=1
+
+Passes: 11533, Time: 5.000238060951233, Avg: 0.0004335591832958669, Limit: 1000000, Count: 78498, Valid: true
+
+j-f1_yellowcub_bool;11533;5.000238060951233;1;algorithm=base,faithful=yes,bits=8
+
