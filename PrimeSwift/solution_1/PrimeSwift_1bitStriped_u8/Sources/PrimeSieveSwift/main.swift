@@ -27,16 +27,12 @@ struct PrimeSieveSwift: ParsableCommand {
         guard upperLimit >= 0 else {
             throw ValidationError("The upper limit must be nonnegative.")
         }
-        guard maxTime.isFinite, maxTime >= 0,
-              (maxTime * 1_000_000_000).rounded(.up) < Double(UInt64.max) else {
-            throw ValidationError("Time must be finite, nonnegative, and representable in nanoseconds.")
-        }
+        _ = try validatedNanoseconds(for: maxTime)
     }
 
     func run() throws {
-        let oddCount = upperLimit >= 3 ? (upperLimit - 1) / 2 : 0
-        let byteCount = oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
-        let targetNanoseconds = UInt64((maxTime * 1_000_000_000).rounded(.up))
+        let byteCount = PrimeSieve.storageLayout(for: upperLimit).byteCount
+        let targetNanoseconds = try validatedNanoseconds(for: maxTime)
         var passes = 0
         var checksum: UInt64 = 0
         let start = DispatchTime.now().uptimeNanoseconds
@@ -55,7 +51,10 @@ struct PrimeSieveSwift: ParsableCommand {
         // Validation, enumeration, and printing are outside the timed interval.
         let check = PrimeSieve(limit: upperLimit)
         check.runSieve()
-        let primes = check.primes().filter { $0 < upperLimit }
+        let inclusivePrimes = check.primes()
+        // Sorted inclusive output can exceed the CLI's exclusive bound only at
+        // its final element. Keep a slice instead of allocating a filtered array.
+        let primes = inclusivePrimes.dropLast(inclusivePrimes.last == upperLimit ? 1 : 0)
         let primeCounts = [
                      10:         4,
                     100:        25,

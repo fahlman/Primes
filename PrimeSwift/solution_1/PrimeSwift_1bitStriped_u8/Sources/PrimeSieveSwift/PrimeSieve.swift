@@ -6,10 +6,27 @@ final class PrimeSieve {
     private let byteCount: Int
     private let storage: UnsafeMutablePointer<UInt8>
 
+    /// Logical counts only; an empty sieve still allocates one physical byte.
+    struct StorageLayout {
+        let oddCount: Int
+
+        var byteCount: Int {
+            @inline(__always) get {
+                oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
+            }
+        }
+    }
+
+    @inline(__always)
+    static func storageLayout(for limit: Int) -> StorageLayout {
+        StorageLayout(oddCount: limit >= 3 ? (limit - 1) / 2 : 0)
+    }
+
     init(limit: Int) {
+        let layout = Self.storageLayout(for: limit)
         self.limit = limit
-        oddCount = limit >= 3 ? (limit - 1) / 2 : 0
-        byteCount = oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
+        oddCount = layout.oddCount
+        byteCount = layout.byteCount
         storage = .allocate(capacity: max(1, byteCount))
         storage.initialize(repeating: 0, count: byteCount)
     }
@@ -217,6 +234,7 @@ final class PrimeSieve {
         // the next mark starts the next p-word group. Each markWord call marks the
         // multiples in one word individually and stores that word once. `first` is
         // the bit offset of that word's first multiple.
+        // BEGIN GENERATED DENSE 64
         switch p {
         case 5:
             while word + 5 <= fullWords {
@@ -1361,6 +1379,7 @@ final class PrimeSieve {
         default:
             preconditionFailure("Word-dense marking requires an odd factor from 5 to 63")
         }
+        // END GENERATED DENSE 64
 
         // Fewer than p complete words remain, plus any partial final word.
         bit = word * 64
