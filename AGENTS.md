@@ -4,7 +4,7 @@ These instructions apply to Swift work in `PrimeSwift/solution_1`, `fork/swift` 
 
 ## Goal
 
-Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8bitBool`, `PrimeSwift_1bit_u8`, `PrimeSwift_1bitStriped_u8`) on equal terms, in one category: `algorithm=base,faithful=yes,bits=1`, one thread, limit 1,000,000. Wheel, cached-state, and multithreaded variants are deferred.
+Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8bitBool`, `PrimeSwift_1bit_u8`, `PrimeSwift_1bitStriped_u8`) on equal terms, in one category: `algorithm=base,faithful=yes,bits=1`, one thread, limit 1,000,000. The same sieve also runs multithreaded as a second output line: N single-threaded workers, each with its own fresh sieves, passes summed. Wheel and cached-state variants are deferred.
 
 ## Baseline and development controls
 
@@ -20,9 +20,10 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Mark every composite with its own operation in the source. Unrolling and reordering the marks are fine; the eight fixed-mask streams do both. The compiler may merge these operations in machine code. The classification rests on the source, so say so wherever it matters.
 - Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. No external dependencies.
 - The completed flags are the result. A count or checksum alone is not.
-- Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, more than one thread, and marking a prime as composite and then restoring it.
+- Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, and marking a prime as composite and then restoring it.
+- A multithreaded run is N single-threaded workers, each creating its own fresh sieves; no sieve is split across threads, and nothing is shared between them but the limit and the running time. The sieve code is the same bytes as the single-threaded entry's.
 - Specialized small-factor handlers: dispatch only after the runtime bit test finds the candidate unmarked. Provide a handler for every odd value in the handled range, not only primes, so no knowledge of primality is built in. Start at p², mark individually up to any alignment boundary, and finish with a bounded tail.
-- Output tags must match the code: `algorithm=base,faithful=yes,bits=1` and a thread count of 1. READMEs and PR records must describe what the code does.
+- Output tags must match the code: `algorithm=base,faithful=yes,bits=1` and the thread count actually used. READMEs and PR records must describe what the code does.
 - Implement the sieve, the benchmark and the project's tools in Swift, with POSIX `sh` only for thin wrappers such as `run.sh`. No sieve or benchmark logic lives outside Swift, and no other language is needed anywhere in the fork.
 - When borrowing an idea from another submission, read its code. Its labels are not proof that it complies.
 
