@@ -52,7 +52,10 @@ struct PrimeSieveSwift: ParsableCommand {
         // Validation, enumeration, and printing are outside the timed interval.
         let check = PrimeSieve(limit: upperLimit)
         check.runSieve()
-        let primes = check.primes().filter { $0 < upperLimit }
+        let inclusivePrimes = check.primes()
+        // Sorted inclusive output can exceed the CLI's exclusive bound only at
+        // its final element. Keep a slice instead of allocating a filtered array.
+        let primes = inclusivePrimes.dropLast(inclusivePrimes.last == upperLimit ? 1 : 0)
         let primeCounts = [
                      10:         4,
                     100:        25,
