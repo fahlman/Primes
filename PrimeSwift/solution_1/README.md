@@ -80,7 +80,7 @@ additional alignment, group, tail, random-limit, and prime-square checks. From
 
 ```sh
 mkdir -p .build
-swift Tools/generate-dense-128.swift --check Sources/PrimeSieveSwift/PrimeSieve.swift
+swift Tools/generate-dense.swift --check Sources/PrimeSieveSwift/PrimeSieve.swift
 swiftc -O -sanitize=address Sources/PrimeSieveSwift/PrimeSieve.swift Tools/Verify.swift -o .build/verify-asan
 .build/verify-asan
 swiftc -O -whole-module-optimization Sources/PrimeSieveSwift/PrimeSieve.swift Tools/Verify.swift -o .build/verify
@@ -89,8 +89,32 @@ swiftc -O -sanitize=address Sources/PrimeSieveSwift/PrimeSieve.swift Tools/Extra
 .build/extra-verify-asan
 ```
 
-The generator reproduces the individual 128-bit source marks; it is not used at
-runtime. All code remains licensed under the repository's BSD-3-Clause license.
+## Editing the generated sieve
+
+Edit `Tools/PrimeSieve.swift.in` for handwritten sieve logic and
+`Tools/generate-dense.swift` for the dense marking metadata. The generator inserts
+the individual 64-bit and 128-bit source marks and renders the complete committed
+`Sources/PrimeSieveSwift/PrimeSieve.swift`. Builds compile that output directly;
+generation is not a build step or part of the runtime.
+
+From `PrimeSwift_1bitStriped_u8`, regenerate and check the complete file:
+
+```sh
+swift Tools/generate-dense.swift --write Sources/PrimeSieveSwift/PrimeSieve.swift
+swift Tools/generate-dense.swift --check Sources/PrimeSieveSwift/PrimeSieve.swift
+```
+
+`--write` replaces the entire output, including edits outside the generated
+blocks; make those edits in the template instead. It requires an existing output
+with both correctly ordered marker pairs, validates the template and dispatch
+contract, then writes atomically. `--check` compares the complete output bytes.
+The template defaults to `PrimeSieve.swift.in` beside the generator; append
+`--template path/to/PrimeSieve.swift.in` to select another template explicitly.
+The previous `Tools/generate-dense-128.swift` filename forwards to the same
+complete-file generator. With no arguments, either entry point prints both
+marked switches to standard output.
+
+All code remains licensed under the repository's BSD-3-Clause license.
 
 ## Output and measurements
 

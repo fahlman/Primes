@@ -31,8 +31,7 @@ struct PrimeSieveSwift: ParsableCommand {
     }
 
     func run() throws {
-        let oddCount = upperLimit >= 3 ? (upperLimit - 1) / 2 : 0
-        let byteCount = oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
+        let byteCount = PrimeSieve.storageLayout(for: upperLimit).byteCount
         let targetNanoseconds = try validatedNanoseconds(for: maxTime)
         var passes = 0
         var checksum: UInt64 = 0
