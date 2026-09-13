@@ -76,7 +76,7 @@ The prepared package is preserved on `swift/upstream-striped-111` at merge `35be
 
 Before submission: resolve the retained `yellowcub_striped_UInt8` result label, record an accepted direct comparison for cutoff 111, and validate the prepared package itself on native Linux. These remain distinct from experiment-source and tooling checks.
 
-Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes and the [reports](reports/) for deeper explanations. Historical branches and immutable evidence links preserve rejected candidates, stopped runs and earlier designs. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
+Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes and the [reports](reports/) for deeper explanations. Rejected experiments live on in their closed PRs, whose commits GitHub keeps; the `swift/stream-fusion` experiment is commit `f0cd82d`. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
 
 ## License
 
