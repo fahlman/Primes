@@ -17,12 +17,11 @@ import Darwin
 #endif
 
 let sourceFiles = ["Dockerfile", "PrimeSieve.swift", "Benchmark.swift", "BenchmarkObserver.swift",
-                   "Verify.swift", "ExtraVerify.swift", "tools/phase-split/PhaseSieve.swift",
+                   "Verify.swift", "tools/phase-split/PhaseSieve.swift",
                    "tools/phase-split/PhaseVerify.swift"]
 let workflowFiles = [".github/workflows/swift-linux-docker-validation.yml",
                      "experiments/swift/tools/linux-docker/linux-validation.swift"]
-let checkNames = ["verify-asan", "extra-verify-asan", "phase-verify-asan",
-                  "verify-wmo", "extra-verify-wmo", "phase-verify-wmo"]
+let checkNames = ["verify-asan", "phase-verify-asan", "verify-wmo", "phase-verify-wmo"]
 let lockPath = "/tmp/primes-timing.lock"
 let ownerLabel = "org.fahlman.primes.validation-owner"
 
@@ -591,7 +590,7 @@ func validate(_ arguments: [String]) throws {
                                     "--mount", "type=bind,source=\(builds.path),target=/validation", "--workdir", "/validation"]
         var completed: [String] = []
         for (mode, flags) in [("asan", ["-O", "-sanitize=address"]), ("wmo", ["-O", "-whole-module-optimization"])] {
-            for (name, sources) in [("verify", ["Verify.swift"]), ("extra-verify", ["ExtraVerify.swift"]),
+            for (name, sources) in [("verify", ["Verify.swift"]),
                                     ("phase-verify", ["tools/phase-split/PhaseSieve.swift", "tools/phase-split/PhaseVerify.swift"])] {
                 let checkName = "\(name)-\(mode)"
                 guard requestedChecks.contains(checkName) else { continue }

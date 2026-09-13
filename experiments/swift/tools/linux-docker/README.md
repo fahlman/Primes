@@ -63,11 +63,11 @@ thread, exact `algorithm=base,faithful=yes,bits=1` tags, and the runner's 78,498
 validation message. This five-second smoke run is compatibility evidence only.
 Hosted hardware and its output must not be used for the project's M4 speed claims.
 
-By default, the build-stage image compiles and runs Verify, ExtraVerify and
-PhaseVerify under both `-O -sanitize=address` and `-O -whole-module-optimization`.
+By default, the build-stage image compiles and runs Verify and PhaseVerify
+under both `-O -sanitize=address` and `-O -whole-module-optimization`.
 The optional `--checks` argument accepts one or more unique names from
-`verify-asan`, `extra-verify-asan`, `phase-verify-asan`, `verify-wmo`,
-`extra-verify-wmo`, and `phase-verify-wmo`. Omitting it retains all six checks.
+`verify-asan`, `phase-verify-asan`, `verify-wmo` and `phase-verify-wmo`.
+Omitting it retains all four checks.
 The record lists requested, completed and unrequested checks, and explicitly
 labels full-suite or targeted coverage. Full-suite success is `passed`;
 targeted success is `passed_targeted` and does not establish unrequested checks.
@@ -109,7 +109,7 @@ nonzero exit, timeout and SIGTERM. The interrupted commands must emit a retained
 start marker, establishing that their workload began, and every owned container
 must be confirmed removed. The probe performs no Swift work, uses the same
 exclusive timing lock, and writes separate evidence included in the existing
-artifact upload. The unchanged six Swift checks then run once per native job.
+artifact upload. The four Swift checks then run once per native job.
 
 For the fake-only tests, after acquiring the project timing lock, use:
 
@@ -166,7 +166,7 @@ retained as a cancelled run. See the [complete report](https://github.com/fahlma
 and [aggregate coverage record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/aggregate-coverage.json).
 
 Implementation and static review do not establish Linux support. Full Linux
-verification requires successful evidence for all six checks on each native
+verification requires successful evidence for all four checks on each native
 architecture, with matching source hashes for any split runs. Push the branch
 only after the authorized local timing sessions finish.
 There is no manual-dispatch trigger or requirement to merge this workflow into

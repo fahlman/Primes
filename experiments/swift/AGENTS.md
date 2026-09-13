@@ -84,8 +84,6 @@ Run these from `experiments/swift`, holding the timing lock. A candidate is read
    mkdir -p .build
    swiftc -O -sanitize=address PrimeSieve.swift Verify.swift -o .build/verify-asan && .build/verify-asan
    swiftc -O -whole-module-optimization PrimeSieve.swift Verify.swift -o .build/verify && .build/verify
-   swiftc -O -sanitize=address PrimeSieve.swift ExtraVerify.swift -o .build/extra-verify-asan && .build/extra-verify-asan
-   swiftc -O -whole-module-optimization PrimeSieve.swift ExtraVerify.swift -o .build/extra-verify && .build/extra-verify
    swiftc -O -sanitize=address PrimeSieve.swift tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseVerify.swift -o .build/phase-verify-asan && .build/phase-verify-asan
    swiftc -O -whole-module-optimization PrimeSieve.swift tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseVerify.swift -o .build/phase-verify && .build/phase-verify
    ```

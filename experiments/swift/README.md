@@ -41,7 +41,7 @@ swift tools/check-dense-generator.swift
 
 `--write` atomically replaces the complete file, including handwritten sections; edits made directly to `PrimeSieve.swift` are overwritten. `--check` compares the complete rendered bytes. The template, dispatch shape, factor ranges, helper widths and source markers are checked before writing. `--template PATH` selects another template; the default is beside the generator. With no arguments, the tool prints both marked blocks.
 
-Builds compile committed `PrimeSieve.swift` directly; generation is not a build step or timed work. `Verify.swift` and `ExtraVerify.swift` compare against independent prime lists and check small limits, alignment, tails, random limits and prime-square boundaries. The [source-candidate checklist](AGENTS.md#done-checklist-for-a-candidate) contains the required ASan/WMO and assembly commands. Generator changes also run the generator's own checks.
+Builds compile committed `PrimeSieve.swift` directly; generation is not a build step or timed work. `Verify.swift` compares complete prime lists against an independent sieve at small limits, alignment, group and tail boundaries, random limits, prime-square boundaries, one million and ten million. The [source-candidate checklist](AGENTS.md#done-checklist-for-a-candidate) contains the required ASan/WMO and assembly commands. Generator changes also run the generator's own checks.
 
 The [phase tools](tools/phase-split/README.md) derive profiling input from current source. Their older `PhaseSieve.swift` remains an active independent full-buffer reference; it must not be used as the current timing implementation.
 
