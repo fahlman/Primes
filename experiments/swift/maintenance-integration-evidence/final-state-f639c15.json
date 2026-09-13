@@ -1,0 +1,120 @@
+{
+  "repository": "fahlman/Primes",
+  "purpose": "Final state of the four user-requested PR actions",
+  "pull_requests": [
+    {
+      "baseRefName": "swift/dense-small-factors",
+      "headRefName": "swift/dense-generator",
+      "headRefOid": "882b1156563883e11ba1fcde8d74b7e45364d695",
+      "mergeCommit": {
+        "oid": "7be57ca207fd45194ff1b71dfbae4d3666195307"
+      },
+      "mergedAt": "2026-09-12T23:51:21Z",
+      "number": 21,
+      "state": "MERGED",
+      "url": "https://github.com/fahlman/Primes/pull/21",
+      "merge_parents": [
+        "1d0522115846d8c6487d49a9bf0e60b18b9d8599",
+        "882b1156563883e11ba1fcde8d74b7e45364d695"
+      ],
+      "remote_branch_preserved": true
+    },
+    {
+      "baseRefName": "swift/dense-small-factors",
+      "headRefName": "swift/current-phase-tools",
+      "headRefOid": "966f1515506251c2ec13dcd1b8208bd31c2f4e06",
+      "mergeCommit": {
+        "oid": "2ee7b3a54c5e10cb87962e271f2185a72332ac20"
+      },
+      "mergedAt": "2026-09-12T23:52:03Z",
+      "number": 24,
+      "state": "MERGED",
+      "url": "https://github.com/fahlman/Primes/pull/24",
+      "merge_parents": [
+        "7be57ca207fd45194ff1b71dfbae4d3666195307",
+        "966f1515506251c2ec13dcd1b8208bd31c2f4e06"
+      ],
+      "remote_branch_preserved": true
+    },
+    {
+      "baseRefName": "swift/dense-small-factors",
+      "headRefName": "swift/dense-128-65-127",
+      "headRefOid": "2a1c5d7a90db1b9508c1bc136df5290ebf2fc25c",
+      "mergeCommit": null,
+      "mergedAt": null,
+      "number": 13,
+      "state": "CLOSED",
+      "url": "https://github.com/fahlman/Primes/pull/13",
+      "remote_branch_preserved": true
+    },
+    {
+      "baseRefName": "swift/dense-small-factors",
+      "headRefName": "swift/linux-docker-validation",
+      "headRefOid": "a0bea49c699c53d6c3375fd1d9872e17d4b9a151",
+      "mergeCommit": {
+        "oid": "f639c15f3fe7f837e775f9883c939db878133d23"
+      },
+      "mergedAt": "2026-09-13T00:40:34Z",
+      "number": 15,
+      "state": "MERGED",
+      "url": "https://github.com/fahlman/Primes/pull/15",
+      "merge_parents": [
+        "3d996eb86de4a59903f8367ffe8f7beb4511aa5b",
+        "a0bea49c699c53d6c3375fd1d9872e17d4b9a151"
+      ],
+      "remote_branch_preserved": true
+    }
+  ],
+  "validation_run": {
+    "conclusion": "success",
+    "databaseId": 34726948107,
+    "headBranch": "swift/linux-docker-validation",
+    "headSha": "028125534a516a9adca0cd8f7419bd74d2b51975",
+    "name": "Swift Linux Docker validation",
+    "status": "completed"
+  },
+  "intentionally_cancelled_unrelated_ci": [
+    {
+      "conclusion": "cancelled",
+      "databaseId": 34728572690,
+      "headBranch": "swift/dense-small-factors",
+      "headSha": "f639c15f3fe7f837e775f9883c939db878133d23",
+      "name": "CI",
+      "status": "completed"
+    },
+    {
+      "conclusion": "cancelled",
+      "databaseId": 34728508747,
+      "headBranch": "swift/linux-cleanup-review",
+      "headSha": "a0bea49c699c53d6c3375fd1d9872e17d4b9a151",
+      "name": "CI",
+      "status": "completed"
+    }
+  ],
+  "cancellation_reason": "Inherited all-language matrix does not test experiments/swift; the dedicated native Swift validation passed.",
+  "upstream_submission": "remains paused",
+  "checked_at_utc": "2026-09-13T00:43:28.635176+00:00",
+  "merge_revision": "f639c15f3fe7f837e775f9883c939db878133d23",
+  "pre_merge_development": "3d996eb86de4a59903f8367ffe8f7beb4511aa5b",
+  "byte_identity_checks": {
+    "experiments/swift/PrimeSieve.swift": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+    "experiments/swift/Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+    "experiments/swift/BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "experiments/swift/Dockerfile": "078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3",
+    "experiments/swift/Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+    "experiments/swift/ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "experiments/swift/tools/generate-dense.swift": "ef47c0e441154c9b125397f21bc97ca485ad93b1b0de525641af8ba3d4bafed3",
+    "experiments/swift/tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9",
+    "experiments/swift/tools/phase-split/CurrentPhaseVerify.swift": "d8d8505a1b824cd79fee727dc78c486e1272a07581ebabc92d25a62bf327f247",
+    "experiments/swift/tools/phase-split/GenerateCurrentPhaseSieve.swift": "a8d43114ac37a492ac40b62984599baa03f322adfaf9d961e143673d2e692b7c",
+    "experiments/swift/tools/phase-split/PhaseBench.swift": "a888d3cafed730f6d5e96c874056eadf472c12ac12e2bab5ad9a605ad3519bce",
+    "experiments/swift/tools/phase-split/PhaseSieve.swift": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "experiments/swift/tools/phase-split/PhaseSourceGuard.swift": "08a327da33c87091eb6c1b7d8cf5e0982d9f97d50c258e2ae5b654b2b6ae8434",
+    "experiments/swift/tools/phase-split/PhaseVerify.swift": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+    "experiments/swift/tools/phase-split/README.md": "53c9d55038bf33de39cf60aa585b6ec78fe1e74e82364378ac3c05b718d3baad",
+    "experiments/swift/tools/phase-split/build-current.sh": "8165dc1fb21efb7b887bd0a445a548dbfe78e551acebb39e7b8b55a4a5a535e6",
+    ".github/workflows/swift-linux-docker-validation.yml": "233020d460c3ee239b16ce8e369f60376cea073acd75b0698fecf451915e78b3",
+    "experiments/swift/tools/linux-docker/validate.py": "bffb99aabb65ca76be6813ddd2384d3e0c027dbcff7e174018c8b54975336330",
+    "experiments/swift/tools/linux-docker/test_lifecycle.py": "2de60f7f7b9ed2887eee617287e544b0a48454c31f45d88aa31a29c01727ce81"
+  }
+}
