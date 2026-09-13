@@ -1,5 +1,13 @@
 # Fork-only Linux and Docker validation
 
+The validator and its lifecycle tests are one Swift script,
+`linux-validation.swift`, with the subcommands `validate` and `test-lifecycle`; it
+runs on the runner host, whose Ubuntu images ship Swift 6.3.3. It is a port of the
+earlier Python pair, keeping the same commands, checks, evidence record and
+cleanup rules; the Python versions remain in Git history and in the evidence they
+produced.
+
+
 This workflow validates the committed Swift Dockerfile and existing correctness
 checks on native Linux amd64 and arm64. It uses Docker already installed on the
 GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners; no Docker installation
@@ -7,7 +15,7 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow,
-`validate.py` or `test_lifecycle.py`, and only in `fahlman/Primes`. The two native jobs run serially.
+`linux-validation.swift`, and only in `fahlman/Primes`. The two native jobs run serially.
 The current trigger requests the full six-check
 suite on amd64 and arm64 for the adopted cutoff 111. The job limit
 is 60 minutes, providing room beyond the earlier 45-minute cutoff127 timeout;
@@ -89,12 +97,12 @@ they cannot abandon removal. An uncertain creation, failed inspection/removal or
 failed client cleanup marks the run failed and retains its owned timing lock.
 An uncertain create is never started. A later operator must establish that work
 has stopped before removing a retained lock. SIGKILL or loss of the runner cannot
-be handled by Python; the lock is not deliberately released in those cases.
+be handled by the validator; the lock is not deliberately released in those cases.
 Historical evidence is unchanged, including the earlier cancelled run whose
 record remained `running`.
 
-The workflow first runs `test_lifecycle.py` with fake Docker responses and a small
-real Docker probe. Unit coverage targets timeout/interruption, process cleanup,
+The workflow first runs `linux-validation.swift test-lifecycle` with fake Docker
+responses, real timed-out and interrupted processes, and a small real Docker probe. Unit coverage targets timeout/interruption, process cleanup,
 container exit codes, failed cleanup and ownership. The explicit probe uses
 `busybox:1.37.0`, records the inspected image identity, and checks normal exit,
 nonzero exit, timeout and SIGTERM. The interrupted commands must emit a retained
@@ -106,7 +114,7 @@ artifact upload. The unchanged six Swift checks then run once per native job.
 For the fake-only tests, after acquiring the project timing lock, use:
 
 ```sh
-python3 experiments/swift/tools/linux-docker/test_lifecycle.py --output /tmp/new-lifecycle-test-evidence
+swift experiments/swift/tools/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
 ```
 
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the

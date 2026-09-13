@@ -23,7 +23,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, more than one thread, and marking a prime as composite and then restoring it.
 - Specialized small-factor handlers: dispatch only after the runtime bit test finds the candidate unmarked. Provide a handler for every odd value in the handled range, not only primes, so no knowledge of primality is built in. Start at p², mark individually up to any alignment boundary, and finish with a bounded tail.
 - Output tags must match the code: `algorithm=base,faithful=yes,bits=1` and a thread count of 1. READMEs and reports must describe what the code does.
-- Implement the sieve, the benchmark and the project's tools in Swift, with POSIX `sh` only for thin wrappers such as `run.sh`. No sieve or benchmark logic lives outside Swift. The Linux validator under `tools/linux-docker/` runs on the GitHub runner host and is the remaining exception; its port is separate work.
+- Implement the sieve, the benchmark and the project's tools in Swift, with POSIX `sh` only for thin wrappers such as `run.sh`. No sieve or benchmark logic lives outside Swift, and no other language is needed anywhere in the fork.
 - When borrowing an idea from another submission, read its code. Its labels are not proof that it complies.
 
 ## Benchmark contract

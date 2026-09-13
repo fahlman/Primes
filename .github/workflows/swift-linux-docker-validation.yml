@@ -5,8 +5,7 @@ on:
     branches: [swift/linux-docker-validation]
     paths:
       - .github/workflows/swift-linux-docker-validation.yml
-      - experiments/swift/tools/linux-docker/validate.py
-      - experiments/swift/tools/linux-docker/test_lifecycle.py
+      - experiments/swift/tools/linux-docker/linux-validation.swift
 
 permissions:
   contents: read
@@ -17,11 +16,11 @@ concurrency:
 
 env:
   # The solution under test is independent of the workflow commit.
-  SOLUTION_REVISION: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+  SOLUTION_REVISION: dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee
 
 jobs:
   validate:
-    name: Validate cutoff 111 on native ${{ matrix.architecture }}
+    name: Validate the adopted source on native ${{ matrix.architecture }}
     if: github.repository == 'fahlman/Primes'
     timeout-minutes: 60
     strategy:
@@ -52,14 +51,14 @@ jobs:
 
       - name: Check owned Docker container cleanup
         run: |
-          python3 workflow/experiments/swift/tools/linux-docker/test_lifecycle.py \
+          swift workflow/experiments/swift/tools/linux-docker/linux-validation.swift test-lifecycle \
             --docker-probe --output "$RUNNER_TEMP/swift-linux-docker-lifecycle"
 
       - name: Build Dockerfile and validate Swift on native Linux
         env:
           VALIDATION_PLATFORM: linux/${{ matrix.architecture }}
         run: |
-          python3 workflow/experiments/swift/tools/linux-docker/validate.py \
+          swift workflow/experiments/swift/tools/linux-docker/linux-validation.swift validate \
             --solution-root "$GITHUB_WORKSPACE/solution" \
             --solution-revision "$SOLUTION_REVISION" \
             --workflow-root "$GITHUB_WORKSPACE/workflow" \
