@@ -207,6 +207,7 @@ final class GeneratorChecks {
                 ("corrupt-handwritten", try replacingOnce(source, "private let limit: Int", "private let limit: Int // disposable corruption")),
                 ("word-dispatch-cutoff", try replacingOnce(source, "if p < 64 {", "if p < 62 {")),
                 ("vector-dispatch-cutoff", try replacingOnce(source, "if p < 112 {", "if p < 114 {")),
+                ("source-utf8-bom", "\u{FEFF}" + source),
             ] {
                 let file = try fixture(corrupted, "\(stem)-\(name).swift")
                 _ = try invoke(tool, ["--check", file.path], name: name + "-check", expected: 1)
