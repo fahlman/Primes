@@ -1,0 +1,239 @@
+[
+    {
+        "Id": "47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f",
+        "Created": "2026-09-13T23:42:14.599871802Z",
+        "Path": "/validation/phase-verify-wmo",
+        "Args": [],
+        "State": {
+            "Status": "exited",
+            "Running": false,
+            "Paused": false,
+            "Restarting": false,
+            "OOMKilled": false,
+            "Dead": false,
+            "Pid": 0,
+            "ExitCode": 0,
+            "Error": "",
+            "StartedAt": "2026-09-13T23:42:14.791921754Z",
+            "FinishedAt": "2026-09-13T23:42:16.060318496Z"
+        },
+        "Image": "sha256:fe4800c63353b399ee0138a700386a1dedf330e7456ccc9b232dd25926706fe9",
+        "ResolvConfPath": "/var/lib/docker/containers/47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f/resolv.conf",
+        "HostnamePath": "/var/lib/docker/containers/47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f/hostname",
+        "HostsPath": "/var/lib/docker/containers/47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f/hosts",
+        "LogPath": "/var/lib/docker/containers/47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f/47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f-json.log",
+        "Name": "/swift-validation-da62dbfce33f4f8cbfc0fc78b778f196-10",
+        "RestartCount": 0,
+        "Driver": "overlay2",
+        "Platform": "linux",
+        "MountLabel": "",
+        "ProcessLabel": "",
+        "AppArmorProfile": "docker-default",
+        "ExecIDs": null,
+        "HostConfig": {
+            "Binds": null,
+            "ContainerIDFile": "",
+            "LogConfig": {
+                "Type": "json-file",
+                "Config": {}
+            },
+            "NetworkMode": "none",
+            "PortBindings": {},
+            "RestartPolicy": {
+                "Name": "no",
+                "MaximumRetryCount": 0
+            },
+            "AutoRemove": false,
+            "VolumeDriver": "",
+            "VolumesFrom": null,
+            "ConsoleSize": [
+                0,
+                0
+            ],
+            "CapAdd": null,
+            "CapDrop": null,
+            "CgroupnsMode": "private",
+            "Dns": [],
+            "DnsOptions": [],
+            "DnsSearch": [],
+            "ExtraHosts": null,
+            "GroupAdd": null,
+            "IpcMode": "private",
+            "Cgroup": "",
+            "Links": null,
+            "OomScoreAdj": 0,
+            "PidMode": "",
+            "Privileged": false,
+            "PublishAllPorts": false,
+            "ReadonlyRootfs": false,
+            "SecurityOpt": null,
+            "UTSMode": "",
+            "UsernsMode": "",
+            "ShmSize": 67108864,
+            "Runtime": "runc",
+            "Isolation": "",
+            "CpuShares": 0,
+            "Memory": 0,
+            "NanoCpus": 0,
+            "CgroupParent": "",
+            "BlkioWeight": 0,
+            "BlkioWeightDevice": [],
+            "BlkioDeviceReadBps": [],
+            "BlkioDeviceWriteBps": [],
+            "BlkioDeviceReadIOps": [],
+            "BlkioDeviceWriteIOps": [],
+            "CpuPeriod": 0,
+            "CpuQuota": 0,
+            "CpuRealtimePeriod": 0,
+            "CpuRealtimeRuntime": 0,
+            "CpusetCpus": "",
+            "CpusetMems": "",
+            "Devices": [],
+            "DeviceCgroupRules": null,
+            "DeviceRequests": null,
+            "MemoryReservation": 0,
+            "MemorySwap": 0,
+            "MemorySwappiness": null,
+            "OomKillDisable": null,
+            "PidsLimit": null,
+            "Ulimits": [],
+            "CpuCount": 0,
+            "CpuPercent": 0,
+            "IOMaximumIOps": 0,
+            "IOMaximumBandwidth": 0,
+            "Mounts": [
+                {
+                    "Type": "bind",
+                    "Source": "/home/runner/work/Primes/Primes/solution",
+                    "Target": "/source",
+                    "ReadOnly": true
+                },
+                {
+                    "Type": "bind",
+                    "Source": "/home/runner/work/_temp/swift-linux-docker-checks",
+                    "Target": "/validation"
+                }
+            ],
+            "MaskedPaths": [
+                "/proc/asound",
+                "/proc/acpi",
+                "/proc/interrupts",
+                "/proc/kcore",
+                "/proc/keys",
+                "/proc/latency_stats",
+                "/proc/timer_list",
+                "/proc/timer_stats",
+                "/proc/sched_debug",
+                "/proc/scsi",
+                "/sys/firmware",
+                "/sys/devices/virtual/powercap"
+            ],
+            "ReadonlyPaths": [
+                "/proc/bus",
+                "/proc/fs",
+                "/proc/irq",
+                "/proc/sys",
+                "/proc/sysrq-trigger"
+            ]
+        },
+        "GraphDriver": {
+            "Data": {
+                "ID": "47a273642ea7d81a55c491d2be43744ca8ef6706bdceb93485c03252f0754c1f",
+                "LowerDir": "/var/lib/docker/overlay2/1b8099add55261315a7fccc3846faccd8209d0e85e944ff78c3110e7c3e71958-init/diff:/var/lib/docker/overlay2/pzf04sire6r5e1eu6mqp0yamf/diff:/var/lib/docker/overlay2/510nl4noxjnoumou0lzt5suq8/diff:/var/lib/docker/overlay2/xyjzq732devw07ljla0s607is/diff:/var/lib/docker/overlay2/30e3ff405039c08ec6b1894958036fb6b686745503f89007cca43fc29ff228ac/diff:/var/lib/docker/overlay2/fd292b6720a0efc3ce4364c08ca37ebd2b8af479cccdc0bade038dc7dfe245b6/diff:/var/lib/docker/overlay2/16b6164b0483546e9b35d4fb87514d4515c6473f4e19e5ef0a37678d7da0dc5d/diff:/var/lib/docker/overlay2/c7e1ef0abcfee3ee3af4df6018929f0c4c76b81f9286fb5a2db664e985f076fa/diff",
+                "MergedDir": "/var/lib/docker/overlay2/1b8099add55261315a7fccc3846faccd8209d0e85e944ff78c3110e7c3e71958/merged",
+                "UpperDir": "/var/lib/docker/overlay2/1b8099add55261315a7fccc3846faccd8209d0e85e944ff78c3110e7c3e71958/diff",
+                "WorkDir": "/var/lib/docker/overlay2/1b8099add55261315a7fccc3846faccd8209d0e85e944ff78c3110e7c3e71958/work"
+            },
+            "Name": "overlay2"
+        },
+        "Mounts": [
+            {
+                "Type": "bind",
+                "Source": "/home/runner/work/Primes/Primes/solution",
+                "Destination": "/source",
+                "Mode": "",
+                "RW": false,
+                "Propagation": "rprivate"
+            },
+            {
+                "Type": "bind",
+                "Source": "/home/runner/work/_temp/swift-linux-docker-checks",
+                "Destination": "/validation",
+                "Mode": "",
+                "RW": true,
+                "Propagation": "rprivate"
+            }
+        ],
+        "Config": {
+            "Hostname": "47a273642ea7",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": true,
+            "AttachStderr": true,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "SWIFT_SIGNING_KEY=52BB7E3DE28A71BE22EC05FFEF80A866B47A981F",
+                "SWIFT_PLATFORM=ubuntu24.04",
+                "SWIFT_BRANCH=swift-6.3.3-release",
+                "SWIFT_VERSION=swift-6.3.3-RELEASE",
+                "SWIFT_WEBROOT=https://download.swift.org"
+            ],
+            "Cmd": null,
+            "Image": "swift-validation-build:acde3564c6eb-amd64",
+            "Volumes": null,
+            "WorkingDir": "/validation",
+            "Entrypoint": [
+                "/validation/phase-verify-wmo"
+            ],
+            "OnBuild": null,
+            "Labels": {
+                "description": "Docker Container for the Swift programming language",
+                "maintainer": "Swift Infrastructure <swift-infrastructure@forums.swift.org>",
+                "org.fahlman.primes.validation-owner": "da62dbfce33f4f8cbfc0fc78b778f196",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "NetworkSettings": {
+            "Bridge": "",
+            "SandboxID": "",
+            "SandboxKey": "",
+            "Ports": {},
+            "HairpinMode": false,
+            "LinkLocalIPv6Address": "",
+            "LinkLocalIPv6PrefixLen": 0,
+            "SecondaryIPAddresses": null,
+            "SecondaryIPv6Addresses": null,
+            "EndpointID": "",
+            "Gateway": "",
+            "GlobalIPv6Address": "",
+            "GlobalIPv6PrefixLen": 0,
+            "IPAddress": "",
+            "IPPrefixLen": 0,
+            "IPv6Gateway": "",
+            "MacAddress": "",
+            "Networks": {
+                "none": {
+                    "IPAMConfig": null,
+                    "Links": null,
+                    "Aliases": null,
+                    "MacAddress": "",
+                    "DriverOpts": null,
+                    "GwPriority": 0,
+                    "NetworkID": "7651dd7616abe47783c1ae7696855361483cd675643fdf2c9d3d1314383299df",
+                    "EndpointID": "",
+                    "Gateway": "",
+                    "IPAddress": "",
+                    "IPPrefixLen": 0,
+                    "IPv6Gateway": "",
+                    "GlobalIPv6Address": "",
+                    "GlobalIPv6PrefixLen": 0,
+                    "DNSNames": null
+                }
+            }
+        }
+    }
+]
