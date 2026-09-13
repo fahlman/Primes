@@ -1,6 +1,6 @@
-# Swift sieve experiments: instructions for coding agents
+# Swift sieve: instructions for coding agents
 
-These instructions apply to everything in `experiments/swift`. Current implementation, commands and accepted results belong in [README.md](README.md); each pull request owns its change history and decision. This file and `CLAUDE.md` belong to the fahlman/Primes fork only. Never include them, or anything else under `experiments/`, in a pull request to PlummersSoftwareLLC/Primes.
+These instructions apply to Swift work in `PrimeSwift/solution_1`, `tools/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `tools/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [tools/swift/README.md](tools/swift/README.md), and each PR owns its change history and decision. This file, `CLAUDE.md` and `tools/swift` belong to the fork only; exclude them from any upstream submission.
 
 ## Goal
 
@@ -29,12 +29,12 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 ## Benchmark contract
 
 - Every pass times allocation, initialization, sieving, the opaque observation, and release. Compilation, validation, prime enumeration, building output arrays, and printing are not timed.
-- Keep the observer a separately compiled module that the benchmark can't inline, built as in `run.sh`. Never change the workload or weaken this protection to improve a timing.
+- Keep the observer a separately compiled module that the benchmark can't inline, built as in `tools/swift/run.sh`. Never change the workload or weaken this protection to improve a timing.
 - Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
-- Build the benchmark with `-O -whole-module-optimization` and the observer as in `run.sh`. Compared variants use identical flags and the same runner.
+- Build the benchmark with `-O -whole-module-optimization` and the observer as in `tools/swift/run.sh`. Compared variants use identical flags and the same runner.
 - Timing evidence comes only from the reference machine (Apple M4 Pro, Swift 6.3.3): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
-- Compare committed revisions with `swift tools/compare-revisions.swift`. Include the current development branch as a development control in the same run. `--output` is required and never overwrites, so every session leaves its own record.
-- Use `swift tools/compare-upstream.swift` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It builds the upstream adapters and the candidate with the frozen `25402d4` runner and observer, and records the candidate revision, the upstream revision, source and adapter hashes, hardware, Swift version and run order itself. `--output` is required and never overwrites. Hold the timing lock before it starts compiling.
+- Compare committed revisions with `swift tools/swift/compare-revisions.swift`. Include the current development branch as a development control in the same run. `--output` is required and never overwrites, so every session leaves its own record.
+- Use `swift tools/swift/compare-upstream.swift` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It builds the upstream adapters and the candidate with the frozen `25402d4` runner and observer, and records the candidate revision, the upstream revision, source and adapter hashes, hardware, Swift version and run order itself. `--output` is required and never overwrites. Hold the timing lock before it starts compiling.
 - Admission rule for a speed change: three rotated five-second trials per variant in one session, and the candidate qualifies only if every candidate trial beats every control trial. Overlapping ranges are flat, not a gain. Don't repeat a flat or losing session to look for a win; a repeat happens only at the user's request and is reported separately, never pooled. A refactor of timed code is accepted on byte-identical benchmark assembly against the control, built with the same observer, flags and module name; if the assembly changes, it needs the same timing admission as a speed change, and a flat result does not show it is harmless.
 
 ## Timing sessions
@@ -44,7 +44,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 - State the intended change, acceptance criteria and directly relevant verification before starting. Use the agreed benchmark admission rule for timing work. Stop after the required checks and final decision; additional experiments or retiming need the user's direction.
 - Use one `swift/<experiment>` branch per experiment, based on `swift/dense-small-factors`, with one PR in `fahlman/Primes`. Verify the head and base repositories. Keep the PR a draft while required work is incomplete.
-- Use a separate worktree for concurrent work or when an isolated exact-revision checkout is needed. Sequential work may use the main checkout after preserving local changes. Put temporary worktrees under `/Users/ryan/Developer/Primes/.worktrees/`, create them from the main repository, and confirm the sparse checkout includes `PrimeSwift`, `experiments` and `.github`; if necessary, run `git sparse-checkout set PrimeSwift experiments .github` in the new worktree. Do not edit another agent's worktree.
+- Use a separate worktree for concurrent work or when an isolated exact-revision checkout is needed. Sequential work may use the main checkout after preserving local changes. Put temporary worktrees under `/Users/ryan/Developer/Primes/.worktrees/`, create them from the main repository, and confirm the sparse checkout includes `PrimeSwift`, `tools` and `.github`; if necessary, run `git sparse-checkout set PrimeSwift tools .github` in the new worktree. Do not edit another agent's worktree.
 - Once a branch is merged or its PR is closed, publish any unique source/evidence and remove its worktree and disposable builds. Keep the branch. Generated caches need no backup; preserve any unique uncommitted work before removal.
 - Don't discard existing changes, rewrite pushed history, or push to upstream. Push to `origin` only. An upstream submission requires a fresh branch from `upstream/drag-race` containing only the solution folder; verify that with `git diff --stat upstream/drag-race...HEAD` before opening it. Submission remains paused until the user resumes it.
 
@@ -69,25 +69,25 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 ## Done checklist for a candidate
 
-Run these from `experiments/swift`, holding the timing lock. A candidate is ready for timing only when all of them pass.
+Run these from `tools/swift`, holding the timing lock. Set `swift_package=../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8` in the shell first. A candidate is ready for timing only when all of them pass.
 
-1. The committed sieve is exactly its template rendering. Edit `tools/PrimeSieve.swift.in`, never `PrimeSieve.swift` directly; `--write` re-renders the whole file. When the template, generator or checker changed, run the generator's own checks too:
+1. The committed sieve is exactly its template rendering. Edit the package’s `Tools/PrimeSieve.swift.in`, never its generated `Sources/PrimeSieveSwift/PrimeSieve.swift` directly; `--write` re-renders the whole file. When the template, generator or checker changed, run the generator's own checks too:
 
    ```sh
-   swift tools/generate-dense.swift --check PrimeSieve.swift
-   swift tools/check-dense-generator.swift
+   swift "$swift_package/Tools/generate-dense.swift" --check "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift"
+   swift "$swift_package/Tools/check-dense-generator.swift"
    ```
 
 2. Correctness, with AddressSanitizer and with the benchmark's optimization flags. `PhaseVerify` compares complete buffers, padding included, with the historical `8f108f5` copy:
 
    ```sh
    mkdir -p .build
-   swiftc -O -sanitize=address PrimeSieve.swift Verify.swift -o .build/verify-asan && .build/verify-asan
-   swiftc -O -whole-module-optimization PrimeSieve.swift Verify.swift -o .build/verify && .build/verify
-   swiftc -O -sanitize=address PrimeSieve.swift ExtraVerify.swift -o .build/extra-verify-asan && .build/extra-verify-asan
-   swiftc -O -whole-module-optimization PrimeSieve.swift ExtraVerify.swift -o .build/extra-verify && .build/extra-verify
-   swiftc -O -sanitize=address PrimeSieve.swift tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseVerify.swift -o .build/phase-verify-asan && .build/phase-verify-asan
-   swiftc -O -whole-module-optimization PrimeSieve.swift tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseVerify.swift -o .build/phase-verify && .build/phase-verify
+   swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/Verify.swift" -o .build/verify-asan && .build/verify-asan
+   swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/Verify.swift" -o .build/verify && .build/verify
+   swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/ExtraVerify.swift" -o .build/extra-verify-asan && .build/extra-verify-asan
+   swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" "$swift_package/Tools/ExtraVerify.swift" -o .build/extra-verify && .build/extra-verify
+   swiftc -O -sanitize=address "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" phase-split/PhaseSieve.swift phase-split/PhaseVerify.swift -o .build/phase-verify-asan && .build/phase-verify-asan
+   swiftc -O -whole-module-optimization "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" phase-split/PhaseSieve.swift phase-split/PhaseVerify.swift -o .build/phase-verify && .build/phase-verify
    ```
 
 3. Inspect the assembly when the change depends on particular machine code, such as removed overflow checks or merged or vectorized stores, and always for a refactor that must not change the timed code, whose complete `.s` must equal the control's byte for byte:
@@ -95,8 +95,8 @@ Run these from `experiments/swift`, holding the timing lock. A candidate is read
    ```sh
    swiftc -O -parse-as-library -module-name BenchmarkObserver \
      -emit-module -emit-module-path .build/BenchmarkObserver.swiftmodule \
-     -emit-object BenchmarkObserver.swift -o .build/BenchmarkObserver.o
-   swiftc -O -whole-module-optimization -module-name PrimeSwift -I .build PrimeSieve.swift Benchmark.swift -S -o .build/PrimeSwift.s
+     -emit-object "$swift_package/Sources/BenchmarkObserver/BenchmarkObserver.swift" -o .build/BenchmarkObserver.o
+   swiftc -O -whole-module-optimization -module-name PrimeSwift -I .build "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift" Benchmark.swift -S -o .build/PrimeSwift.s
    ```
 
    The call to `observe` must still be a real call (`bl` on arm64), not inlined.

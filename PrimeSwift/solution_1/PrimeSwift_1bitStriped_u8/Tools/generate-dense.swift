@@ -1,8 +1,8 @@
 // Render PrimeSieve.swift from PrimeSieve.swift.in and both explicit switches. Every odd factor in
 // each range receives a case; this does not test primality or construct masks.
-// Run from experiments/swift after acquiring the project's timing lock:
-//   swift tools/generate-dense.swift --check PrimeSieve.swift
-//   swift tools/generate-dense.swift --write PrimeSieve.swift
+// Run from the PrimeSwift_1bitStriped_u8 package directory:
+//   swift Tools/generate-dense.swift --check Sources/PrimeSieveSwift/PrimeSieve.swift
+//   swift Tools/generate-dense.swift --write Sources/PrimeSieveSwift/PrimeSieve.swift
 // With no arguments, print both marked switches to stdout (legacy interface).
 import Foundation
 

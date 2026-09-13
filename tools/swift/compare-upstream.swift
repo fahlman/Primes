@@ -4,14 +4,18 @@
 // the pinned revision and adapted only so the frozen runner can drive them.
 // Three rotated five-second runs per variant, twelve in all. Run while holding
 // the project's timing lock, from any directory, with network access:
-//   swift tools/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]
+//   swift tools/swift/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]
 // The candidate defaults to HEAD. The output file must not exist. Timing counts
 // as evidence only on the reference machine; see AGENTS.md.
 import Foundation
 
 let harnessRevision = "25402d46ba991b39451724d3873d326626981e3f"
 let upstreamRevision = "22bfea9c7122c46dcda799020fccf5ae83fe667f"
-let package = "experiments/swift"
+let harnessPackage = "experiments/swift"
+let candidateSourcePaths = [
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift",
+    "experiments/swift/PrimeSieve.swift",
+]
 let frozenLabel = "fahlman_swift_striped_unrolled"
 let frozenByteCount = "let byteCount = ((limit - 1) / 2 + 7) / 8"
 let validationMarker = "Validated: 78498 primes;"
@@ -194,25 +198,33 @@ do {
 
     let scriptDirectory = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
     let repo = URL(fileURLWithPath: try run(["git", "rev-parse", "--show-toplevel"], in: URL(fileURLWithPath: repoPath ?? scriptDirectory.path)).stdout.trimmingCharacters(in: .whitespacesAndNewlines))
-    func source(_ revision: String, _ name: String) throws -> Data {
+    func source(_ revision: String, _ path: String) throws -> Data {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["git", "-C", repo.path, "show", "\(revision):\(package)/\(name)"]
+        process.arguments = ["git", "-C", repo.path, "show", "\(revision):\(path)"]
         let out = Pipe(); process.standardOutput = out; process.standardError = FileHandle.standardError
         try process.run()
         let data = out.fileHandleForReading.readDataToEndOfFile()
         process.waitUntilExit()
-        guard process.terminationStatus == 0 else { throw ToolError(description: "git show failed for \(revision):\(name)") }
+        guard process.terminationStatus == 0 else { throw ToolError(description: "git show failed for \(revision):\(path)") }
         return data
+    }
+    func candidateSourcePath(_ revision: String) throws -> String {
+        let output = try run(["git", "-C", repo.path, "ls-tree", "-r", "--name-only", revision, "--"] + candidateSourcePaths).stdout
+        let paths = Set(output.split(separator: "\n").map(String.init))
+        guard let path = candidateSourcePaths.first(where: { paths.contains($0) }) else {
+            throw ToolError(description: "No Swift candidate source at \(revision); expected one of \(candidateSourcePaths.joined(separator: ", "))")
+        }
+        return path
     }
     let candidateRevision = try run(["git", "-C", repo.path, "rev-parse", "--verify", "\(candidateRequested)^{commit}"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)
 
-    let build = repo.appendingPathComponent(package).appendingPathComponent(".build/upstream-comparison")
+    let build = repo.appendingPathComponent("tools/swift/.build/upstream-comparison")
     try FileManager.default.createDirectory(at: build, withIntermediateDirectories: true)
     let observerFile = build.appendingPathComponent("BenchmarkObserver.swift")
     let runnerFile = build.appendingPathComponent("Benchmark.swift")
-    try source(harnessRevision, "BenchmarkObserver.swift").write(to: observerFile)
-    try source(harnessRevision, "Benchmark.swift").write(to: runnerFile)
+    try source(harnessRevision, "\(harnessPackage)/BenchmarkObserver.swift").write(to: observerFile)
+    try source(harnessRevision, "\(harnessPackage)/Benchmark.swift").write(to: runnerFile)
     let runnerText = try String(contentsOf: runnerFile, encoding: .utf8)
     try run(["swiftc", "-O", "-parse-as-library", "-module-name", "BenchmarkObserver",
              "-emit-module", "-emit-module-path", build.appendingPathComponent("BenchmarkObserver.swiftmodule").path,
@@ -244,7 +256,7 @@ do {
         print("built \(adapter.name)"); fflush(stdout)
     }
     let candidateFile = build.appendingPathComponent("\(candidateName)-PrimeSieve.swift")
-    try source(candidateRevision, "PrimeSieve.swift").write(to: candidateFile)
+    try source(candidateRevision, candidateSourcePath(candidateRevision)).write(to: candidateFile)
     try compile(candidateName, sieve: candidateFile, runner: try replaceOnce(runnerText, frozenLabel, candidateName, label: "runner label"))
     print("built \(candidateName) at \(candidateRevision)"); fflush(stdout)
 

@@ -16,15 +16,55 @@ import Glibc
 import Darwin
 #endif
 
-let sourceFiles = ["Dockerfile", "PrimeSieve.swift", "Benchmark.swift", "BenchmarkObserver.swift",
-                   "Verify.swift", "ExtraVerify.swift", "tools/phase-split/PhaseSieve.swift",
-                   "tools/phase-split/PhaseVerify.swift"]
-let workflowFiles = [".github/workflows/swift-linux-docker-validation.yml",
-                     "experiments/swift/tools/linux-docker/linux-validation.swift"]
 let checkNames = ["verify-asan", "extra-verify-asan", "phase-verify-asan",
                   "verify-wmo", "extra-verify-wmo", "phase-verify-wmo"]
 let lockPath = "/tmp/primes-timing.lock"
 let ownerLabel = "org.fahlman.primes.validation-owner"
+
+// Paths are relative to the selected build context and read-only source mount.
+// Keep the legacy map so the workflow can still validate its exact historical pin.
+struct SourceLayout {
+    let name: String
+    let rootPath: String
+    let dockerfile: String
+    let core: String
+    let sourceFiles: [String]
+    let checks: [(String, [String])]
+}
+
+func sourceLayout(_ solution: URL) throws -> SourceLayout {
+    let package = "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8"
+    let core = package + "/Sources/PrimeSieveSwift/PrimeSieve.swift"
+    let current = FileManager.default.fileExists(atPath: solution.appendingPathComponent(core).path)
+    let legacy = FileManager.default.fileExists(atPath: solution.appendingPathComponent("experiments/swift/PrimeSieve.swift").path)
+    guard current != legacy else { throw RuntimeError("Expected exactly one supported canonical sieve layout.") }
+    if current {
+        return SourceLayout(
+            name: "solution-package", rootPath: ".", dockerfile: "tools/swift/Dockerfile", core: core,
+            sourceFiles: ["tools/swift/Dockerfile", "tools/swift/Dockerfile.dockerignore", core,
+                          "tools/swift/Benchmark.swift", package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
+                          package + "/Tools/Verify.swift", package + "/Tools/ExtraVerify.swift",
+                          "tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"],
+            checks: [("verify", [package + "/Tools/Verify.swift"]),
+                     ("extra-verify", [package + "/Tools/ExtraVerify.swift"]),
+                     ("phase-verify", ["tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"])])
+    }
+    return SourceLayout(
+        name: "experiments", rootPath: "experiments/swift", dockerfile: "Dockerfile", core: "PrimeSieve.swift",
+        sourceFiles: ["Dockerfile", "PrimeSieve.swift", "Benchmark.swift", "BenchmarkObserver.swift",
+                      "Verify.swift", "ExtraVerify.swift", "tools/phase-split/PhaseSieve.swift",
+                      "tools/phase-split/PhaseVerify.swift"],
+        checks: [("verify", ["Verify.swift"]), ("extra-verify", ["ExtraVerify.swift"]),
+                 ("phase-verify", ["tools/phase-split/PhaseSieve.swift", "tools/phase-split/PhaseVerify.swift"])])
+}
+
+func workflowFiles(_ workflow: URL) throws -> [String] {
+    let validators = ["tools/swift/linux-docker/linux-validation.swift",
+                      "experiments/swift/tools/linux-docker/linux-validation.swift"]
+        .filter { FileManager.default.fileExists(atPath: workflow.appendingPathComponent($0).path) }
+    guard validators.count == 1 else { throw RuntimeError("Expected exactly one supported workflow validator path.") }
+    return [".github/workflows/swift-linux-docker-validation.yml"] + validators
+}
 
 // MARK: - Errors, recorded with the same names the Python validator used
 
@@ -472,7 +512,6 @@ func validate(_ arguments: [String]) throws {
     guard try FileManager.default.contentsOfDirectory(atPath: output.path).isEmpty else { throw RuntimeError("Output directory must be new and empty: \(output.path)") }
     try FileManager.default.createDirectory(at: output.appendingPathComponent("logs"), withIntermediateDirectories: false)
     let solution = URL(fileURLWithPath: solutionRoot).standardizedFileURL
-    let package = solution.appendingPathComponent("experiments/swift")
     let workflow = URL(fileURLWithPath: workflowRoot).standardizedFileURL
     let builds = URL(fileURLWithPath: buildPath).standardizedFileURL
     let environment = ProcessInfo.processInfo.environment
@@ -532,8 +571,13 @@ func validate(_ arguments: [String]) throws {
         let workflowHead = try run("workflow-head", ["git", "-C", workflow.path, "rev-parse", "HEAD"], timeout: 60).stdout.trimmingCharacters(in: .whitespacesAndNewlines)
         journal["workflow_revision"] = workflowHead
         if let expected = environment["GITHUB_SHA"], !expected.isEmpty, workflowHead != expected { throw RuntimeError("Workflow checkout does not match the event revision.") }
-        journal["source_sha256"] = try hashes(package, sourceFiles)
-        journal["workflow_sha256"] = try hashes(workflow, workflowFiles)
+        let layout = try sourceLayout(solution)
+        let sourceRoot = solution.appendingPathComponent(layout.rootPath).standardizedFileURL
+        let dockerfileURL = sourceRoot.appendingPathComponent(layout.dockerfile)
+        journal["source_layout"] = layout.name
+        journal["source_hash_root"] = layout.rootPath
+        journal["source_sha256"] = try hashes(sourceRoot, layout.sourceFiles)
+        journal["workflow_sha256"] = try hashes(workflow, workflowFiles(workflow))
         try run("host-kernel", ["uname", "-a"], timeout: 60)
         try run("host-cpu", ["lscpu"], timeout: 60)
         let version = try run("docker-version", ["docker", "version", "--format", "{{json .}}"], timeout: 60).stdout
@@ -543,7 +587,7 @@ func validate(_ arguments: [String]) throws {
 
         // Keep the Dockerfile untouched. Pull its versioned bases once, retain their
         // immutable digests, then use local images without requesting a fresh pull.
-        let dockerfile = try String(contentsOf: package.appendingPathComponent("Dockerfile"), encoding: .utf8)
+        let dockerfile = try String(contentsOf: dockerfileURL, encoding: .utf8)
         let regex = try NSRegularExpression(pattern: "^FROM\\s+(\\S+)(?:\\s+AS\\s+(\\S+))?\\s*$", options: [.anchorsMatchLines, .caseInsensitive])
         let fromLines = regex.matches(in: dockerfile, range: NSRange(dockerfile.startIndex..., in: dockerfile)).map { match -> (String, String) in
             let image = Range(match.range(at: 1), in: dockerfile).map { String(dockerfile[$0]) } ?? ""
@@ -565,9 +609,9 @@ func validate(_ arguments: [String]) throws {
         let suffix = String(solutionRevision.prefix(12)) + "-" + expectedMachine.replacingOccurrences(of: "x86_64", with: "amd64").replacingOccurrences(of: "aarch64", with: "arm64")
         let builder = "swift-validation-build:" + suffix
         let runtime = "swift-validation-runtime:" + suffix
-        let commonBuild = ["docker", "build", "--progress=plain", "--pull=false", "--platform", platform, "--file", package.appendingPathComponent("Dockerfile").path]
-        try run("build-compiler-stage", commonBuild + ["--target", "build", "--tag", builder, "--iidfile", output.appendingPathComponent("build-image.id").path, package.path])
-        try run("build-runtime-image", commonBuild + ["--tag", runtime, "--iidfile", output.appendingPathComponent("runtime-image.id").path, package.path])
+        let commonBuild = ["docker", "build", "--progress=plain", "--pull=false", "--platform", platform, "--file", dockerfileURL.path]
+        try run("build-compiler-stage", commonBuild + ["--target", "build", "--tag", builder, "--iidfile", output.appendingPathComponent("build-image.id").path, sourceRoot.path])
+        try run("build-runtime-image", commonBuild + ["--tag", runtime, "--iidfile", output.appendingPathComponent("runtime-image.id").path, sourceRoot.path])
         journal["build_image"] = try inspectImage("inspect-build-image", builder)
         journal["runtime_image"] = try inspectImage("inspect-runtime-image", runtime)
         let container = ["--platform", platform, "--network", "none"]
@@ -587,16 +631,15 @@ func validate(_ arguments: [String]) throws {
 
         // Both code and checks come from the same immutable checkout. The only
         // writable host mount holds newly compiled verification executables.
-        let checking = container + ["--mount", "type=bind,source=\(package.path),target=/source,readonly",
+        let checking = container + ["--mount", "type=bind,source=\(sourceRoot.path),target=/source,readonly",
                                     "--mount", "type=bind,source=\(builds.path),target=/validation", "--workdir", "/validation"]
         var completed: [String] = []
         for (mode, flags) in [("asan", ["-O", "-sanitize=address"]), ("wmo", ["-O", "-whole-module-optimization"])] {
-            for (name, sources) in [("verify", ["Verify.swift"]), ("extra-verify", ["ExtraVerify.swift"]),
-                                    ("phase-verify", ["tools/phase-split/PhaseSieve.swift", "tools/phase-split/PhaseVerify.swift"])] {
+            for (name, sources) in layout.checks {
                 let checkName = "\(name)-\(mode)"
                 guard requestedChecks.contains(checkName) else { continue }
                 let executable = "/validation/\(name)-\(mode)"
-                try containers("compile-\(checkName)", checking + ["--entrypoint", "swiftc", builder] + flags + ["/source/PrimeSieve.swift"] + sources.map { "/source/" + $0 } + ["-o", executable])
+                try containers("compile-\(checkName)", checking + ["--entrypoint", "swiftc", builder] + flags + ["/source/" + layout.core] + sources.map { "/source/" + $0 } + ["-o", executable])
                 try containers("run-\(checkName)", checking + ["--entrypoint", executable, builder])
                 completed.append(checkName)
                 journal["completed_checks"] = completed
@@ -604,7 +647,7 @@ func validate(_ arguments: [String]) throws {
             }
         }
         guard completed == requestedChecks else { throw RuntimeError("The completed checks do not match the requested checks.") }
-        let after = try hashes(package, sourceFiles)
+        let after = try hashes(sourceRoot, layout.sourceFiles)
         journal["source_sha256_after"] = after
         guard after == journal["source_sha256"] as? [String: String] else { throw RuntimeError("The checked-out source changed during validation.") }
         journal["status"] = checkScope == "full_suite" ? "passed" : "passed_targeted"

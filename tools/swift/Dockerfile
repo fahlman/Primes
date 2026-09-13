@@ -1,6 +1,8 @@
 FROM swift:6.3.3 AS build
 WORKDIR /app
-COPY PrimeSieve.swift Benchmark.swift BenchmarkObserver.swift ./
+COPY PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift ./
+COPY PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift ./
+COPY tools/swift/Benchmark.swift ./
 RUN mkdir -p .build && \
     swiftc -O -parse-as-library -module-name BenchmarkObserver \
       -emit-module -emit-module-path .build/BenchmarkObserver.swiftmodule \

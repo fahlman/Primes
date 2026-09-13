@@ -1,7 +1,8 @@
 # Current-source phase diagnostics
 
-Future profiling uses `CurrentPhaseSieve`, generated from the current
-`PrimeSieve.swift` at build time. Production source, benchmark and observer are
+Future profiling uses `CurrentPhaseSieve`, generated from the canonical
+[PrimeSieve.swift](../../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift)
+at build time. Production source, benchmark and observer are
 unchanged. The checked-in `PhaseSieve.swift` remains the independent historical
 `8f108f5` reference; it is **not** an input to the current phase benchmark.
 Existing historical verification and Linux validation paths remain available.
@@ -33,8 +34,8 @@ record the compiler commands, binary hashes and assembly review as usual.
 
 ## Build and short checks
 
-From `experiments/swift`, exclusively acquire and own the timing lock described
-in [AGENTS.md](../../AGENTS.md) before any compilation or execution. Release
+From `tools/swift`, exclusively acquire and own the timing lock described
+in [AGENTS.md](../../../AGENTS.md) before any compilation or execution. Release
 only your own lock in a `finally`/trap. No competing builds, tests, benchmarks
 or media. The script checks lock presence; the caller remains responsible for
 ownership. Use a new directory for each build so existing inputs and evidence
@@ -42,7 +43,7 @@ are not overwritten:
 
 ```sh
 mkdir -p .build
-sh tools/phase-split/build-current.sh .build/UNIQUE_PHASE_BUILD
+sh phase-split/build-current.sh .build/UNIQUE_PHASE_BUILD
 .build/UNIQUE_PHASE_BUILD/phase-current --check
 ```
 
@@ -63,17 +64,18 @@ benchmark optimization flags, using the same generated input:
 
 ```sh
 phase_build_dir=.build/UNIQUE_PHASE_BUILD
-swiftc -O -sanitize=address PrimeSieve.swift \
+swift_source=../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift
+swiftc -O -sanitize=address "$swift_source" \
   "$phase_build_dir/inputs/CurrentPhaseSieve.swift" \
   "$phase_build_dir/inputs/CurrentPhaseIdentity.swift" \
-  tools/phase-split/PhaseSourceGuard.swift tools/phase-split/PhaseSieve.swift \
-  tools/phase-split/CurrentPhaseVerify.swift -o "$phase_build_dir/verify-current-asan"
+  phase-split/PhaseSourceGuard.swift phase-split/PhaseSieve.swift \
+  phase-split/CurrentPhaseVerify.swift -o "$phase_build_dir/verify-current-asan"
 "$phase_build_dir/verify-current-asan"
-swiftc -O -whole-module-optimization PrimeSieve.swift \
+swiftc -O -whole-module-optimization "$swift_source" \
   "$phase_build_dir/inputs/CurrentPhaseSieve.swift" \
   "$phase_build_dir/inputs/CurrentPhaseIdentity.swift" \
-  tools/phase-split/PhaseSourceGuard.swift tools/phase-split/PhaseSieve.swift \
-  tools/phase-split/CurrentPhaseVerify.swift -o "$phase_build_dir/verify-current"
+  phase-split/PhaseSourceGuard.swift phase-split/PhaseSieve.swift \
+  phase-split/CurrentPhaseVerify.swift -o "$phase_build_dir/verify-current"
 "$phase_build_dir/verify-current"
 ```
 
@@ -87,8 +89,8 @@ limits, and the known one-million count. The unchanged `PhaseVerify.swift`
 continues to support the original verification command independently:
 
 ```sh
-swiftc -O -whole-module-optimization PrimeSieve.swift \
-  tools/phase-split/PhaseSieve.swift tools/phase-split/PhaseVerify.swift \
+swiftc -O -whole-module-optimization "$swift_source" \
+  phase-split/PhaseSieve.swift phase-split/PhaseVerify.swift \
   -o "$phase_build_dir/verify-historical"
 "$phase_build_dir/verify-historical"
 ```
@@ -135,7 +137,7 @@ production by more than 3%, report the mismatch and avoid fine attribution of
 the production total. Passing that screen does not establish identical codegen
 for partial modes. Compiler specialization, code layout, cache state, drift and
 desktop noise remain limitations. No optimization gain follows from this tool;
-use `tools/compare-revisions.swift` under the normal benchmark contract for that
+use `swift compare-revisions.swift` from `tools/swift` under the normal benchmark contract for that
 claim, and never combine ratios from separate sessions.
 
 ## Preserved historical reference and results
