@@ -60,7 +60,7 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
         return SourceLayout(
             name: "solution-package", rootPath: ".", context: folder, dockerfile: folder + "/Dockerfile",
             candidateEntry: "PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
-            diagnostic: "Passes: [0-9]+, Time: [0-9.e+-]+, Avg: [0-9.e+-]+, Limit: 1000000, Count: 78498, Valid: true, Checksum: [0-9]+",
+            diagnostic: "Passes: [0-9]+, Time: [0-9.e+-]+, Avg: [0-9.e+-]+, (Threads: [0-9]+, )?Limit: 1000000, Count: 78498, Valid: true, Checksum: [0-9]+",
             core: core,
             sourceFiles: [folder + "/Dockerfile", folder + "/.dockerignore", folder + "/run.sh",
                           package + "/Package.swift", package + "/Package.resolved",
