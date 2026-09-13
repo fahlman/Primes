@@ -10,7 +10,7 @@ Beat the three upstream Swift entries in `PrimeSwift/solution_1` (`PrimeSwift_8b
 
 The project baseline is currently `PrimeSwift_1bitStriped_u8` at upstream `22bfea9`, as established in [the direct comparison](reports/UpstreamBaselineComparison.md). In general, it is the fastest of the three upstream Swift implementations, measured with the same runner, compiler flags, machine, and timing session as our candidate. Pin the upstream commit and identify the winning entry in each report. The Bool entry uses `bits=8`; retain that label when comparing it with the three `bits=1` implementations.
 
-Our earlier versions are development controls: they measure the contribution of an optimization. The historical `swift/baseline` branch (`25402d4`) and `0d0a142` are development controls, not the upstream baseline. Preserve those branches and historical results. Report gains over the upstream baseline separately from gains over a development control.
+Our earlier versions are development controls: they measure the contribution of an optimization. The original verified implementation at commit `25402d4` and `0d0a142` are development controls, not the upstream baseline. Preserve those branches and historical results. Report gains over the upstream baseline separately from gains over a development control.
 
 ## Sieve rules
 
