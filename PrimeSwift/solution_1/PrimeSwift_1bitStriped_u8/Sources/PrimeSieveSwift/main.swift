@@ -75,7 +75,7 @@ struct PrimeSieveSwift: ParsableCommand {
         let validation = valid.map { String($0) } ?? "unknown"
         let diagnostic = "Passes: \(passes), Time: \(duration), Avg: \(duration / Double(passes)), Limit: \(upperLimit), Count: \(primes.count), Valid: \(validation), Checksum: \(checksum)\n"
         FileHandle.standardError.write(Data(diagnostic.utf8))
-        print("yellowcub_striped_UInt8;\(passes);\(duration);1;algorithm=base,faithful=yes,bits=1")
+        print("yellowcub_fahlman_striped_UInt8;\(passes);\(duration);1;algorithm=base,faithful=yes,bits=1")
     }
 }
 

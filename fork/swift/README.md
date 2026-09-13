@@ -48,7 +48,7 @@ Exact `099e35a` passed all six checks and runtime smoke on native amd64 and arm6
 
 ## Submission and history
 
-The package prepared through [PR #28](https://github.com/fahlman/Primes/pull/28), preserved at `35becbe`, is now the development source under `PrimeSwift/solution_1`. Upstream submission remains paused. Before submission, resolve the retained `yellowcub_striped_UInt8` label and record an accepted direct comparison for cutoff 111. The packaged entry's own image is what [the Linux workflow](linux-docker/README.md) validates.
+The package prepared through [PR #28](https://github.com/fahlman/Primes/pull/28), preserved at `35becbe`, is now the development source under `PrimeSwift/solution_1`. Upstream submission remains paused. Before submission, record an accepted direct comparison for cutoff 111. The entry prints the label `yellowcub_fahlman_striped_UInt8`, following the folder's `j-f1_yellowcub_bool` precedent for an improved entry. The packaged entry's own image is what [the Linux workflow](linux-docker/README.md) validates.
 
 Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes, detailed reviews, timing tables and evidence links. The original report files remain in published Git history. Rejected experiments live on in their closed PRs, whose commits GitHub keeps; the `swift/stream-fusion` experiment is commit `f0cd82d`. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
 
