@@ -111,7 +111,7 @@ The template defaults to `PrimeSieve.swift.in` beside the generator; append
 `--template path/to/PrimeSieve.swift.in` to select another template explicitly.
 With no arguments, the generator prints both marked switches to standard output.
 
-All code remains licensed under the repository's BSD-3-Clause license.
+fahlman's contributions in this folder are licensed under the BSD-3-Clause license, as CONTRIBUTING.md asks of every solution.
 
 ## Output
 
