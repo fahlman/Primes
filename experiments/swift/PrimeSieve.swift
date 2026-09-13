@@ -6,13 +6,20 @@ final class PrimeSieve {
     private let byteCount: Int
     private let storage: UnsafeMutablePointer<UInt8>
 
-    /// Logical flag and byte counts; an empty sieve still allocates one byte.
+    /// Logical counts only; an empty sieve still allocates one physical byte.
+    struct StorageLayout {
+        let oddCount: Int
+
+        var byteCount: Int {
+            @inline(__always) get {
+                oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
+            }
+        }
+    }
+
     @inline(__always)
-    static func storageLayout(for limit: Int) -> (oddCount: Int, byteCount: Int) {
-        let oddCount = limit >= 3 ? (limit - 1) / 2 : 0
-        // oddCount <= Int.max / 2, so adding seven cannot overflow.
-        let byteCount = (oddCount + 7) / 8
-        return (oddCount, byteCount)
+    static func storageLayout(for limit: Int) -> StorageLayout {
+        StorageLayout(oddCount: limit >= 3 ? (limit - 1) / 2 : 0)
     }
 
     init(limit: Int) {
