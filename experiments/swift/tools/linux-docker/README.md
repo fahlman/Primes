@@ -110,9 +110,14 @@ python3 experiments/swift/tools/linux-docker/test_lifecycle.py --output /tmp/new
 ```
 
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the
-runner-local lock itself. These changes are pending focused execution and the
-single native workflow run. Prior successful Swift checks remain evidence for
-their original exact revisions, not proof of this cleanup fix.
+runner-local lock itself. At source `f6256fd862ddfdd85f8c02d191fbf84822310798`,
+all 13 focused Python tests and syntax parsing passed under the exclusive lock
+on the Mac; [local record](../../linux-cleanup-evidence/local-f6256fd/local-verification.json)
+and [test log](../../linux-cleanup-evidence/local-f6256fd/unit-tests/unit-tests.log)
+retain the commands, exits and source hashes. Docker was not installed locally,
+so the real probe and single native workflow run remain pending. Prior successful
+Swift checks remain evidence for their original exact revisions, not proof of
+this cleanup fix.
 
 ## Evidence and execution status
 
