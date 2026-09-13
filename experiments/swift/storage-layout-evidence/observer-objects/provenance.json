@@ -1,0 +1,14 @@
+{
+  "b992595-checks-2.o": {
+    "sha256": "3079984172b7195c286637f1d89058293fa299b09f45f04e41431d054140a3f8",
+    "verification_record": "../b992595-checks-2/verification.json"
+  },
+  "3d8477d.o": {
+    "sha256": "34a9cc08bf540beef4b9781c2ed3c9a5bf850ed48b79a76aa255b3705a406f88",
+    "verification_record": "../3d8477d/verification.json"
+  },
+  "5cbc25e.o": {
+    "sha256": "51159806b4ae02e073a0b4a88765acf343516e197b2c389c13062023a4ceedc5",
+    "verification_record": "../5cbc25e/verification.json"
+  }
+}

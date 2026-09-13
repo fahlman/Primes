@@ -1,0 +1,532 @@
+{
+  "candidate": "5cbc25e1c41d55e1a48db4737721e589e046b08e",
+  "control": "84d8a4fb0235ca4d5e8261a80877499e3b36b3ef",
+  "started_at_utc": "2026-09-13T11:59:19.165249+00:00",
+  "status": "passed_correctness_and_assembly_identity",
+  "scope": "Layout boundaries, Verify ASAN/WMO, ExtraVerify ASAN and actual-source assembly; no throughput timing.",
+  "conditions_scope": "Reject competing builds/tests/benchmarks; audio is recorded but does not invalidate correctness or assembly.",
+  "commands": [
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:59:19.994292+00:00",
+      "owned_process_group": 81656,
+      "exit_code": 0,
+      "combined_stdout_stderr": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "finished_at_utc": "2026-09-13T11:59:20.441577+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/BenchmarkObserver.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:59:20.445788+00:00",
+      "owned_process_group": 81657,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T11:59:21.062716+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-module-name",
+        "PrimeSwift",
+        "-I",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/Benchmark.swift",
+        "-S",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/storage-layout-evidence/5cbc25e/candidate.s"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:59:21.068787+00:00",
+      "owned_process_group": 81662,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T12:03:21.807773+00:00"
+    },
+    {
+      "command": [
+        "/usr/bin/otool",
+        "-tvV",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:03:21.811825+00:00",
+      "owned_process_group": 82336,
+      "exit_code": 0,
+      "combined_stdout_stderr": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/BenchmarkObserver.o:\n(__TEXT,__text) section\n_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF:\n0000000000000000\tcbz\tx0, 0x8\n0000000000000004\tldrb\tw0, [x0, x1]\n0000000000000008\tret\n",
+      "finished_at_utc": "2026-09-13T12:03:22.012778+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-sanitize=address",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/Verify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:03:22.310964+00:00",
+      "owned_process_group": 82340,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T12:07:39.219978+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:07:39.224283+00:00",
+      "owned_process_group": 83141,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: 25 storage layout/zeroing cases and Int.min/Int.max layout arithmetic.\nPassed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "finished_at_utc": "2026-09-13T12:07:39.748446+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/Verify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/verify-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:07:39.751491+00:00",
+      "owned_process_group": 83144,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T12:11:53.418735+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/verify-wmo"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:11:53.423778+00:00",
+      "owned_process_group": 83788,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: 25 storage layout/zeroing cases and Int.min/Int.max layout arithmetic.\nPassed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "finished_at_utc": "2026-09-13T12:11:53.610188+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-sanitize=address",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/candidate/ExtraVerify.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/extraverify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:11:53.611863+00:00",
+      "owned_process_group": 83793,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T12:13:49.722839+00:00"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/extraverify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:13:49.723752+00:00",
+      "owned_process_group": 84170,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Passed: every limit in 2,049...30,000, 11382 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.\nPassed: 3654 sparse double-group and cleanup boundary limits.\n",
+      "finished_at_utc": "2026-09-13T12:13:52.330815+00:00"
+    }
+  ],
+  "wrapper_sha256": "2de2357a7354f5e5f14a42a4633b89bed83605ed063fd20b53ef8de47b59693b",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "source_sha256": {
+    "control": {
+      "PrimeSieve.swift": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686"
+    },
+    "candidate": {
+      "PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+      "Benchmark.swift": "3e8feb92083f2b0d239ce71f4d09100f886a93551e96d20480761fe87c6ace2e",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+      "Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+      "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686"
+    }
+  },
+  "exclusive_lock_before_compilation": true,
+  "before": {
+    "at_utc": "2026-09-13T11:59:19.750516+00:00",
+    "top_processes": [
+      {
+        "pid": 80775,
+        "cpu_percent": 43.4,
+        "executable": "java"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 32.6,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 30.7,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 15.1,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 81636,
+        "cpu_percent": 10.9,
+        "executable": "Python"
+      },
+      {
+        "pid": 424,
+        "cpu_percent": 7.5,
+        "executable": "coreaudiod"
+      },
+      {
+        "pid": 74997,
+        "cpu_percent": 5.6,
+        "executable": "Claude"
+      },
+      {
+        "pid": 739,
+        "cpu_percent": 5.1,
+        "executable": "NotificationCenter"
+      },
+      {
+        "pid": 819,
+        "cpu_percent": 3.7,
+        "executable": "corespeechd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.5,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 3.3,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 3.2,
+        "executable": "Messages"
+      },
+      {
+        "pid": 412,
+        "cpu_percent": 2.9,
+        "executable": "loginwindow"
+      },
+      {
+        "pid": 74441,
+        "cpu_percent": 2.4,
+        "executable": "Safari"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.9,
+        "executable": "logd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [
+      "pid 424(coreaudiod): [0x0015173b00018527] 00:04:09 PreventUserIdleSystemSleep named: \"com.apple.audio.AVVCAggregateDevice-819-282475249.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice",
+      "pid 424(coreaudiod): [0x0015173b00019a67] 00:04:10 PreventUserIdleSystemSleep named: \"com.apple.audio.BuiltInSpeakerDevice.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice"
+    ],
+    "caffeinate_pids": []
+  },
+  "compiler_sha256": "2ed38571e92c0283091838c1649e27650ad9c99950288e883c7b2dc6c4ce89fb",
+  "reused_control_assembly": {
+    "record": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/storage-layout-evidence/b992595-checks-2/verification.json",
+    "record_sha256": "078fe715b4943ef31d68fdb732d1daf58f16dff74dd06273a07bd3f9345d6352",
+    "assembly_sha256": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5",
+    "reason": "Exact unchanged control source, real observer, compiler and flags already compiled in preserved prior session."
+  },
+  "assembly_comparison": {
+    "$s10Foundation13__DataStorageC22withUnsafeMutableBytes2in5applyxSnySiG_xSwKXEtKlFs16IndexingIteratorVySS8UTF8ViewVG_Sit_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation15ContiguousBytes_pSgWOh": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation15ContiguousBytes_pWOb": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV06InlineB0VyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV10LargeSliceVyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV11InlineSliceVyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationO22withUnsafeMutableBytesyxxSwKXEKlFs16IndexingIteratorVySS8UTF8ViewVG_Sit_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationO5countAESi_tcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOSgWOe": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOWOe": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOWOy": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufCSS8UTF8ViewV_Tt0g5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufc8IteratorQz_SitSwXEfU1_SS8UTF8ViewV_TG5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufc8IteratorQz_SitSwXEfU1_SS8UTF8ViewV_TG5TA": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufcAC15_RepresentationOSRyAEGXEfU0_": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufcAC15_RepresentationOSWXEfU_": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC03runC0yyF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC24markVectorDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC5limitACSi_tcfc": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC6primesSaySiGyF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveCMa": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveCfD": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift13completedPass5limit6offsets6UInt64VSi_SitF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift9BenchmarkV4mainyyFZTf4d_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$ss11_StringGutsV27_slowEnsureMatchingEncodingySS5IndexVAEF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFSi_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_destroy_boxed_opaque_existential_1": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_instantiateConcreteTypeFromMangledNameV2": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_project_boxed_opaque_existential_1": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "main": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    }
+  },
+  "assembly_sha256": {
+    "control": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5",
+    "candidate": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5"
+  },
+  "observer_object_sha256": "51159806b4ae02e073a0b4a88765acf343516e197b2c389c13062023a4ceedc5",
+  "additional_candidate_functions": [],
+  "existing_function_identity_gate_passed": true,
+  "source_unchanged_after": true,
+  "after": {
+    "at_utc": "2026-09-13T12:13:52.407479+00:00",
+    "top_processes": [
+      {
+        "pid": 7781,
+        "cpu_percent": 96.9,
+        "executable": "com.apple.WebKit.WebContent"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 38.1,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 20.8,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 16.0,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 744,
+        "cpu_percent": 7.3,
+        "executable": "mediaanalysisd"
+      },
+      {
+        "pid": 7230,
+        "cpu_percent": 7.3,
+        "executable": "com.apple.WebKit.GPU"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 7.2,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 3.7,
+        "executable": "Messages"
+      },
+      {
+        "pid": 571,
+        "cpu_percent": 2.3,
+        "executable": "mds_stores"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 2.1,
+        "executable": "launchd"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 1.8,
+        "executable": "codex"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.7,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 7157,
+        "cpu_percent": 1.5,
+        "executable": "Mail"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 1.2,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.9,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-13T12:13:52.408485+00:00",
+  "lock_absent_after": true
+}
