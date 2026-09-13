@@ -6,6 +6,7 @@ on:
     paths:
       - .github/workflows/swift-linux-docker-validation.yml
       - experiments/swift/tools/linux-docker/validate.py
+      - experiments/swift/tools/linux-docker/test_lifecycle.py
 
 permissions:
   contents: read
@@ -49,6 +50,11 @@ jobs:
           path: solution
           persist-credentials: false
 
+      - name: Check owned Docker container cleanup
+        run: |
+          python3 workflow/experiments/swift/tools/linux-docker/test_lifecycle.py \
+            --docker-probe --output "$RUNNER_TEMP/swift-linux-docker-lifecycle"
+
       - name: Build Dockerfile and validate Swift on native Linux
         env:
           VALIDATION_PLATFORM: linux/${{ matrix.architecture }}
@@ -66,6 +72,8 @@ jobs:
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         with:
           name: swift-linux-${{ matrix.architecture }}-full-${{ env.SOLUTION_REVISION }}
-          path: ${{ runner.temp }}/swift-linux-docker-evidence/
+          path: |
+            ${{ runner.temp }}/swift-linux-docker-evidence/
+            ${{ runner.temp }}/swift-linux-docker-lifecycle/
           if-no-files-found: warn
           retention-days: 30

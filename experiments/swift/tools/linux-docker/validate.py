@@ -13,7 +13,9 @@ import os
 from pathlib import Path
 import platform
 import re
+import signal
 import subprocess
+import uuid
 
 
 SOURCE_FILES = [
@@ -24,6 +26,7 @@ SOURCE_FILES = [
 WORKFLOW_FILES = [
     ".github/workflows/swift-linux-docker-validation.yml",
     "experiments/swift/tools/linux-docker/validate.py",
+    "experiments/swift/tools/linux-docker/test_lifecycle.py",
 ]
 CHECK_NAMES = [
     "verify-asan", "extra-verify-asan", "phase-verify-asan",
@@ -38,6 +41,206 @@ def utc():
 def hashes(root, names):
     return {name: hashlib.sha256((root / name).read_bytes()).hexdigest()
             for name in names}
+
+
+class ValidationInterrupted(BaseException):
+    def __init__(self, signum):
+        super().__init__(f"Received signal {signum}")
+
+
+class CommandRunner:
+    """Keep command logs and stop the client process group before Docker cleanup."""
+    def __init__(self, output, record, save):
+        self.output, self.record, self.save = output, record, save
+
+    def __call__(self, name, command, timeout=1200):
+        number = len(self.record["commands"]) + 1
+        stdout = self.output / "logs" / f"{number:02d}-{name}.stdout.log"
+        stderr = self.output / "logs" / f"{number:02d}-{name}.stderr.log"
+        entry = {
+            "name": name, "command": [str(part) for part in command],
+            "started_at_utc": utc(), "timeout_seconds": timeout, "exit_code": None,
+            "stdout_log": str(stdout.relative_to(self.output)),
+            "stderr_log": str(stderr.relative_to(self.output)),
+        }
+        self.record["commands"].append(entry)
+        self.save()
+        print(f"RUN {name}: {json.dumps(entry['command'])}", flush=True)
+        process = None
+        try:
+            with stdout.open("w") as out, stderr.open("w") as err:
+                process = subprocess.Popen(entry["command"], stdout=out, stderr=err,
+                                           text=True, start_new_session=True)
+                entry["owned_process_group"] = process.pid
+                entry["exit_code"] = process.wait(timeout=timeout)
+        except BaseException as error:
+            entry["error"] = f"{type(error).__name__}: {error}"
+            if process is not None:
+                already_cleaning = self.record.get("cleaning_up", False)
+                self.record["cleaning_up"] = True
+                try:
+                    # Always signal the group, including children left after its
+                    # leader exits. Reap the client before inspecting containers.
+                    try:
+                        os.killpg(process.pid, signal.SIGTERM)
+                    except ProcessLookupError:
+                        pass
+                    try:
+                        process.wait(timeout=2)
+                    except subprocess.TimeoutExpired:
+                        pass
+                    try:
+                        os.killpg(process.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    entry["exit_code"] = process.wait(timeout=2)
+                    entry["client_reaped_after_error"] = True
+                except BaseException as cleanup_error:
+                    entry["client_cleanup_error"] = f"{type(cleanup_error).__name__}: {cleanup_error}"
+                finally:
+                    self.record["cleaning_up"] = already_cleaning
+            raise
+        finally:
+            entry["finished_at_utc"] = utc()
+            self.save()
+        if entry["exit_code"] != 0:
+            raise RuntimeError(f"{name} exited {entry['exit_code']}; see {stderr.name}")
+        return stdout.read_text(), stderr.read_text()
+
+
+class OwnedContainers:
+    """Create first; start only a verified container owned by this invocation."""
+    LABEL = "org.fahlman.primes.validation-owner"
+
+    def __init__(self, run, record, save):
+        self.run, self.record, self.save = run, record, save
+        self.owner = uuid.uuid4().hex
+        record["container_owner"] = self.owner
+        record["containers"] = []
+
+    def _inspect(self, entry, container_id):
+        text, _ = self.run("inspect-owned-" + entry["name"],
+                           ["docker", "container", "inspect", container_id], timeout=5)
+        info = json.loads(text)[0]
+        if (info["Id"] != container_id or info["Name"] != "/" + entry["name"] or
+                info.get("Config", {}).get("Labels", {}).get(self.LABEL) != self.owner or
+                (entry.get("id") and entry["id"] != container_id)):
+            raise RuntimeError("Container identity/ownership mismatch; refusing removal or start")
+        entry["id"] = container_id
+        entry["creation_confirmed"] = True
+        entry["last_inspected_state"] = info.get("State")
+        self.save()
+        return info
+
+    def _matching_ids(self, entry):
+        # Once creation returned a verified ID, absence must be checked by that
+        # ID: a renamed container can still be running under another name.
+        selector = "id=" + entry["id"] if entry.get("id") else "name=^/" + entry["name"] + "$"
+        text, _ = self.run("find-owned-" + entry["name"],
+                           ["docker", "container", "ls", "--all", "--quiet", "--no-trunc",
+                            "--filter", selector], timeout=5)
+        ids = text.split()
+        if (len(ids) > 1 or any(not re.fullmatch(r"[0-9a-f]{64}", item) for item in ids) or
+                (entry.get("id") and any(item != entry["id"] for item in ids))):
+            raise RuntimeError("Unexpected container lookup result")
+        return ids
+
+    def cleanup(self, entry):
+        if entry.get("removed_confirmed"):
+            return
+        self.record["cleaning_up"] = True
+        try:
+            ids = self._matching_ids(entry)
+            if ids:
+                self._inspect(entry, ids[0])
+                self.run("remove-owned-" + entry["name"],
+                         ["docker", "container", "rm", "--force", ids[0]], timeout=5)
+                if self._matching_ids(entry):
+                    raise RuntimeError("Owned container still exists after removal")
+            elif not entry.get("creation_confirmed"):
+                # A timed-out create request may still complete at the daemon.
+                # It cannot start work, but absence is not a confirmed outcome.
+                raise RuntimeError("Container creation outcome is unconfirmed; retain timing lock")
+            entry["removed_confirmed"] = True
+            entry["removed_at_utc"] = utc()
+        except BaseException as error:
+            entry.setdefault("cleanup_errors", []).append(f"{type(error).__name__}: {error}")
+            raise
+        finally:
+            self.record["cleaning_up"] = False
+            self.save()
+
+    def __call__(self, name, options, timeout=1200):
+        entry = {"operation": name, "name": f"swift-validation-{self.owner}-{len(self.record['containers'])}",
+                 "creation_confirmed": False, "removed_confirmed": False}
+        self.record["containers"].append(entry)
+        self.save()
+        primary_error = None
+        try:
+            text, _ = self.run("create-" + name,
+                               ["docker", "container", "create", "--name", entry["name"],
+                                "--label", self.LABEL + "=" + self.owner, *options], timeout=60)
+            container_id = text.strip()
+            if not re.fullmatch(r"[0-9a-f]{64}", container_id):
+                raise RuntimeError("Docker create did not return a full container ID")
+            self._inspect(entry, container_id)
+            result = self.run(name, ["docker", "container", "start", "--attach", container_id], timeout)
+            state = self._inspect(entry, container_id)["State"]
+            # The attached client's exit code alone does not establish that the
+            # container command completed successfully. Inspect its own state.
+            if state["Running"] or state["Status"] != "exited" or state["ExitCode"] != 0:
+                raise RuntimeError(f"{name} container did not exit successfully: {state}")
+        except BaseException as error:
+            primary_error = error
+            entry["error"] = f"{type(error).__name__}: {error}"
+            raise
+        finally:
+            try:
+                self.cleanup(entry)
+            except BaseException:
+                if primary_error is None:
+                    raise
+        if self.record.get("interrupted_signals"):
+            raise ValidationInterrupted(self.record["interrupted_signals"][-1])
+        return result
+
+    def cleanup_all(self):
+        for entry in self.record["containers"]:
+            try:
+                self.cleanup(entry)
+            except BaseException:
+                pass  # Each failure is recorded; no uncertain lock release below.
+        return (all(entry.get("removed_confirmed") for entry in self.record["containers"]) and
+                not any("client_cleanup_error" in entry for entry in self.record["commands"]))
+
+
+def install_signal_handlers(record):
+    def interrupt(signum, _frame):
+        record.setdefault("interrupted_signals", []).append(signum)
+        if not record.get("cleaning_up"):
+            raise ValidationInterrupted(signum)
+        # Do not abandon cleanup on a second SIGINT/SIGTERM. SIGKILL cannot be
+        # handled; in that case the already-created timing lock stays on disk.
+    old = {sig: signal.signal(sig, interrupt) for sig in (signal.SIGINT, signal.SIGTERM)}
+    return old
+
+
+def finish_cleanup(containers, record, lock, lock_inode):
+    confirmed = containers.cleanup_all()
+    record["owned_container_cleanup_confirmed"] = confirmed
+    if not confirmed:
+        record["status"] = "failed"
+        record["cleanup_error"] = "Owned Docker cleanup is unconfirmed; timing lock retained"
+    elif record.get("interrupted_signals"):
+        record["status"] = "failed"
+        record.setdefault("error", "Validation interrupted by signal")
+    if lock_inode is not None and lock.exists() and lock.stat().st_ino == lock_inode:
+        if confirmed:
+            lock.unlink()
+            record.setdefault("runner_local_lock", {})["removed_in_finally"] = True
+        else:
+            record.setdefault("runner_local_lock", {})["retained_due_to_unconfirmed_cleanup"] = True
+    return confirmed
 
 
 def main():
@@ -93,34 +296,10 @@ def main():
     def save():
         (output / "validation.json").write_text(json.dumps(record, indent=2) + "\n")
 
-    def run(name, command, timeout=1200):
-        number = len(record["commands"]) + 1
-        stdout = logs / f"{number:02d}-{name}.stdout.log"
-        stderr = logs / f"{number:02d}-{name}.stderr.log"
-        entry = {
-            "name": name, "command": [str(part) for part in command],
-            "started_at_utc": utc(), "timeout_seconds": timeout,
-            "exit_code": None,
-            "stdout_log": str(stdout.relative_to(output)),
-            "stderr_log": str(stderr.relative_to(output)),
-        }
-        record["commands"].append(entry)
-        save()
-        print(f"RUN {name}: {json.dumps(entry['command'])}", flush=True)
-        try:
-            with stdout.open("w") as out, stderr.open("w") as err:
-                result = subprocess.run(entry["command"], stdout=out, stderr=err,
-                                        text=True, timeout=timeout, check=False)
-            entry["exit_code"] = result.returncode
-        except Exception as error:
-            entry["error"] = f"{type(error).__name__}: {error}"
-            raise
-        finally:
-            entry["finished_at_utc"] = utc()
-            save()
-        if result.returncode != 0:
-            raise RuntimeError(f"{name} exited {result.returncode}; see {stderr.name}")
-        return stdout.read_text(), stderr.read_text()
+    run = CommandRunner(output, record, save)
+    containers = OwnedContainers(run, record, save)
+    previous_signals = install_signal_handlers(record)
+    failed = False
 
     def inspect_image(name, image):
         text, _ = run(name, ["docker", "image", "inspect", image], timeout=60)
@@ -191,12 +370,12 @@ def main():
             "--iidfile", output / "runtime-image.id", package])
         record["build_image"] = inspect_image("inspect-build-image", builder)
         record["runtime_image"] = inspect_image("inspect-runtime-image", runtime)
-        container = ["docker", "run", "--rm", "--platform", args.platform, "--network", "none"]
-        version, _ = run("container-swift-version", container + ["--entrypoint", "swiftc", builder, "--version"], timeout=60)
+        container = ["--platform", args.platform, "--network", "none"]
+        version, _ = containers("container-swift-version", container + ["--entrypoint", "swiftc", builder, "--version"], timeout=60)
         record["swift_version"] = version.strip()
         if "Swift version 6.3.3" not in version:
             raise RuntimeError("Unexpected Swift compiler version in build stage.")
-        stdout, stderr = run("runtime-smoke", container + [runtime], timeout=120)
+        stdout, stderr = containers("runtime-smoke", container + [runtime], timeout=120)
         fields = stdout.strip().split(";")
         if len(stdout.strip().splitlines()) != 1 or len(fields) != 5:
             raise RuntimeError("Runtime image did not emit exactly one benchmark result.")
@@ -230,10 +409,10 @@ def main():
                 if check_name not in requested_checks:
                     continue
                 executable = f"/validation/{name}-{mode}"
-                run(f"compile-{name}-{mode}", checking + ["--entrypoint", "swiftc", builder,
+                containers(f"compile-{name}-{mode}", checking + ["--entrypoint", "swiftc", builder,
                     *flags, "/source/PrimeSieve.swift", *["/source/" + s for s in sources],
                     "-o", executable])
-                run(f"run-{name}-{mode}", checking + ["--entrypoint", executable, builder])
+                containers(f"run-{name}-{mode}", checking + ["--entrypoint", executable, builder])
                 record["completed_checks"].append(check_name)
                 save()
 
@@ -243,17 +422,22 @@ def main():
         if record["source_sha256_after"] != record["source_sha256"]:
             raise RuntimeError("The checked-out source changed during validation.")
         record["status"] = "passed" if check_scope == "full_suite" else "passed_targeted"
-    except Exception as error:
+    except BaseException as error:
+        failed = True
         record["status"] = "failed"
         record["error"] = f"{type(error).__name__}: {error}"
         raise
     finally:
-        if lock_inode is not None and lock.exists() and lock.stat().st_ino == lock_inode:
-            lock.unlink()
-            record.setdefault("runner_local_lock", {})["removed_in_finally"] = True
-        record["finished_at_utc"] = utc()
-        save()
-        print(f"Evidence: {output / 'validation.json'}", flush=True)
+        try:
+            confirmed = finish_cleanup(containers, record, lock, lock_inode)
+            record["finished_at_utc"] = utc()
+            save()
+            print(f"Evidence: {output / 'validation.json'}", flush=True)
+            if not failed and (not confirmed or record.get("interrupted_signals")):
+                raise RuntimeError(record.get("cleanup_error", "Validation interrupted by signal"))
+        finally:
+            for sig, handler in previous_signals.items():
+                signal.signal(sig, handler)
 
 
 if __name__ == "__main__":

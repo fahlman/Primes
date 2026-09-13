@@ -45,8 +45,8 @@ the Dockerfile's two versioned Swift 6.3.3 images once and records their immutab
 repository digests. It builds both the existing `build` stage and final runtime
 image with the unchanged Dockerfile and `--pull=false`. Plain build logs retain
 the builder's base-image resolution; inspect records retain image IDs and digests.
-An exclusive `/tmp/primes-timing.lock` protects this runner's work and is removed
-in `finally`. An existing lock stops the job. It cannot synchronize with the Mac;
+An exclusive `/tmp/primes-timing.lock` protects this runner's work. It is removed
+in `finally` only after owned-container cleanup is confirmed. An existing lock stops the job. It cannot synchronize with the Mac;
 the root agent must still withhold the push until local timing is complete.
 
 The final image runs once, with its normal entrypoint and no network. Success
@@ -71,6 +71,48 @@ status and stdout/stderr log. A failing command stops that architecture's job;
 any other configured architecture still runs. Failures are preserved and require
 diagnosis;
 the script does not weaken checks, retry, or change the source automatically.
+
+## Container lifetime and focused regression checks
+
+Each container receives a unique invocation label and name. The validator creates
+it first, verifies its full ID, name and ownership label, then starts that exact
+ID with attached output. Successful validation also requires the inspected
+container state to be stopped with exit code zero; Docker client success alone
+does not establish command success. Normal completion, failure, timeout, SIGINT
+and SIGTERM all enter cleanup. The client process group is stopped and reaped
+before the owned container is force-removed and a successful daemon lookup
+confirms its absence. No unrelated containers or images are removed.
+
+Cleanup commands and inspected states are retained in `validation.json` and its
+raw logs. SIGINT/SIGTERM received during cleanup are recorded and deferred so
+they cannot abandon removal. An uncertain creation, failed inspection/removal or
+failed client cleanup marks the run failed and retains its owned timing lock.
+An uncertain create is never started. A later operator must establish that work
+has stopped before removing a retained lock. SIGKILL or loss of the runner cannot
+be handled by Python; the lock is not deliberately released in those cases.
+Historical evidence is unchanged, including the earlier cancelled run whose
+record remained `running`.
+
+The workflow first runs `test_lifecycle.py` with fake Docker responses and a small
+real Docker probe. Unit coverage targets timeout/interruption, process cleanup,
+container exit codes, failed cleanup and ownership. The explicit probe uses
+`busybox:1.37.0`, records the inspected image identity, and checks normal exit,
+nonzero exit, timeout and SIGTERM. The interrupted commands must emit a retained
+start marker, establishing that their workload began, and every owned container
+must be confirmed removed. The probe performs no Swift work, uses the same
+exclusive timing lock, and writes separate evidence included in the existing
+artifact upload. The unchanged six Swift checks then run once per native job.
+
+For the fake-only tests, after acquiring the project timing lock, use:
+
+```sh
+python3 experiments/swift/tools/linux-docker/test_lifecycle.py --output /tmp/new-lifecycle-test-evidence
+```
+
+The real probe requires Docker and an explicit `--docker-probe`; it acquires the
+runner-local lock itself. These changes are pending focused execution and the
+single native workflow run. Prior successful Swift checks remain evidence for
+their original exact revisions, not proof of this cleanup fix.
 
 ## Evidence and execution status
 
