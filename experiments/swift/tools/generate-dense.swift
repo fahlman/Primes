@@ -190,7 +190,10 @@ do {
         }
         guard let mode, let path else { throw fail(usage) }
         let file = URL(fileURLWithPath: path)
-        let source = try String(contentsOf: file, encoding: .utf8)
+        let sourceBytes = try Data(contentsOf: file)
+        guard let source = String(data: sourceBytes, encoding: .utf8) else {
+            throw fail("PrimeSieve.swift must be UTF-8")
+        }
         try validateSourceMarkers(source)
         let templateFile = templatePath.map { URL(fileURLWithPath: $0) } ??
             URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("PrimeSieve.swift.in")
@@ -201,7 +204,7 @@ do {
             try rendered.write(to: file, atomically: true, encoding: .utf8)
             print("Rendered complete PrimeSieve.swift from its template and dense metadata.")
         } else {
-            guard source.utf8.elementsEqual(rendered.utf8) else { throw fail("PrimeSieve.swift differs from its complete template rendering") }
+            guard sourceBytes == Data(rendered.utf8) else { throw fail("PrimeSieve.swift differs from its complete template rendering") }
             print("Complete source and generated \(switches.map(\.label).joined(separator: " and ")) switches match.")
         }
     }
