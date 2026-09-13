@@ -1,0 +1,13 @@
+normal run removes the verified id and preserves an unrelated container ... ok
+timeout and interrupt preserve the primary error and remove the container ... ok
+cleanup failure retains the lock and the original timeout ... ok
+client success cannot hide a nonzero container exit ... ok
+uncertain create never starts and retains the lock even if the lookup is empty ... ok
+failed lookup is not treated as container absence ... ok
+foreign name collision is never removed or started ... ok
+renamed known container is not mistaken for absence ... ok
+unreaped client retains the lock without containers ... ok
+lock with another inode is not removed ... ok
+signal is recorded, interrupts when idle and is deferred during cleanup ... ok
+timeout stops the process group and reaps the client with partial logs ... ok
+interrupt stops the running command and reaps the client ... ok
