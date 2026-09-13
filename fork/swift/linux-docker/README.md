@@ -90,10 +90,11 @@ the project's M4 speed claims.
 
 By default, the build-stage image compiles and runs Verify and PhaseVerify
 under both `-O -sanitize=address` and `-O -whole-module-optimization`.
-The optional `--checks` argument accepts one or more unique names from
-`verify-asan`, `phase-verify-asan`, `verify-wmo` and `phase-verify-wmo` for the
-package layout; the legacy layout still has `extra-verify-asan` and
-`extra-verify-wmo` as well. Omitting it retains every check of the layout.
+The optional `--checks` argument accepts one or more unique names from the
+layout's checks: `verify-asan`, `phase-verify-asan`, `verify-wmo` and
+`phase-verify-wmo` for the package layout, plus `extra-verify-asan` and
+`extra-verify-wmo` while the pinned revision still ships `Tools/ExtraVerify.swift`;
+the legacy layout has all six. Omitting it retains every check of the layout.
 The record lists requested, completed and unrequested checks, and explicitly
 labels full-suite or targeted coverage. Full-suite success is `passed`;
 targeted success is `passed_targeted` and does not establish unrequested checks.

@@ -115,6 +115,24 @@ schedules, complete-file rendering, repairs and rejected inputs.
 
 All code remains licensed under the repository's BSD-3-Clause license.
 
-## Output and measurements
+## Output
 
-Final packaged output and measurements will be recorded here after verification.
+On an Apple M4 Pro (macOS 26.6.2, Swift 6.3.3), after the build commands above, `./run.sh` printed:
+
+```
+Passes: 13784, Time: 5.000250935554504, Avg: 0.000362757612852184, Limit: 1000000, Count: 78498, Valid: true
+
+yellowcub_1bit_UInt8;13784;5.000250935554504;1;algorithm=base,faithful=yes,bits=1
+
+yellowcub_fahlman_striped_UInt8;127639;5.000029667;1;algorithm=base,faithful=yes,bits=1
+
+Passes: 16749, Time: 5.000002026557922, Avg: 0.00029852540608740356, Limit: 1000000, Count: 78498, Valid: true
+
+j-f1_yellowcub_bool;16749;5.000002026557922;1;algorithm=base,faithful=yes,bits=8
+```
+
+The striped entry reports its diagnostic on standard error:
+
+```
+Passes: 127639, Time: 5.000029667, Avg: 3.9173212474243765e-05, Limit: 1000000, Count: 78498, Valid: true, Checksum: 27413282
+```

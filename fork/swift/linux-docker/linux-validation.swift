@@ -52,6 +52,10 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
         // The fork's tools moved from tools/swift to fork/swift; older pins keep the old path.
         let tools = FileManager.default.fileExists(atPath: solution.appendingPathComponent("fork/swift/phase-split/PhaseSieve.swift").path) ? "fork/swift" : "tools/swift"
         let phases = [tools + "/phase-split/PhaseSieve.swift", tools + "/phase-split/PhaseVerify.swift"]
+        let verify = package + "/Tools/Verify.swift"
+        // Revisions before #34 merged the verifiers still ship ExtraVerify.swift; check it too.
+        let extra = package + "/Tools/ExtraVerify.swift"
+        let extras = FileManager.default.fileExists(atPath: solution.appendingPathComponent(extra).path) ? [extra] : []
         // The shipped image builds all three Swift entries, and run.sh runs them in turn.
         return SourceLayout(
             name: "solution-package", rootPath: ".", context: folder, dockerfile: folder + "/Dockerfile",
@@ -62,9 +66,8 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
                           package + "/Package.swift", package + "/Package.resolved",
                           package + "/Sources/PrimeSieveSwift/main.swift", package + "/Sources/PrimeSieveSwift/BenchmarkDuration.swift",
                           core, package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
-                          package + "/Tools/Verify.swift",
-                          phases[0], phases[1]],
-            checks: [("verify", [package + "/Tools/Verify.swift"]), ("phase-verify", phases)])
+                          verify] + extras + [phases[0], phases[1]],
+            checks: [("verify", [verify])] + extras.map { ("extra-verify", [$0]) } + [("phase-verify", phases)])
     }
     return SourceLayout(
         name: "experiments", rootPath: "experiments/swift", context: ".", dockerfile: "Dockerfile",
@@ -814,6 +817,30 @@ struct LifecycleFixture {
 
 func lifecycleTests(in directory: URL) -> [(String, (LifecycleFixture) throws -> Void)] {
     [
+        ("source layout follows the pinned revision's files", { _ in
+            func layout(_ files: [String]) throws -> SourceLayout {
+                let root = directory.appendingPathComponent("layout-" + UUID().uuidString)
+                for file in files {
+                    let url = root.appendingPathComponent(file)
+                    try FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
+                    try Data().write(to: url)
+                }
+                return try sourceLayout(root)
+            }
+            let core = "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift"
+            let extra = "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/ExtraVerify.swift"
+            let current = try layout([core, "fork/swift/phase-split/PhaseSieve.swift"])
+            try check(checkNames(for: current) == ["verify-asan", "phase-verify-asan", "verify-wmo", "phase-verify-wmo"], "current package checks")
+            try check(current.checks.last?.1 == ["fork/swift/phase-split/PhaseSieve.swift", "fork/swift/phase-split/PhaseVerify.swift"], "phase checks under fork/swift")
+            let older = try layout([core, extra, "tools/swift/phase-split/PhaseSieve.swift"])
+            try check(checkNames(for: older) == ["verify-asan", "extra-verify-asan", "phase-verify-asan", "verify-wmo", "extra-verify-wmo", "phase-verify-wmo"], "older package checks include ExtraVerify")
+            try check(older.checks[2].1 == ["tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"] && older.sourceFiles.contains(extra), "older pins keep tools/swift and hash ExtraVerify")
+            let legacy = try layout(["experiments/swift/PrimeSieve.swift"])
+            try check(legacy.name == "experiments" && checkNames(for: legacy).count == 6, "legacy layout keeps six checks")
+            for files in [[core, "experiments/swift/PrimeSieve.swift"], []] {
+                do { _ = try layout(files); try check(false, "an ambiguous or missing layout was accepted") } catch is RuntimeError {}
+            }
+        }),
         ("normal run removes the verified id and preserves an unrelated container", { f in
             let foreign = String(repeating: "f", count: 64)
             f.docker.items.append((foreign, ["Id": foreign, "Name": "/unrelated", "Config": ["Labels": [String: String]()]]))
