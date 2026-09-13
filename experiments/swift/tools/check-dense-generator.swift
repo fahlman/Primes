@@ -1,4 +1,4 @@
-// Reusable CLI regression checks for the dense generator and compatibility shim.
+// Reusable CLI regression checks for the dense generator.
 // Run from any directory, while the caller owns the project's timing lock:
 //   swift /path/to/experiments/swift/tools/check-dense-generator.swift
 // All mutations use disposable fixtures. The final JSON records every command;
@@ -188,13 +188,14 @@ final class GeneratorChecks {
                 "loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)",
                 "loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)")),
         ]
-        for tool in ["generate-dense.swift", "generate-dense-128.swift"] {
-            let stem = tool == "generate-dense.swift" ? "canonical" : "shim"
+        do {
+            let tool = "generate-dense.swift"
+            let stem = "canonical"
             let printed = try invoke(tool, [], name: "stdout-blocks")
             try require(printed.utf8.elementsEqual(expectedBlocks.utf8), "\(tool) stdout differs from the two current marked blocks")
             let checkedSchedule = try checkSchedules(printed)
             if schedules.isEmpty { schedules = checkedSchedule }
-            try require(schedules == checkedSchedule, "Shim schedule differs")
+            try require(schedules == checkedSchedule, "Generator stdout schedule differs from the source schedule")
             let good = try fixture(source, "\(stem)-source with spaces.swift")
             _ = try invoke(tool, ["--check", good.path], name: "check-current")
             _ = try invoke(tool, ["--template", goodTemplate.path, "--check", good.path], name: "template-before-mode")

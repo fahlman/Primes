@@ -29,7 +29,7 @@ run builds the image, checks native host/daemon/image architecture and Swift
 
 [Job 103556227050](https://github.com/fahlman/Primes/actions/runs/34694761283/job/103556227050)
 ran from 12:50:17 to 13:35:34 UTC on 2026-09-12 and ended `cancelled` because of
-the 45-minute job cap. GitHub's preserved [check-run annotation](../linux-docker-validation/run-34694761283/github/check-run-103556227050-annotations.json)
+the 45-minute job cap. GitHub's preserved [check-run annotation](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/github/check-run-103556227050-annotations.json)
 explicitly states, "The job has exceeded the maximum execution time of 45m0s".
 The native runner exposed four x86_64 CPUs, identified as
 AMD EPYC 9V74, on the `ubuntu-24.04` image `20260907.300.1`. The container reported
@@ -72,7 +72,7 @@ hashes of the exact local Git objects. The sieve SHA256 is
 `d6368487ee284c955781fe6944c0d94bc35c265e5b40fc4e19cba21d66f6590d`;
 the unchanged Dockerfile SHA256 is
 `078e05af738c017dfaf6bfc53b83c6c308f72349980991eae227804a63d34ed3`.
-The full mapping is in [expected-source-hashes.json](../linux-docker-validation/run-34694761283/expected-source-hashes.json).
+The full mapping is in [expected-source-hashes.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/expected-source-hashes.json).
 The original checkpoint still says `running`: cancellation prevented final
 source rehash, final status and the recorded lock-release marker. Those missing
 fields are not converted into successful results.
@@ -89,10 +89,10 @@ images were not published, so their immutable local IDs are recorded rather
 than invented repository digests. The original [artifact 10299186009](https://github.com/fahlman/Primes/actions/runs/34694761283/artifacts/10299186009)
 was downloaded as a ZIP and its SHA256 matched GitHub's advertised digest:
 `78680dbfcae62d8c297b218704e8748347b41a7583fe214fe648e3233a5d7afc`.
-The ZIP, extracted [validation.json](../linux-docker-validation/run-34694761283/amd64/validation.json),
+The ZIP, extracted [validation.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/amd64/validation.json),
 unmodified command logs, raw job log and API metadata are preserved under
 `linux-docker-validation/run-34694761283/`. A separate
-[derived audit](../linux-docker-validation/run-34694761283/amd64-audit.json)
+[derived audit](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/amd64-audit.json)
 records the timeout and durations without rewriting the raw checkpoint.
 An independent Codex subagent reconciled the hashes, successful checks,
 timestamps and incomplete final-check status with no evidence inconsistency.
@@ -135,9 +135,9 @@ The [arm64 artifact 10299213736](https://github.com/fahlman/Primes/actions/runs/
 ZIP SHA256 matched GitHub's advertised digest,
 `98a996e48194702ff68ae6bb1d82ec5b64a71c7a1235202c9cb628ad23872fbe`,
 and every extracted file matched its archived bytes. The original
-[validation.json](../linux-docker-validation/run-34694761283/arm64/validation.json),
+[validation.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/arm64/validation.json),
 command/job logs and metadata are preserved alongside a separate
-[derived audit](../linux-docker-validation/run-34694761283/arm64-audit.json).
+[derived audit](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34694761283/arm64-audit.json).
 An independent Codex subagent reconciled the complete arm64 evidence with no
 blocking findings.
 
@@ -175,9 +175,9 @@ Both report `linux/amd64`. The [focused artifact 10299771414](https://github.com
 ZIP matched GitHub's advertised SHA256,
 `02f19ae48f81eca8469193ecf36e288281aeabdb13a93bcbcf2787f4122348c2`,
 and every extracted byte matched the archive. Its original
-[validation.json](../linux-docker-validation/run-34697204142/amd64-phase-verify-wmo/validation.json),
+[validation.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34697204142/amd64-phase-verify-wmo/validation.json),
 logs, job/run metadata and separate
-[derived audit](../linux-docker-validation/run-34697204142/amd64-targeted-audit.json)
+[derived audit](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/run-34697204142/amd64-targeted-audit.json)
 are preserved. An independent Codex subagent audited the original-five plus
 focused-one amd64 coverage with no blocking findings.
 
@@ -190,13 +190,13 @@ focused-one amd64 coverage with no blocking findings.
 | ExtraVerify WMO | 34694761283 | 34694761283 |
 | PhaseVerify WMO | 34697204142 | 34694761283 |
 
-The [aggregate coverage record](../linux-docker-validation/aggregate-coverage.json)
+The [aggregate coverage record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/aggregate-coverage.json)
 maps all 12 successful native verifier executions to the two runs. This is
 source-specific compatibility/correctness coverage across jobs. The original
 amd64 job remains cancelled, with its unfinished compile exit code `null` and
 absent final rehash/cleanup fields preserved. The original matrix therefore
 remains `cancelled` despite successful aggregate completion. The
-[evidence manifest](../linux-docker-validation/evidence-manifest.json) records
+[evidence manifest](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/evidence-manifest.json) records
 SHA256 hashes for the preserved files.
 
 [Claude's independent review](https://github.com/fahlman/Primes/pull/14#issuecomment-5646170915)

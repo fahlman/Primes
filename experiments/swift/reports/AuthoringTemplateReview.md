@@ -52,3 +52,5 @@ release passed. Swift 6.3.3 on the reference M4 Pro; no sieve was executed.
 No throughput run is part of this authoring change. Byte-identical compiled source
 and unchanged build inputs are the runtime-preservation evidence; no speedup is
 claimed. Storage-layout integration is reviewed and verified separately.
+
+Retrieve the named verification files from the [authoring evidence archive](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/authoring-refactor-evidence/1f9e11e).

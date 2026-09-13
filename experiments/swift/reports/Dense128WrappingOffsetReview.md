@@ -49,6 +49,6 @@ These snapshots are before compilation and after comparison, not continuous moni
 
 ## Evidence
 
-- [Raw results](../dense-128-offset-results-bd3858c.json).
-- [Verification, reviews, assembly, conditions and calculations](../dense-128-offset-verification.json).
+- [Raw results](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/dense-128-offset-results-bd3858c.json).
+- [Verification, reviews, assembly, conditions and calculations](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/dense-128-offset-verification.json).
 - [Original 128-bit result](Dense128Review.md).

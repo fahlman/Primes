@@ -1,2 +1,0 @@
-Passed: every limit in 2,049...30,000, 11382 deduplicated 128-bit alignment/group/tail limits, 500 random limits in 2,049...2,000,000, and 1561 limits within 3 of every prime square up to 2,000,000.
-Passed: 3654 sparse double-group and cleanup boundary limits.

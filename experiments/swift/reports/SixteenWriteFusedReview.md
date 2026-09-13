@@ -56,6 +56,6 @@ These are snapshots before comparison compilation and afterward, not continuous 
 
 ## Evidence
 
-- [Raw comparison samples](../sparse-next-results-59262fe-307da10.json).
-- [Verification, reviews, assembly, source hashes, commands, conditions and calculations](../sparse-next-verification.json).
+- [Raw comparison samples](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/sparse-next-results-59262fe-307da10.json).
+- [Verification, reviews, assembly, source hashes, commands, conditions and calculations](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/sparse-next-verification.json).
 - [Other independent candidate](Dense128Review.md).
