@@ -1,0 +1,37 @@
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 1.18kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/swift:6.3.3
+#2 DONE 0.0s
+
+#3 [build 1/6] FROM docker.io/library/swift:6.3.3
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 234.04kB done
+#4 DONE 0.0s
+
+#5 [build 2/6] WORKDIR /app
+#5 DONE 0.0s
+
+#6 [build 3/6] COPY PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift ./
+#6 DONE 0.0s
+
+#7 [build 4/6] COPY PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift ./
+#7 DONE 0.0s
+
+#8 [build 5/6] COPY tools/swift/Benchmark.swift ./
+#8 DONE 0.0s
+
+#9 [build 6/6] RUN mkdir -p .build &&     swiftc -O -parse-as-library -module-name BenchmarkObserver       -emit-module -emit-module-path .build/BenchmarkObserver.swiftmodule       -emit-object BenchmarkObserver.swift -o .build/BenchmarkObserver.o &&     swiftc -O -whole-module-optimization -I .build       PrimeSieve.swift Benchmark.swift .build/BenchmarkObserver.o       -o /app/PrimeSwift
+#9 DONE 105.6s
+
+#10 exporting to image
+#10 exporting layers
+#10 exporting layers 0.6s done
+#10 writing image sha256:37c8bb4d4f4c075e041d5ebf2b2739a6cc0a8b7d2d34fecb3566e57b284e88c4 done
+#10 naming to docker.io/library/swift-validation-build:0ecbde644e3d-arm64 done
+#10 DONE 0.6s
