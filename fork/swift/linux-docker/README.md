@@ -15,7 +15,7 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
-`tools/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
+`fork/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
 The two native jobs run serially.
 Each job runs every check of the pinned solution's layout. The job limit
 is 60 minutes; individual command limits remain 20 minutes. Repository permissions are read-only.
@@ -45,7 +45,7 @@ their hash keys keep the original paths relative to that directory. Current
 revisions mount the repository root read-only and build `PrimeSwift/solution_1`
 with its shipped Dockerfile, with the canonical core and observer under
 `PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources`, Verify under that
-package's `Tools`, and the phase checks under `tools/swift`. Their hash keys are
+package's `Tools`, and the phase checks under `fork/swift`. Their hash keys are
 repository-relative. The record identifies `source_layout` and
 `source_hash_root`. Missing or ambiguous layouts fail instead of selecting a
 duplicate source.
@@ -140,7 +140,7 @@ artifact upload. The layout's Swift checks then run once per native job.
 For the fake-only tests, after acquiring the project timing lock, use:
 
 ```sh
-swift tools/swift/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
+swift fork/swift/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
 ```
 
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the

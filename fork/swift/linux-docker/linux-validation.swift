@@ -49,6 +49,9 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
     let legacy = FileManager.default.fileExists(atPath: solution.appendingPathComponent("experiments/swift/PrimeSieve.swift").path)
     guard current != legacy else { throw RuntimeError("Expected exactly one supported canonical sieve layout.") }
     if current {
+        // The fork's tools moved from tools/swift to fork/swift; older pins keep the old path.
+        let tools = FileManager.default.fileExists(atPath: solution.appendingPathComponent("fork/swift/phase-split/PhaseSieve.swift").path) ? "fork/swift" : "tools/swift"
+        let phases = [tools + "/phase-split/PhaseSieve.swift", tools + "/phase-split/PhaseVerify.swift"]
         // The shipped image builds all three Swift entries, and run.sh runs them in turn.
         return SourceLayout(
             name: "solution-package", rootPath: ".", context: folder, dockerfile: folder + "/Dockerfile",
@@ -60,9 +63,8 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
                           package + "/Sources/PrimeSieveSwift/main.swift", package + "/Sources/PrimeSieveSwift/BenchmarkDuration.swift",
                           core, package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
                           package + "/Tools/Verify.swift",
-                          "tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"],
-            checks: [("verify", [package + "/Tools/Verify.swift"]),
-                     ("phase-verify", ["tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"])])
+                          phases[0], phases[1]],
+            checks: [("verify", [package + "/Tools/Verify.swift"]), ("phase-verify", phases)])
     }
     return SourceLayout(
         name: "experiments", rootPath: "experiments/swift", context: ".", dockerfile: "Dockerfile",
@@ -75,7 +77,8 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
 }
 
 func workflowFiles(_ workflow: URL) throws -> [String] {
-    let validators = ["tools/swift/linux-docker/linux-validation.swift",
+    let validators = ["fork/swift/linux-docker/linux-validation.swift",
+                      "tools/swift/linux-docker/linux-validation.swift",
                       "experiments/swift/tools/linux-docker/linux-validation.swift"]
         .filter { FileManager.default.fileExists(atPath: workflow.appendingPathComponent($0).path) }
     guard validators.count == 1 else { throw RuntimeError("Expected exactly one supported workflow validator path.") }

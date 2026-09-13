@@ -4,7 +4,7 @@
 // the pinned revision and adapted only so the frozen runner can drive them.
 // Three rotated five-second runs per variant, twelve in all. Run while holding
 // the project's timing lock, from any directory, with network access:
-//   swift tools/swift/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]
+//   swift fork/swift/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]
 // The candidate defaults to HEAD. The output file must not exist. Timing counts
 // as evidence only on the reference machine; see AGENTS.md.
 import Foundation
@@ -219,7 +219,7 @@ do {
     }
     let candidateRevision = try run(["git", "-C", repo.path, "rev-parse", "--verify", "\(candidateRequested)^{commit}"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)
 
-    let build = repo.appendingPathComponent("tools/swift/.build/upstream-comparison")
+    let build = repo.appendingPathComponent("fork/swift/.build/upstream-comparison")
     try FileManager.default.createDirectory(at: build, withIntermediateDirectories: true)
     let observerFile = build.appendingPathComponent("BenchmarkObserver.swift")
     let runnerFile = build.appendingPathComponent("Benchmark.swift")

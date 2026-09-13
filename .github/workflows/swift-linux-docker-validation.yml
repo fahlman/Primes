@@ -5,7 +5,7 @@ on:
     branches: [swift/linux-docker-validation]
     paths:
       - .github/workflows/swift-linux-docker-validation.yml
-      - tools/swift/linux-docker/linux-validation.swift
+      - fork/swift/linux-docker/linux-validation.swift
 
 permissions:
   contents: read
@@ -51,14 +51,14 @@ jobs:
 
       - name: Check owned Docker container cleanup
         run: |
-          swift workflow/tools/swift/linux-docker/linux-validation.swift test-lifecycle \
+          swift workflow/fork/swift/linux-docker/linux-validation.swift test-lifecycle \
             --docker-probe --output "$RUNNER_TEMP/swift-linux-docker-lifecycle"
 
       - name: Build Dockerfile and validate Swift on native Linux
         env:
           VALIDATION_PLATFORM: linux/${{ matrix.architecture }}
         run: |
-          swift workflow/tools/swift/linux-docker/linux-validation.swift validate \
+          swift workflow/fork/swift/linux-docker/linux-validation.swift validate \
             --solution-root "$GITHUB_WORKSPACE/solution" \
             --solution-revision "$SOLUTION_REVISION" \
             --workflow-root "$GITHUB_WORKSPACE/workflow" \

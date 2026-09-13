@@ -2,7 +2,7 @@
 // from revision 25402d4. Every executable is compiled first; then three rotated
 // five-second runs per variant are measured serially. Run while holding the
 // project's timing lock, from any directory:
-//   swift tools/swift/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json
+//   swift fork/swift/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json
 // Variant names use lowercase letters, digits, hyphens and underscores; the first
 // variant is the reference for speedup_over_first. The output file must not exist.
 // Timing counts as evidence only on the reference machine; see AGENTS.md.
@@ -160,7 +160,7 @@ do {
         return path
     }
 
-    let build = repo.appendingPathComponent("tools/swift/.build/optimization-comparison")
+    let build = repo.appendingPathComponent("fork/swift/.build/optimization-comparison")
     try FileManager.default.createDirectory(at: build, withIntermediateDirectories: true)
     let observerFile = build.appendingPathComponent("BenchmarkObserver.swift")
     let runnerFile = build.appendingPathComponent("Benchmark.swift")

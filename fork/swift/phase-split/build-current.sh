@@ -3,7 +3,7 @@ set -eu
 cd "$(dirname "$0")/.."
 swift_package=../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
 if [ "$#" -ne 1 ]; then
-    echo "Usage: sh phase-split/build-current.sh NEW_BUILD_DIRECTORY (from tools/swift)" >&2
+    echo "Usage: sh phase-split/build-current.sh NEW_BUILD_DIRECTORY (from fork/swift)" >&2
     exit 2
 fi
 if [ ! -f /tmp/primes-timing.lock ]; then

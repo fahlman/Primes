@@ -34,7 +34,7 @@ record the compiler commands, binary hashes and assembly review as usual.
 
 ## Build and short checks
 
-From `tools/swift`, exclusively acquire and own the timing lock described
+From `fork/swift`, exclusively acquire and own the timing lock described
 in [AGENTS.md](../../../AGENTS.md) before any compilation or execution. Release
 only your own lock in a `finally`/trap. No competing builds, tests, benchmarks
 or media. The script checks lock presence; the caller remains responsible for
@@ -137,7 +137,7 @@ production by more than 3%, report the mismatch and avoid fine attribution of
 the production total. Passing that screen does not establish identical codegen
 for partial modes. Compiler specialization, code layout, cache state, drift and
 desktop noise remain limitations. No optimization gain follows from this tool;
-use `swift compare-revisions.swift` from `tools/swift` under the normal benchmark contract for that
+use `swift compare-revisions.swift` from `fork/swift` under the normal benchmark contract for that
 claim, and never combine ratios from separate sessions.
 
 ## Preserved historical reference and results
