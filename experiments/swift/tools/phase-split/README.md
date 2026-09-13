@@ -96,7 +96,7 @@ swiftc -O -whole-module-optimization PrimeSieve.swift \
 Use `-O -sanitize=address` in place of WMO for its original ASan check.
 At exact candidate `0c605a4`, current verification passed 66,845 checks over
 2,305 limits under both ASan and WMO. Actual binary review, short wrapper checks
-and stale-input/overwrite refusals passed. See the [verification record](../../reports/CurrentPhaseTools.md).
+and stale-input/overwrite refusals passed. See the [verification record](https://github.com/fahlman/Primes/pull/24#issuecomment-5653992467).
 No new phase timings are claimed.
 
 ## Future timing and interpretation
@@ -147,10 +147,10 @@ six-line historical header. Its companion `PhaseVerify.swift` is also unchanged.
 The versioned alias in the current verifier identifies its historical role
 without renaming files used by prior verification and Linux automation.
 
-The [B breakdown](../../reports/FusedSparseBandBreakdown.md) records the
+The [B breakdown](https://github.com/fahlman/Primes/pull/10#issuecomment-5653991507) records the
 `56ad42b` copy, 21 timing samples and the passing 3% full-copy control. The
-[earlier through-63 breakdown](../../reports/PhaseBreakdownThrough63.md) and
-[earlier sparse-band report](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md)
+[earlier through-63 breakdown](https://github.com/fahlman/Primes/pull/9#issuecomment-5653991336) and
+[earlier sparse-band report](https://github.com/fahlman/Primes/pull/10)
 describe `19aa38a`. These are historical evidence, not current phase measurements.
 The old seven-mode benchmark is retained in Git history; new commands above use
 freshly derived current source.

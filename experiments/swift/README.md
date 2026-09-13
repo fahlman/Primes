@@ -1,6 +1,6 @@
 # Swift sieve by fahlman
 
-This folder contains the current experimental implementation, development tools and selected reports. Individual changes, reviews and adoption decisions live in the [fork's pull requests](https://github.com/fahlman/Primes/pulls?q=is%3Apr). Historical raw records are preserved in the [evidence snapshot](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift), retained on `archive/swift-evidence`.
+This folder contains the current experimental implementation and development tools. Individual changes, reviews and adoption decisions live in the [fork's pull requests](https://github.com/fahlman/Primes/pulls?q=is%3Apr). Historical raw records are preserved in the [evidence snapshot](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift), retained on `archive/swift-evidence`.
 
 ## Current implementation
 
@@ -55,11 +55,11 @@ These are recorded results for exact historical revisions on M4 Pro / Swift 6.3.
 | Same cutoff-sweep session | `099e35a`: 38.434 µs/sieve | Cutoff 127 `bd3858c`: 38.642 µs/sieve | 0.540% more throughput; 0.208 µs saved |
 | Latest accepted direct upstream comparison | Cutoff 127 `bd3858c`: 39.000 µs/sieve | Upstream striped UInt8 at `22bfea9`: 207.191 µs/sieve | 5.31× throughput |
 
-The cutoff sweep used three rotated five-second trials per variant, with every cutoff-111 trial faster than every control trial; separation from 127 was only 0.036377 µs at the range boundary. See [PR #16](https://github.com/fahlman/Primes/pull/16) and its [report](https://github.com/fahlman/Primes/blob/9867dce8a60985272c85baa8596433b9719e243c/experiments/swift/reports/FollowupFourExperimentReview.md).
+The cutoff sweep used three rotated five-second trials per variant, with every cutoff-111 trial faster than every control trial; separation from 127 was only 0.036377 µs at the range boundary. See the [recorded comparison in PR #16](https://github.com/fahlman/Primes/pull/16).
 
-The upstream session compared all three original Swift entries under the same adapted runner and machine conditions. Striped UInt8 was fastest. Spotlight activity and incomplete position balancing limit precision. See the [upstream report and raw-data links](reports/CurrentUpstreamSwiftComparison.md). The 5.31× result belongs to cutoff 127, not cutoff 111. Never multiply gains or combine ratios from separate sessions.
+The upstream session compared all three original Swift entries under the same adapted runner and machine conditions. Striped UInt8 was fastest. Spotlight activity and incomplete position balancing limit precision. See the [upstream comparison and raw-data links](https://github.com/fahlman/Primes/pull/14#issuecomment-5653991965). The 5.31× result belongs to cutoff 127, not cutoff 111. Never multiply gains or combine ratios from separate sessions.
 
-Exact `099e35a` passed all six checks and runtime smoke on native amd64 and arm64 through [PR #15](https://github.com/fahlman/Primes/pull/15). These are correctness and compatibility results, not Threadripper timing. See the [cutoff-111 report](reports/Cutoff111LinuxValidation.md) and [container-cleanup report](reports/LinuxContainerCleanup.md).
+Exact `099e35a` passed all six checks and runtime smoke on native amd64 and arm64 through [PR #15](https://github.com/fahlman/Primes/pull/15). These are correctness and compatibility results, not Threadripper timing. See the [cutoff-111 verification](https://github.com/fahlman/Primes/pull/16#issuecomment-5653992293) and [container-cleanup verification](https://github.com/fahlman/Primes/pull/15#issuecomment-5653992129).
 
 For new comparisons, follow the [benchmark contract](AGENTS.md#benchmark-contract). The Swift harnesses adopted through [PR #29](https://github.com/fahlman/Primes/pull/29) build all compared variants with the frozen `25402d4` runner and observer. Both require a unique `--output` path and refuse to overwrite records. Their author-reported tooling runs do not replace the accepted measurements above.
 
@@ -76,7 +76,7 @@ The prepared package is preserved on `swift/upstream-striped-111` at merge `35be
 
 Before submission: resolve the retained `yellowcub_striped_UInt8` result label, record an accepted direct comparison for cutoff 111, and validate the prepared package itself on native Linux. These remain distinct from experiment-source and tooling checks.
 
-Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes and the [reports](reports/) for deeper explanations. Rejected experiments live on in their closed PRs, whose commits GitHub keeps; the `swift/stream-fusion` experiment is commit `f0cd82d`. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
+Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes, detailed reviews, timing tables and evidence links. The original report files remain in published Git history. Rejected experiments live on in their closed PRs, whose commits GitHub keeps; the `swift/stream-fusion` experiment is commit `f0cd82d`. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
 
 ## License
 

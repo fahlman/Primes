@@ -26,7 +26,7 @@ The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
 Do not include these files or the inherited-CI guard in an upstream submission.
 
-The cleanup-fix [run 34726948107](https://github.com/fahlman/Primes/actions/runs/34726948107) passed both native jobs, including all six Swift checks, the unchanged Docker runtime, 13 lifecycle tests and four real-Docker probes per architecture. See [the cleanup report and permanent evidence](../../reports/LinuxContainerCleanup.md). Earlier cutoff111 [run 34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) and its [exact-cutoff report](../../reports/Cutoff111LinuxValidation.md) remain unchanged; prior cutoff127 evidence is preserved separately.
+The cleanup-fix [run 34726948107](https://github.com/fahlman/Primes/actions/runs/34726948107) passed both native jobs, including all six Swift checks, the unchanged Docker runtime, 13 lifecycle tests and four real-Docker probes per architecture. See [the cleanup report and permanent evidence](https://github.com/fahlman/Primes/pull/15#issuecomment-5653992129). Earlier cutoff111 [run 34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) and its [exact-cutoff report](https://github.com/fahlman/Primes/pull/16#issuecomment-5653992293) remain unchanged; prior cutoff127 evidence is preserved separately.
 
 ## Selecting exactly what is checked
 
@@ -127,7 +127,7 @@ The single native workflow run at `028125534a516a9adca0cd8f7419bd74d2b51975`
 subsequently passed on amd64 and arm64. Each architecture passed the real probe,
 all 13 unit tests and all six Swift checks; all 14 validation containers and four
 probe containers were confirmed removed before lock release. The
-[cleanup report](../../reports/LinuxContainerCleanup.md) links the original ZIPs,
+[cleanup report](https://github.com/fahlman/Primes/pull/15#issuecomment-5653992129) links the original ZIPs,
 raw logs, source hashes and audits. Prior successful Swift checks remain evidence
 for their original exact revisions.
 
@@ -162,7 +162,7 @@ evidence. The original arm64 job also passed all six checks. Independent audits
 confirm full six-check coverage on each native architecture for exact solution
 `bd3858cac9a306aa3b8d4729cf059959a7c70885`, with amd64 coverage assembled across
 the original five checks and the focused final check. The original timeout is
-retained as a cancelled run. See the [complete report](../../reports/LinuxDockerValidation.md)
+retained as a cancelled run. See the [complete report](https://github.com/fahlman/Primes/pull/15#issuecomment-5653992129)
 and [aggregate coverage record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/aggregate-coverage.json).
 
 Implementation and static review do not establish Linux support. Full Linux
