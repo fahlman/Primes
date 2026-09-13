@@ -166,6 +166,10 @@ final class GeneratorChecks {
         let insert64 = "        // INSERT GENERATED DENSE 64\n", insert128 = "        // INSERT GENERATED DENSE 128\n"
         let swapped = try replacingOnce(try replacingOnce(template, insert64, "REVERSE-INSERT\n"), insert128, insert64)
             .replacingOccurrences(of: "REVERSE-INSERT\n", with: insert128)
+        let swappedDispatch = try replacingOnce(
+            try replacingOnce(template, "markWordDenseMultiples(of: p)", "SWAPPED-DISPATCH"),
+            "markVectorDenseMultiples(of: p)", "markWordDenseMultiples(of: p)")
+            .replacingOccurrences(of: "SWAPPED-DISPATCH", with: "markVectorDenseMultiples(of: p)")
         let badTemplates = [
             ("missing-insertion", try replacingOnce(template, insert64, "")),
             ("duplicate-insertion", try replacingOnce(template, insert128, insert128 + insert128)),
@@ -174,13 +178,20 @@ final class GeneratorChecks {
             ("duplicate-dispatch-token", template + "// {{VECTOR_DISPATCH_UPPER_BOUND}}\n"),
             ("unknown-token", template + "// {{UNSUPPORTED_GENERATOR_TOKEN}}\n"),
             ("dispatch-shape", try replacingOnce(template, "if p < {{VECTOR_DISPATCH_UPPER_BOUND}}", "if p <= {{VECTOR_DISPATCH_UPPER_BOUND}}")),
+            ("swapped-dispatch-handlers", swappedDispatch),
             ("word-helper-width", try replacingOnce(template, "while bit < 64 {", "while bit < 63 {")),
             ("vector-helper-width", try replacingOnce(template, "while bit < 128 {", "while bit < 127 {")),
+            ("word-storage-type", try replacingOnce(template,
+                "loadUnaligned(fromByteOffset: offset, as: UInt64.self)",
+                "loadUnaligned(fromByteOffset: offset, as: UInt32.self)")),
+            ("vector-storage-type", try replacingOnce(template,
+                "loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)",
+                "loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)")),
         ]
         for tool in ["generate-dense.swift", "generate-dense-128.swift"] {
             let stem = tool == "generate-dense.swift" ? "canonical" : "shim"
             let printed = try invoke(tool, [], name: "stdout-blocks")
-            try require(printed == expectedBlocks, "\(tool) stdout differs from the two current marked blocks")
+            try require(printed.utf8.elementsEqual(expectedBlocks.utf8), "\(tool) stdout differs from the two current marked blocks")
             let checkedSchedule = try checkSchedules(printed)
             if schedules.isEmpty { schedules = checkedSchedule }
             try require(schedules == checkedSchedule, "Shim schedule differs")
@@ -194,10 +205,12 @@ final class GeneratorChecks {
                 ("corrupt-vector", try replacingOnce(source, "first: 2, step: 65)", "first: 3, step: 65)")),
                 ("corrupt-both-blocks", corruptBoth),
                 ("corrupt-handwritten", try replacingOnce(source, "private let limit: Int", "private let limit: Int // disposable corruption")),
+                ("word-dispatch-cutoff", try replacingOnce(source, "if p < 64 {", "if p < 62 {")),
+                ("vector-dispatch-cutoff", try replacingOnce(source, "if p < 112 {", "if p < 114 {")),
             ] {
                 let file = try fixture(corrupted, "\(stem)-\(name).swift")
                 _ = try invoke(tool, ["--check", file.path], name: name + "-check", expected: 1)
-                try require(try String(contentsOf: file, encoding: .utf8) == corrupted, "Failed check changed source")
+                try require(try Data(contentsOf: file) == Data(corrupted.utf8), "Failed check changed source")
                 _ = try invoke(tool, ["--write", file.path], name: name + "-repair")
                 try require(try Data(contentsOf: file) == original, "Whole-file regeneration did not restore source")
             }
@@ -206,7 +219,7 @@ final class GeneratorChecks {
                 let file = try fixture(corrupted, "\(stem)-\(name).swift")
                 for mode in ["--check", "--write"] {
                     _ = try invoke(tool, [mode, file.path], name: name + mode, expected: 1)
-                    try require(try String(contentsOf: file, encoding: .utf8) == corrupted, "Invalid marker operation modified its file")
+                    try require(try Data(contentsOf: file) == Data(corrupted.utf8), "Invalid marker operation modified its file")
                 }
             }
             for (name, badTemplate) in badTemplates {
@@ -214,13 +227,35 @@ final class GeneratorChecks {
                 let target = try fixture(source, "\(stem)-\(name)-target.swift")
                 _ = try invoke(tool, ["--write", target.path, "--template", input.path], name: name, expected: 1)
                 try require(try Data(contentsOf: target) == original, "Invalid template partially wrote source")
-                try require(try String(contentsOf: input, encoding: .utf8) == badTemplate, "Generator changed template")
+                try require(try Data(contentsOf: input) == Data(badTemplate.utf8), "Generator changed template")
             }
             for (name, args) in [("unknown-mode", ["--unknown", good.path]), ("missing-path", ["--check"]),
-                                 ("extra-argument", ["--check", good.path, "extra"]), ("missing-template-path", ["--template"])] {
+                                 ("extra-argument", ["--check", good.path, "extra"]), ("missing-template-path", ["--template"]),
+                                 ("template-without-mode", ["--template", goodTemplate.path]),
+                                 ("duplicate-modes", ["--check", good.path, "--write", good.path]),
+                                 ("duplicate-template-options", ["--check", good.path, "--template", goodTemplate.path,
+                                                                 "--template", goodTemplate.path])] {
                 _ = try invoke(tool, args, name: name, expected: 1)
                 try require(try Data(contentsOf: good) == original, "Invalid arguments modified source")
             }
+            // Swift String equality treats these comments as equal. The source
+            // contract is exact UTF8, so only explicit --write may replace them.
+            let composed = "// Unicode byte-identity fixture: caf\u{00E9}\n"
+            let decomposed = "// Unicode byte-identity fixture: cafe\u{0301}\n"
+            try require(composed == decomposed && !composed.utf8.elementsEqual(decomposed.utf8),
+                        "Unicode fixture must have canonically equal text but different bytes")
+            let unicodeSource = try fixture(source + composed, "\(stem)-unicode.swift")
+            let unicodeTemplate = try fixture(template + decomposed, "\(stem)-unicode.swift.in")
+            let unicodeArguments = [unicodeSource.path, "--template", unicodeTemplate.path]
+            _ = try invoke(tool, ["--check"] + unicodeArguments, name: "unicode-byte-mismatch", expected: 1)
+            try require(try Data(contentsOf: unicodeSource) == Data((source + composed).utf8),
+                        "Unicode mismatch check changed source bytes")
+            _ = try invoke(tool, ["--write"] + unicodeArguments, name: "unicode-byte-repair")
+            try require(try Data(contentsOf: unicodeSource) == Data((source + decomposed).utf8),
+                        "Unicode regeneration did not preserve exact template bytes")
+            _ = try invoke(tool, ["--check"] + unicodeArguments, name: "unicode-repaired-check")
+            try require(try Data(contentsOf: unicodeTemplate) == Data((template + decomposed).utf8),
+                        "Unicode operations changed template bytes")
             let absent = temporary.appendingPathComponent("\(stem)-does-not-exist.swift")
             _ = try invoke(tool, ["--write", absent.path], name: "missing-source", expected: 1)
             try require(!files.fileExists(atPath: absent.path), "Missing source was unexpectedly created")
