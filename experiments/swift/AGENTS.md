@@ -113,7 +113,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 ## Branches, pull requests, and reviews
 
-- One experiment per branch, named `swift/<experiment>` and created from the current development branch (`swift/dense-small-factors`). Work in that branch's own git worktree, and don't edit another agent's worktree.
+- One experiment per branch, named `swift/<experiment>` and created from the current development branch (`swift/dense-small-factors`). Work in that branch's own git worktree, and don't edit another agent's worktree. Create worktrees from the main checkout (`git -C /Users/ryan/Developer/Primes worktree add ...`), which is a sparse checkout of `PrimeSwift`, `experiments` and `.github`; new worktrees inherit that, and one that comes out with all 110 language folders needs `git sparse-checkout set PrimeSwift experiments .github` run inside it. Remove a worktree once its branch is merged or its PR is closed; the branch stays.
 - Open one pull request per experiment in `fahlman/Primes`, targeting the current development branch in that fork. Verify both the head and base repositories; GitHub may suggest the upstream repository by default. Use a draft while implementation or required checks are incomplete.
 - The PR is the shared record for implementation, review, timing, and the final decision. Its description explains what changed, why it remains `base,faithful=yes,bits=1`, the exact candidate commit, and which verification checks passed or remain pending. Keep it current as the candidate changes.
 - Hand off with the PR link and exact commit, for example `Claude implemented <commit>; PR: <url>; report: <path>` or `Codex reviewed <commit>; PR: <url>; report: <path>`. Chat handoffs supplement the PR record.
