@@ -6,10 +6,10 @@ GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners; no Docker installat
 on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
-only for pushes to `swift/linux-docker-validation` that change that workflow or
-`validate.py`, and only in `fahlman/Primes`. The two native jobs run serially.
+only for pushes to `swift/linux-docker-validation` that change that workflow,
+`validate.py` or `test_lifecycle.py`, and only in `fahlman/Primes`. The two native jobs run serially.
 The current trigger requests the full six-check
-suite on amd64 and arm64 for cutoff 111 before integrating PR #16. The job limit
+suite on amd64 and arm64 for the adopted cutoff 111. The job limit
 is 60 minutes, providing room beyond the earlier 45-minute cutoff127 timeout;
 individual command limits remain 20 minutes. Repository permissions are read-only.
 Its unchanged concurrency group serializes
@@ -18,7 +18,7 @@ The inherited broad CI jobs skip this fork branch and pull requests from its
 head; other branches and the upstream repository retain their existing behavior.
 Do not include these files or the inherited-CI guard in an upstream submission.
 
-The current cutoff111 [run34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) passed both native jobs, with all six checks and the unchanged Docker runtime on each. See [the exact-cutoff report](../../reports/Cutoff111LinuxValidation.md); prior cutoff127 evidence remains preserved separately.
+The cleanup-fix [run 34726948107](https://github.com/fahlman/Primes/actions/runs/34726948107) passed both native jobs, including all six Swift checks, the unchanged Docker runtime, 13 lifecycle tests and four real-Docker probes per architecture. See [the cleanup report and permanent evidence](../../reports/LinuxContainerCleanup.md). Earlier cutoff111 [run 34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) and its [exact-cutoff report](../../reports/Cutoff111LinuxValidation.md) remain unchanged; prior cutoff127 evidence is preserved separately.
 
 ## Selecting exactly what is checked
 
@@ -114,10 +114,14 @@ runner-local lock itself. At source `f6256fd862ddfdd85f8c02d191fbf84822310798`,
 all 13 focused Python tests and syntax parsing passed under the exclusive lock
 on the Mac; [local record](../../linux-cleanup-evidence/local-f6256fd/local-verification.json)
 and [test log](../../linux-cleanup-evidence/local-f6256fd/unit-tests/unit-tests.log)
-retain the commands, exits and source hashes. Docker was not installed locally,
-so the real probe and single native workflow run remain pending. Prior successful
-Swift checks remain evidence for their original exact revisions, not proof of
-this cleanup fix.
+retain the commands, exits and source hashes. Docker was not installed locally.
+The single native workflow run at `028125534a516a9adca0cd8f7419bd74d2b51975`
+subsequently passed on amd64 and arm64. Each architecture passed the real probe,
+all 13 unit tests and all six Swift checks; all 14 validation containers and four
+probe containers were confirmed removed before lock release. The
+[cleanup report](../../reports/LinuxContainerCleanup.md) links the original ZIPs,
+raw logs, source hashes and audits. Prior successful Swift checks remain evidence
+for their original exact revisions.
 
 ## Evidence and execution status
 
