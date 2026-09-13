@@ -80,7 +80,7 @@ Run these from `fork/swift`, holding the timing lock. Set `swift_package=../../P
 
    ```sh
    swift "$swift_package/Tools/generate-dense.swift" --check "$swift_package/Sources/PrimeSieveSwift/PrimeSieve.swift"
-   swift "$swift_package/Tools/check-dense-generator.swift"
+   swift check-dense-generator.swift
    ```
 
 2. Correctness, with AddressSanitizer and with the benchmark's optimization flags. `PhaseVerify` compares complete buffers, padding included, with the historical `8f108f5` copy:

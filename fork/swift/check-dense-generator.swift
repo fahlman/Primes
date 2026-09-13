@@ -1,6 +1,7 @@
-// Reusable CLI regression checks for the dense generator.
+// Reusable CLI regression checks for the striped package's dense generator,
+// kept in the fork's tools because they test the generator, not the entry.
 // Run from any directory, while the caller owns the project's timing lock:
-//   swift /path/to/PrimeSwift_1bitStriped_u8/Tools/check-dense-generator.swift
+//   swift fork/swift/check-dense-generator.swift
 // All mutations use disposable fixtures. The final JSON records every command;
 // this does not compile or run the sieve, or replace its correctness checks.
 import Foundation
@@ -91,7 +92,10 @@ func checkSchedules(_ output: String) throws -> [String: Int] {
 
 final class GeneratorChecks {
     let files = FileManager.default
+    // This file lives in fork/swift; the generator and template live in the package's Tools.
     let tools = URL(fileURLWithPath: #filePath).standardizedFileURL.deletingLastPathComponent()
+        .deletingLastPathComponent().deletingLastPathComponent()
+        .appendingPathComponent("PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools", isDirectory: true)
     let temporary: URL
     var commands: [[String: Any]] = []
     var schedules: [String: Int] = [:]

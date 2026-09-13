@@ -110,8 +110,6 @@ contract, then writes atomically. `--check` compares the complete output bytes.
 The template defaults to `PrimeSieve.swift.in` beside the generator; append
 `--template path/to/PrimeSieve.swift.in` to select another template explicitly.
 With no arguments, the generator prints both marked switches to standard output.
-The reusable `swift Tools/check-dense-generator.swift` check validates the generated
-schedules, complete-file rendering, repairs and rejected inputs.
 
 All code remains licensed under the repository's BSD-3-Clause license.
 
