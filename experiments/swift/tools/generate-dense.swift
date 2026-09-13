@@ -1,9 +1,9 @@
-// Generate both explicit dense switches in PrimeSieve.swift. Every odd factor in
+// Render PrimeSieve.swift from PrimeSieve.swift.in and both explicit switches. Every odd factor in
 // each range receives a case; this does not test primality or construct masks.
 // Run from experiments/swift after acquiring the project's timing lock:
 //   swift tools/generate-dense.swift --check PrimeSieve.swift
 //   swift tools/generate-dense.swift --write PrimeSieve.swift
-// With no arguments, print both marked switches to stdout.
+// With no arguments, print both marked switches to stdout (legacy interface).
 import Foundation
 
 struct DenseSwitch {
@@ -16,6 +16,10 @@ struct DenseSwitch {
     var beginMarker: String { "        // BEGIN GENERATED DENSE \(width)" }
     var endMarker: String { "        // END GENERATED DENSE \(width)" }
     var label: String { "\(width)-bit \(firstFactor)...\(lastFactor)" }
+    var insertion: String { "        // INSERT GENERATED DENSE \(width)\n" }
+    var boundToken: String {
+        width == 64 ? "{{WORD_DISPATCH_UPPER_BOUND}}" : "{{VECTOR_DISPATCH_UPPER_BOUND}}"
+    }
 
     func generated() -> String {
         var lines = [beginMarker, "        switch p {"]
@@ -63,6 +67,99 @@ let switches = [
     DenseSwitch(width: 128, firstFactor: 65, lastFactor: 111,
                 helper: "markVectorWord", diagnostic: "Vector-dense"),
 ]
+
+func fail(_ message: String) -> NSError {
+    NSError(domain: "GenerateDense", code: 1, userInfo: [NSLocalizedDescriptionKey: message])
+}
+
+func requireOnce(_ text: String, in source: String, label: String) throws {
+    guard source.components(separatedBy: text).count == 2 else {
+        throw fail("Missing, duplicated, or changed \(label)")
+    }
+}
+
+func validateSourceMarkers(_ source: String) throws {
+    let ranges = try switches.map { try $0.markedRange(in: source) }
+    guard ranges[0].upperBound <= ranges[1].lowerBound else {
+        throw fail("Generated blocks must be separate, with the 64-bit block first")
+    }
+}
+
+func render(_ template: String) throws -> String {
+    // This is an intentionally narrow source-shape contract, not a Swift parser.
+    // A changed dispatch or storage mechanism needs an explicit generator review.
+    guard switches.count == 2,
+          switches[0].width == 64, switches[0].firstFactor == 5,
+          switches[0].helper == "markWord",
+          switches[1].width == 128, switches[1].helper == "markVectorWord",
+          switches[1].firstFactor == switches[0].lastFactor + 2,
+          switches.allSatisfy({ $0.firstFactor & 1 == 1 && $0.lastFactor & 1 == 1 &&
+              $0.firstFactor <= $0.lastFactor && $0.lastFactor < $0.width }) else {
+        throw fail("Dense metadata must describe consecutive odd ranges after factor 3, within the supported helper widths")
+    }
+    guard !template.contains("// BEGIN GENERATED DENSE"),
+          !template.contains("// END GENERATED DENSE") else {
+        throw fail("Template must contain insertion lines, not generated blocks")
+    }
+    for block in switches {
+        try requireOnce(block.insertion, in: template, label: "\(block.width)-bit insertion line")
+        try requireOnce(block.boundToken, in: template, label: "\(block.width)-bit dispatch token")
+    }
+    guard template.range(of: switches[0].insertion)!.upperBound <=
+            template.range(of: switches[1].insertion)!.lowerBound else {
+        throw fail("Template insertions must put the 64-bit block first")
+    }
+    let dispatch = """
+            while p <= limit / p {
+                let candidate = (p - 3) / 2
+                if bytes[candidate >> 3] & (UInt8(1) << (candidate & 7)) == 0 {
+                    if p < {{WORD_DISPATCH_UPPER_BOUND}} {
+                        if p == 3 {
+                            markDenseMultiples(of: p)
+                        } else {
+                            markWordDenseMultiples(of: p)
+                        }
+                        p += 2
+                        continue
+                    }
+
+                    if p < {{VECTOR_DISPATCH_UPPER_BOUND}} {
+                        markVectorDenseMultiples(of: p)
+                        p += 2
+                        continue
+                    }
+    """
+    try requireOnce(dispatch, in: template, label: "runtime-tested dense dispatch")
+    for block in switches {
+        // Scope the width check to the corresponding helper, so swapping two
+        // otherwise valid widths cannot accidentally satisfy a global search.
+        let signature = "    private func \(block.helper)("
+        try requireOnce(signature, in: template, label: "\(block.helper) helper")
+        let start = template.range(of: signature)!.upperBound
+        guard let end = template.range(of: "\n    }", range: start..<template.endIndex) else {
+            throw fail("Missing end of \(block.helper) helper")
+        }
+        let body = String(template[start..<end.lowerBound])
+        try requireOnce("while bit < \(block.width) {", in: body, label: "\(block.helper) bit width")
+        let storageType = block.width == 64 ? "UInt64.self" : "SIMD2<UInt64>.self"
+        guard body.contains("loadUnaligned(fromByteOffset: offset, as: \(storageType))"),
+              body.contains("toByteOffset: offset, as: \(storageType))") else {
+            throw fail("Changed \(block.helper) storage width")
+        }
+    }
+    var source = template
+    for block in switches {
+        source = source.replacingOccurrences(of: block.insertion, with: block.generated())
+        source = source.replacingOccurrences(of: block.boundToken, with: String(block.lastFactor + 1))
+    }
+    guard !source.contains("{{"), !source.contains("}}"),
+          !source.contains("// INSERT GENERATED DENSE") else {
+        throw fail("Unrecognized template token or insertion")
+    }
+    try validateSourceMarkers(source)
+    return source
+}
+
 do {
     let arguments = Array(CommandLine.arguments.dropFirst())
     if arguments.isEmpty {
@@ -70,39 +167,45 @@ do {
             print(block.generated(), terminator: "")
         }
     } else {
-        guard arguments.count == 2 && (arguments[0] == "--check" || arguments[0] == "--write") else {
-            throw NSError(domain: "GenerateDense", code: 1, userInfo: [
-                NSLocalizedDescriptionKey: "Usage: generate-dense.swift [--check|--write PrimeSieve.swift]"
-            ])
-        }
-        let file = URL(fileURLWithPath: arguments[1])
-        var source = try String(contentsOf: file, encoding: .utf8)
-        let ranges = try switches.map { try $0.markedRange(in: source) }
-        guard ranges[0].upperBound <= ranges[1].lowerBound else {
-            throw NSError(domain: "GenerateDense", code: 2, userInfo: [
-                NSLocalizedDescriptionKey: "Generated blocks must be separate, with the 64-bit block first"
-            ])
-        }
-        for block in switches {
-            let range = try block.markedRange(in: source)
-            let generated = block.generated()
-            if arguments[0] == "--check" {
-                guard source[range] == generated else {
-                    throw NSError(domain: "GenerateDense", code: 3, userInfo: [
-                        NSLocalizedDescriptionKey: "The generated \(block.label) switch does not match the source"
-                    ])
-                }
-            } else {
-                source.replaceSubrange(range, with: generated)
+        let usage = "Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]"
+        var mode: String?
+        var path: String?
+        var templatePath: String?
+        var index = 0
+        while index < arguments.count {
+            let flag = arguments[index]
+            guard index + 1 < arguments.count, !arguments[index + 1].hasPrefix("--") else { throw fail(usage) }
+            switch flag {
+            case "--check", "--write":
+                guard mode == nil else { throw fail(usage) }
+                mode = flag
+                path = arguments[index + 1]
+            case "--template":
+                guard templatePath == nil else { throw fail(usage) }
+                templatePath = arguments[index + 1]
+            default:
+                throw fail(usage)
             }
+            index += 2
         }
-        // Write once, after both blocks have been located successfully. Everything
-        // outside the markers is preserved, including alignment peels and tails.
-        if arguments[0] == "--write" {
-            try source.write(to: file, atomically: true, encoding: .utf8)
-            print("Updated both generated dense switches.")
+        guard let mode, let path else { throw fail(usage) }
+        let file = URL(fileURLWithPath: path)
+        let sourceBytes = try Data(contentsOf: file)
+        guard let source = String(data: sourceBytes, encoding: .utf8) else {
+            throw fail("PrimeSieve.swift must be UTF-8")
+        }
+        try validateSourceMarkers(source)
+        let templateFile = templatePath.map { URL(fileURLWithPath: $0) } ??
+            URL(fileURLWithPath: #filePath).deletingLastPathComponent().appendingPathComponent("PrimeSieve.swift.in")
+        let rendered = try render(String(contentsOf: templateFile, encoding: .utf8))
+        // Validate everything before one atomic write. The template owns the
+        // complete file, including handwritten alignment peels and tails.
+        if mode == "--write" {
+            try rendered.write(to: file, atomically: true, encoding: .utf8)
+            print("Rendered complete PrimeSieve.swift from its template and dense metadata.")
         } else {
-            print("Generated \(switches.map(\.label).joined(separator: " and ")) switches match.")
+            guard sourceBytes == Data(rendered.utf8) else { throw fail("PrimeSieve.swift differs from its complete template rendering") }
+            print("Complete source and generated \(switches.map(\.label).joined(separator: " and ")) switches match.")
         }
     }
 } catch {
