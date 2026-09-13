@@ -1,0 +1,3 @@
+Error: The upper limit must be nonnegative.
+Usage: prime-sieve-swift [--upper-limit <upper-limit>] [--time <time>] [--list-results <list-results>]
+  See 'prime-sieve-swift --help' for more information.

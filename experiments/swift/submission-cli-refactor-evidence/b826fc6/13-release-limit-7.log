@@ -1,0 +1,3 @@
+2, 3, 5
+Passes: 1, Time: 4.666e-06, Avg: 4.666e-06, Limit: 7, Count: 3, Valid: unknown, Checksum: 0
+yellowcub_striped_UInt8;1;4.666e-06;1;algorithm=base,faithful=yes,bits=1

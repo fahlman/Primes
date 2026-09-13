@@ -1,0 +1,1 @@
+Exact package b826fc6 verification artifacts. The executable duration-probe is retained locally; its source, compiler command and hash are recorded here. The archived base-package-verification-8909095.json is the exact prior record whose hash admitted the cached control binary. No binaries or evidence are added to the submission payload.

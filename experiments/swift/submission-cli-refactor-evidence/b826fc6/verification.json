@@ -1,0 +1,1115 @@
+{
+  "status": "passed",
+  "started_at_utc": "2026-09-13T12:15:20.243361+00:00",
+  "source_revision": "b826fc6af66835d67494c7d0646fc7d596a2ccc8",
+  "storage_reference_revision": "5cbc25e1c41d55e1a48db4737721e589e046b08e",
+  "submission_base_revision": "890909588f311f9314933d0517e07416310a7c7b",
+  "scope": "Actual striped release/ASan package, focused CLI regression, 19 direct conversion probes, canonical/shim integration and actual-binary observer/release gate. No throughput comparison or standalone full-sieve suite rerun.",
+  "conditions_scope": "Correctness/assembly only: reject competing builds/tests/benchmarks; record audio and other process activity without treating them as performance or correctness failures.",
+  "reused_core_evidence": "Final storage5cbc25e correctness/assembly record is supplied separately by root; package core and Verify.swift identities are checked here.",
+  "commands": [
+    {
+      "command": [
+        "swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:20.519749+00:00",
+      "owned_process_group": 84465,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:20.593798+00:00",
+      "label": "swift-version",
+      "expected_exit_code": 0,
+      "output_log": "01-swift-version.log",
+      "output_sha256": "5fa4b669e41b23b9ad0760253d062493487f93cf5d8ad8c44f0d4fd635137499"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:20.594498+00:00",
+      "owned_process_group": 84466,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:20.990547+00:00",
+      "label": "canonical-check",
+      "expected_exit_code": 0,
+      "output_log": "02-canonical-check.log",
+      "output_sha256": "209c5f1e1e5a85396fbe6dc7e22e1e52d07d940400aa7d429d07d681b43f18fd"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift",
+        "--write",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/canonical-output.swift",
+        "--template",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:20.991709+00:00",
+      "owned_process_group": 84468,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:21.397156+00:00",
+      "label": "canonical-write-copy",
+      "expected_exit_code": 0,
+      "output_log": "03-canonical-write-copy.log",
+      "output_sha256": "0d159d46b740c1cb7f73a2a140d96fe0b1d6187658d579966e4395bdb6f3e114"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/canonical-output.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:21.398255+00:00",
+      "owned_process_group": 84476,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:21.802000+00:00",
+      "label": "canonical-check-copy",
+      "expected_exit_code": 0,
+      "output_log": "04-canonical-check-copy.log",
+      "output_sha256": "209c5f1e1e5a85396fbe6dc7e22e1e52d07d940400aa7d429d07d681b43f18fd"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:21.803043+00:00",
+      "owned_process_group": 84477,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:22.438094+00:00",
+      "label": "shim-check",
+      "expected_exit_code": 0,
+      "output_log": "05-shim-check.log",
+      "output_sha256": "209c5f1e1e5a85396fbe6dc7e22e1e52d07d940400aa7d429d07d681b43f18fd"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift",
+        "--write",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/shim-output.swift",
+        "--template",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:22.439319+00:00",
+      "owned_process_group": 84481,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:23.054612+00:00",
+      "label": "shim-write-copy",
+      "expected_exit_code": 0,
+      "output_log": "06-shim-write-copy.log",
+      "output_sha256": "0d159d46b740c1cb7f73a2a140d96fe0b1d6187658d579966e4395bdb6f3e114"
+    },
+    {
+      "command": [
+        "swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift",
+        "--check",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/shim-output.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:23.055477+00:00",
+      "owned_process_group": 84483,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:23.671305+00:00",
+      "label": "shim-check-copy",
+      "expected_exit_code": 0,
+      "output_log": "07-shim-check-copy.log",
+      "output_sha256": "209c5f1e1e5a85396fbe6dc7e22e1e52d07d940400aa7d429d07d681b43f18fd"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-swift-submission/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "1000000",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:23.672290+00:00",
+      "owned_process_group": 84487,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:15:23.684364+00:00",
+      "label": "base-list-1m",
+      "expected_exit_code": 0,
+      "output_log": "08-base-list-1m.log",
+      "output_sha256": "dca30b1471b76da4fb92faddea7767f8a7e0f4ceaf21ac513152c6b001e21eff"
+    },
+    {
+      "command": [
+        "swift",
+        "build",
+        "-v",
+        "--configuration",
+        "release",
+        "-Xswiftc",
+        "-O",
+        "-Xswiftc",
+        "-whole-module-optimization",
+        "--package-path",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:15:23.687455+00:00",
+      "owned_process_group": 84488,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.551807+00:00",
+      "label": "release-build",
+      "expected_exit_code": 0,
+      "output_log": "09-release-build.log",
+      "output_sha256": "5e77074023603cd126f89440f54b1e01526969f95cccb9f0e4d620ace2a748bb"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--upper-limit",
+        "0",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.554393+00:00",
+      "owned_process_group": 84842,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.559968+00:00",
+      "label": "release-limit-0",
+      "expected_exit_code": 0,
+      "output_log": "10-release-limit-0.log",
+      "output_sha256": "b08404e783c051d96ec62ae46e7e4693adc1ad9edbc8872c101cafec30e8e9c8"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "2",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.560835+00:00",
+      "owned_process_group": 84844,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.565753+00:00",
+      "label": "release-limit-2",
+      "expected_exit_code": 0,
+      "output_log": "11-release-limit-2.log",
+      "output_sha256": "29beedde486905c20c91e73afc813d7fbdb9ec759dbf4c3367c2e8687e192160"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--upper-limit",
+        "3",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.566455+00:00",
+      "owned_process_group": 84845,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.571117+00:00",
+      "label": "release-limit-3",
+      "expected_exit_code": 0,
+      "output_log": "12-release-limit-3.log",
+      "output_sha256": "151beb80b4ee7234fab671d2198ea3c9eed72f9dbcb0767d753fcc0da071e659"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "7",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.571737+00:00",
+      "owned_process_group": 84846,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.576421+00:00",
+      "label": "release-limit-7",
+      "expected_exit_code": 0,
+      "output_log": "13-release-limit-7.log",
+      "output_sha256": "44110e07638b5508e1ad00d1338353892462b0d1bb623c2686f6101070d3965f"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--upper-limit",
+        "31",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.577122+00:00",
+      "owned_process_group": 84848,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.581547+00:00",
+      "label": "release-limit-31",
+      "expected_exit_code": 0,
+      "output_log": "14-release-limit-31.log",
+      "output_sha256": "ecb7928579cb471084c5a6b701f711bb63cbab2bd822d0cf068301df4d4bd511"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "1000000",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.582257+00:00",
+      "owned_process_group": 84849,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.590075+00:00",
+      "label": "release-limit-1000000",
+      "expected_exit_code": 0,
+      "output_log": "15-release-limit-1000000.log",
+      "output_sha256": "613f09931dded7bf00f40fdf1ef7b5fe6deb9e904e9aefac439f821e9aa720d3"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--upper-limit=-1"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.592718+00:00",
+      "owned_process_group": 84850,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.597544+00:00",
+      "label": "release-invalid-0",
+      "expected_exit_code": 64,
+      "output_log": "16-release-invalid-0.log",
+      "output_sha256": "98d412a078b2e6ab93d626dfac8ff8a4c28c1ec202b511f16207d48f160f13d6"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--time=-1"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.598107+00:00",
+      "owned_process_group": 84851,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.602276+00:00",
+      "label": "release-invalid-1",
+      "expected_exit_code": 64,
+      "output_log": "17-release-invalid-1.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--time=nan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.602857+00:00",
+      "owned_process_group": 84852,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.606953+00:00",
+      "label": "release-invalid-2",
+      "expected_exit_code": 64,
+      "output_log": "18-release-invalid-2.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--time=inf"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.607549+00:00",
+      "owned_process_group": 84853,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.611693+00:00",
+      "label": "release-invalid-3",
+      "expected_exit_code": 64,
+      "output_log": "19-release-invalid-3.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--time=-inf"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.612299+00:00",
+      "owned_process_group": 84854,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.616276+00:00",
+      "label": "release-invalid-4",
+      "expected_exit_code": 64,
+      "output_log": "20-release-invalid-4.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "--time=1e100"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.616881+00:00",
+      "owned_process_group": 84855,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:16:22.620719+00:00",
+      "label": "release-invalid-5",
+      "expected_exit_code": 64,
+      "output_log": "21-release-invalid-5.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "31",
+        "-t",
+        "1e-10",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.621300+00:00",
+      "owned_process_group": 84856,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.625136+00:00",
+      "label": "release-fractional-0",
+      "expected_exit_code": 0,
+      "output_log": "22-release-fractional-0.log",
+      "output_sha256": "c03ad5689642573c93984329a6f63ba0be36989fcf44de62beaafcb7d3835970"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "31",
+        "-t",
+        "1.5e-9",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.625712+00:00",
+      "owned_process_group": 84857,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.629387+00:00",
+      "label": "release-fractional-1",
+      "expected_exit_code": 0,
+      "output_log": "23-release-fractional-1.log",
+      "output_sha256": "353a0a35a226aa28bfa98cf99764a8aeb71d376c75543fbbcc324f3df68ac9a0"
+    },
+    {
+      "command": [
+        "otool",
+        "-tvV",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.630263+00:00",
+      "owned_process_group": 84858,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:22.734352+00:00",
+      "label": "release-disassembly",
+      "expected_exit_code": 0,
+      "output_log": "24-release-disassembly.log",
+      "output_sha256": "d4740351216f59e5944b2a5b284ae5efabeb0ff59fbcfac28d3d8a128070c5b2"
+    },
+    {
+      "command": [
+        "swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-I",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/Modules",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/BenchmarkDuration.swift",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/DurationProbe.swift",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Argument.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentDecoder.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentDefinition.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentHelp.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentSet.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/BashCompletionsGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CollectionExtensions.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CommandConfiguration.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CommandParser.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CompletionKind.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CompletionsGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/DumpHelpGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/EnumerableFlag.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Errors.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ExpressibleByArgument.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/FishCompletionsGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Flag.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/HelpCommand.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/HelpGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/InputOrigin.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/MessageInfo.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Name.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/NameSpecification.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Option.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/OptionGroup.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableArguments.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableArgumentsValidation.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableCommand.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Parsed.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsedValues.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParserError.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/SequenceExtensions.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/SplitArguments.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/StringExtensions.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Tree.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/UsageGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ZshCompletionsGenerator.swift.o",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParserToolInfo.build/ToolInfo.swift.o",
+        "-o",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/duration-probe"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:22.747081+00:00",
+      "owned_process_group": 84860,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:23.236859+00:00",
+      "label": "duration-probe-build",
+      "expected_exit_code": 0,
+      "output_log": "25-duration-probe-build.log",
+      "output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/submission-cli-refactor/package-verify-b826fc6/duration-probe"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:23.237682+00:00",
+      "owned_process_group": 84868,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:16:23.242146+00:00",
+      "label": "duration-probe",
+      "expected_exit_code": 0,
+      "output_log": "26-duration-probe.log",
+      "output_sha256": "507bd5a4ca752b7e53e5c5c00b0fcfef4ce1c5075e0834af6debcec0ccb516d4"
+    },
+    {
+      "command": [
+        "swift",
+        "build",
+        "-v",
+        "--configuration",
+        "release",
+        "--sanitize",
+        "address",
+        "--scratch-path",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan",
+        "-Xswiftc",
+        "-O",
+        "-Xswiftc",
+        "-whole-module-optimization",
+        "--package-path",
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:16:23.243495+00:00",
+      "owned_process_group": 84869,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.140308+00:00",
+      "label": "asan-build",
+      "expected_exit_code": 0,
+      "output_log": "27-asan-build.log",
+      "output_sha256": "2bfcef135c6ee8f101d7508d65a19042bdfd77490719b94eff678b42628e3f8f"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--upper-limit",
+        "0",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.142548+00:00",
+      "owned_process_group": 85135,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.246895+00:00",
+      "label": "asan-limit-0",
+      "expected_exit_code": 0,
+      "output_log": "28-asan-limit-0.log",
+      "output_sha256": "688537400d91ca8602b5f1daedb3208c7ebe81c722f3375dd9cb0caaf73ea687"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "-n",
+        "2",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.247864+00:00",
+      "owned_process_group": 85140,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.293801+00:00",
+      "label": "asan-limit-2",
+      "expected_exit_code": 0,
+      "output_log": "29-asan-limit-2.log",
+      "output_sha256": "901cea065397cf76b7aa1a0fea5c2167373bc2e60c324cd00531f438258762dc"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--upper-limit",
+        "3",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.294733+00:00",
+      "owned_process_group": 85141,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.342465+00:00",
+      "label": "asan-limit-3",
+      "expected_exit_code": 0,
+      "output_log": "30-asan-limit-3.log",
+      "output_sha256": "6db8a9a550e277fde6f46cbf8e68175648e5eeaf2b710d407b029c24ea0a55a6"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "-n",
+        "7",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.343431+00:00",
+      "owned_process_group": 85142,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.389970+00:00",
+      "label": "asan-limit-7",
+      "expected_exit_code": 0,
+      "output_log": "31-asan-limit-7.log",
+      "output_sha256": "c2dc114629f9213873ce334b904fe1233fe68f022410d87ae4da08e4d535b727"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--upper-limit",
+        "31",
+        "--time",
+        "0",
+        "--list-results",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.391674+00:00",
+      "owned_process_group": 85143,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.441211+00:00",
+      "label": "asan-limit-31",
+      "expected_exit_code": 0,
+      "output_log": "32-asan-limit-31.log",
+      "output_sha256": "8691e2eb1c6c104e82cf49c34e2dac16b26b189b328cdb5049ab3d6e8b20434b"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "-n",
+        "1000000",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.442119+00:00",
+      "owned_process_group": 85144,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.494677+00:00",
+      "label": "asan-limit-1000000",
+      "expected_exit_code": 0,
+      "output_log": "33-asan-limit-1000000.log",
+      "output_sha256": "3cbdc314cc8d9730d8072b0a340c40be188d69d361b4eedebf1ae85530df6611"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--upper-limit=-1"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.497747+00:00",
+      "owned_process_group": 85145,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.545917+00:00",
+      "label": "asan-invalid-0",
+      "expected_exit_code": 64,
+      "output_log": "34-asan-invalid-0.log",
+      "output_sha256": "98d412a078b2e6ab93d626dfac8ff8a4c28c1ec202b511f16207d48f160f13d6"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--time=-1"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.546871+00:00",
+      "owned_process_group": 85146,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.595534+00:00",
+      "label": "asan-invalid-1",
+      "expected_exit_code": 64,
+      "output_log": "35-asan-invalid-1.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--time=nan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.596450+00:00",
+      "owned_process_group": 85148,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.645578+00:00",
+      "label": "asan-invalid-2",
+      "expected_exit_code": 64,
+      "output_log": "36-asan-invalid-2.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--time=inf"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.646517+00:00",
+      "owned_process_group": 85149,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.695255+00:00",
+      "label": "asan-invalid-3",
+      "expected_exit_code": 64,
+      "output_log": "37-asan-invalid-3.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--time=-inf"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.696132+00:00",
+      "owned_process_group": 85150,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.746802+00:00",
+      "label": "asan-invalid-4",
+      "expected_exit_code": 64,
+      "output_log": "38-asan-invalid-4.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "--time=1e100"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.747745+00:00",
+      "owned_process_group": 85154,
+      "exit_code": 64,
+      "finished_at_utc": "2026-09-13T12:17:23.796546+00:00",
+      "label": "asan-invalid-5",
+      "expected_exit_code": 64,
+      "output_log": "39-asan-invalid-5.log",
+      "output_sha256": "8409d61b940dc47965bf5ce9e1757a0fc9e99cb63a794d7f50a95a1154ed13d4"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "-n",
+        "31",
+        "-t",
+        "1e-10",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.797501+00:00",
+      "owned_process_group": 85155,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.847134+00:00",
+      "label": "asan-fractional-0",
+      "expected_exit_code": 0,
+      "output_log": "40-asan-fractional-0.log",
+      "output_sha256": "bcc0ca48f541bd26f4e12f5d22ca4f270c4f9a5092ff5010ee4dd98100a2f8ad"
+    },
+    {
+      "command": [
+        "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/asan/release/PrimeSieveSwift",
+        "-n",
+        "31",
+        "-t",
+        "1.5e-9",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8",
+      "started_at_utc": "2026-09-13T12:17:23.848113+00:00",
+      "owned_process_group": 85156,
+      "exit_code": 0,
+      "finished_at_utc": "2026-09-13T12:17:23.896142+00:00",
+      "label": "asan-fractional-1",
+      "expected_exit_code": 0,
+      "output_log": "41-asan-fractional-1.log",
+      "output_sha256": "82ab6eaf450bde717632689a2bae26ab80d9fa99ecb4b6101ee81d71a012b496"
+    }
+  ],
+  "cli_checks": {
+    "release": {
+      "status": "passed",
+      "cases": 14,
+      "limits": [
+        0,
+        2,
+        3,
+        7,
+        31,
+        1000000
+      ],
+      "complete_1m_list_equals_verified_base": true
+    },
+    "asan": {
+      "status": "passed",
+      "cases": 14,
+      "limits": [
+        0,
+        2,
+        3,
+        7,
+        31,
+        1000000
+      ],
+      "complete_1m_list_equals_verified_base": true
+    }
+  },
+  "generator_checks": {
+    "canonical": {
+      "status": "passed",
+      "output_sha256": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262"
+    },
+    "shim": {
+      "status": "passed",
+      "output_sha256": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262"
+    }
+  },
+  "source_sha256": {
+    "PrimeSwift/solution_1/.dockerignore": "c14f36c070c94b854e6d72989822199e036baeb0233021aa55f1edfb5a8238e8",
+    "PrimeSwift/solution_1/.gitignore": "1bfe9a999a5f414e562b1a9192e188cc2ad5b0e04a8183604628d2f359e1ac85",
+    "PrimeSwift/solution_1/Dockerfile": "4562b2bfe6a3ced412985331853cf34154b840617733533c38a3176bf1049560",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Package.resolved": "6bc5af0df9381bcdd62d63d9b37cf2f2b871bdbbcea297c41a4300804a8fa7ed",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Package.swift": "c3f492dbbf40f507c3e85963626f39e20ef3ab19d69527973d7661736720a9e5",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/BenchmarkDuration.swift": "560a5886d97bfb73f87c90e223afc003ef33a3810a9fc9e4abcb8c8eff01218c",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/main.swift": "b4b702726ac99d629882e205c0fc0e2d8baa8a51d29b0934f8994ac81adad3ab",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift": "963bc445920039bf9b3f3cc8ae743c9d46b5184fdc0c0a25410621f8f8abfe2c",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.resolved": "4303afbd0ef6e7f420c68a05cb8f9649cb4e518d002ffb231ddc953b07078bbf",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.swift": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Sources/PrimeSieveSwift/main.swift": "005b09b32838e554ceb9a3936a2b87db1837f4a8a050d4bf0e49d1186f9be8e0",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.resolved": "21c430836466eb38b6a82d972a2bd3cae46ea052f4bbf85c622452d99ddc7a00",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.swift": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Sources/PrimeSieveSwift/main.swift": "0eaf575c78339181d3f9aae630116164d68cb54e246f8f128283706c7ee80563",
+    "PrimeSwift/solution_1/README.md": "1c0699c1d558028471801436ddfb5d6740080f2cbf1dc7c93f866d992a9e38ce",
+    "PrimeSwift/solution_1/run.sh": "d2431a8ee3f83cc16d6e0298a461f8bf188e8df8c059b375c3e176e53a2406bb"
+  },
+  "wrapper_sha256": "baa57023af823696b7fa4e94c4579de1bef32aa503035a72ba153a8f643d2c53",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "probe_source_sha256": "0229d1e6750da97428f914a6a419634089028c8fb224a15b9cfafe205fdabc22",
+  "source_proof_sha256": "b75513ff98b4163e12e6bb5f1643b0e8a642e307564abbfe8cc656c071ffe70c",
+  "base_record_sha256": "ea6e7903525ee65c908f196fdc1c2409bc1cfe5e82e0cd7f20d57f94e0c2ce79",
+  "base_binary_sha256": "38affd9748adeb5aaa81dfe134f3306eb0ece2f2546a14576007b3c4a2d1ba74",
+  "before": {
+    "at_utc": "2026-09-13T12:15:20.519168+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 23.5,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 14.6,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 84434,
+        "cpu_percent": 13.6,
+        "executable": "Python"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 13.5,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 6.7,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 4.6,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 3.4,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 3.1,
+        "executable": "Messages"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 2.2,
+        "executable": "logd"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 2.1,
+        "executable": "codex"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 1.6,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.5,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 7157,
+        "cpu_percent": 1.3,
+        "executable": "Mail"
+      },
+      {
+        "pid": 641,
+        "cpu_percent": 1.2,
+        "executable": "SystemUIServer"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.8,
+        "executable": "bluetoothd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "compiler_version": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+  "base_1m_list_sha256": "95e9e4d73d6777f2e3da9a7d0f1de5e83ff6c72de70daa8268c199e8936619b8",
+  "release_binary_sha256": "8350cbfa5f6f885ee403c4b568bbfe808053ad089851fcfebc7267061392c306",
+  "actual_binary_gate": {
+    "checks": {
+      "initializer_call": true,
+      "run_sieve_call": true,
+      "opaque_observer_call": true,
+      "release_call": true
+    },
+    "completedPass_sha256": "58a39558c1edd3a17aef4981d4da7026bdc51f685aecce396da357ca9cfd7a1a",
+    "scope": "Required calls in the actual packaged completedPass; not a whole-binary assembly-identity or throughput claim."
+  },
+  "duration_probe_object_sha256": {
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Argument.swift.o": "30f2975017c4de913a29d33990e7d75208f925cb5a3c03ac05003de7db3c4cbc",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentDecoder.swift.o": "74c4981139f1c4cf4d9e99a873a608a86fd9c889e281bea1d4732fb336637b92",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentDefinition.swift.o": "bba97ffe6926ee88aab3df44dcf948e8fde1ec222d01e34a2d08e29b5d6ea00c",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentHelp.swift.o": "60b5b78155d1111cd7e71fda655c2bfb4e46e241bbfb1a793a504ae76a70ffb8",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ArgumentSet.swift.o": "c0c14f065b87c422c7790af0fcea200c15804b21c0ce430b0f2f8b254e6d4983",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/BashCompletionsGenerator.swift.o": "aa6fb346b6240a2afe2bb7f1566225d9b97fefe868cce4e26c05cd88dfc09370",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CollectionExtensions.swift.o": "65733c12ac6886379f83499d5886e75107eb254528399b15d3eea70f98155b57",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CommandConfiguration.swift.o": "c19a157cec2c2dd1cc38b16716f5bc062901be5f05359ec8bd2c39b348ea1177",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CommandParser.swift.o": "2003e9043f0c7f761b252a4fa3bc0ccb96b96242ac20d7a8ac3fd28cd81e032e",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CompletionKind.swift.o": "9b0bf8adef93b44fff8a6f09fbccf9b2318eec811b5f20b69989b1a8204a930b",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/CompletionsGenerator.swift.o": "e2918df0e3bc44b016d8ac943bec85ef43d59a77640590084fec9c7ec603433e",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/DumpHelpGenerator.swift.o": "cea2a367543d67f3c629dd44cba6942e2235b1d1fd65c625dff53f589f611d0e",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/EnumerableFlag.swift.o": "a73b51747d10f3d9abe373ff053642daef25643aacde52b9b526c01fef75ffd6",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Errors.swift.o": "67dd83581c77e99825b33cde6895a531158c8d2077024c5572db4f981b159726",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ExpressibleByArgument.swift.o": "45801bc422b03e207fa04686b1aabb980097038674048d5e0503c2ab41e407f1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/FishCompletionsGenerator.swift.o": "f7b1742ad4f503c744b9f904c6c1631c266a2e44743c1a18c2d27982499402a0",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Flag.swift.o": "95f82704884a3bfe73bc3895221680d429674497018b1f91787f0d6704b47dc3",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/HelpCommand.swift.o": "137bc480e8856f8618372e4a0156c0781b576ba637173e49dda2d99b4f850ec1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/HelpGenerator.swift.o": "7d329a64a031634ab8dee58ed0318f77c9412138f6f3e06ed062ce0b47458cfb",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/InputOrigin.swift.o": "5de905626bfceb00960b06a9be02ceeb7d24bd68c8427c13fc86d11e9d909bca",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/MessageInfo.swift.o": "59c61762f8d4d836398cf9c1d8a3c5a6820e9c7736599b3bc8b1b0505b4fb582",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Name.swift.o": "7df1ca072a4e7e599aa134df7569c2660f150868eb2329a9d9420b27c2f21afe",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/NameSpecification.swift.o": "505c3b37a5ec40b239cd8bd612744532d2b478c0e8af5b64061b820649f7a41f",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Option.swift.o": "acb3c43fd943857b37478bfc79d1960968be73eddfe0ddf4c72ab7a8bc8b741d",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/OptionGroup.swift.o": "9ff8197b06478a5ec5994d4ed0c61fc2880d85849c90e6a90b7acca53a7f21f1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableArguments.swift.o": "729a247fc55a65b5717a963802672ceef1142516bb1d767a46bbf4ba51e2f176",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableArgumentsValidation.swift.o": "abbda17c966553164dd40cb74148bc3065591b490eef818718366edc615208d1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsableCommand.swift.o": "8f6aa41b8b3f8d514607dce23781969ac0c1eef53fc607ec7f30bee9a04d2715",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Parsed.swift.o": "2e432c7032a4aadea0aa34479122cd6662ad3a6662de90fe4bf7f4e696e252d1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParsedValues.swift.o": "ae4d7fe66f42ddf73d04db6046e26cd059190a907cfecf7755e2d7232c035ac1",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ParserError.swift.o": "f8f54609459b44694eef4f6223f57d844602727783c676b756a997a2d420eddb",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/SequenceExtensions.swift.o": "66847ca1acb750d479ce948c2f50059dcaa353e8597be44f1bd4bd894672959a",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/SplitArguments.swift.o": "494fa4c0519baa318db0f36aa2b40ae1a5a73b704eec3ac1d46dd70566bf5241",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/StringExtensions.swift.o": "883a4e57eae992dd9ae87b7e8a5309bf1964f8c405973dc0648fafd105127cf2",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/Tree.swift.o": "4b71f8cd37afe75680b78fba935ce9318a9741b2c273a4608d7b1b33fa93779d",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/UsageGenerator.swift.o": "90bec00ddc69fce4dd17149082f412bfc1880eb0994da0a560d3b3a74c425bd9",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParser.build/ZshCompletionsGenerator.swift.o": "a038ca2363964e7f755085dfcb09c019295e020b2c053433f37e1755a45c8281",
+    "/Users/ryan/Developer/Primes-submission-cli-refactor/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/ArgumentParserToolInfo.build/ToolInfo.swift.o": "9412b30bb776cd87097d686486256ed71965c932bc1e1ea1c387ff589d496d79"
+  },
+  "duration_probe": {
+    "status": "passed",
+    "cases": 19,
+    "binary_sha256": "889067fdc26fb5ea6e54152a79b2105c2028f275f7e61fb6f33ebb1b4618fcb8"
+  },
+  "asan_binary_sha256": "b255380e19a4d716d5a3b0e54b49323839759770962c8e580e93b8491d563f5a",
+  "source_sha256_after": {
+    "PrimeSwift/solution_1/.dockerignore": "c14f36c070c94b854e6d72989822199e036baeb0233021aa55f1edfb5a8238e8",
+    "PrimeSwift/solution_1/.gitignore": "1bfe9a999a5f414e562b1a9192e188cc2ad5b0e04a8183604628d2f359e1ac85",
+    "PrimeSwift/solution_1/Dockerfile": "4562b2bfe6a3ced412985331853cf34154b840617733533c38a3176bf1049560",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Package.resolved": "6bc5af0df9381bcdd62d63d9b37cf2f2b871bdbbcea297c41a4300804a8fa7ed",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Package.swift": "c3f492dbbf40f507c3e85963626f39e20ef3ab19d69527973d7661736720a9e5",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/BenchmarkDuration.swift": "560a5886d97bfb73f87c90e223afc003ef33a3810a9fc9e4abcb8c8eff01218c",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/main.swift": "b4b702726ac99d629882e205c0fc0e2d8baa8a51d29b0934f8994ac81adad3ab",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift": "963bc445920039bf9b3f3cc8ae743c9d46b5184fdc0c0a25410621f8f8abfe2c",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.resolved": "4303afbd0ef6e7f420c68a05cb8f9649cb4e518d002ffb231ddc953b07078bbf",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.swift": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993",
+    "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Sources/PrimeSieveSwift/main.swift": "005b09b32838e554ceb9a3936a2b87db1837f4a8a050d4bf0e49d1186f9be8e0",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.resolved": "21c430836466eb38b6a82d972a2bd3cae46ea052f4bbf85c622452d99ddc7a00",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.swift": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993",
+    "PrimeSwift/solution_1/PrimeSwift_8bitBool/Sources/PrimeSieveSwift/main.swift": "0eaf575c78339181d3f9aae630116164d68cb54e246f8f128283706c7ee80563",
+    "PrimeSwift/solution_1/README.md": "1c0699c1d558028471801436ddfb5d6740080f2cbf1dc7c93f866d992a9e38ce",
+    "PrimeSwift/solution_1/run.sh": "d2431a8ee3f83cc16d6e0298a461f8bf188e8df8c059b375c3e176e53a2406bb"
+  },
+  "completed_checks": "Canonical/shim source and write-copy identity; two package builds; 28 focused CLI cases; 19 direct conversion probes; actual packaged initializer/sieve/observer/release calls.",
+  "after": {
+    "at_utc": "2026-09-13T12:17:24.000692+00:00",
+    "top_processes": [
+      {
+        "pid": 7781,
+        "cpu_percent": 48.2,
+        "executable": "com.apple.WebKit.WebContent"
+      },
+      {
+        "pid": 669,
+        "cpu_percent": 27.0,
+        "executable": "fileproviderd"
+      },
+      {
+        "pid": 7511,
+        "cpu_percent": 27.0,
+        "executable": "IntelligencePlatformComputeService"
+      },
+      {
+        "pid": 85147,
+        "cpu_percent": 24.9,
+        "executable": "AddressBookSourceSync"
+      },
+      {
+        "pid": 746,
+        "cpu_percent": 19.8,
+        "executable": "UsageTrackingAgent"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 14.1,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 13.5,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 7135,
+        "cpu_percent": 11.0,
+        "executable": "accountsd"
+      },
+      {
+        "pid": 664,
+        "cpu_percent": 9.7,
+        "executable": "bird"
+      },
+      {
+        "pid": 85152,
+        "cpu_percent": 7.3,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 60613,
+        "cpu_percent": 7.2,
+        "executable": "contactsd"
+      },
+      {
+        "pid": 85151,
+        "cpu_percent": 6.9,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 85153,
+        "cpu_percent": 6.8,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 655,
+        "cpu_percent": 6.3,
+        "executable": "nsurlsessiond"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 5.1,
+        "executable": "launchd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-13T12:17:24.001760+00:00",
+  "lock_absent_after": true
+}

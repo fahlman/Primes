@@ -1,0 +1,35 @@
+{
+  "scope": "Static source identity checks only; no generator, build, test or timing execution.",
+  "base_revision": "890909588f311f9314933d0517e07416310a7c7b",
+  "storage_reference_revision": "5cbc25e1c41d55e1a48db4737721e589e046b08e",
+  "authoring_reference_revision": "1f9e11e2bb9cf4db867dbe61c82357f4cce115a3",
+  "checks": {
+    "core_equals_storage_candidate": true,
+    "verify_equals_storage_candidate": true,
+    "core_from_deinit_equals_adopted_84d8a4f": true,
+    "template_preamble_equals_storage_source": true,
+    "template_from_deinit_equals_authoring_candidate": true,
+    "dense_64_block_equals_authoring_candidate": true,
+    "dense_128_block_equals_authoring_candidate": true,
+    "template_with_exact_reviewed_blocks_equals_complete_core": true,
+    "generate-dense-128.swift_equals_authoring_candidate": true,
+    "observer_flags_dependencies_docker_runner_extra_verify_unchanged": true,
+    "completedPass_source_unchanged": true,
+    "timed_loop_source_unchanged": true,
+    "generator_executable_body_equals_authoring_candidate": true,
+    "all_recorded_files_equal_frozen_revision": true
+  },
+  "source_sha256": {
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/main.swift": "b4b702726ac99d629882e205c0fc0e2d8baa8a51d29b0934f8994ac81adad3ab",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/BenchmarkDuration.swift": "560a5886d97bfb73f87c90e223afc003ef33a3810a9fc9e4abcb8c8eff01218c",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift": "963bc445920039bf9b3f3cc8ae743c9d46b5184fdc0c0a25410621f8f8abfe2c",
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9",
+    "PrimeSwift/solution_1/README.md": "1c0699c1d558028471801436ddfb5d6740080f2cbf1dc7c93f866d992a9e38ce"
+  },
+  "status": "passed_static_checks",
+  "generator_header_change": "Only usage-comment paths changed for the package; no experiment path or lock direction is shipped.",
+  "source_revision": "b826fc6af66835d67494c7d0646fc7d596a2ccc8"
+}
