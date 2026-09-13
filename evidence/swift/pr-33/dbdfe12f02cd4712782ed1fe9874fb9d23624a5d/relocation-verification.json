@@ -1,0 +1,455 @@
+{
+  "purpose": "Source layout migration verification; no performance comparison",
+  "candidate": "dbdfe12f02cd4712782ed1fe9874fb9d23624a5d",
+  "base": "811011e8ef0766dcdf2a79e0628e494057580ff2",
+  "source_identities": {
+    "base": "811011e8ef0766dcdf2a79e0628e494057580ff2",
+    "checks": [
+      {
+        "original": "experiments/swift/PrimeSieve.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift",
+        "sha256": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262"
+      },
+      {
+        "original": "experiments/swift/BenchmarkObserver.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift",
+        "sha256": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e"
+      },
+      {
+        "original": "experiments/swift/Verify.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/Verify.swift",
+        "sha256": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db"
+      },
+      {
+        "original": "experiments/swift/ExtraVerify.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/ExtraVerify.swift",
+        "sha256": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686"
+      },
+      {
+        "original": "experiments/swift/tools/PrimeSieve.swift.in",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in",
+        "sha256": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0"
+      },
+      {
+        "original": "experiments/swift/Benchmark.swift",
+        "canonical": "tools/swift/Benchmark.swift",
+        "sha256": "3e8feb92083f2b0d239ce71f4d09100f886a93551e96d20480761fe87c6ace2e"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/PhaseSieve.swift",
+        "canonical": "tools/swift/phase-split/PhaseSieve.swift",
+        "sha256": "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/PhaseSourceGuard.swift",
+        "canonical": "tools/swift/phase-split/PhaseSourceGuard.swift",
+        "sha256": "08a327da33c87091eb6c1b7d8cf5e0982d9f97d50c258e2ae5b654b2b6ae8434"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/CurrentPhaseVerify.swift",
+        "canonical": "tools/swift/phase-split/CurrentPhaseVerify.swift",
+        "sha256": "d8d8505a1b824cd79fee727dc78c486e1272a07581ebabc92d25a62bf327f247"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/PhaseBench.swift",
+        "canonical": "tools/swift/phase-split/PhaseBench.swift",
+        "sha256": "a888d3cafed730f6d5e96c874056eadf472c12ac12e2bab5ad9a605ad3519bce"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/GenerateCurrentPhaseSieve.swift",
+        "canonical": "tools/swift/phase-split/GenerateCurrentPhaseSieve.swift",
+        "sha256": "a8d43114ac37a492ac40b62984599baa03f322adfaf9d961e143673d2e692b7c"
+      },
+      {
+        "original": "experiments/swift/tools/phase-split/PhaseVerify.swift",
+        "canonical": "tools/swift/phase-split/PhaseVerify.swift",
+        "sha256": "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243"
+      },
+      {
+        "original": "PrimeSwift/solution_1/PrimeSwift_8bitBool/Sources/PrimeSieveSwift/main.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_8bitBool/Sources/PrimeSieveSwift/main.swift",
+        "sha256": "0eaf575c78339181d3f9aae630116164d68cb54e246f8f128283706c7ee80563"
+      },
+      {
+        "original": "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_8bitBool/Package.swift",
+        "sha256": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993"
+      },
+      {
+        "original": "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Sources/PrimeSieveSwift/main.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Sources/PrimeSieveSwift/main.swift",
+        "sha256": "005b09b32838e554ceb9a3936a2b87db1837f4a8a050d4bf0e49d1186f9be8e0"
+      },
+      {
+        "original": "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.swift",
+        "canonical": "PrimeSwift/solution_1/PrimeSwift_1bit_u8/Package.swift",
+        "sha256": "e719a1d5f4f486a8a65c553e911fdd7b4555ec15a3b0542e07ef160acfab8993"
+      }
+    ]
+  },
+  "commands": [
+    {
+      "name": "swift-version",
+      "argv": [
+        "swift",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.182889042,
+      "stdout": "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "stderr": "swift-driver version: 1.148.6 "
+    },
+    {
+      "name": "hardware",
+      "argv": [
+        "sysctl",
+        "-n",
+        "machdep.cpu.brand_string"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.002948166000000002,
+      "stdout": "Apple M4 Pro\n",
+      "stderr": ""
+    },
+    {
+      "name": "generator-render",
+      "argv": [
+        "swift",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift",
+        "--check",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.47905804199999996,
+      "stdout": "Complete source and generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "stderr": ""
+    },
+    {
+      "name": "generator-checker",
+      "argv": [
+        "swift",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/check-dense-generator.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 17.812219625,
+      "stdout": "{\n  \"command_count\" : 49,\n  \"commands\" : [\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\"\n      ],\n      \"case\" : \"stdout-blocks\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 218410,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\"\n      ],\n      \"case\" : \"check-current\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 81,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/template with spaces.swift.in\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\"\n      ],\n      \"case\" : \"template-before-mode\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 81,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/template with spaces.swift.in\"\n      ],\n      \"case\" : \"template-after-path\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-word.swift\"\n      ],\n      \"case\" : \"corrupt-word-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-word.swift\"\n      ],\n      \"case\" : \"corrupt-word-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-vector.swift\"\n      ],\n      \"case\" : \"corrupt-vector-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-vector.swift\"\n      ],\n      \"case\" : \"corrupt-vector-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-both-blocks.swift\"\n      ],\n      \"case\" : \"corrupt-both-blocks-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-both-blocks.swift\"\n      ],\n      \"case\" : \"corrupt-both-blocks-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-handwritten.swift\"\n      ],\n      \"case\" : \"corrupt-handwritten-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-corrupt-handwritten.swift\"\n      ],\n      \"case\" : \"corrupt-handwritten-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-dispatch-cutoff.swift\"\n      ],\n      \"case\" : \"word-dispatch-cutoff-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-dispatch-cutoff.swift\"\n      ],\n      \"case\" : \"word-dispatch-cutoff-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-dispatch-cutoff.swift\"\n      ],\n      \"case\" : \"vector-dispatch-cutoff-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-dispatch-cutoff.swift\"\n      ],\n      \"case\" : \"vector-dispatch-cutoff-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source-utf8-bom.swift\"\n      ],\n      \"case\" : \"source-utf8-bom-check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source-utf8-bom.swift\"\n      ],\n      \"case\" : \"source-utf8-bom-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-marker.swift\"\n      ],\n      \"case\" : \"missing-marker--check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 128-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-marker.swift\"\n      ],\n      \"case\" : \"missing-marker--write\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 128-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-marker.swift\"\n      ],\n      \"case\" : \"duplicate-marker--check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 64-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-marker.swift\"\n      ],\n      \"case\" : \"duplicate-marker--write\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 64-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-reversed-markers.swift\"\n      ],\n      \"case\" : \"reversed-markers--check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 64-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-reversed-markers.swift\"\n      ],\n      \"case\" : \"reversed-markers--write\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or reversed 64-bit generated-block markers\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-overlapping-markers.swift\"\n      ],\n      \"case\" : \"overlapping-markers--check\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Generated blocks must be separate, with the 64-bit block first\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-overlapping-markers.swift\"\n      ],\n      \"case\" : \"overlapping-markers--write\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Generated blocks must be separate, with the 64-bit block first\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-insertion-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-insertion.swift.in\"\n      ],\n      \"case\" : \"missing-insertion\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed 64-bit insertion line\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-insertion-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-insertion.swift.in\"\n      ],\n      \"case\" : \"duplicate-insertion\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed 128-bit insertion line\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-reversed-insertions-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-reversed-insertions.swift.in\"\n      ],\n      \"case\" : \"reversed-insertions\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Template insertions must put the 64-bit block first\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-dispatch-token-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-missing-dispatch-token.swift.in\"\n      ],\n      \"case\" : \"missing-dispatch-token\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed 64-bit dispatch token\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-dispatch-token-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-duplicate-dispatch-token.swift.in\"\n      ],\n      \"case\" : \"duplicate-dispatch-token\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed 128-bit dispatch token\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unknown-token-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unknown-token.swift.in\"\n      ],\n      \"case\" : \"unknown-token\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Unrecognized template token or insertion\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-dispatch-shape-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-dispatch-shape.swift.in\"\n      ],\n      \"case\" : \"dispatch-shape\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed runtime-tested dense dispatch\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-swapped-dispatch-handlers-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-swapped-dispatch-handlers.swift.in\"\n      ],\n      \"case\" : \"swapped-dispatch-handlers\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed runtime-tested dense dispatch\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-helper-width-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-helper-width.swift.in\"\n      ],\n      \"case\" : \"word-helper-width\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed markWord bit width\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-helper-width-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-helper-width.swift.in\"\n      ],\n      \"case\" : \"vector-helper-width\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Missing, duplicated, or changed markVectorWord bit width\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-storage-type-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-word-storage-type.swift.in\"\n      ],\n      \"case\" : \"word-storage-type\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Changed markWord storage width\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-storage-type-target.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-vector-storage-type.swift.in\"\n      ],\n      \"case\" : \"vector-storage-type\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Changed markVectorWord storage width\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--unknown\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\"\n      ],\n      \"case\" : \"unknown-mode\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\"\n      ],\n      \"case\" : \"missing-path\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\",\n        \"extra\"\n      ],\n      \"case\" : \"extra-argument\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--template\"\n      ],\n      \"case\" : \"missing-template-path\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/template with spaces.swift.in\"\n      ],\n      \"case\" : \"template-without-mode\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\"\n      ],\n      \"case\" : \"duplicate-modes\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-source with spaces.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/template with spaces.swift.in\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/template with spaces.swift.in\"\n      ],\n      \"case\" : \"duplicate-template-options\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"Usage: generate-dense.swift [--check|--write PrimeSieve.swift [--template PrimeSieve.swift.in]]\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift.in\"\n      ],\n      \"case\" : \"unicode-byte-mismatch\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"PrimeSieve.swift differs from its complete template rendering\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift.in\"\n      ],\n      \"case\" : \"unicode-byte-repair\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 73,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--check\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift\",\n        \"--template\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-unicode.swift.in\"\n      ],\n      \"case\" : \"unicode-repaired-check\",\n      \"exit_code\" : 0,\n      \"expected_exit_code\" : 0,\n      \"stderr\" : \"\",\n      \"stdout_bytes\" : 81,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    },\n    {\n      \"argv\" : [\n        \"\\/usr\\/bin\\/env\",\n        \"swift\",\n        \"\\/Users\\/ryan\\/Developer\\/Primes\\/.worktrees\\/swift-source-layout\\/PrimeSwift\\/solution_1\\/PrimeSwift_1bitStriped_u8\\/Tools\\/generate-dense.swift\",\n        \"--write\",\n        \"\\/var\\/folders\\/f_\\/gksy_zv907bb8lchdg3521cm0000gp\\/T\\/dense-generator-check-B06B9556-91E2-4588-8FDC-95FD34EC6FD9\\/canonical-does-not-exist.swift\"\n      ],\n      \"case\" : \"missing-source\",\n      \"exit_code\" : 1,\n      \"expected_exit_code\" : 1,\n      \"stderr\" : \"The file \u201ccanonical-does-not-exist.swift\u201d couldn\u2019t be opened because there is no such file.\\n\",\n      \"stdout_bytes\" : 0,\n      \"termination_reason\" : \"exit\",\n      \"tool\" : \"generate-dense.swift\"\n    }\n  ],\n  \"purpose\" : \"Generator CLI and independent schedule checks only; no sieve execution.\",\n  \"schedule\" : {\n    \"helper_calls\" : 3132,\n    \"individual_marks\" : 4992,\n    \"odd_factors\" : 54\n  },\n  \"status\" : \"passed\",\n  \"temporary_fixtures_removed\" : true\n}\n",
+      "stderr": ""
+    },
+    {
+      "name": "typecheck-compare-revisions.swift",
+      "argv": [
+        "swiftc",
+        "-typecheck",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/compare-revisions.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 1.2601138750000018,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "typecheck-compare-upstream.swift",
+      "argv": [
+        "swiftc",
+        "-typecheck",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/compare-upstream.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.202945500000002,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "typecheck-linux-docker/linux-validation.swift",
+      "argv": [
+        "swiftc",
+        "-typecheck",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/linux-docker/linux-validation.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.32837241600000056,
+      "stdout": "",
+      "stderr": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/linux-docker/linux-validation.swift:90:50: warning: conditional cast from 'any Error' to 'any CustomStringConvertible' always succeeds\n  88 |     var description: String { \"AssertionError: \\(message)\" }\n  89 | }\n  90 | func describe(_ error: Error) -> String { (error as? CustomStringConvertible)?.description ?? \"\\(type(of: error)): \\(error)\" }\n     |                                                  `- warning: conditional cast from 'any Error' to 'any CustomStringConvertible' always succeeds\n  91 | \n  92 | func utc() -> String {\n"
+    },
+    {
+      "name": "probe-compare-revisions.swift",
+      "argv": [
+        "swift",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/probe-compare-revisions.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 1.6048697080000025,
+      "stdout": "resolved 811011e8ef0766dcdf2a79e0628e494057580ff2:experiments/swift/PrimeSieve.swift, 231457 bytes\nresolved 35becbe13990c2bdf25784ef3e152c95f855b089:PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift, 231457 bytes\nresolved dbdfe12f02cd4712782ed1fe9874fb9d23624a5d:PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift, 231457 bytes\nmissing source rejected\nfrozen input preserved: Benchmark.swift\nfrozen input preserved: BenchmarkObserver.swift\n",
+      "stderr": ""
+    },
+    {
+      "name": "probe-compare-upstream.swift",
+      "argv": [
+        "swift",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/probe-compare-upstream.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 1.6404427500000018,
+      "stdout": "resolved 811011e8ef0766dcdf2a79e0628e494057580ff2:experiments/swift/PrimeSieve.swift, 231457 bytes\nresolved 35becbe13990c2bdf25784ef3e152c95f855b089:PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift, 231457 bytes\nresolved dbdfe12f02cd4712782ed1fe9874fb9d23624a5d:PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift, 231457 bytes\nmissing source rejected\nfrozen input preserved: Benchmark.swift\nfrozen input preserved: BenchmarkObserver.swift\n",
+      "stderr": ""
+    },
+    {
+      "name": "probe-layouts.swift",
+      "argv": [
+        "swift",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/probe-layouts.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.20704095800000033,
+      "stdout": "verified solution-package layout and workflow inputs\nverified experiments layout and workflow inputs\nmissing and ambiguous layouts rejected\n",
+      "stderr": ""
+    },
+    {
+      "name": "linux-lifecycle",
+      "argv": [
+        "swift",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/linux-docker/linux-validation.swift",
+        "test-lifecycle",
+        "--output",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/lifecycle"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 2.991594667000001,
+      "stdout": "normal run removes the verified id and preserves an unrelated container ... ok\ntimeout and interrupt preserve the primary error and remove the container ... ok\ncleanup failure retains the lock and the original timeout ... ok\nclient success cannot hide a nonzero container exit ... ok\nuncertain create never starts and retains the lock even if the lookup is empty ... ok\nfailed lookup is not treated as container absence ... ok\nforeign name collision is never removed or started ... ok\nrenamed known container is not mistaken for absence ... ok\nunreaped client retains the lock without containers ... ok\nlock with another inode is not removed ... ok\nsignal is recorded, interrupts when idle and is deferred during cleanup ... ok\nRUN client: [\"sh\",\"-c\",\"echo partial output; sleep 30\"]\ntimeout stops the process group and reaps the client with partial logs ... ok\nRUN client: [\"sh\",\"-c\",\"echo started; sleep 30\"]\ninterrupt stops the running command and reaps the client ... ok\n",
+      "stderr": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/linux-docker/linux-validation.swift:90:50: warning: conditional cast from 'any Error' to 'any CustomStringConvertible' always succeeds\n  88 |     var description: String { \"AssertionError: \\(message)\" }\n  89 | }\n  90 | func describe(_ error: Error) -> String { (error as? CustomStringConvertible)?.description ?? \"\\(type(of: error)): \\(error)\" }\n     |                                                  `- warning: conditional cast from 'any Error' to 'any CustomStringConvertible' always succeeds\n  91 | \n  92 | func utc() -> String {\n"
+    },
+    {
+      "name": "release-package-build",
+      "argv": [
+        "swift",
+        "build",
+        "-c",
+        "release",
+        "--package-path",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 53.929659541999996,
+      "stdout": "Building for production...\n[0/7] Write sources\n[4/7] Write swift-version--58304C5D6DBC2206.txt\n[6/10] Emitting module BenchmarkObserver\n[7/10] Compiling BenchmarkObserver BenchmarkObserver.swift\n[8/10] Compiling ArgumentParserToolInfo ToolInfo.swift\n[9/11] Compiling ArgumentParser BashCompletionsGenerator.swift\n[10/13] Emitting module PrimeSieveSwift\n[11/13] Compiling PrimeSieveSwift BenchmarkDuration.swift\n[11/13] Write Objects.LinkFileList\n[12/13] Linking PrimeSieveSwift\nBuild complete! (53.16s)\n",
+      "stderr": "Fetching https://github.com/apple/swift-argument-parser from cache\nFetched https://github.com/apple/swift-argument-parser from cache (0.48s)\nComputing version for https://github.com/apple/swift-argument-parser\nComputed https://github.com/apple/swift-argument-parser at 0.5.0 (0.71s)\nCreating working copy for https://github.com/apple/swift-argument-parser\nWorking copy of https://github.com/apple/swift-argument-parser resolved at 0.5.0\n"
+    },
+    {
+      "name": "package-default-limit-single-pass",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-t",
+        "0"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.0061568329999914795,
+      "stdout": "yellowcub_striped_UInt8;1;7.0708e-05;1;algorithm=base,faithful=yes,bits=1\n",
+      "stderr": "Passes: 1, Time: 7.0708e-05, Avg: 7.0708e-05, Limit: 1000000, Count: 78498, Valid: true, Checksum: 72\n"
+    },
+    {
+      "name": "package-prime-boundary",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "31",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.004506790999997179,
+      "stdout": "yellowcub_striped_UInt8;1;8.292e-06;1;algorithm=base,faithful=yes,bits=1\n",
+      "stderr": "2, 3, 5, 7, 11, 13, 17, 19, 23, 29\nPasses: 1, Time: 8.292e-06, Avg: 8.292e-06, Limit: 31, Count: 10, Valid: unknown, Checksum: 72\n"
+    },
+    {
+      "name": "package-empty-boundary",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-n",
+        "2",
+        "-t",
+        "0",
+        "-l",
+        "true"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.004043582999997852,
+      "stdout": "yellowcub_striped_UInt8;1;6.708e-06;1;algorithm=base,faithful=yes,bits=1\n",
+      "stderr": "\nPasses: 1, Time: 6.708e-06, Avg: 6.708e-06, Limit: 2, Count: 0, Valid: unknown, Checksum: 0\n"
+    },
+    {
+      "name": "package-invalid-duration",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+        "-t",
+        "-1"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 64,
+      "expected_exit_code": 64,
+      "seconds": 0.004311916000006022,
+      "stdout": "",
+      "stderr": "Error: Missing value for '-t <time>'\nHelp:  -t <time>  Minimum running time in seconds.\nUsage: prime-sieve-swift [--upper-limit <upper-limit>] [--time <time>] [--list-results <list-results>]\n  See 'prime-sieve-swift --help' for more information.\n"
+    },
+    {
+      "name": "verify-asan-build",
+      "argv": [
+        "swiftc",
+        "-O",
+        "-sanitize=address",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/Verify.swift",
+        "-o",
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 46.99150679200001,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "name": "verify-asan-run",
+      "argv": [
+        "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/verify-asan"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.1671274160000138,
+      "stdout": "Passed: 25 storage layout/zeroing cases and Int.min/Int.max layout arithmetic.\nPassed: complete prime arrays for every limit -2...2048, larger square boundaries, 1M, and 10M.\n",
+      "stderr": ""
+    },
+    {
+      "name": "development-runner-smoke",
+      "argv": [
+        "sh",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/run.sh"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 52.84763050000001,
+      "stdout": "fahlman_swift_dense_striped;128963;5.000033875;1;algorithm=base,faithful=yes,bits=1\n",
+      "stderr": "Validated: 78498 primes; checksum: 27689736\n"
+    },
+    {
+      "name": "phase-build",
+      "argv": [
+        "sh",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/phase-split/build-current.sh",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 92.138895625,
+      "stdout": "Generated current diagnostic from production Git blob d3a60ccaf8cb2d258ca0f398b30b3fa3e9cd1993; exactly three reversible substitutions.\nBuilt /Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase/phase-current; no diagnostic workloads have been run.\n",
+      "stderr": ""
+    },
+    {
+      "name": "phase-wrapper-check",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase/phase-current",
+        "--check"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "seconds": 0.3246740829999908,
+      "stdout": "production_full: checksum 255\nderived_full: checksum 255\nthrough_499: checksum 223\nthrough_251: checksum 223\nthrough_111: checksum 223\nthrough_63: checksum 95\nthrough_3: checksum 73\nallocation_only: checksum 0\nChecked all eight wrappers; full raw flags agree; 78,498 primes; source identities unchanged. No timed trials run.\n",
+      "stderr": ""
+    },
+    {
+      "name": "phase-overwrite-refusal",
+      "argv": [
+        "sh",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/phase-split/build-current.sh",
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "seconds": 0.015025583000010556,
+      "stdout": "",
+      "stderr": "mkdir: /Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase: File exists\n"
+    },
+    {
+      "name": "phase-stale-input-refusal",
+      "argv": [
+        "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase/phase-current",
+        "--check"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "seconds": 0.16792670799998177,
+      "stdout": "",
+      "stderr": "error: Source changed since this diagnostic was generated: /Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase/inputs/CurrentPhaseSieve.swift. Rebuild from current production.\n"
+    }
+  ],
+  "probe_sources": {
+    "probe-compare-revisions.swift": "// Compare committed Swift candidates with the frozen benchmark runner and observer\n// from revision 25402d4. Every executable is compiled first; then three rotated\n// five-second runs per variant are measured serially. Run while holding the\n// project's timing lock, from any directory:\n//   swift tools/swift/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json\n// Variant names use lowercase letters, digits, hyphens and underscores; the first\n// variant is the reference for speedup_over_first. The output file must not exist.\n// Timing counts as evidence only on the reference machine; see AGENTS.md.\nimport Foundation\n\nlet harnessRevision = \"25402d46ba991b39451724d3873d326626981e3f\"\nlet harnessPackage = \"experiments/swift\"\nlet candidateSourcePaths = [\n    \"PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift\",\n    \"experiments/swift/PrimeSieve.swift\",\n]\nlet frozenLabel = \"fahlman_swift_striped_unrolled\"\nlet requiredTags = \"algorithm=base,faithful=yes,bits=1\"\nlet validationMarker = \"Validated: 78498 primes;\"\nlet rounds = 3\nlet usage = \"Usage: compare-revisions.swift --variant NAME=REVISION [--variant NAME=REVISION ...] --output RESULTS.json [--repo PATH]\"\n\nstruct ToolError: Error, CustomStringConvertible { let description: String }\n\nstruct Command {\n    let stdout: String\n    let stderr: String\n}\n\n/// Runs a command through /usr/bin/env, capturing both streams, and fails on a nonzero exit.\n@discardableResult\nfunc run(_ arguments: [String], in directory: URL? = nil) throws -> Command {\n    let process = Process()\n    process.executableURL = URL(fileURLWithPath: \"/usr/bin/env\")\n    process.arguments = arguments\n    process.currentDirectoryURL = directory\n    let out = Pipe(), err = Pipe()\n    process.standardOutput = out\n    process.standardError = err\n    try process.run()\n    var outData = Data(), errData = Data()\n    let group = DispatchGroup()\n    group.enter(); DispatchQueue.global().async { outData = out.fileHandleForReading.readDataToEndOfFile(); group.leave() }\n    group.enter(); DispatchQueue.global().async { errData = err.fileHandleForReading.readDataToEndOfFile(); group.leave() }\n    group.wait()\n    process.waitUntilExit()\n    let result = Command(stdout: String(decoding: outData, as: UTF8.self), stderr: String(decoding: errData, as: UTF8.self))\n    guard process.terminationReason == .exit, process.terminationStatus == 0 else {\n        throw ToolError(description: \"`\\(arguments.joined(separator: \" \"))` exited with \\(process.terminationStatus)\\n\\(result.stderr)\")\n    }\n    return result\n}\n\nfunc sha256(of file: URL) throws -> String {\n    let output = try run([\"shasum\", \"-a\", \"256\", file.path]).stdout\n    guard let digest = output.split(separator: \" \").first, digest.count == 64 else {\n        throw ToolError(description: \"Cannot hash \\(file.path)\")\n    }\n    return String(digest)\n}\n\nfunc median(_ values: [Double]) -> Double {\n    let sorted = values.sorted()\n    let n = sorted.count\n    return n % 2 == 1 ? sorted[n / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2\n}\n\nstruct Sample: Codable {\n    let output: String\n    let passes: Int\n    let seconds: Double\n    let threads: Int\n    let tags: String\n    let validation: String\n    let milliseconds_per_pass: Double\n}\n\nstruct Variant: Codable {\n    let revision: String\n    let source_sha256: String\n}\n\nstruct Results: Codable {\n    let recorded_at_utc: String\n    let platform: String\n    let machine: String\n    let cpu: String\n    let swift_version: String\n    let flags: [String]\n    let harness_revision: String\n    let runner_sha256: String\n    let observer_sha256: String\n    let variants: [String: Variant]\n    let run_order: [[String]]\n    let samples: [String: [Sample]]\n    let median_ms: [String: Double]\n    let speedup_over_first: [String: Double]\n}\n\nfunc hostDescription() -> (platform: String, machine: String, cpu: String) {\n    let machine = (try? run([\"uname\", \"-m\"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? \"unknown\"\n    #if os(macOS)\n    let platform = \"macOS \" + ProcessInfo.processInfo.operatingSystemVersionString\n    let cpu = (try? run([\"sysctl\", \"-n\", \"machdep.cpu.brand_string\"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? \"unknown\"\n    #else\n    let platform = \"Linux \" + ProcessInfo.processInfo.operatingSystemVersionString\n    let cpuinfo = (try? String(contentsOfFile: \"/proc/cpuinfo\", encoding: .utf8)) ?? \"\"\n    let cpu = cpuinfo.split(separator: \"\\n\").first { $0.hasPrefix(\"model name\") }\n        .map { String($0.split(separator: \":\", maxSplits: 1).last ?? \"\").trimmingCharacters(in: .whitespaces) } ?? \"unknown\"\n    #endif\n    return (platform, machine, cpu)\n}\n\nlet repo = URL(fileURLWithPath: \"/Users/ryan/Developer/Primes/.worktrees/swift-source-layout\")\nfunc git(_ arguments: [String]) throws -> String { try run([\"git\", \"-C\", repo.path] + arguments).stdout.trimmingCharacters(in: .whitespacesAndNewlines) }\nfunc source(_ revision: String, _ path: String) throws -> Data {\n        let process = Process()\n        process.executableURL = URL(fileURLWithPath: \"/usr/bin/env\")\n        process.arguments = [\"git\", \"-C\", repo.path, \"show\", \"\\(revision):\\(path)\"]\n        let out = Pipe(); process.standardOutput = out; process.standardError = FileHandle.standardError\n        try process.run()\n        let data = out.fileHandleForReading.readDataToEndOfFile()\n        process.waitUntilExit()\n        guard process.terminationStatus == 0 else { throw ToolError(description: \"git show failed for \\(revision):\\(path)\") }\n        return data\n    }\nfunc candidateSourcePath(_ revision: String) throws -> String {\n        let paths = Set(try git([\"ls-tree\", \"-r\", \"--name-only\", revision, \"--\"] + candidateSourcePaths)\n            .split(separator: \"\\n\").map(String.init))\n        guard let path = candidateSourcePaths.first(where: { paths.contains($0) }) else {\n            throw ToolError(description: \"No Swift candidate source at \\(revision); expected one of \\(candidateSourcePaths.joined(separator: \", \"))\")\n        }\n        return path\n    }\nfor revision in [\"811011e\", \"35becbe\", \"dbdfe12f02cd4712782ed1fe9874fb9d23624a5d\"] {\n let full = try git([\"rev-parse\", revision + \"^{commit}\"])\n let path = try candidateSourcePath(full)\n let bytes = try source(full, path)\n precondition(bytes == (try! Data(contentsOf: repo.appendingPathComponent(candidateSourcePaths[0]))))\n print(\"resolved \\(full):\\(path), \\(bytes.count) bytes\")\n}\nvar missingRejected = false\ndo { _ = try candidateSourcePath(try git([\"rev-parse\", \"22bfea9^{commit}\"])) } catch { missingRejected = true; print(\"missing source rejected\") }\nprecondition(missingRejected)\nfor name in [\"Benchmark.swift\", \"BenchmarkObserver.swift\"] {\n let bytes = try source(harnessRevision, harnessPackage + \"/\" + name)\n let expected = try run([\"git\", \"-C\", repo.path, \"show\", harnessRevision + \":experiments/swift/\" + name]).stdout\n precondition(bytes == Data(expected.utf8)); print(\"frozen input preserved: \" + name)\n}\n",
+    "probe-compare-upstream.swift": "// Compare a committed candidate with the three upstream Swift entries, all built\n// with the frozen benchmark runner and observer from revision 25402d4 so every\n// variant is timed by the same harness. The upstream sources are downloaded at\n// the pinned revision and adapted only so the frozen runner can drive them.\n// Three rotated five-second runs per variant, twelve in all. Run while holding\n// the project's timing lock, from any directory, with network access:\n//   swift tools/swift/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]\n// The candidate defaults to HEAD. The output file must not exist. Timing counts\n// as evidence only on the reference machine; see AGENTS.md.\nimport Foundation\n\nlet harnessRevision = \"25402d46ba991b39451724d3873d326626981e3f\"\nlet upstreamRevision = \"22bfea9c7122c46dcda799020fccf5ae83fe667f\"\nlet harnessPackage = \"experiments/swift\"\nlet candidateSourcePaths = [\n    \"PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift\",\n    \"experiments/swift/PrimeSieve.swift\",\n]\nlet frozenLabel = \"fahlman_swift_striped_unrolled\"\nlet frozenByteCount = \"let byteCount = ((limit - 1) / 2 + 7) / 8\"\nlet validationMarker = \"Validated: 78498 primes;\"\nlet rounds = 3\nlet candidateName = \"candidate\"\nlet usage = \"Usage: compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]\"\n\nstruct Adapter { let name: String; let directory: String; let bits: Int }\nlet adapters = [\n    Adapter(name: \"repository-bool\", directory: \"PrimeSwift_8bitBool\", bits: 8),\n    Adapter(name: \"repository-packed\", directory: \"PrimeSwift_1bit_u8\", bits: 1),\n    Adapter(name: \"repository-striped\", directory: \"PrimeSwift_1bitStriped_u8\", bits: 1),\n]\n\nstruct ToolError: Error, CustomStringConvertible { let description: String }\nstruct Command { let stdout: String; let stderr: String }\n\n@discardableResult\nfunc run(_ arguments: [String], in directory: URL? = nil) throws -> Command {\n    let process = Process()\n    process.executableURL = URL(fileURLWithPath: \"/usr/bin/env\")\n    process.arguments = arguments\n    process.currentDirectoryURL = directory\n    let out = Pipe(), err = Pipe()\n    process.standardOutput = out\n    process.standardError = err\n    try process.run()\n    var outData = Data(), errData = Data()\n    let group = DispatchGroup()\n    group.enter(); DispatchQueue.global().async { outData = out.fileHandleForReading.readDataToEndOfFile(); group.leave() }\n    group.enter(); DispatchQueue.global().async { errData = err.fileHandleForReading.readDataToEndOfFile(); group.leave() }\n    group.wait()\n    process.waitUntilExit()\n    let result = Command(stdout: String(decoding: outData, as: UTF8.self), stderr: String(decoding: errData, as: UTF8.self))\n    guard process.terminationReason == .exit, process.terminationStatus == 0 else {\n        throw ToolError(description: \"`\\(arguments.joined(separator: \" \"))` exited with \\(process.terminationStatus)\\n\\(result.stderr)\")\n    }\n    return result\n}\n\nfunc sha256(of file: URL) throws -> String {\n    let output = try run([\"shasum\", \"-a\", \"256\", file.path]).stdout\n    guard let digest = output.split(separator: \" \").first, digest.count == 64 else { throw ToolError(description: \"Cannot hash \\(file.path)\") }\n    return String(digest)\n}\n\nfunc median(_ values: [Double]) -> Double {\n    let sorted = values.sorted(); let n = sorted.count\n    return n % 2 == 1 ? sorted[n / 2] : (sorted[n / 2 - 1] + sorted[n / 2]) / 2\n}\n\nfunc download(_ url: URL) throws -> String {\n    var received: Data?\n    var failure: Error?\n    let done = DispatchSemaphore(value: 0)\n    URLSession.shared.dataTask(with: url) { data, response, error in\n        if let http = response as? HTTPURLResponse, http.statusCode != 200 {\n            failure = ToolError(description: \"HTTP \\(http.statusCode) for \\(url)\")\n        } else { received = data; failure = error }\n        done.signal()\n    }.resume()\n    guard done.wait(timeout: .now() + 120) == .success else { throw ToolError(description: \"Timed out downloading \\(url)\") }\n    if let failure { throw failure }\n    guard let received, let text = String(data: received, encoding: .utf8) else { throw ToolError(description: \"Empty download: \\(url)\") }\n    return text\n}\n\n/// Replaces exactly one occurrence, so an upstream or runner change can't pass silently.\nfunc replaceOnce(_ text: String, _ old: String, _ new: String, label: String) throws -> String {\n    guard text.components(separatedBy: old).count == 2 else { throw ToolError(description: \"Expected exactly one \\(label) in the source to adapt\") }\n    return text.replacingOccurrences(of: old, with: new)\n}\n\n/// The same source surgery the Python harness performed: drop the CLI parts of the\n/// upstream file and add the storage and prime accessors the frozen runner calls.\nfunc adapt(_ upstream: String, bits: Int) throws -> String {\n    guard let cut = upstream.range(of: \"extension Sieve {\\n    func printResults\") else { throw ToolError(description: \"Upstream source shape changed: no printResults extension\") }\n    var source = String(upstream[..<cut.lowerBound])\n    source = try replaceOnce(source, \"import ArgumentParser\\n\", \"\", label: \"ArgumentParser import\")\n    if bits == 1 {\n        guard let start = source.range(of: \"let bitMasks =\"), let end = source.range(of: \"// This is a very limited\") else {\n            throw ToolError(description: \"Upstream source shape changed: bitMasks table not found\")\n        }\n        source = String(source[..<start.lowerBound]) + \"\"\"\n        let bitMasks: UnsafeMutableBufferPointer<Word> = {\n            let masks = UnsafeMutableBufferPointer<Word>.allocate(capacity: wordSize)\n            _ = masks.initialize(from: ContiguousArray((0..<wordSize).lazy.map { Word(1) &<< $0 }))\n            return masks\n        }()\n\n\n        \"\"\" + String(source[end.lowerBound...])\n        source += \"\"\"\n\n        extension BooleanBitArray {\n            func withStorage<R>(_ body: (UnsafeRawPointer?) -> R) -> R {\n                body(words.baseAddress)\n            }\n        }\n        extension Sieve {\n            func withStorage<R>(_ body: (UnsafeRawPointer?) -> R) -> R {\n                primeArray.withStorage(body)\n            }\n            func primes() -> [Int] {\n                var result = [2]\n                for num in stride(from: 3, to: sieveLimit, by: 2) {\n                    if primeArray.getBit(at: index(for: num)) { result.append(num) }\n                }\n                return result\n            }\n        }\n\n        \"\"\"\n    } else {\n        source += \"\"\"\n\n        extension Sieve {\n            func withStorage<R>(_ body: (UnsafeRawPointer?) -> R) -> R {\n                body(bits.baseAddress)\n            }\n            func primes() -> [Int] {\n                var result = [2]\n                for num in stride(from: 3, to: sieveSize, by: 2) {\n                    if bits[index(for: num)] { result.append(num) }\n                }\n                return result\n            }\n        }\n\n        \"\"\"\n    }\n    return source + \"\\ntypealias PrimeSieve = Sieve\\n\"\n}\n\nstruct Sample: Codable {\n    let output: String; let passes: Int; let seconds: Double; let threads: Int; let tags: String\n    let validation: String; let milliseconds_per_pass: Double\n}\nstruct AdapterRecord: Codable { let directory: String; let bits: Int; let upstream_sha256: String; let adapted_sha256: String }\nstruct Candidate: Codable { let revision: String; let source_sha256: String }\nstruct Results: Codable {\n    let recorded_at_utc: String; let platform: String; let machine: String; let cpu: String; let swift_version: String\n    let flags: [String]; let harness_revision: String; let runner_sha256: String; let observer_sha256: String\n    let revision: String; let adapters: [String: AdapterRecord]; let candidate: Candidate\n    let run_order: [[String]]; let samples: [String: [Sample]]; let median_ms: [String: Double]; let speedups: [String: Double]\n}\n\nfunc hostDescription() -> (platform: String, machine: String, cpu: String) {\n    let machine = (try? run([\"uname\", \"-m\"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? \"unknown\"\n    #if os(macOS)\n    let platform = \"macOS \" + ProcessInfo.processInfo.operatingSystemVersionString\n    let cpu = (try? run([\"sysctl\", \"-n\", \"machdep.cpu.brand_string\"]).stdout.trimmingCharacters(in: .whitespacesAndNewlines)) ?? \"unknown\"\n    #else\n    let platform = \"Linux \" + ProcessInfo.processInfo.operatingSystemVersionString\n    let cpuinfo = (try? String(contentsOfFile: \"/proc/cpuinfo\", encoding: .utf8)) ?? \"\"\n    let cpu = cpuinfo.split(separator: \"\\n\").first { $0.hasPrefix(\"model name\") }\n        .map { String($0.split(separator: \":\", maxSplits: 1).last ?? \"\").trimmingCharacters(in: .whitespaces) } ?? \"unknown\"\n    #endif\n    return (platform, machine, cpu)\n}\n\nlet repo = URL(fileURLWithPath: \"/Users/ryan/Developer/Primes/.worktrees/swift-source-layout\")\nfunc git(_ arguments: [String]) throws -> String { try run([\"git\", \"-C\", repo.path] + arguments).stdout.trimmingCharacters(in: .whitespacesAndNewlines) }\nfunc source(_ revision: String, _ path: String) throws -> Data {\n        let process = Process()\n        process.executableURL = URL(fileURLWithPath: \"/usr/bin/env\")\n        process.arguments = [\"git\", \"-C\", repo.path, \"show\", \"\\(revision):\\(path)\"]\n        let out = Pipe(); process.standardOutput = out; process.standardError = FileHandle.standardError\n        try process.run()\n        let data = out.fileHandleForReading.readDataToEndOfFile()\n        process.waitUntilExit()\n        guard process.terminationStatus == 0 else { throw ToolError(description: \"git show failed for \\(revision):\\(path)\") }\n        return data\n    }\nfunc candidateSourcePath(_ revision: String) throws -> String {\n        let output = try run([\"git\", \"-C\", repo.path, \"ls-tree\", \"-r\", \"--name-only\", revision, \"--\"] + candidateSourcePaths).stdout\n        let paths = Set(output.split(separator: \"\\n\").map(String.init))\n        guard let path = candidateSourcePaths.first(where: { paths.contains($0) }) else {\n            throw ToolError(description: \"No Swift candidate source at \\(revision); expected one of \\(candidateSourcePaths.joined(separator: \", \"))\")\n        }\n        return path\n    }\nfor revision in [\"811011e\", \"35becbe\", \"dbdfe12f02cd4712782ed1fe9874fb9d23624a5d\"] {\n let full = try git([\"rev-parse\", revision + \"^{commit}\"])\n let path = try candidateSourcePath(full)\n let bytes = try source(full, path)\n precondition(bytes == (try! Data(contentsOf: repo.appendingPathComponent(candidateSourcePaths[0]))))\n print(\"resolved \\(full):\\(path), \\(bytes.count) bytes\")\n}\nvar missingRejected = false\ndo { _ = try candidateSourcePath(try git([\"rev-parse\", \"22bfea9^{commit}\"])) } catch { missingRejected = true; print(\"missing source rejected\") }\nprecondition(missingRejected)\nfor name in [\"Benchmark.swift\", \"BenchmarkObserver.swift\"] {\n let bytes = try source(harnessRevision, harnessPackage + \"/\" + name)\n let expected = try run([\"git\", \"-C\", repo.path, \"show\", harnessRevision + \":experiments/swift/\" + name]).stdout\n precondition(bytes == Data(expected.utf8)); print(\"frozen input preserved: \" + name)\n}\n",
+    "probe-layouts.swift": "import Foundation\nstruct RuntimeError: Error, CustomStringConvertible {\n    let message: String\n    init(_ message: String) { self.message = message }\n    var description: String { \"RuntimeError: \\(message)\" }\n}\nstruct SourceLayout {\n    let name: String\n    let rootPath: String\n    let dockerfile: String\n    let core: String\n    let sourceFiles: [String]\n    let checks: [(String, [String])]\n}\nfunc sourceLayout(_ solution: URL) throws -> SourceLayout {\n    let package = \"PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8\"\n    let core = package + \"/Sources/PrimeSieveSwift/PrimeSieve.swift\"\n    let current = FileManager.default.fileExists(atPath: solution.appendingPathComponent(core).path)\n    let legacy = FileManager.default.fileExists(atPath: solution.appendingPathComponent(\"experiments/swift/PrimeSieve.swift\").path)\n    guard current != legacy else { throw RuntimeError(\"Expected exactly one supported canonical sieve layout.\") }\n    if current {\n        return SourceLayout(\n            name: \"solution-package\", rootPath: \".\", dockerfile: \"tools/swift/Dockerfile\", core: core,\n            sourceFiles: [\"tools/swift/Dockerfile\", \"tools/swift/Dockerfile.dockerignore\", core,\n                          \"tools/swift/Benchmark.swift\", package + \"/Sources/BenchmarkObserver/BenchmarkObserver.swift\",\n                          package + \"/Tools/Verify.swift\", package + \"/Tools/ExtraVerify.swift\",\n                          \"tools/swift/phase-split/PhaseSieve.swift\", \"tools/swift/phase-split/PhaseVerify.swift\"],\n            checks: [(\"verify\", [package + \"/Tools/Verify.swift\"]),\n                     (\"extra-verify\", [package + \"/Tools/ExtraVerify.swift\"]),\n                     (\"phase-verify\", [\"tools/swift/phase-split/PhaseSieve.swift\", \"tools/swift/phase-split/PhaseVerify.swift\"])])\n    }\n    return SourceLayout(\n        name: \"experiments\", rootPath: \"experiments/swift\", dockerfile: \"Dockerfile\", core: \"PrimeSieve.swift\",\n        sourceFiles: [\"Dockerfile\", \"PrimeSieve.swift\", \"Benchmark.swift\", \"BenchmarkObserver.swift\",\n                      \"Verify.swift\", \"ExtraVerify.swift\", \"tools/phase-split/PhaseSieve.swift\",\n                      \"tools/phase-split/PhaseVerify.swift\"],\n        checks: [(\"verify\", [\"Verify.swift\"]), (\"extra-verify\", [\"ExtraVerify.swift\"]),\n                 (\"phase-verify\", [\"tools/phase-split/PhaseSieve.swift\", \"tools/phase-split/PhaseVerify.swift\"])])\n}\nfunc workflowFiles(_ workflow: URL) throws -> [String] {\n    let validators = [\"tools/swift/linux-docker/linux-validation.swift\",\n                      \"experiments/swift/tools/linux-docker/linux-validation.swift\"]\n        .filter { FileManager.default.fileExists(atPath: workflow.appendingPathComponent($0).path) }\n    guard validators.count == 1 else { throw RuntimeError(\"Expected exactly one supported workflow validator path.\") }\n    return [\".github/workflows/swift-linux-docker-validation.yml\"] + validators\n}\nlet roots = [\"/Users/ryan/Developer/Primes/.worktrees/swift-source-layout\", \"/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/legacy\"]\nfor (index, root) in roots.enumerated() {\n let url = URL(fileURLWithPath: root); let layout = try sourceLayout(url)\n precondition(layout.name == (index == 0 ? \"solution-package\" : \"experiments\"))\n precondition(layout.sourceFiles.count == (index == 0 ? 9 : 8))\n precondition(layout.checks.map { $0.0 } == [\"verify\", \"extra-verify\", \"phase-verify\"])\n for path in layout.sourceFiles { precondition(FileManager.default.fileExists(atPath: url.appendingPathComponent(layout.rootPath).appendingPathComponent(path).path), path) }\n for path in [layout.core] + layout.checks.flatMap({ $0.1 }) { precondition(FileManager.default.fileExists(atPath: url.appendingPathComponent(layout.rootPath).appendingPathComponent(path).path), path) }\n let workflows = try workflowFiles(url); precondition(workflows.count == 2)\n print(\"verified \" + layout.name + \" layout and workflow inputs\")\n}\nlet temporary = URL(fileURLWithPath: \"/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/invalid-layouts\")\ntry FileManager.default.createDirectory(at: temporary, withIntermediateDirectories: true)\nvar rejected = 0\ndo { _ = try sourceLayout(temporary) } catch { rejected += 1 }\nfor path in [\"experiments/swift/PrimeSieve.swift\", \"PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift\"] {\n let file = temporary.appendingPathComponent(path); try FileManager.default.createDirectory(at: file.deletingLastPathComponent(), withIntermediateDirectories: true); try Data().write(to: file)\n}\ndo { _ = try sourceLayout(temporary) } catch { rejected += 1 }\nprecondition(rejected == 2); print(\"missing and ambiguous layouts rejected\")\n"
+  },
+  "status": "passed",
+  "started_at": "2026-09-13T15:17:39.565351+00:00",
+  "lifecycle_results": {
+    "command": [
+      "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/linux-docker/linux-validation.swift",
+      "test-lifecycle",
+      "--output",
+      "/Users/ryan/Documents/Codex/2026-09-11/wa/work/source-layout/checks/lifecycle"
+    ],
+    "errors": 0,
+    "failures": 0,
+    "finished_at_utc": "2026-09-13T15:18:06.254Z",
+    "source_sha256": {
+      "linux-validation.swift": "ed60c55d6ae30cbdb91c6c29cda468fbf17f79be487503802c43ffcdeef180a0"
+    },
+    "started_at_utc": "2026-09-13T15:18:04.337Z",
+    "status": "passed",
+    "tests_run": 13
+  },
+  "phase_source_identity": {
+    "derivedGitBlob": "a0ce28169f358a3205e29df9d4ae9dc1c5290f2e",
+    "derivedPath": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/tools/swift/.build/layout-phase/inputs/CurrentPhaseSieve.swift",
+    "productionGitBlob": "d3a60ccaf8cb2d258ca0f398b30b3fa3e9cd1993",
+    "productionPath": "/Users/ryan/Developer/Primes/.worktrees/swift-source-layout/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift"
+  },
+  "finished_at": "2026-09-13T15:22:12.991471+00:00",
+  "final_git_status": "",
+  "lock_released": true
+}
