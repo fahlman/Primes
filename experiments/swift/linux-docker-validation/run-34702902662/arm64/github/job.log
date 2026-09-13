@@ -1,0 +1,393 @@
+﻿2026-09-12T15:51:43.1713327Z Current runner version: '2.337.0'
+2026-09-12T15:51:43.1746742Z ##[group]Runner Image Provisioner
+2026-09-12T15:51:43.1747722Z Hosted Compute Agent
+2026-09-12T15:51:43.1748325Z Version: 20260828.587
+2026-09-12T15:51:43.1749127Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-12T15:51:43.1749939Z Build Date: 2026-08-28T16:44:25Z
+2026-09-12T15:51:43.1750792Z Worker ID: {b1d230db-37a8-4d58-80a4-50ba249c3ecc}
+2026-09-12T15:51:43.1751541Z Azure Region: westus3
+2026-09-12T15:51:43.1752179Z ##[endgroup]
+2026-09-12T15:51:43.1754947Z ##[group]Operating System
+2026-09-12T15:51:43.1755652Z Ubuntu
+2026-09-12T15:51:43.1756355Z 24.04.5
+2026-09-12T15:51:43.1756868Z LTS
+2026-09-12T15:51:43.1757387Z ##[endgroup]
+2026-09-12T15:51:43.1758003Z ##[group]Runner Image
+2026-09-12T15:51:43.1758645Z Image: ubuntu-24.04-arm
+2026-09-12T15:51:43.1759722Z Version: 20260907.118.1
+2026-09-12T15:51:43.1761299Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24-arm64/20260907.118/images/ubuntu/Ubuntu2404-Arm64-Readme.md
+2026-09-12T15:51:43.1763313Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24-arm64%2F20260907.118
+2026-09-12T15:51:43.1764303Z ##[endgroup]
+2026-09-12T15:51:43.1765575Z ##[group]GITHUB_TOKEN Permissions
+2026-09-12T15:51:43.1769057Z Contents: read
+2026-09-12T15:51:43.1769845Z Metadata: read
+2026-09-12T15:51:43.1770731Z ##[endgroup]
+2026-09-12T15:51:43.1774424Z Secret source: Actions
+2026-09-12T15:51:43.1775591Z Cache mode: write
+2026-09-12T15:51:43.1776662Z Prepare workflow directory
+2026-09-12T15:51:43.2277409Z Prepare all required actions
+2026-09-12T15:51:43.2331372Z Getting action download info
+2026-09-12T15:51:43.5554724Z Download action repository 'actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803' (SHA:d23441a48e516b6c34aea4fa41551a30e30af803)
+2026-09-12T15:51:43.6504224Z Download action repository 'actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a' (SHA:043fb46d1a93c77aae656e7c1c64a875d1fc6a0a)
+2026-09-12T15:51:43.8361170Z Complete job name: Validate cutoff 111 on native arm64
+2026-09-12T15:51:43.9250135Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-09-12T15:51:43.9251864Z with:
+2026-09-12T15:51:43.9252880Z   ref: cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126
+2026-09-12T15:51:43.9253658Z   path: workflow
+2026-09-12T15:51:43.9254376Z   persist-credentials: false
+2026-09-12T15:51:43.9255013Z   repository: fahlman/Primes
+2026-09-12T15:51:43.9258781Z   token: ***
+2026-09-12T15:51:43.9259399Z   ssh-strict: true
+2026-09-12T15:51:43.9259966Z   ssh-user: git
+2026-09-12T15:51:43.9260603Z   clean: true
+2026-09-12T15:51:43.9261185Z   sparse-checkout-cone-mode: true
+2026-09-12T15:51:43.9261897Z   fetch-depth: 1
+2026-09-12T15:51:43.9262499Z   fetch-tags: false
+2026-09-12T15:51:43.9263272Z   show-progress: true
+2026-09-12T15:51:43.9263953Z   lfs: false
+2026-09-12T15:51:43.9264496Z   submodules: false
+2026-09-12T15:51:43.9265061Z   set-safe-directory: true
+2026-09-12T15:51:43.9265852Z   allow-unsafe-pr-checkout: false
+2026-09-12T15:51:43.9267124Z env:
+2026-09-12T15:51:43.9268114Z   SOLUTION_REVISION: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:43.9268916Z ##[endgroup]
+2026-09-12T15:51:44.0170056Z Syncing repository: fahlman/Primes
+2026-09-12T15:51:44.0172948Z ##[group]Getting Git version info
+2026-09-12T15:51:44.0173969Z Working directory is '/home/runner/work/Primes/Primes/workflow'
+2026-09-12T15:51:44.0175445Z [command]/usr/bin/git version
+2026-09-12T15:51:44.0284777Z git version 2.55.0
+2026-09-12T15:51:44.0296015Z ##[endgroup]
+2026-09-12T15:51:44.0312161Z Temporarily overriding HOME='/home/runner/work/_temp/7142e92d-e51e-462b-97fe-9a763c954e9e' before making global git config changes
+2026-09-12T15:51:44.0313940Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T15:51:44.0317085Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes/workflow
+2026-09-12T15:51:44.0352478Z ##[group]Determining repository object format
+2026-09-12T15:51:44.0354929Z ##[endgroup]
+2026-09-12T15:51:44.0356577Z ##[group]Initializing the repository
+2026-09-12T15:51:44.0360702Z [command]/usr/bin/git init /home/runner/work/Primes/Primes/workflow
+2026-09-12T15:51:44.0448675Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-12T15:51:44.0450099Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-12T15:51:44.0451236Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-12T15:51:44.0452147Z hint: call:
+2026-09-12T15:51:44.0453393Z hint:
+2026-09-12T15:51:44.0454138Z hint: 	git config --global init.defaultBranch <name>
+2026-09-12T15:51:44.0454944Z hint:
+2026-09-12T15:51:44.0455711Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-12T15:51:44.0456799Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-12T15:51:44.0457724Z hint:
+2026-09-12T15:51:44.0458288Z hint: 	git branch -m <name>
+2026-09-12T15:51:44.0458970Z hint:
+2026-09-12T15:51:44.0459954Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-12T15:51:44.0461205Z Initialized empty Git repository in /home/runner/work/Primes/Primes/workflow/.git/
+2026-09-12T15:51:44.0465966Z [command]/usr/bin/git remote add origin https://github.com/fahlman/Primes
+2026-09-12T15:51:44.0508982Z ##[endgroup]
+2026-09-12T15:51:44.0510361Z ##[group]Disabling automatic garbage collection
+2026-09-12T15:51:44.0512465Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-12T15:51:44.0544169Z ##[endgroup]
+2026-09-12T15:51:44.0545195Z ##[group]Setting up auth
+2026-09-12T15:51:44.0546293Z Removing SSH command configuration
+2026-09-12T15:51:44.0551375Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T15:51:44.0584752Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T15:51:44.0910653Z Removing HTTP extra header
+2026-09-12T15:51:44.0916115Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T15:51:44.0947049Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T15:51:44.1144215Z Removing includeIf entries pointing to credentials config files
+2026-09-12T15:51:44.1150500Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T15:51:44.1183414Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T15:51:44.1397538Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-12T15:51:44.1427950Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/workflow/.git.path /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:44.1458169Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/workflow/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:44.1489284Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/workflow/.git.path /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:44.1520429Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/workflow/.git/worktrees/*.path /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:44.1548149Z ##[endgroup]
+2026-09-12T15:51:44.1549367Z ##[group]Fetching the repository
+2026-09-12T15:51:44.1556280Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126
+2026-09-12T15:51:45.3126869Z From https://github.com/fahlman/Primes
+2026-09-12T15:51:45.3128334Z  * branch            cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126 -> FETCH_HEAD
+2026-09-12T15:51:45.3135909Z [command]/usr/bin/git rev-parse --verify --quiet cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126^{object}
+2026-09-12T15:51:45.3159150Z cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126
+2026-09-12T15:51:45.3166422Z ##[endgroup]
+2026-09-12T15:51:45.3167823Z ##[group]Determining the checkout info
+2026-09-12T15:51:45.3169006Z ##[endgroup]
+2026-09-12T15:51:45.3169907Z [command]/usr/bin/git sparse-checkout disable
+2026-09-12T15:51:45.3212374Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-12T15:51:45.3242098Z ##[group]Checking out the ref
+2026-09-12T15:51:45.3244873Z [command]/usr/bin/git checkout --progress --force cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126
+2026-09-12T15:51:45.3874621Z Note: switching to 'cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126'.
+2026-09-12T15:51:45.3876041Z 
+2026-09-12T15:51:45.3876816Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-09-12T15:51:45.3878723Z changes and commit them, and you can discard any commits you make in this
+2026-09-12T15:51:45.3880631Z state without impacting any branches by switching back to a branch.
+2026-09-12T15:51:45.3881609Z 
+2026-09-12T15:51:45.3882312Z If you want to create a new branch to retain commits you create, you may
+2026-09-12T15:51:45.3884283Z do so (now or later) by using -c with the switch command. Example:
+2026-09-12T15:51:45.3885303Z 
+2026-09-12T15:51:45.3885742Z   git switch -c <new-branch-name>
+2026-09-12T15:51:45.3886520Z 
+2026-09-12T15:51:45.3886969Z Or undo this operation with:
+2026-09-12T15:51:45.3887598Z 
+2026-09-12T15:51:45.3888061Z   git switch -
+2026-09-12T15:51:45.3888578Z 
+2026-09-12T15:51:45.3889363Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-09-12T15:51:45.3890402Z 
+2026-09-12T15:51:45.3891618Z HEAD is now at cfa0f2f Validate reviewed cutoff 111 on both native Linux architectures
+2026-09-12T15:51:45.3895855Z ##[endgroup]
+2026-09-12T15:51:45.3922081Z [command]/usr/bin/git log -1 --format=%H
+2026-09-12T15:51:45.3946911Z cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126
+2026-09-12T15:51:45.3968470Z ##[group]Removing auth
+2026-09-12T15:51:45.3969814Z Removing SSH command configuration
+2026-09-12T15:51:45.3971297Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T15:51:45.3990710Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T15:51:45.4195703Z Removing HTTP extra header
+2026-09-12T15:51:45.4197716Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T15:51:45.4230402Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T15:51:45.4437179Z Removing includeIf entries pointing to credentials config files
+2026-09-12T15:51:45.4439180Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T15:51:45.4463746Z includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git.path
+2026-09-12T15:51:45.4465961Z includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git/worktrees/*.path
+2026-09-12T15:51:45.4467942Z includeif.gitdir:/github/workspace/workflow/.git.path
+2026-09-12T15:51:45.4469544Z includeif.gitdir:/github/workspace/workflow/.git/worktrees/*.path
+2026-09-12T15:51:45.4482416Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git.path
+2026-09-12T15:51:45.4498002Z /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4508808Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git.path /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4542270Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git/worktrees/*.path
+2026-09-12T15:51:45.4567993Z /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4577896Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/workflow/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4610598Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/workflow/.git.path
+2026-09-12T15:51:45.4637056Z /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4645883Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/workflow/.git.path /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4683519Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/workflow/.git/worktrees/*.path
+2026-09-12T15:51:45.4707306Z /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4715264Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/workflow/.git/worktrees/*.path /github/runner_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config
+2026-09-12T15:51:45.4748600Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T15:51:45.4948440Z Removing credentials config '/home/runner/work/_temp/git-credentials-7ef3194f-a4b2-428c-bacc-10db84352ae8.config'
+2026-09-12T15:51:45.4957606Z ##[endgroup]
+2026-09-12T15:51:45.5312460Z ##[group]Run actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803
+2026-09-12T15:51:45.5314038Z with:
+2026-09-12T15:51:45.5314948Z   repository: fahlman/Primes
+2026-09-12T15:51:45.5315881Z   ref: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:45.5316876Z   path: solution
+2026-09-12T15:51:45.5317660Z   persist-credentials: false
+2026-09-12T15:51:45.5323700Z   token: ***
+2026-09-12T15:51:45.5324547Z   ssh-strict: true
+2026-09-12T15:51:45.5325308Z   ssh-user: git
+2026-09-12T15:51:45.5326110Z   clean: true
+2026-09-12T15:51:45.5326893Z   sparse-checkout-cone-mode: true
+2026-09-12T15:51:45.5327770Z   fetch-depth: 1
+2026-09-12T15:51:45.5328560Z   fetch-tags: false
+2026-09-12T15:51:45.5329302Z   show-progress: true
+2026-09-12T15:51:45.5330079Z   lfs: false
+2026-09-12T15:51:45.5330877Z   submodules: false
+2026-09-12T15:51:45.5331647Z   set-safe-directory: true
+2026-09-12T15:51:45.5332853Z   allow-unsafe-pr-checkout: false
+2026-09-12T15:51:45.5333800Z env:
+2026-09-12T15:51:45.5334884Z   SOLUTION_REVISION: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:45.5336034Z ##[endgroup]
+2026-09-12T15:51:45.6057805Z Syncing repository: fahlman/Primes
+2026-09-12T15:51:45.6062361Z ##[group]Getting Git version info
+2026-09-12T15:51:45.6064337Z Working directory is '/home/runner/work/Primes/Primes/solution'
+2026-09-12T15:51:45.6103768Z [command]/usr/bin/git version
+2026-09-12T15:51:45.6130931Z git version 2.55.0
+2026-09-12T15:51:45.6152760Z ##[endgroup]
+2026-09-12T15:51:45.6167450Z Temporarily overriding HOME='/home/runner/work/_temp/bc199aeb-39c1-4090-93db-161316734f97' before making global git config changes
+2026-09-12T15:51:45.6170322Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T15:51:45.6175648Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes/solution
+2026-09-12T15:51:45.6204342Z ##[group]Determining repository object format
+2026-09-12T15:51:45.6206509Z ##[endgroup]
+2026-09-12T15:51:45.6209877Z ##[group]Initializing the repository
+2026-09-12T15:51:45.6211448Z [command]/usr/bin/git init /home/runner/work/Primes/Primes/solution
+2026-09-12T15:51:45.6249106Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-12T15:51:45.6254212Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-12T15:51:45.6256298Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-12T15:51:45.6259477Z hint: call:
+2026-09-12T15:51:45.6261025Z hint:
+2026-09-12T15:51:45.6262239Z hint: 	git config --global init.defaultBranch <name>
+2026-09-12T15:51:45.6263638Z hint:
+2026-09-12T15:51:45.6264609Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-12T15:51:45.6266251Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-12T15:51:45.6267434Z hint:
+2026-09-12T15:51:45.6268215Z hint: 	git branch -m <name>
+2026-09-12T15:51:45.6269018Z hint:
+2026-09-12T15:51:45.6270114Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-12T15:51:45.6271885Z Initialized empty Git repository in /home/runner/work/Primes/Primes/solution/.git/
+2026-09-12T15:51:45.6274970Z [command]/usr/bin/git remote add origin https://github.com/fahlman/Primes
+2026-09-12T15:51:45.6291606Z ##[endgroup]
+2026-09-12T15:51:45.6293628Z ##[group]Disabling automatic garbage collection
+2026-09-12T15:51:45.6295252Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-12T15:51:45.6333662Z ##[endgroup]
+2026-09-12T15:51:45.6335287Z ##[group]Setting up auth
+2026-09-12T15:51:45.6336300Z Removing SSH command configuration
+2026-09-12T15:51:45.6340959Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T15:51:45.6374416Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T15:51:45.6571541Z Removing HTTP extra header
+2026-09-12T15:51:45.6577832Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T15:51:45.6635572Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T15:51:45.6836683Z Removing includeIf entries pointing to credentials config files
+2026-09-12T15:51:45.6843353Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T15:51:45.6877288Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T15:51:45.7091735Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-12T15:51:45.7131314Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/solution/.git.path /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:45.7164078Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/Primes/Primes/solution/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:45.7196568Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/solution/.git.path /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:45.7227544Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/solution/.git/worktrees/*.path /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:45.7255776Z ##[endgroup]
+2026-09-12T15:51:45.7257027Z ##[group]Fetching the repository
+2026-09-12T15:51:45.7264746Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:47.0222410Z From https://github.com/fahlman/Primes
+2026-09-12T15:51:47.0223384Z  * branch            099e35afa8a2f01d79ef11f805d760e81d1d983a -> FETCH_HEAD
+2026-09-12T15:51:47.0234067Z [command]/usr/bin/git rev-parse --verify --quiet 099e35afa8a2f01d79ef11f805d760e81d1d983a^{object}
+2026-09-12T15:51:47.0267895Z 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:47.0272211Z ##[endgroup]
+2026-09-12T15:51:47.0273106Z ##[group]Determining the checkout info
+2026-09-12T15:51:47.0278023Z ##[endgroup]
+2026-09-12T15:51:47.0286539Z [command]/usr/bin/git sparse-checkout disable
+2026-09-12T15:51:47.0318410Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-12T15:51:47.0346435Z ##[group]Checking out the ref
+2026-09-12T15:51:47.0350112Z [command]/usr/bin/git checkout --progress --force 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:47.0921230Z Note: switching to '099e35afa8a2f01d79ef11f805d760e81d1d983a'.
+2026-09-12T15:51:47.0921690Z 
+2026-09-12T15:51:47.0922058Z You are in 'detached HEAD' state. You can look around, make experimental
+2026-09-12T15:51:47.0923171Z changes and commit them, and you can discard any commits you make in this
+2026-09-12T15:51:47.0923772Z state without impacting any branches by switching back to a branch.
+2026-09-12T15:51:47.0924082Z 
+2026-09-12T15:51:47.0924276Z If you want to create a new branch to retain commits you create, you may
+2026-09-12T15:51:47.0924819Z do so (now or later) by using -c with the switch command. Example:
+2026-09-12T15:51:47.0925097Z 
+2026-09-12T15:51:47.0925242Z   git switch -c <new-branch-name>
+2026-09-12T15:51:47.0925504Z 
+2026-09-12T15:51:47.0925765Z Or undo this operation with:
+2026-09-12T15:51:47.0925950Z 
+2026-09-12T15:51:47.0926068Z   git switch -
+2026-09-12T15:51:47.0926198Z 
+2026-09-12T15:51:47.0926427Z Turn off this advice by setting config variable advice.detachedHead to false
+2026-09-12T15:51:47.0926812Z 
+2026-09-12T15:51:47.0927507Z HEAD is now at 099e35a Stop the Swift 128-bit handlers at 111: cutoff sweep, variant 3
+2026-09-12T15:51:47.0929008Z ##[endgroup]
+2026-09-12T15:51:47.0968809Z [command]/usr/bin/git log -1 --format=%H
+2026-09-12T15:51:47.0994179Z 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:47.1004057Z ##[group]Removing auth
+2026-09-12T15:51:47.1004561Z Removing SSH command configuration
+2026-09-12T15:51:47.1008198Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T15:51:47.1039174Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T15:51:47.1242505Z Removing HTTP extra header
+2026-09-12T15:51:47.1245471Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T15:51:47.1276623Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T15:51:47.1480780Z Removing includeIf entries pointing to credentials config files
+2026-09-12T15:51:47.1484434Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T15:51:47.1507764Z includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git.path
+2026-09-12T15:51:47.1508564Z includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git/worktrees/*.path
+2026-09-12T15:51:47.1509068Z includeif.gitdir:/github/workspace/solution/.git.path
+2026-09-12T15:51:47.1509505Z includeif.gitdir:/github/workspace/solution/.git/worktrees/*.path
+2026-09-12T15:51:47.1518608Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git.path
+2026-09-12T15:51:47.1542866Z /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1553849Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git.path /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1587795Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git/worktrees/*.path
+2026-09-12T15:51:47.1610486Z /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1620374Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/Primes/Primes/solution/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1654774Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/solution/.git.path
+2026-09-12T15:51:47.1678025Z /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1687119Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/solution/.git.path /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1723733Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/solution/.git/worktrees/*.path
+2026-09-12T15:51:47.1747345Z /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1753671Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/solution/.git/worktrees/*.path /github/runner_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config
+2026-09-12T15:51:47.1786932Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T15:51:47.1990984Z Removing credentials config '/home/runner/work/_temp/git-credentials-a5715bc3-a6ba-40d6-9a45-d89a306ff6ae.config'
+2026-09-12T15:51:47.2000350Z ##[endgroup]
+2026-09-12T15:51:47.2154519Z ##[group]Run python3 workflow/experiments/swift/tools/linux-docker/validate.py \
+2026-09-12T15:51:47.2155362Z [36;1mpython3 workflow/experiments/swift/tools/linux-docker/validate.py \[0m
+2026-09-12T15:51:47.2155946Z [36;1m  --solution-root "$GITHUB_WORKSPACE/solution" \[0m
+2026-09-12T15:51:47.2156443Z [36;1m  --solution-revision "$SOLUTION_REVISION" \[0m
+2026-09-12T15:51:47.2156845Z [36;1m  --workflow-root "$GITHUB_WORKSPACE/workflow" \[0m
+2026-09-12T15:51:47.2157253Z [36;1m  --platform "$VALIDATION_PLATFORM" \[0m
+2026-09-12T15:51:47.2157648Z [36;1m  --output "$RUNNER_TEMP/swift-linux-docker-evidence" \[0m
+2026-09-12T15:51:47.2158085Z [36;1m  --build-output "$RUNNER_TEMP/swift-linux-docker-checks"[0m
+2026-09-12T15:51:47.2266829Z shell: /usr/bin/bash -e {0}
+2026-09-12T15:51:47.2267431Z env:
+2026-09-12T15:51:47.2267778Z   SOLUTION_REVISION: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T15:51:47.2268171Z   VALIDATION_PLATFORM: linux/arm64
+2026-09-12T15:51:47.2268622Z ##[endgroup]
+2026-09-12T15:51:47.2700341Z RUN solution-head: ["git", "-C", "/home/runner/work/Primes/Primes/solution", "rev-parse", "HEAD"]
+2026-09-12T15:51:47.2721670Z RUN solution-clean: ["git", "-C", "/home/runner/work/Primes/Primes/solution", "status", "--porcelain"]
+2026-09-12T15:51:47.3371311Z RUN workflow-head: ["git", "-C", "/home/runner/work/Primes/Primes/workflow", "rev-parse", "HEAD"]
+2026-09-12T15:51:47.3398035Z RUN host-kernel: ["uname", "-a"]
+2026-09-12T15:51:47.3419274Z RUN host-cpu: ["lscpu"]
+2026-09-12T15:51:47.3642840Z RUN docker-version: ["docker", "version", "--format", "{{json .}}"]
+2026-09-12T15:51:47.4797821Z RUN docker-platform: ["docker", "info", "--format", "{{.OSType}}/{{.Architecture}}"]
+2026-09-12T15:51:47.6957661Z RUN pull-base-0: ["docker", "pull", "--platform", "linux/arm64", "swift:6.3.3"]
+2026-09-12T15:52:14.6293159Z RUN inspect-base-0: ["docker", "image", "inspect", "swift:6.3.3"]
+2026-09-12T15:52:14.6461155Z RUN pull-base-1: ["docker", "pull", "--platform", "linux/arm64", "swift:6.3.3-slim"]
+2026-09-12T15:52:17.7685960Z RUN inspect-base-1: ["docker", "image", "inspect", "swift:6.3.3-slim"]
+2026-09-12T15:52:17.7857379Z RUN build-compiler-stage: ["docker", "build", "--progress=plain", "--pull=false", "--platform", "linux/arm64", "--file", "/home/runner/work/Primes/Primes/solution/experiments/swift/Dockerfile", "--target", "build", "--tag", "swift-validation-build:099e35afa8a2-arm64", "--iidfile", "/home/runner/work/_temp/swift-linux-docker-evidence/build-image.id", "/home/runner/work/Primes/Primes/solution/experiments/swift"]
+2026-09-12T15:54:14.0732108Z RUN build-runtime-image: ["docker", "build", "--progress=plain", "--pull=false", "--platform", "linux/arm64", "--file", "/home/runner/work/Primes/Primes/solution/experiments/swift/Dockerfile", "--tag", "swift-validation-runtime:099e35afa8a2-arm64", "--iidfile", "/home/runner/work/_temp/swift-linux-docker-evidence/runtime-image.id", "/home/runner/work/Primes/Primes/solution/experiments/swift"]
+2026-09-12T15:54:15.0407480Z RUN inspect-build-image: ["docker", "image", "inspect", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T15:54:15.0580666Z RUN inspect-runtime-image: ["docker", "image", "inspect", "swift-validation-runtime:099e35afa8a2-arm64"]
+2026-09-12T15:54:15.0752362Z RUN container-swift-version: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "--version"]
+2026-09-12T15:54:15.2910816Z RUN runtime-smoke: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "swift-validation-runtime:099e35afa8a2-arm64"]
+2026-09-12T15:54:20.4321781Z RUN compile-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-sanitize=address", "/source/PrimeSieve.swift", "/source/Verify.swift", "-o", "/validation/verify-asan"]
+2026-09-12T15:56:15.3698952Z RUN run-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/verify-asan", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T15:56:15.6866254Z RUN compile-extra-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-sanitize=address", "/source/PrimeSieve.swift", "/source/ExtraVerify.swift", "-o", "/validation/extra-verify-asan"]
+2026-09-12T15:58:13.7190295Z RUN run-extra-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/extra-verify-asan", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T15:58:20.2253665Z RUN compile-phase-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-sanitize=address", "/source/PrimeSieve.swift", "/source/tools/phase-split/PhaseSieve.swift", "/source/tools/phase-split/PhaseVerify.swift", "-o", "/validation/phase-verify-asan"]
+2026-09-12T16:00:24.4504500Z RUN run-phase-verify-asan: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/phase-verify-asan", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T16:00:27.0287070Z RUN compile-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-whole-module-optimization", "/source/PrimeSieve.swift", "/source/Verify.swift", "-o", "/validation/verify-wmo"]
+2026-09-12T16:02:10.9536531Z RUN run-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/verify-wmo", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T16:02:11.1701268Z RUN compile-extra-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-whole-module-optimization", "/source/PrimeSieve.swift", "/source/ExtraVerify.swift", "-o", "/validation/extra-verify-wmo"]
+2026-09-12T16:03:56.1269072Z RUN run-extra-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/extra-verify-wmo", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T16:03:59.3096721Z RUN compile-phase-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "swiftc", "swift-validation-build:099e35afa8a2-arm64", "-O", "-whole-module-optimization", "/source/PrimeSieve.swift", "/source/tools/phase-split/PhaseSieve.swift", "/source/tools/phase-split/PhaseVerify.swift", "-o", "/validation/phase-verify-wmo"]
+2026-09-12T16:05:58.3629550Z RUN run-phase-verify-wmo: ["docker", "run", "--rm", "--platform", "linux/arm64", "--network", "none", "--mount", "type=bind,source=/home/runner/work/Primes/Primes/solution/experiments/swift,target=/source,readonly", "--mount", "type=bind,source=/home/runner/work/_temp/swift-linux-docker-checks,target=/validation", "--workdir", "/validation", "--entrypoint", "/validation/phase-verify-wmo", "swift-validation-build:099e35afa8a2-arm64"]
+2026-09-12T16:05:59.6333392Z Evidence: /home/runner/work/_temp/swift-linux-docker-evidence/validation.json
+2026-09-12T16:05:59.6482874Z ##[group]Run actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+2026-09-12T16:05:59.6483554Z with:
+2026-09-12T16:05:59.6483895Z   name: swift-linux-arm64-full-099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T16:05:59.6484365Z   path: /home/runner/work/_temp/swift-linux-docker-evidence/
+2026-09-12T16:05:59.6485047Z   if-no-files-found: warn
+2026-09-12T16:05:59.6485335Z   retention-days: 30
+2026-09-12T16:05:59.6485559Z   compression-level: 6
+2026-09-12T16:05:59.6485838Z   overwrite: false
+2026-09-12T16:05:59.6486068Z   include-hidden-files: false
+2026-09-12T16:05:59.6486366Z   archive: true
+2026-09-12T16:05:59.6486640Z env:
+2026-09-12T16:05:59.6486907Z   SOLUTION_REVISION: 099e35afa8a2f01d79ef11f805d760e81d1d983a
+2026-09-12T16:05:59.6487297Z ##[endgroup]
+2026-09-12T16:05:59.7760491Z With the provided path, there will be 61 files uploaded
+2026-09-12T16:05:59.7771602Z Artifact name is valid!
+2026-09-12T16:05:59.7771927Z Root directory input is valid!
+2026-09-12T16:06:00.1106413Z Uploading artifact: swift-linux-arm64-full-099e35afa8a2f01d79ef11f805d760e81d1d983a.zip
+2026-09-12T16:06:00.1137059Z Beginning upload of artifact content to blob storage
+2026-09-12T16:06:00.4687743Z Uploaded bytes 23396
+2026-09-12T16:06:00.5304299Z Finished uploading artifact content to blob storage!
+2026-09-12T16:06:00.5305310Z SHA256 digest of uploaded artifact is eed7eddd949e6b2f0545d9cf1a5229df95aa941499e11bf76a709561eeb18e40
+2026-09-12T16:06:00.5306238Z Finalizing artifact upload
+2026-09-12T16:06:00.8682363Z Artifact swift-linux-arm64-full-099e35afa8a2f01d79ef11f805d760e81d1d983a successfully finalized. Artifact ID 10301102745
+2026-09-12T16:06:00.8684017Z Artifact swift-linux-arm64-full-099e35afa8a2f01d79ef11f805d760e81d1d983a has been successfully uploaded! Final size is 23396 bytes. Artifact ID is 10301102745
+2026-09-12T16:06:00.8687415Z Artifact download URL: https://github.com/fahlman/Primes/actions/runs/34702902662/artifacts/10301102745
+2026-09-12T16:06:00.8881789Z Post job cleanup.
+2026-09-12T16:06:00.9596843Z [command]/usr/bin/git version
+2026-09-12T16:06:00.9646916Z git version 2.55.0
+2026-09-12T16:06:00.9676660Z Temporarily overriding HOME='/home/runner/work/_temp/c509fc2b-9f72-412c-bb64-805b0615dd0b' before making global git config changes
+2026-09-12T16:06:00.9682747Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T16:06:00.9689668Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes/solution
+2026-09-12T16:06:00.9720604Z Removing SSH command configuration
+2026-09-12T16:06:00.9721265Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T16:06:00.9756276Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T16:06:00.9957498Z Removing HTTP extra header
+2026-09-12T16:06:00.9964168Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T16:06:00.9996235Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T16:06:01.0197738Z Removing includeIf entries pointing to credentials config files
+2026-09-12T16:06:01.0204839Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T16:06:01.0237392Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T16:06:01.0582870Z Post job cleanup.
+2026-09-12T16:06:01.1373728Z [command]/usr/bin/git version
+2026-09-12T16:06:01.1432487Z git version 2.55.0
+2026-09-12T16:06:01.1533691Z Temporarily overriding HOME='/home/runner/work/_temp/fd51da5d-531b-4bf0-a1a6-813b8d4dcbbf' before making global git config changes
+2026-09-12T16:06:01.1538442Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-12T16:06:01.1539414Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/Primes/Primes/workflow
+2026-09-12T16:06:01.1540813Z Removing SSH command configuration
+2026-09-12T16:06:01.1541355Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-12T16:06:01.1553215Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-12T16:06:01.1765161Z Removing HTTP extra header
+2026-09-12T16:06:01.1777352Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-12T16:06:01.1803614Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-12T16:06:01.1999538Z Removing includeIf entries pointing to credentials config files
+2026-09-12T16:06:01.2006554Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-12T16:06:01.2040089Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-12T16:06:01.2368724Z Cleaning up orphan processes

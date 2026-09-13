@@ -1,0 +1,21 @@
+{
+  "started_at_utc": "2026-09-12T15:56:05.131209+00:00",
+  "architecture": "amd64",
+  "attempt": "raw-log-retry2",
+  "source_revision": "099e35afa8a2f01d79ef11f805d760e81d1d983a",
+  "workflow_revision": "cfa0f2fa3e11e8d3d5ad2f17084aaf49ff98d126",
+  "run_id": 34702902662,
+  "job_id": 103577690048,
+  "expected_source_manifest_sha256": "52bc9c5cc2a427d606729da72718b966f1cad4858c2e2007cca8aa6d56bd8d88",
+  "expected_workflow_manifest_sha256": "672cf63805b7ad52e9c8cde14b5f8d64c0dedfa3912b6b869203ab98417efa00",
+  "run_snapshot_scope": "Captured for this completed architecture; the overall run may still be running.",
+  "collector_sha256": "e042cd543993533677435e7b94d0dcfae3e82ac7ebd2adaa37d42a16598215a2",
+  "status": "collected_and_audited",
+  "supplemental_job_log": {
+    "status": "available",
+    "path": "github/job.log"
+  },
+  "artifact_zip_sha256": "79184f64a302f40c12ce99828fafef266a953f8770aa78810c75c599c007469a",
+  "artifact_zip_matches_github_digest": true,
+  "finished_at_utc": "2026-09-12T15:56:07.917004+00:00"
+}
