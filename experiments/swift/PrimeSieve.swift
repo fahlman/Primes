@@ -10,7 +10,8 @@ final class PrimeSieve {
     @inline(__always)
     static func storageLayout(for limit: Int) -> (oddCount: Int, byteCount: Int) {
         let oddCount = limit >= 3 ? (limit - 1) / 2 : 0
-        let byteCount = oddCount / 8 + (oddCount % 8 == 0 ? 0 : 1)
+        // oddCount <= Int.max / 2, so adding seven cannot overflow.
+        let byteCount = (oddCount + 7) / 8
         return (oddCount, byteCount)
     }
 
