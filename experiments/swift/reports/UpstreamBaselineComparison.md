@@ -11,7 +11,7 @@ Earlier versions of our own implementation are development controls. The previou
 - Upstream: [`22bfea9c7122c46dcda799020fccf5ae83fe667f`](https://github.com/PlummersSoftwareLLC/Primes/tree/22bfea9c7122c46dcda799020fccf5ae83fe667f/PrimeSwift/solution_1), verified as the live `drag-race` head immediately before the run.
 - Candidate: [`e8ba7346615e79b65bba2e4aef57af9aaf8ea180`](https://github.com/fahlman/Primes/commit/e8ba7346615e79b65bba2e4aef57af9aaf8ea180), adopted through [PR #4](https://github.com/fahlman/Primes/pull/4).
 - Checkout and unchanged harness: [`5f1a3e8a32af96aa3196f1cfed155310ba8c4b6d`](https://github.com/fahlman/Primes/tree/5f1a3e8a32af96aa3196f1cfed155310ba8c4b6d/experiments/swift). The measured `PrimeSieve.swift` was checked byte-for-byte against `e8ba734` before compiling.
-- [Raw results and provenance](../upstream-baseline-e8ba734.json): every execution's output, validation and time, candidate/upstream revisions, source and generated-adapter SHA-256 hashes, environment, order, and activity snapshots.
+- [Raw results and provenance](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-baseline-e8ba734.json): every execution's output, validation and time, candidate/upstream revisions, source and generated-adapter SHA-256 hashes, environment, order, and activity snapshots.
 
 ## Results
 

@@ -10,8 +10,8 @@ This report measures the exact candidate below. It does not adopt that candidate
 
 - Candidate and checkout: [`bd3858cac9a306aa3b8d4729cf059959a7c70885`](https://github.com/fahlman/Primes/tree/bd3858cac9a306aa3b8d4729cf059959a7c70885/experiments/swift). This combines the adopted sixteen-write sparse loop with 128-bit handlers for odd factors 65–127 and the proven-safe wrapping chunk-offset multiplication.
 - Upstream: [`22bfea9c7122c46dcda799020fccf5ae83fe667f`](https://github.com/PlummersSoftwareLLC/Primes/tree/22bfea9c7122c46dcda799020fccf5ae83fe667f/PrimeSwift/solution_1). The execution record states that the live upstream head matched this pin before the run.
-- [Raw trials](../upstream-current-bd3858c.json) contain every result line, pass count, elapsed time, validation message, median and throughput ratio.
-- [Verification and provenance](../upstream-current-bd3858c-verification.json) identify the candidate, upstream sources, compiler, hardware, source/adapter/executable hashes, command outcome, activity snapshots and independent audit.
+- [Raw trials](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-current-bd3858c.json) contain every result line, pass count, elapsed time, validation message, median and throughput ratio.
+- [Verification and provenance](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-current-bd3858c-verification.json) identify the candidate, upstream sources, compiler, hardware, source/adapter/executable hashes, command outcome, activity snapshots and independent audit.
 
 The audit recomputed the raw-data hash and checked all four recorded source hashes against the checkout and exact candidate commit. The runner, observer and comparison script match the previous independently reviewed upstream comparison byte-for-byte. All six generated source/runner adapters and all three upstream source hashes also match that earlier record. The four executable hashes match the retained build artifacts. The tracked historical `all-swift-results.json` was restored unchanged.
 

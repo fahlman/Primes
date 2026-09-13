@@ -86,3 +86,5 @@ Suggested order: fix the overwrite in `compare_all.py` and rerun the upstream co
 - Five-second contract runs. The stage timings used two-second rounds.
 - Docker, Linux, and x86-64 code generation.
 - A fresh comparison with the upstream entries.
+
+The named raw samples are preserved in the [results archive](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/all-swift-results.json).

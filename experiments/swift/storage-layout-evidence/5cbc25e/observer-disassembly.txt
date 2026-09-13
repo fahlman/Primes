@@ -1,6 +1,0 @@
-/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-5cbc25e/BenchmarkObserver.o:
-(__TEXT,__text) section
-_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF:
-0000000000000000	cbz	x0, 0x8
-0000000000000004	ldrb	w0, [x0, x1]
-0000000000000008	ret

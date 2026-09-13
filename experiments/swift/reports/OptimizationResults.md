@@ -14,7 +14,7 @@ Hardware: Apple M4 Pro, arm64, macOS 26.6.2. Compiler: Apple Swift 6.3.3, `-O -w
 
 The dense candidate took 31.2% less time per sieve. Its three measurements were consistently below all three baseline measurements. Fusion was approximately 1.2% slower by median; this small difference does not establish a general regression, but provides no reason to adopt it here.
 
-All executables were built before timed runs began. Runs were serial, rotating the order across three rounds. Every executable used the frozen baseline runner and separately compiled Swift observer; only the sieve source and printed label varied. Allocation, initialization, marking, observation, and release occur inside each measured pass. Validation, enumeration, compilation, and output do not. All nine executions validated 78,498 primes and exited successfully. The raw output, validation messages, run order, compiler/platform information, source hashes, and commit IDs are in [optimization-results.json](../optimization-results.json).
+All executables were built before timed runs began. Runs were serial, rotating the order across three rounds. Every executable used the frozen baseline runner and separately compiled Swift observer; only the sieve source and printed label varied. Allocation, initialization, marking, observation, and release occur inside each measured pass. Validation, enumeration, compilation, and output do not. All nine executions validated 78,498 primes and exited successfully. The raw output, validation messages, run order, compiler/platform information, source hashes, and commit IDs are in [optimization-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/optimization-results.json).
 
 ## Changes and decision
 

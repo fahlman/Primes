@@ -88,7 +88,7 @@ An independent Codex subagent checked this final report and the updated project 
 
 ## Evidence
 
-- [Raw timing samples](../phase-band-fused-results-56ad42b.json).
-- [Verification, source/assembly hashes, review, commands, session conditions and calculations](../phase-band-fused-verification-56ad42b.json).
+- [Raw timing samples](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/phase-band-fused-results-56ad42b.json).
+- [Verification, source/assembly hashes, review, commands, session conditions and calculations](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/phase-band-fused-verification-56ad42b.json).
 - [Diagnostic implementation and procedure](../tools/phase-split/README.md).
 - Historical pre-fusion measurements remain unchanged: [through-63 report](PhaseBreakdownThrough63.md) and [original sparse-band report at a7fc27f](https://github.com/fahlman/Primes/blob/a7fc27f8c53a29215a5bc54c73f4bcd8e80186b6/experiments/swift/reports/SparseBandBreakdown.md).

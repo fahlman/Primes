@@ -1,5 +1,0 @@
-{
-  ".github/workflows/swift-linux-docker-validation.yml": "233020d460c3ee239b16ce8e369f60376cea073acd75b0698fecf451915e78b3",
-  "experiments/swift/tools/linux-docker/validate.py": "bffb99aabb65ca76be6813ddd2384d3e0c027dbcff7e174018c8b54975336330",
-  "experiments/swift/tools/linux-docker/test_lifecycle.py": "2de60f7f7b9ed2887eee617287e544b0a48454c31f45d88aa31a29c01727ce81"
-}

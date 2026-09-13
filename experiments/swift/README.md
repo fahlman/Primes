@@ -1,5 +1,7 @@
 # Swift solution by fahlman
 
+The working folder contains current source, tools and reports. Historical raw results, logs and verification artifacts are preserved in the [evidence snapshot](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift), retained on `archive/swift-evidence`. Report links point to those immutable files.
+
 This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It stores one composite flag per bit and allocates fresh runtime-sized storage for every pass. Runtime-discovered factor 3 retains dense byte marking, and odd factors 5 through 63 retain dense 64-bit marking. The adopted implementation uses the 128-bit local handlers for every odd factor 65 through 111, dispatched only after the runtime candidate-bit test. Each multiple receives its own single-bit OR into a `SIMD2<UInt64>` lane. Factors above 111 retain the adopted sixteen-write fused loop, its optional eight-mark cleanup, and the scalar tail of at most seven marks. There is no presieving, cached sieve state, or wheel.
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
@@ -10,7 +12,7 @@ Branch `swift/storage-layout`, exact source `5cbc25e1c41d55e1a48db4737721e589e04
 
 Verify ASAN/WMO and ExtraVerify ASAN passed, including 25 explicit layout/zeroing cases and layout-only extreme limits. Complete optimized benchmark assembly is byte-for-byte identical to development control `84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`, including the initializer and all 32 emitted functions. The authoring template is synchronized; canonical and compatibility full-file checks passed. Adopted through [PR #27](https://github.com/fahlman/Primes/pull/27), merge `b33b2fc`, after the authoring tools in [PR #26](https://github.com/fahlman/Primes/pull/26), merge `0d64a47`. No throughput comparison ran. [Review, limits and preserved attempts](reports/StorageLayoutReview.md).
 
-[PR #28](https://github.com/fahlman/Primes/pull/28) also adopted the matching core/template and two CLI refactors into the fork's prepared package branch at `35becbe`. Its release/ASan and focused CLI checks passed. Upstream submission remains paused. [Merge identities](refactor-merge-evidence/2026-09-13.json).
+[PR #28](https://github.com/fahlman/Primes/pull/28) also adopted the matching core/template and two CLI refactors into the fork's prepared package branch at `35becbe`. Its release/ASan and focused CLI checks passed. Upstream submission remains paused. [Merge identities](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/refactor-merge-evidence/2026-09-13.json).
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
 
@@ -112,7 +114,7 @@ Cutoff111 is adopted through PR #16. PR #17, #18 and #19 were tested and closed 
 
 ## Most recent direct upstream comparison
 
-The candidate in the latest direct upstream comparison is **historical cutoff 127 `bd3858c` from [PR #14](https://github.com/fahlman/Primes/pull/14)**. It adds the 128-bit handlers for odd factors 65–127 to the adopted sixteen-write loop, with provably safe wrapping byte offsets. Its direct development comparison measured **39.116 µs** versus `e3f5a41` at **40.432 µs**, **3.36% more throughput**, saving **1.316 µs per sieve**. Every candidate trial beat every development trial. [Review](reports/Dense128WrappingOffsetReview.md), [raw results](dense-128-offset-results-bd3858c.json), [verification](dense-128-offset-verification.json). The port parent was not timed, so this does not isolate wrapping's contribution.
+The candidate in the latest direct upstream comparison is **historical cutoff 127 `bd3858c` from [PR #14](https://github.com/fahlman/Primes/pull/14)**. It adds the 128-bit handlers for odd factors 65–127 to the adopted sixteen-write loop, with provably safe wrapping byte offsets. Its direct development comparison measured **39.116 µs** versus `e3f5a41` at **40.432 µs**, **3.36% more throughput**, saving **1.316 µs per sieve**. Every candidate trial beat every development trial. [Review](reports/Dense128WrappingOffsetReview.md), [raw results](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/dense-128-offset-results-bd3858c.json), [verification](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/dense-128-offset-verification.json). The port parent was not timed, so this does not isolate wrapping's contribution.
 
 A separate fresh session compared that exact candidate with all three upstream entries. The project baseline remains **`PrimeSwift_1bitStriped_u8` at `22bfea9`**, the fastest upstream implementation.
 
@@ -123,13 +125,13 @@ A separate fresh session compared that exact candidate with all three upstream e
 | Upstream striped UInt8 (`bits=1`), project baseline | 207.191 | **5.31x** |
 | Historical cutoff 127 `bd3858c` (`bits=1`) | **39.000** | — |
 
-Three rotated five-second trials per implementation, Apple M4 Pro, Swift 6.3.3, identical compiler flags and allocation-through-release Swift runner. All 12 executions validated 78,498 primes, and every candidate trial beat every upstream trial. Spotlight activity before compilation makes the exact ratios provisional; snapshots do not establish activity during individual trials. Three rounds do not fully balance four execution positions. These are adapted upstream kernels under a common runner at one million, not the original CLI executables or Threadripper measurements. [Report and adapter details](reports/CurrentUpstreamSwiftComparison.md), [raw results](upstream-current-bd3858c.json), [provenance](upstream-current-bd3858c-verification.json).
+Three rotated five-second trials per implementation, Apple M4 Pro, Swift 6.3.3, identical compiler flags and allocation-through-release Swift runner. All 12 executions validated 78,498 primes, and every candidate trial beat every upstream trial. Spotlight activity before compilation makes the exact ratios provisional; snapshots do not establish activity during individual trials. Three rounds do not fully balance four execution positions. These are adapted upstream kernels under a common runner at one million, not the original CLI executables or Threadripper measurements. [Report and adapter details](reports/CurrentUpstreamSwiftComparison.md), [raw results](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-current-bd3858c.json), [provenance](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-current-bd3858c-verification.json).
 
-The earlier `e8ba734` comparison remains preserved in its [report](reports/UpstreamBaselineComparison.md) and [raw record](upstream-baseline-e8ba734.json). The adopted source is cutoff 111 `099e35a`. The most recent direct upstream result belongs to cutoff 127 `bd3858c`; its 5.31x ratio has not been measured for 111.
+The earlier `e8ba734` comparison remains preserved in its [report](reports/UpstreamBaselineComparison.md) and [raw record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/upstream-baseline-e8ba734.json). The adopted source is cutoff 111 `099e35a`. The most recent direct upstream result belongs to cutoff 127 `bd3858c`; its 5.31x ratio has not been measured for 111.
 
 Our earlier implementations are **development controls**, including the historical `swift/baseline` branch. Comparisons against them measure each optimization's contribution and are separate from the upstream baseline. The combined candidate's earlier 38.72% gain was over development control `0d0a142`; wrapping added 9.48% over the combined word handlers alone. See the [combined review](https://github.com/fahlman/Primes/blob/8d773810e9d250076f332904169b3d540b7863db/experiments/swift/reports/CombinedReview.md).
 
-Historical stream-fusion and dense-byte results remain in [OptimizationResults.md](reports/OptimizationResults.md) and [optimization-results.json](optimization-results.json). Those measurements and the original comparison below describe earlier versions.
+Historical stream-fusion and dense-byte results remain in [OptimizationResults.md](reports/OptimizationResults.md) and [optimization-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/optimization-results.json). Those measurements and the original comparison below describe earlier versions.
 
 ## Original repository comparison
 
@@ -141,7 +143,7 @@ Before these experiments, our original development control beat all three reposi
 | Packed UInt8 | 2.91x |
 | Striped UInt8 | 1.73x |
 
-Those are historical development-control measurements, preserved in [all-swift-results.json](all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` and cutoff 127 `bd3858c` each have their own direct upstream comparison; then-adopted `59262fe` has its recorded development comparison. Cutoff111 has its latest comparison against development controls. Do not combine ratios across sessions.
+Those are historical development-control measurements, preserved in [all-swift-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` and cutoff 127 `bd3858c` each have their own direct upstream comparison; then-adopted `59262fe` has its recorded development comparison. Cutoff111 has its latest comparison against development controls. Do not combine ratios across sessions.
 
 To compare the current implementation with all three original entries:
 
@@ -149,11 +151,11 @@ To compare the current implementation with all three original entries:
 python3 compare_all.py
 ```
 
-Acquire the timing lock before running this command, back up `all-swift-results.json`, save the new results under a unique name, and restore the earlier file afterward. See [AGENTS.md](AGENTS.md) for the timing protocol.
+Acquire the timing lock before running this command. If `all-swift-results.json` already exists, preserve it first; the script creates or replaces that file. Move the fresh results to an unused, uniquely named path and publish them on the experiment or review branch, linking their exact commit from the report. Earlier measurements are in the evidence snapshot. See [AGENTS.md](AGENTS.md) for the timing protocol.
 
 This takes approximately 60 seconds of timed work plus compilation, downloads originals pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`, and replaces `all-swift-results.json` with the new measurements. Generated files stay under `.build`. Python only builds and launches executables; sieve and timed benchmark logic are Swift.
 
-The earlier two-way results remain in [comparison-results.json](comparison-results.json), and the [retired comparison runner](https://github.com/fahlman/Primes/blob/405dfc5b6be6bc0bba651d35e8582da97d38388f/experiments/swift/compare.py) is preserved in Git history. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
+The earlier two-way results remain in [comparison-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/comparison-results.json), and the [retired comparison runner](https://github.com/fahlman/Primes/blob/405dfc5b6be6bc0bba651d35e8582da97d38388f/experiments/swift/compare.py) is preserved in Git history. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
 
 ## Validation
 
