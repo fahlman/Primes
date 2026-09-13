@@ -135,7 +135,7 @@ production by more than 3%, report the mismatch and avoid fine attribution of
 the production total. Passing that screen does not establish identical codegen
 for partial modes. Compiler specialization, code layout, cache state, drift and
 desktop noise remain limitations. No optimization gain follows from this tool;
-use `compare_optimizations.py` under the normal benchmark contract for that
+use `tools/compare-revisions.swift` under the normal benchmark contract for that
 claim, and never combine ratios from separate sessions.
 
 ## Preserved historical reference and results

@@ -71,8 +71,8 @@ Measurements are from each experiment's recorded session; use the linked reports
 | `Verify.swift` | Complete-array checks against an independent Boolean sieve. |
 | `ExtraVerify.swift` | Complete-array checks at random limits and at every prime-square boundary up to 2,000,000. |
 | `run.sh`, `Dockerfile` | Build and run with the benchmark flags. |
-| `compare_optimizations.py` | Timing comparison of committed revisions, using the frozen runner and observer from commit `25402d4`. |
-| `compare_all.py` | Timing comparison against the three upstream entries, downloaded at commit `22bfea9`. |
+| `tools/compare-revisions.swift` | Timing comparison of committed revisions, all built with the frozen runner and observer from commit `25402d4`. `--output` is required and never overwrites. |
+| `tools/compare-upstream.swift` | Timing comparison of a committed candidate against the three upstream entries, downloaded at commit `22bfea9` and built with the same frozen runner and observer. `--output` is required and never overwrites. |
 | `tools/phase-split/` | Generates current phase inputs with source-identity guards; preserves the independent `8f108f5` full-buffer correctness reference. See its README before building or running. |
 | `tools/linux-docker/` | Native Linux/Docker validator and container lifecycle tests, driven by the fork's `swift-linux-docker-validation.yml` workflow. |
 | `reports/`, `*.json` | Recorded results. Don't overwrite them unintentionally. |
@@ -88,7 +88,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, more than one thread, and marking a prime as composite and then restoring it.
 - Specialized small-factor handlers: dispatch only after the runtime bit test finds the candidate unmarked. Provide a handler for every odd value in the handled range, not only primes, so no knowledge of primality is built in. Start at p², mark individually up to any alignment boundary, and finish with a bounded tail.
 - Output tags must match the code: `algorithm=base,faithful=yes,bits=1` and a thread count of 1. READMEs and reports must describe what the code does.
-- Implement the sieve and the timed benchmark in Swift. Python may orchestrate builds, runs, validation and records, but must not implement any sieve or benchmark logic.
+- Implement the sieve, the benchmark and the project's tools in Swift, with POSIX `sh` only for thin wrappers such as `run.sh`. No sieve or benchmark logic lives outside Swift. The Linux validator under `tools/linux-docker/` runs on the GitHub runner host and is the remaining exception; its port is separate work.
 - When borrowing an idea from another submission, read its code. Its labels are not proof that it complies.
 
 ## Benchmark contract
@@ -98,8 +98,8 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
 - Build the benchmark with `-O -whole-module-optimization` and the observer as in `run.sh`. Compared variants use identical flags and the same runner.
 - Timing evidence comes only from the reference machine (Apple M4 Pro, Swift 6.3.3): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
-- Compare committed revisions with `compare_optimizations.py`. Include the current development branch as a development control in the same run, and pass `--output` so the recorded `optimization-results.json` isn't overwritten.
-- Use `compare_all.py` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It overwrites `all-swift-results.json`: copy that file first, preserve the new run under a unique name, and restore the earlier record. Record the exact candidate revision, upstream revision, source and adapter hashes, hardware, Swift version, and run order with the results; acquire the timing lock before this script starts compiling.
+- Compare committed revisions with `swift tools/compare-revisions.swift`. Include the current development branch as a development control in the same run. `--output` is required and never overwrites, so every session leaves its own record.
+- Use `swift tools/compare-upstream.swift` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It builds the upstream adapters and the candidate with the frozen `25402d4` runner and observer, and records the candidate revision, the upstream revision, source and adapter hashes, hardware, Swift version and run order itself. `--output` is required and never overwrites. Hold the timing lock before it starts compiling.
 - Admission rule for a speed change: three rotated five-second trials per variant in one session, and the candidate qualifies only if every candidate trial beats every control trial. Overlapping ranges are flat, not a gain. Don't repeat a flat or losing session to look for a win; a repeat happens only at the user's request and is reported separately, never pooled. A refactor of timed code is accepted on byte-identical benchmark assembly against the control, built with the same observer, flags and module name; if the assembly changes, it needs the same timing admission as a speed change, and a flat result does not show it is harmless.
 
 ## Timing sessions
