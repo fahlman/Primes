@@ -1,6 +1,6 @@
 # Swift sieve: instructions for coding agents
 
-These instructions apply to Swift work in `PrimeSwift/solution_1`, `tools/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `tools/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [tools/swift/README.md](tools/swift/README.md), and each PR owns its change history and decision. This file, `CLAUDE.md` and `tools/swift` belong to the fork only; exclude them from any upstream submission.
+These instructions apply to Swift work in `PrimeSwift/solution_1`, `tools/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `tools/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [tools/swift/README.md](tools/swift/README.md), and each PR owns its change history and decision. This file, `CLAUDE.md`, `tools/swift` and `.github/workflows/swift-linux-docker-validation.yml` belong to the fork only; exclude them from any upstream submission.
 
 ## Goal
 
@@ -47,6 +47,11 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Use a separate worktree for concurrent work or when an isolated exact-revision checkout is needed. Sequential work may use the main checkout after preserving local changes. Put temporary worktrees under `/Users/ryan/Developer/Primes/.worktrees/`, create them from the main repository, and confirm the sparse checkout includes `PrimeSwift`, `tools` and `.github`; if necessary, run `git sparse-checkout set PrimeSwift tools .github` in the new worktree. Do not edit another agent's worktree.
 - Once a branch is merged or its PR is closed, publish any unique source/evidence and remove its worktree and disposable builds. Keep the branch. Generated caches need no backup; preserve any unique uncommitted work before removal.
 - Don't discard existing changes, rewrite pushed history, or push to upstream. Push to `origin` only. An upstream submission requires a fresh branch from `upstream/drag-race` containing only the solution folder; verify that with `git diff --stat upstream/drag-race...HEAD` before opening it. Submission remains paused until the user resumes it.
+- Upstream's files stay at upstream's bytes. Outside `PrimeSwift/solution_1` and the fork-only files named above, development carries no change against `upstream/drag-race`; inside the solution folder it changes only what the entry needs to build and run, the restraint `CONTRIBUTING.md` asks of a PR that improves an existing solution. That excludes convenience edits: lockfiles or ignore files in packages we don't own, guards in the inherited CI. Keep local ignores in `.git/info/exclude`, which every worktree of the repository shares. This prints nothing while the rule holds:
+
+  ```sh
+  git diff --name-only upstream/drag-race...HEAD -- . ':!PrimeSwift/solution_1' ':!tools/swift' ':!AGENTS.md' ':!CLAUDE.md' ':!.github/workflows/swift-linux-docker-validation.yml'
+  ```
 
 ## Pull requests and reviews
 
@@ -103,3 +108,4 @@ Run these from `tools/swift`, holding the timing lock. Set `swift_package=../../
 
 4. The change is committed on its own branch, its fork PR is open, and the other agent's review of the exact candidate commit is recorded there with no unresolved blocking findings.
 5. Any write-up separates measured results from hypotheses, and claims a speedup only from the timing protocol above.
+6. Upstream's files are untouched: the diff command under Work scope and branches prints nothing.
