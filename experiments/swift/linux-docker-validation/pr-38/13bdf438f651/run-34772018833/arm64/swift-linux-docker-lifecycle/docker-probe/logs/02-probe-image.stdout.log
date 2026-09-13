@@ -1,0 +1,60 @@
+[
+    {
+        "Id": "sha256:6df9636795d37473994366014c25264edeb6c00d7a57188ff62d5a94276b4297",
+        "RepoTags": [
+            "busybox:1.37.0"
+        ],
+        "RepoDigests": [
+            "busybox@sha256:9db7b59979c38555a39def84a31fb98b5296952f9e3afd4f6f11f05b07adfab0"
+        ],
+        "Parent": "",
+        "Comment": "",
+        "Created": "2024-09-26T21:31:42Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+            ],
+            "Cmd": [
+                "sh"
+            ],
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": null
+        },
+        "Architecture": "arm64",
+        "Variant": "v8",
+        "Os": "linux",
+        "Size": 4105238,
+        "GraphDriver": {
+            "Data": {
+                "MergedDir": "/var/lib/docker/overlay2/034cc8aea3680638f812e87756f45bbd4f51a5df4feb5da0864ec2df2bbd5de9/merged",
+                "UpperDir": "/var/lib/docker/overlay2/034cc8aea3680638f812e87756f45bbd4f51a5df4feb5da0864ec2df2bbd5de9/diff",
+                "WorkDir": "/var/lib/docker/overlay2/034cc8aea3680638f812e87756f45bbd4f51a5df4feb5da0864ec2df2bbd5de9/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:4739bf586b56d45b5cf7c229303c9061c0402c8979ce26ac45b9cecc4b11c0e4"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "0001-01-01T00:00:00Z"
+        }
+    }
+]
