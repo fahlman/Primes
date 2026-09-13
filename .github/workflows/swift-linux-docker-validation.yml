@@ -19,6 +19,27 @@ env:
   SOLUTION_REVISION: 8e05b4a89ad7706eced6ef8827e62a15c37e5b29
 
 jobs:
+  lint:
+    name: Lint the solution Dockerfile as upstream's CI does
+    if: github.repository == 'fahlman/Primes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Check out exact solution revision
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: fahlman/Primes
+          ref: ${{ env.SOLUTION_REVISION }}
+          persist-credentials: false
+
+      - name: Lint Dockerfile
+        uses: jbergstroem/hadolint-gh-action@d2f58da7f4f242dc0b6c5ef882ad4f8e871ba96b # v1
+        with:
+          dockerfile: PrimeSwift/solution_1/Dockerfile
+          output_format: tty
+          error_level: 0
+          config_file: ./config/hadolint.yml
+
   validate:
     name: Validate the adopted source on native ${{ matrix.architecture }}
     if: github.repository == 'fahlman/Primes'
