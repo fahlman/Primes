@@ -1,0 +1,14 @@
+
+PID    %CPU COMMAND         
+409    34.8 WindowServer    
+75011  23.0 Claude Helper   
+0      10.1 kernel_task     
+75024  8.6  Claude Helper (R
+66109  7.1  top             
+565    3.0  com.apple.Driver
+7162   2.5  Messages        
+3437   2.3  claude          
+1      1.9  launchd         
+72895  1.2  diskimagesiod   
+401    1.2  bluetoothd      
+7157   1.1  Mail            

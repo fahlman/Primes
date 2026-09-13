@@ -1,0 +1,14 @@
+
+PID    %CPU COMMAND         
+409    10.2 WindowServer    
+66476  6.5  top             
+0      5.7  kernel_task     
+565    3.7  com.apple.Driver
+3437   2.3  claude          
+7162   2.2  Messages        
+7781   1.9  com.apple.WebKit
+1      1.5  launchd         
+7157   1.3  Mail            
+72895  1.3  diskimagesiod   
+401    1.3  bluetoothd      
+7147   1.0  Safari          

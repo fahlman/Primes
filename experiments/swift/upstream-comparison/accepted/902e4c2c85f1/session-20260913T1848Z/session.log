@@ -1,0 +1,45 @@
+built repository-bool
+built repository-packed
+built repository-striped
+built candidate at 902e4c2c85f198fdb2c93457f7c9f0307d750934
+repository-bool;16913;5.000109125;1;algorithm=base,faithful=yes,bits=8
+repository-packed;14064;5.000345875;1;algorithm=base,faithful=yes,bits=1
+repository-striped;23817;5.000108042;1;algorithm=base,faithful=yes,bits=1
+candidate;126298;5.000014583;1;algorithm=base,faithful=yes,bits=1
+repository-packed;14122;5.000170416;1;algorithm=base,faithful=yes,bits=1
+repository-striped;23824;5.000058084;1;algorithm=base,faithful=yes,bits=1
+candidate;127299;5.000031041;1;algorithm=base,faithful=yes,bits=1
+repository-bool;17148;5.000228208;1;algorithm=base,faithful=yes,bits=8
+repository-striped;23850;5.000107792;1;algorithm=base,faithful=yes,bits=1
+candidate;127855;5.000036792;1;algorithm=base,faithful=yes,bits=1
+repository-bool;17132;5.0000265;1;algorithm=base,faithful=yes,bits=8
+repository-packed;14150;5.00001425;1;algorithm=base,faithful=yes,bits=1
+{
+  "median_ms" : {
+    "candidate" : 0.03927785010879897,
+    "repository-bool" : 0.2918530527667523,
+    "repository-packed" : 0.3540695663503753,
+    "repository-striped" : 0.2098748356279382
+  },
+  "speedups" : {
+    "repository-bool" : 7.430474222960888,
+    "repository-packed" : 9.014484381645346,
+    "repository-striped" : 5.343338167608168
+  }
+}
+{
+  "recorded_at_utc": "2026-09-13T18:48:30Z",
+  "cpu": "Apple M4 Pro",
+  "candidate": "902e4c2c85f198fdb2c93457f7c9f0307d750934",
+  "median_ms": {
+    "candidate": 0.03927785010879897,
+    "repository-bool": 0.2918530527667523,
+    "repository-packed": 0.3540695663503753,
+    "repository-striped": 0.2098748356279382
+  },
+  "speedups": {
+    "repository-bool": 7.430474222960888,
+    "repository-packed": 9.014484381645346,
+    "repository-striped": 5.343338167608168
+  }
+}

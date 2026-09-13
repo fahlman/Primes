@@ -1,0 +1,188 @@
+{
+  "adapters" : {
+    "repository-bool" : {
+      "adapted_sha256" : "ae44db2c06e0aeaae53431f2879b6cbe69ee0c4ce8b188fb11a8cabac2379431",
+      "bits" : 8,
+      "directory" : "PrimeSwift_8bitBool",
+      "upstream_sha256" : "0eaf575c78339181d3f9aae630116164d68cb54e246f8f128283706c7ee80563"
+    },
+    "repository-packed" : {
+      "adapted_sha256" : "8ab30aac5c9c5190125c6866df3475f1121b9b23c817f2f97b72484bb1b64259",
+      "bits" : 1,
+      "directory" : "PrimeSwift_1bit_u8",
+      "upstream_sha256" : "005b09b32838e554ceb9a3936a2b87db1837f4a8a050d4bf0e49d1186f9be8e0"
+    },
+    "repository-striped" : {
+      "adapted_sha256" : "d71aa90944ee83636acd3b04bbc6e9d484d0ed9340da46815b217d20769f891a",
+      "bits" : 1,
+      "directory" : "PrimeSwift_1bitStriped_u8",
+      "upstream_sha256" : "5397bd3902ca8b10ae15b553d36f63a294d43f465e17abfd5c00a53662b42cb1"
+    }
+  },
+  "candidate" : {
+    "revision" : "902e4c2c85f198fdb2c93457f7c9f0307d750934",
+    "source_sha256" : "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262"
+  },
+  "cpu" : "Apple M4 Pro",
+  "flags" : [
+    "-O",
+    "-whole-module-optimization"
+  ],
+  "harness_revision" : "25402d46ba991b39451724d3873d326626981e3f",
+  "machine" : "arm64",
+  "median_ms" : {
+    "candidate" : 0.03927785010879897,
+    "repository-bool" : 0.2918530527667523,
+    "repository-packed" : 0.3540695663503753,
+    "repository-striped" : 0.2098748356279382
+  },
+  "observer_sha256" : "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+  "platform" : "macOS Version 26.6.2 (Build 25G83)",
+  "recorded_at_utc" : "2026-09-13T18:48:30Z",
+  "revision" : "22bfea9c7122c46dcda799020fccf5ae83fe667f",
+  "run_order" : [
+    [
+      "repository-bool",
+      "repository-packed",
+      "repository-striped",
+      "candidate"
+    ],
+    [
+      "repository-packed",
+      "repository-striped",
+      "candidate",
+      "repository-bool"
+    ],
+    [
+      "repository-striped",
+      "candidate",
+      "repository-bool",
+      "repository-packed"
+    ]
+  ],
+  "runner_sha256" : "ffd79a64437d82bb613629df5e862a3e1472b4fcffe191fb6237b4faf0299eb3",
+  "samples" : {
+    "candidate" : [
+      {
+        "milliseconds_per_pass" : 0.03958902423632994,
+        "output" : "candidate;126298;5.000014583;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 126298,
+        "seconds" : 5.000014583,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 27138028"
+      },
+      {
+        "milliseconds_per_pass" : 0.03927785010879897,
+        "output" : "candidate;127299;5.000031041;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 127299,
+        "seconds" : 5.000031041,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 27343578"
+      },
+      {
+        "milliseconds_per_pass" : 0.03910708843611905,
+        "output" : "candidate;127855;5.000036792;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 127855,
+        "seconds" : 5.000036792,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 27458579"
+      }
+    ],
+    "repository-bool" : [
+      {
+        "milliseconds_per_pass" : 0.2956370321646071,
+        "output" : "repository-bool;16913;5.000109125;1;algorithm=base,faithful=yes,bits=8",
+        "passes" : 16913,
+        "seconds" : 5.000109125,
+        "tags" : "algorithm=base,faithful=yes,bits=8",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 3622"
+      },
+      {
+        "milliseconds_per_pass" : 0.2915925010496851,
+        "output" : "repository-bool;17148;5.000228208;1;algorithm=base,faithful=yes,bits=8",
+        "passes" : 17148,
+        "seconds" : 5.000228208,
+        "tags" : "algorithm=base,faithful=yes,bits=8",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 3663"
+      },
+      {
+        "milliseconds_per_pass" : 0.2918530527667523,
+        "output" : "repository-bool;17132;5.0000265;1;algorithm=base,faithful=yes,bits=8",
+        "passes" : 17132,
+        "seconds" : 5.0000265,
+        "tags" : "algorithm=base,faithful=yes,bits=8",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 3659"
+      }
+    ],
+    "repository-packed" : [
+      {
+        "milliseconds_per_pass" : 0.3555422266069397,
+        "output" : "repository-packed;14064;5.000345875;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 14064,
+        "seconds" : 5.000345875,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 636718"
+      },
+      {
+        "milliseconds_per_pass" : 0.3540695663503753,
+        "output" : "repository-packed;14122;5.000170416;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 14122,
+        "seconds" : 5.000170416,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 638924"
+      },
+      {
+        "milliseconds_per_pass" : 0.35335789752650176,
+        "output" : "repository-packed;14150;5.00001425;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 14150,
+        "seconds" : 5.00001425,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 639948"
+      }
+    ],
+    "repository-striped" : [
+      {
+        "milliseconds_per_pass" : 0.20993861703824998,
+        "output" : "repository-striped;23817;5.000108042;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 23817,
+        "seconds" : 5.000108042,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 1031803"
+      },
+      {
+        "milliseconds_per_pass" : 0.2098748356279382,
+        "output" : "repository-striped;23824;5.000058084;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 23824,
+        "seconds" : 5.000058084,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 1032101"
+      },
+      {
+        "milliseconds_per_pass" : 0.20964812545073375,
+        "output" : "repository-striped;23850;5.000107792;1;algorithm=base,faithful=yes,bits=1",
+        "passes" : 23850,
+        "seconds" : 5.000107792,
+        "tags" : "algorithm=base,faithful=yes,bits=1",
+        "threads" : 1,
+        "validation" : "Validated: 78498 primes; checksum: 1032922"
+      }
+    ]
+  },
+  "speedups" : {
+    "repository-bool" : 7.430474222960888,
+    "repository-packed" : 9.014484381645346,
+    "repository-striped" : 5.343338167608168
+  },
+  "swift_version" : "Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0"
+}
