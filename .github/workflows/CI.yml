@@ -9,8 +9,6 @@ on:
 
 jobs:
   collect-solutions:
-    # The fork's dedicated validation branch has its own bounded Swift workflow.
-    if: ${{ github.repository != 'fahlman/Primes' || (github.ref != 'refs/heads/swift/linux-docker-validation' && github.head_ref != 'swift/linux-docker-validation') }}
     runs-on: ubuntu-22.04
 
     steps:
@@ -32,7 +30,6 @@ jobs:
       solutions: ${{ steps.solutions.outputs.solutions }}
 
   build:
-    if: ${{ github.repository != 'fahlman/Primes' || (github.ref != 'refs/heads/swift/linux-docker-validation' && github.head_ref != 'swift/linux-docker-validation') }}
     env:
       ENABLE_DOCKER_PUSH: ${{ github.repository_owner == 'PlummersSoftwareLLC' && github.ref == 'refs/heads/drag-race' }}
 
