@@ -14,7 +14,7 @@ func completedPass(limit: Int, offset: Int) -> UInt64 {
 struct Benchmark {
     static func main() {
         let limit = 1_000_000
-        let byteCount = ((limit - 1) / 2 + 7) / 8
+        let byteCount = PrimeSieve.storageLayout(for: limit).byteCount
 
         // Validation is outside the timed section.
         let check = PrimeSieve(limit: limit)

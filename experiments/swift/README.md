@@ -4,6 +4,17 @@ This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It store
 
 `PrimeSieve.swift` is the reusable implementation. Construct `PrimeSieve(limit:)`, call `runSieve()`, then call `primes()` for the inclusive prime list or `withStorage` to inspect flags. Bit zero represents 3; a set bit means composite. Enumeration ignores padding bits. The storage pointer must not outlive its sieve instance.
 
+## Storage-layout maintenance candidate
+
+Branch `swift/storage-layout` centralizes logical storage sizing in the pure
+`PrimeSieve.storageLayout(for:)` helper. Initialization and benchmark setup use
+its named `oddCount`/`byteCount` result. Empty storage still has zero logical bytes,
+allocates a minimum capacity of one, and passes nil to the observer. Offset
+calculation stays outside `completedPass`; marking, ownership and the separately
+compiled observer are unchanged. This is a maintenance candidate against
+`84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`, with correctness and relevant assembly
+comparison pending at this source commit. No throughput comparison is planned.
+
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
 
 ## 128-bit cutoff sweep
