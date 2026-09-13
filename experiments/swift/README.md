@@ -145,15 +145,13 @@ Before these experiments, our original development control beat all three reposi
 
 Those are historical development-control measurements, preserved in [all-swift-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/all-swift-results.json) and the [original report](reports/EqualTermsSwiftComparison.md). The later `e8ba734` and cutoff 127 `bd3858c` each have their own direct upstream comparison; then-adopted `59262fe` has its recorded development comparison. Cutoff111 has its latest comparison against development controls. Do not combine ratios across sessions.
 
-To compare the current implementation with all three original entries:
+To compare a committed candidate with all three original entries, holding the timing lock:
 
 ```sh
-python3 compare_all.py
+swift tools/compare-upstream.swift --output UNIQUE_RESULTS.json
 ```
 
-Acquire the timing lock before running this command. If `all-swift-results.json` already exists, preserve it first; the script creates or replaces that file. Move the fresh results to an unused, uniquely named path and publish them on the experiment or review branch, linking their exact commit from the report. Earlier measurements are in the evidence snapshot. See [AGENTS.md](AGENTS.md) for the timing protocol.
-
-This takes approximately 60 seconds of timed work plus compilation, downloads originals pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`, and replaces `all-swift-results.json` with the new measurements. Generated files stay under `.build`. Python only builds and launches executables; sieve and timed benchmark logic are Swift.
+It downloads the originals pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`, builds every variant with the frozen `25402d4` runner and observer, runs three rotated five-second trials each, about 60 seconds of timed work plus compilation, and writes the record to the required `--output` path, never overwriting one. `--candidate REVISION` selects a commit other than `HEAD`. Generated files stay under `.build`. `swift tools/compare-revisions.swift` compares committed revisions the same way. The tools are Swift; nothing outside Swift touches the sieve or the benchmark. See [AGENTS.md](AGENTS.md) for the timing protocol.
 
 The earlier two-way results remain in [comparison-results.json](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/comparison-results.json), and the [retired comparison runner](https://github.com/fahlman/Primes/blob/405dfc5b6be6bc0bba651d35e8582da97d38388f/experiments/swift/compare.py) is preserved in Git history. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
 
