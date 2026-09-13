@@ -10,9 +10,9 @@
 This folder contains three implementations: an array of 8-bit Booleans, packed
 UInt8 bits, and striped UInt8 bits. The striped entry uses one bit per odd
 candidate and marks composites with dense small-factor handlers and an unrolled
-sparse loop; `run.sh` runs it single-threaded and then once more with a thread per
-active processor, each thread running its own sieves. The Boolean and packed
-implementations are unchanged and single-threaded.
+sparse loop; `run.sh` runs it single-threaded and then multithreaded at 4 threads,
+half the processors and all of them, each thread running its own sieves. The
+Boolean and packed implementations are unchanged and single-threaded.
 
 Credits:
 
@@ -72,8 +72,10 @@ swift build -c release -Xswiftc -O -Xswiftc -whole-module-optimization --package
 ./run.sh
 ```
 
-`run.sh` runs the striped entry twice: with one thread, and with `--threads 0`, which
-selects the active processor count. Pass `--threads N` to choose a count.
+`run.sh` runs the striped entry with one thread, then with 4 threads, half the
+processors and all of them, skipping counts that repeat or exceed the machine.
+Pass `--threads N` to choose a count yourself; `--threads 0` selects the active
+processor count.
 
 Or build and run the Docker image:
 
@@ -143,21 +145,25 @@ fahlman's contributions in this folder are licensed under the BSD-3-Clause licen
 On an Apple M4 Pro (macOS 26.6.2, Swift 6.3.3, 14 active processors), after the build commands above, `./run.sh` printed:
 
 ```
-Passes: 13860, Time: 5.000166058540344, Avg: 0.0003607623418860277, Limit: 1000000, Count: 78498, Valid: true
+Passes: 14909, Time: 5.0002559423446655, Avg: 0.0003353850655540053, Limit: 1000000, Count: 78498, Valid: true
 
-yellowcub_1bit_UInt8;13860;5.000166058540344;1;algorithm=base,faithful=yes,bits=1
+yellowcub_1bit_UInt8;14909;5.0002559423446655;1;algorithm=base,faithful=yes,bits=1
 
-yellowcub_fahlman_striped_UInt8;126759;5.000023209;1;algorithm=base,faithful=yes,bits=1
-yellowcub_fahlman_striped_UInt8_threaded;1312533;5.000107875;14;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8;134395;5.000032708;1;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;500783;5.000035792;4;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;839613;5.000039125;7;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;1329486;5.000046167;14;algorithm=base,faithful=yes,bits=1
 
-Passes: 15963, Time: 5.0000810623168945, Avg: 0.0003132294094040528, Limit: 1000000, Count: 78498, Valid: true
+Passes: 16720, Time: 5.000118970870972, Avg: 0.00029905017768367054, Limit: 1000000, Count: 78498, Valid: true
 
-j-f1_yellowcub_bool;15963;5.0000810623168945;1;algorithm=base,faithful=yes,bits=8
+j-f1_yellowcub_bool;16720;5.000118970870972;1;algorithm=base,faithful=yes,bits=8
 ```
 
 The striped entry reports a diagnostic line on standard error for each of its runs:
 
 ```
-Passes: 126759, Time: 5.000023209, Avg: 3.944511402740634e-05, Threads: 1, Limit: 1000000, Count: 78498, Valid: true, Checksum: 27232251
-Passes: 1312533, Time: 5.000107875, Avg: 3.809510218028804e-06, Threads: 14, Limit: 1000000, Count: 78498, Valid: true, Checksum: 281243813
+Passes: 134395, Time: 5.000032708, Avg: 3.720400839316939e-05, Threads: 1, Limit: 1000000, Count: 78498, Valid: true, Checksum: 28835899
+Passes: 500783, Time: 5.000035792, Avg: 9.984435957290883e-06, Threads: 4, Limit: 1000000, Count: 78498, Valid: true, Checksum: 107671054
+Passes: 839613, Time: 5.000039125, Avg: 5.955171162190199e-06, Threads: 7, Limit: 1000000, Count: 78498, Valid: true, Checksum: 180438781
+Passes: 1329486, Time: 5.000046167, Avg: 3.7608866637181584e-06, Threads: 14, Limit: 1000000, Count: 78498, Valid: true, Checksum: 284916815
 ```
