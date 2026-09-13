@@ -1,6 +1,6 @@
 # Shared storage layout review
 
-Candidate `5cbc25e1c41d55e1a48db4737721e589e046b08e` centralizes logical storage sizing without changing the optimized benchmark assembly. The control is adopted development `84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`. This is a maintenance change; no throughput comparison ran and no speedup is claimed. Adoption remains pending.
+Candidate `5cbc25e1c41d55e1a48db4737721e589e046b08e` centralizes logical storage sizing without changing the optimized benchmark assembly. The control is adopted development `84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`. This is a maintenance change; no throughput comparison ran and no speedup is claimed. Adopted through [PR #27](https://github.com/fahlman/Primes/pull/27) in merge `b33b2fc0192b446c70369a9bd0dd7eacabb331c8`; the merged tree exactly matches reviewed head `34ebe8b`.
 
 `PrimeSieve.storageLayout(for:)` returns a small `StorageLayout` value containing the logical odd-candidate count. Its computed `byteCount` uses the original quotient/remainder expression. Initialization stores limit, odd count and byte count in the original order, and benchmark setup uses the same API outside `completedPass`. The class still stores the same four fields. A zero-byte layout still allocates capacity one and exposes nil through `withStorage`; no cache or retained layout is introduced. Deinitialization, every marking method, enumeration, observer implementation and the `completedPass` body are unchanged. Source classification remains `algorithm=base,faithful=yes,bits=1`, one thread.
 

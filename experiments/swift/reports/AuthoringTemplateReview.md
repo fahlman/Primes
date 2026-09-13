@@ -1,5 +1,7 @@
 # Swift authoring template and generator checks
 
+Adopted through [PR #26](https://github.com/fahlman/Primes/pull/26) in merge `0d64a47a4bc9372196fe63a564ed71315b78fc61`; the merged tree exactly matches reviewed head `5661fa4`. The original verification below remains specific to its recorded source.
+
 The sieve's handwritten logic now lives in `tools/PrimeSieve.swift.in`; the
 canonical generator inserts the two explicit switches and derives their runtime
 dispatch bounds from the same factor metadata. The complete `PrimeSieve.swift`
