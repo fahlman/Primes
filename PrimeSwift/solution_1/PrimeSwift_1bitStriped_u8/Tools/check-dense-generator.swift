@@ -1,6 +1,6 @@
 // Reusable CLI regression checks for the dense generator.
 // Run from any directory, while the caller owns the project's timing lock:
-//   swift /path/to/experiments/swift/tools/check-dense-generator.swift
+//   swift /path/to/PrimeSwift_1bitStriped_u8/Tools/check-dense-generator.swift
 // All mutations use disposable fixtures. The final JSON records every command;
 // this does not compile or run the sieve, or replace its correctness checks.
 import Foundation
@@ -142,7 +142,7 @@ final class GeneratorChecks {
     }
 
     func run() throws {
-        let sourceURL = tools.deletingLastPathComponent().appendingPathComponent("PrimeSieve.swift")
+        let sourceURL = tools.deletingLastPathComponent().appendingPathComponent("Sources/PrimeSieveSwift/PrimeSieve.swift")
         let templateURL = tools.appendingPathComponent("PrimeSieve.swift.in")
         let original = try Data(contentsOf: sourceURL), templateData = try Data(contentsOf: templateURL)
         guard let source = String(data: original, encoding: .utf8),

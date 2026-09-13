@@ -2,14 +2,18 @@
 // from revision 25402d4. Every executable is compiled first; then three rotated
 // five-second runs per variant are measured serially. Run while holding the
 // project's timing lock, from any directory:
-//   swift tools/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json
+//   swift tools/swift/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json
 // Variant names use lowercase letters, digits, hyphens and underscores; the first
 // variant is the reference for speedup_over_first. The output file must not exist.
 // Timing counts as evidence only on the reference machine; see AGENTS.md.
 import Foundation
 
 let harnessRevision = "25402d46ba991b39451724d3873d326626981e3f"
-let package = "experiments/swift"
+let harnessPackage = "experiments/swift"
+let candidateSourcePaths = [
+    "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift",
+    "experiments/swift/PrimeSieve.swift",
+]
 let frozenLabel = "fahlman_swift_striped_unrolled"
 let requiredTags = "algorithm=base,faithful=yes,bits=1"
 let validationMarker = "Validated: 78498 primes;"
@@ -136,24 +140,32 @@ do {
     func git(_ arguments: [String]) throws -> String {
         try run(["git", "-C", repo.path] + arguments).stdout.trimmingCharacters(in: .whitespacesAndNewlines)
     }
-    func source(_ revision: String, _ name: String) throws -> Data {
+    func source(_ revision: String, _ path: String) throws -> Data {
         let process = Process()
         process.executableURL = URL(fileURLWithPath: "/usr/bin/env")
-        process.arguments = ["git", "-C", repo.path, "show", "\(revision):\(package)/\(name)"]
+        process.arguments = ["git", "-C", repo.path, "show", "\(revision):\(path)"]
         let out = Pipe(); process.standardOutput = out; process.standardError = FileHandle.standardError
         try process.run()
         let data = out.fileHandleForReading.readDataToEndOfFile()
         process.waitUntilExit()
-        guard process.terminationStatus == 0 else { throw ToolError(description: "git show failed for \(revision):\(name)") }
+        guard process.terminationStatus == 0 else { throw ToolError(description: "git show failed for \(revision):\(path)") }
         return data
     }
+    func candidateSourcePath(_ revision: String) throws -> String {
+        let paths = Set(try git(["ls-tree", "-r", "--name-only", revision, "--"] + candidateSourcePaths)
+            .split(separator: "\n").map(String.init))
+        guard let path = candidateSourcePaths.first(where: { paths.contains($0) }) else {
+            throw ToolError(description: "No Swift candidate source at \(revision); expected one of \(candidateSourcePaths.joined(separator: ", "))")
+        }
+        return path
+    }
 
-    let build = repo.appendingPathComponent(package).appendingPathComponent(".build/optimization-comparison")
+    let build = repo.appendingPathComponent("tools/swift/.build/optimization-comparison")
     try FileManager.default.createDirectory(at: build, withIntermediateDirectories: true)
     let observerFile = build.appendingPathComponent("BenchmarkObserver.swift")
     let runnerFile = build.appendingPathComponent("Benchmark.swift")
-    try source(harnessRevision, "BenchmarkObserver.swift").write(to: observerFile)
-    try source(harnessRevision, "Benchmark.swift").write(to: runnerFile)
+    try source(harnessRevision, "\(harnessPackage)/BenchmarkObserver.swift").write(to: observerFile)
+    try source(harnessRevision, "\(harnessPackage)/Benchmark.swift").write(to: runnerFile)
     let runnerText = try String(contentsOf: runnerFile, encoding: .utf8)
     guard runnerText.contains(frozenLabel) else { throw ToolError(description: "The frozen runner no longer carries the label \(frozenLabel)") }
     try run(["swiftc", "-O", "-parse-as-library", "-module-name", "BenchmarkObserver",
@@ -175,7 +187,7 @@ do {
         let directory = build.appendingPathComponent(name)
         try FileManager.default.createDirectory(at: directory, withIntermediateDirectories: true)
         let implementation = directory.appendingPathComponent("PrimeSieve.swift")
-        try source(revision, "PrimeSieve.swift").write(to: implementation)
+        try source(revision, candidateSourcePath(revision)).write(to: implementation)
         try runnerText.replacingOccurrences(of: frozenLabel, with: name)
             .write(to: directory.appendingPathComponent("Benchmark.swift"), atomically: true, encoding: .utf8)
         try run(["swiftc", "-O", "-whole-module-optimization", "-I", build.path,

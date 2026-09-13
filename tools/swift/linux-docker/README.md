@@ -8,30 +8,33 @@ cleanup rules; the Python versions remain in Git history and in the evidence the
 produced.
 
 
-This workflow validates the committed Swift Dockerfile and existing correctness
+This workflow validates the committed single-entry development Dockerfile and existing correctness
 checks on native Linux amd64 and arm64. It uses Docker already installed on the
 GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners; no Docker installation
 on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
-only for pushes to `swift/linux-docker-validation` that change that workflow,
-`linux-validation.swift`, and only in `fahlman/Primes`. The two native jobs run serially.
+only for pushes to `swift/linux-docker-validation` that change that workflow or
+`tools/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
+The two native jobs run serially.
 The current trigger requests the full six-check
 suite on amd64 and arm64 for the adopted cutoff 111. The job limit
 is 60 minutes, providing room beyond the earlier 45-minute cutoff127 timeout;
 individual command limits remain 20 minutes. Repository permissions are read-only.
 Its unchanged concurrency group serializes
 runs without cancelling an active run.
-The inherited broad CI jobs skip this fork branch and pull requests from its
-head; other branches and the upstream repository retain their existing behavior.
-Do not include these files or the inherited-CI guard in an upstream submission.
+The inherited all-language CI is disabled in the fork's Actions settings; this
+dedicated workflow remains active. Do not include these fork tools or this
+workflow in an upstream submission.
 
 The cleanup-fix [run 34726948107](https://github.com/fahlman/Primes/actions/runs/34726948107) passed both native jobs, including all six Swift checks, the unchanged Docker runtime, 13 lifecycle tests and four real-Docker probes per architecture. See [the cleanup report and permanent evidence](https://github.com/fahlman/Primes/pull/15#issuecomment-5653992129). Earlier cutoff111 [run 34702902662](https://github.com/fahlman/Primes/actions/runs/34702902662) and its [exact-cutoff report](https://github.com/fahlman/Primes/pull/16#issuecomment-5653992293) remain unchanged; prior cutoff127 evidence is preserved separately.
 
 ## Selecting exactly what is checked
 
-`SOLUTION_REVISION` in the workflow is pinned to the reviewed and timed cutoff111
-candidate, `099e35afa8a2f01d79ef11f805d760e81d1d983a` (PR #16).
+`SOLUTION_REVISION` in the workflow remains pinned to
+`dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee`, a historical development revision
+containing the adopted cutoff111 sieve. Moving the source files does not advance
+that pin or establish native Linux validation of the relocated package.
 This selects the source for Linux validation; it does not adopt or merge it.
 Change the pin explicitly when a different reviewed solution is selected.
 The workflow and solution are checked out into
@@ -39,6 +42,30 @@ separate directories. The validator checks both revisions and requires a clean
 solution checkout, then hashes the Dockerfile, sieve, runner, observer and every
 verification source. All mounted test sources come from that same solution
 commit. The solution files and Dockerfile are never rewritten by the validator.
+
+The validator selects exactly one supported source layout. Historical revisions
+use `experiments/swift` as the Docker build context and read-only source mount;
+their hash keys keep the original paths relative to that directory. Current
+revisions use the repository root, with the canonical core and observer under
+`PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources`, Verify and ExtraVerify
+under that package's `Tools`, and the benchmark and phase checks under
+`tools/swift`. Their hash keys are repository-relative. The record identifies
+`source_layout` and `source_hash_root`; both layouts retain the same six checks.
+Missing or ambiguous layouts fail instead of selecting a duplicate source.
+
+The current single-entry image builds from the repository root:
+
+```sh
+docker build -f tools/swift/Dockerfile -t prime-swift-validation .
+```
+
+`tools/swift/Dockerfile.dockerignore` permits only the core, observer and
+development benchmark into that context, excluding Git metadata, build products
+and other solutions. Docker supports this [Dockerfile-specific ignore
+file](https://docs.docker.com/build/concepts/context/#filename-and-location).
+The validator hashes it with the new layout's inputs. The three-entry
+`PrimeSwift/solution_1/Dockerfile` is the solution package's image and is not the
+validator's image.
 
 The two official actions are pinned to commit SHAs. These refs were read from
 their official GitHub repositories on 2026-09-12:
@@ -114,7 +141,7 @@ artifact upload. The unchanged six Swift checks then run once per native job.
 For the fake-only tests, after acquiring the project timing lock, use:
 
 ```sh
-swift experiments/swift/tools/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
+swift tools/swift/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
 ```
 
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the
