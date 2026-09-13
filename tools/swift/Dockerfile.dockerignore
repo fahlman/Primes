@@ -1,5 +1,0 @@
-# This Dockerfile builds from the repository root. Send only its three inputs.
-**
-!PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift
-!PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/BenchmarkObserver/BenchmarkObserver.swift
-!tools/swift/Benchmark.swift

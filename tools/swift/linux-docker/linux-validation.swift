@@ -23,35 +23,50 @@ func checkNames(for layout: SourceLayout) -> [String] {
 let lockPath = "/tmp/primes-timing.lock"
 let ownerLabel = "org.fahlman.primes.validation-owner"
 
-// Paths are relative to the selected build context and read-only source mount.
+// Paths are relative to the read-only source mount, which is also the hash root.
 // Keep the legacy map so the workflow can still validate its exact historical pin.
 struct SourceLayout {
     let name: String
     let rootPath: String
+    /// The Docker build context and the Dockerfile, relative to `rootPath`.
+    let context: String
     let dockerfile: String
+    /// The candidate's own executable inside the runtime image, relative to its
+    /// working directory, when the image's entrypoint runs more than one entry.
+    let candidateEntry: String?
+    /// The whole of the candidate's standard error after one benchmark run.
+    let diagnostic: String
     let core: String
     let sourceFiles: [String]
     let checks: [(String, [String])]
 }
 
 func sourceLayout(_ solution: URL) throws -> SourceLayout {
-    let package = "PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8"
+    let folder = "PrimeSwift/solution_1"
+    let package = folder + "/PrimeSwift_1bitStriped_u8"
     let core = package + "/Sources/PrimeSieveSwift/PrimeSieve.swift"
     let current = FileManager.default.fileExists(atPath: solution.appendingPathComponent(core).path)
     let legacy = FileManager.default.fileExists(atPath: solution.appendingPathComponent("experiments/swift/PrimeSieve.swift").path)
     guard current != legacy else { throw RuntimeError("Expected exactly one supported canonical sieve layout.") }
     if current {
+        // The shipped image builds all three Swift entries, and run.sh runs them in turn.
         return SourceLayout(
-            name: "solution-package", rootPath: ".", dockerfile: "tools/swift/Dockerfile", core: core,
-            sourceFiles: ["tools/swift/Dockerfile", "tools/swift/Dockerfile.dockerignore", core,
-                          "tools/swift/Benchmark.swift", package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
+            name: "solution-package", rootPath: ".", context: folder, dockerfile: folder + "/Dockerfile",
+            candidateEntry: "PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
+            diagnostic: "Passes: [0-9]+, Time: [0-9.e+-]+, Avg: [0-9.e+-]+, Limit: 1000000, Count: 78498, Valid: true, Checksum: [0-9]+",
+            core: core,
+            sourceFiles: [folder + "/Dockerfile", folder + "/.dockerignore", folder + "/run.sh",
+                          package + "/Package.swift", package + "/Package.resolved",
+                          package + "/Sources/PrimeSieveSwift/main.swift", package + "/Sources/PrimeSieveSwift/BenchmarkDuration.swift",
+                          core, package + "/Sources/BenchmarkObserver/BenchmarkObserver.swift",
                           package + "/Tools/Verify.swift",
                           "tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"],
             checks: [("verify", [package + "/Tools/Verify.swift"]),
                      ("phase-verify", ["tools/swift/phase-split/PhaseSieve.swift", "tools/swift/phase-split/PhaseVerify.swift"])])
     }
     return SourceLayout(
-        name: "experiments", rootPath: "experiments/swift", dockerfile: "Dockerfile", core: "PrimeSieve.swift",
+        name: "experiments", rootPath: "experiments/swift", context: ".", dockerfile: "Dockerfile",
+        candidateEntry: nil, diagnostic: "Validated: 78498 primes; checksum: [0-9]+", core: "PrimeSieve.swift",
         sourceFiles: ["Dockerfile", "PrimeSieve.swift", "Benchmark.swift", "BenchmarkObserver.swift",
                       "Verify.swift", "ExtraVerify.swift", "tools/phase-split/PhaseSieve.swift",
                       "tools/phase-split/PhaseVerify.swift"],
@@ -578,6 +593,7 @@ func validate(_ arguments: [String]) throws {
         journal["workflow_revision"] = workflowHead
         if let expected = environment["GITHUB_SHA"], !expected.isEmpty, workflowHead != expected { throw RuntimeError("Workflow checkout does not match the event revision.") }
         let sourceRoot = solution.appendingPathComponent(layout.rootPath).standardizedFileURL
+        let context = sourceRoot.appendingPathComponent(layout.context).standardizedFileURL
         let dockerfileURL = sourceRoot.appendingPathComponent(layout.dockerfile)
         journal["source_layout"] = layout.name
         journal["source_hash_root"] = layout.rootPath
@@ -615,24 +631,38 @@ func validate(_ arguments: [String]) throws {
         let builder = "swift-validation-build:" + suffix
         let runtime = "swift-validation-runtime:" + suffix
         let commonBuild = ["docker", "build", "--progress=plain", "--pull=false", "--platform", platform, "--file", dockerfileURL.path]
-        try run("build-compiler-stage", commonBuild + ["--target", "build", "--tag", builder, "--iidfile", output.appendingPathComponent("build-image.id").path, sourceRoot.path])
-        try run("build-runtime-image", commonBuild + ["--tag", runtime, "--iidfile", output.appendingPathComponent("runtime-image.id").path, sourceRoot.path])
+        try run("build-compiler-stage", commonBuild + ["--target", "build", "--tag", builder, "--iidfile", output.appendingPathComponent("build-image.id").path, context.path])
+        try run("build-runtime-image", commonBuild + ["--tag", runtime, "--iidfile", output.appendingPathComponent("runtime-image.id").path, context.path])
         journal["build_image"] = try inspectImage("inspect-build-image", builder)
         journal["runtime_image"] = try inspectImage("inspect-runtime-image", runtime)
         let container = ["--platform", platform, "--network", "none"]
         let swiftVersion = try containers("container-swift-version", container + ["--entrypoint", "swiftc", builder, "--version"], timeout: 60).stdout
         journal["swift_version"] = swiftVersion.trimmingCharacters(in: .whitespacesAndNewlines)
         guard swiftVersion.contains("Swift version 6.3.3") else { throw RuntimeError("Unexpected Swift compiler version in build stage.") }
-        let smoke = try containers("runtime-smoke", container + [runtime], timeout: 120)
+        // The candidate runs once on its own: one result line and its diagnostic.
+        let candidate = layout.candidateEntry.map { ["--entrypoint", "./" + $0] } ?? []
+        let smoke = try containers("runtime-smoke", container + candidate + [runtime], timeout: 120)
         let line = smoke.stdout.trimmingCharacters(in: .whitespacesAndNewlines)
         let fields = line.split(separator: ";", omittingEmptySubsequences: false).map(String.init)
         guard line.split(separator: "\n").count == 1, fields.count == 5 else { throw RuntimeError("Runtime image did not emit exactly one benchmark result.") }
         guard !fields[0].isEmpty, let passes = Int(fields[1]), passes > 0, let seconds = Double(fields[2]), seconds.isFinite, seconds >= 5,
               fields[3] == "1", fields[4] == "algorithm=base,faithful=yes,bits=1",
-              matches("Validated: 78498 primes; checksum: [0-9]+", smoke.stderr.trimmingCharacters(in: .whitespacesAndNewlines)) else {
+              matches(layout.diagnostic, smoke.stderr.trimmingCharacters(in: .whitespacesAndNewlines)) else {
             throw RuntimeError("Runtime image failed benchmark-output validation.")
         }
-        journal["runtime_smoke"] = ["passes": passes, "seconds": seconds, "threads": 1, "tags": fields[4], "prime_count": 78498, "performance_evidence": false]
+        journal["runtime_smoke"] = ["label": fields[0], "passes": passes, "seconds": seconds, "threads": 1, "tags": fields[4], "prime_count": 78498, "performance_evidence": false]
+        if layout.candidateEntry != nil {
+            // The image's own entrypoint runs every entry it ships. Each result line
+            // must be well formed, and the candidate's must appear exactly once.
+            let entry = try containers("entry-smoke", container + [runtime], timeout: 300)
+            let results = entry.stdout.split(separator: "\n").map { $0.split(separator: ";", omittingEmptySubsequences: false).map(String.init) }.filter { $0.count == 5 }
+            guard !results.isEmpty,
+                  results.allSatisfy({ Int($0[1]).map { $0 > 0 } == true && Double($0[2]).map { $0 >= 5 } == true && $0[3] == "1" && $0[4].hasPrefix("algorithm=base,faithful=yes,bits=") }),
+                  results.filter({ $0[0] == fields[0] && $0[4] == fields[4] }).count == 1 else {
+                throw RuntimeError("The image's entrypoint did not report the shipped entries as expected.")
+            }
+            journal["entry_smoke"] = ["results": results.map { $0[0] + ";" + $0[4] }, "candidate": fields[0], "performance_evidence": false]
+        }
 
         // Both code and checks come from the same immutable checkout. The only
         // writable host mount holds newly compiled verification executables.
