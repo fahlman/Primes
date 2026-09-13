@@ -1,0 +1,2 @@
+Passed: 25 storage layout/zeroing cases and Int.min/Int.max layout arithmetic.
+Passed: 47105 complete prime lists: every limit -2...30,000, 11382 128-bit alignment/group/tail limits, 3654 sparse group and cleanup limits, 1561 limits within 3 of every prime square up to 2,000,000, 500 random limits up to 2,000,000, and the large limits including 1M (78,498 primes) and 10M (664,579).
