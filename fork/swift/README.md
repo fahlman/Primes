@@ -17,7 +17,7 @@ sh ./run.sh
 
 `run.sh` builds the unchanged development benchmark with the canonical sieve and separately compiled observer. It uses `-O -whole-module-optimization`, limit 1,000,000 and at least five seconds; allocation through release is timed. Validation expects 78,498 primes. The full [candidate checklist](../../AGENTS.md#done-checklist-for-a-candidate) lists the ASan/WMO and assembly commands.
 
-The [phase tools](phase-split/README.md) derive diagnostics from the canonical source. The historical `PhaseSieve.swift` remains an independent full-buffer reference. See [Linux validation](linux-docker/README.md) for the separate single-entry development Docker image and native checks. The solution folder's Docker image runs all three Swift entries.
+The [phase tools](phase-split/README.md) derive diagnostics from the canonical source. The historical `PhaseSieve.swift` remains an independent full-buffer reference. See [Linux validation](linux-docker/README.md) for the native Linux checks of the solution folder's Docker image, which runs all three Swift entries.
 
 ## Compare committed revisions
 
@@ -48,7 +48,7 @@ Exact `099e35a` passed all six checks and runtime smoke on native amd64 and arm6
 
 ## Submission and history
 
-The package prepared through [PR #28](https://github.com/fahlman/Primes/pull/28), preserved at `35becbe`, is now the development source under `PrimeSwift/solution_1`. Upstream submission remains paused. Before submission, resolve the retained `yellowcub_striped_UInt8` label, record an accepted direct comparison for cutoff 111, and validate the packaged entry itself on native Linux. Development-image checks remain separate from package validation.
+The package prepared through [PR #28](https://github.com/fahlman/Primes/pull/28), preserved at `35becbe`, is now the development source under `PrimeSwift/solution_1`. Upstream submission remains paused. Before submission, resolve the retained `yellowcub_striped_UInt8` label and record an accepted direct comparison for cutoff 111. The packaged entry's own image is what [the Linux workflow](linux-docker/README.md) validates.
 
 Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for individual outcomes, detailed reviews, timing tables and evidence links. The original report files remain in published Git history. Rejected experiments live on in their closed PRs, whose commits GitHub keeps; the `swift/stream-fusion` experiment is commit `f0cd82d`. The [earlier project brief](https://github.com/fahlman/Primes/blob/38eb1e77677133d610eb23e13171ee981c815771/experiments/swift/AGENTS.md) retains the former experiment table; it is a dated snapshot, not another current status list.
 

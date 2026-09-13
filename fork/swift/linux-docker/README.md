@@ -8,19 +8,17 @@ cleanup rules; the Python versions remain in Git history and in the evidence the
 produced.
 
 
-This workflow validates the committed single-entry development Dockerfile and existing correctness
+This workflow validates the shipped `PrimeSwift/solution_1/Dockerfile` and the existing correctness
 checks on native Linux amd64 and arm64. It uses Docker already installed on the
 GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners; no Docker installation
 on the Mac is needed. It does not publish images or measure a performance gain.
 
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
-`tools/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
+`fork/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
 The two native jobs run serially.
-The current trigger requests the full six-check
-suite on amd64 and arm64 for the adopted cutoff 111. The job limit
-is 60 minutes, providing room beyond the earlier 45-minute cutoff127 timeout;
-individual command limits remain 20 minutes. Repository permissions are read-only.
+Each job runs every check of the pinned solution's layout. The job limit
+is 60 minutes; individual command limits remain 20 minutes. Repository permissions are read-only.
 Its unchanged concurrency group serializes
 runs without cancelling an active run.
 The inherited all-language CI is disabled in the fork's Actions settings; this
@@ -31,12 +29,10 @@ The cleanup-fix [run 34726948107](https://github.com/fahlman/Primes/actions/runs
 
 ## Selecting exactly what is checked
 
-`SOLUTION_REVISION` in the workflow remains pinned to
-`dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee`, a historical development revision
-containing the adopted cutoff111 sieve. Moving the source files does not advance
-that pin or establish native Linux validation of the relocated package.
-This selects the source for Linux validation; it does not adopt or merge it.
-Change the pin explicitly when a different reviewed solution is selected.
+`SOLUTION_REVISION` in the workflow pins the exact solution commit under
+validation, independently of the workflow commit. A pin selects the source for
+Linux validation; it does not adopt or merge it. Change the pin explicitly when a
+different reviewed solution is selected.
 The workflow and solution are checked out into
 separate directories. The validator checks both revisions and requires a clean
 solution checkout, then hashes the Dockerfile, sieve, runner, observer and every
@@ -46,26 +42,25 @@ commit. The solution files and Dockerfile are never rewritten by the validator.
 The validator selects exactly one supported source layout. Historical revisions
 use `experiments/swift` as the Docker build context and read-only source mount;
 their hash keys keep the original paths relative to that directory. Current
-revisions use the repository root, with the canonical core and observer under
+revisions mount the repository root read-only and build `PrimeSwift/solution_1`
+with its shipped Dockerfile, with the canonical core and observer under
 `PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources`, Verify under that
-package's `Tools`, and the benchmark and phase checks under
-`tools/swift`. Their hash keys are repository-relative. The record identifies
-`source_layout` and `source_hash_root`; both layouts retain the same six checks.
-Missing or ambiguous layouts fail instead of selecting a duplicate source.
+package's `Tools`, and the phase checks under `fork/swift`. Their hash keys are
+repository-relative. The record identifies `source_layout` and
+`source_hash_root`. Missing or ambiguous layouts fail instead of selecting a
+duplicate source.
 
-The current single-entry image builds from the repository root:
+The validator builds the entry's own image with the solution folder as its
+context, as upstream's CI does:
 
 ```sh
-docker build -f tools/swift/Dockerfile -t prime-swift-validation .
+docker build -f PrimeSwift/solution_1/Dockerfile -t prime-swift-validation PrimeSwift/solution_1
 ```
 
-`tools/swift/Dockerfile.dockerignore` permits only the core, observer and
-development benchmark into that context, excluding Git metadata, build products
-and other solutions. Docker supports this [Dockerfile-specific ignore
-file](https://docs.docker.com/build/concepts/context/#filename-and-location).
-The validator hashes it with the new layout's inputs. The three-entry
-`PrimeSwift/solution_1/Dockerfile` is the solution package's image and is not the
-validator's image.
+Its `build` stage compiles all three Swift entries with SwiftPM, and the final
+image's entrypoint, `run.sh`, runs them in turn. The validator hashes the
+Dockerfile, `.dockerignore`, `run.sh` and the striped package's manifest, lockfile
+and sources together with the check sources.
 
 The two official actions are pinned to commit SHAs. These refs were read from
 their official GitHub repositories on 2026-09-12:
@@ -84,11 +79,14 @@ An exclusive `/tmp/primes-timing.lock` protects this runner's work. It is remove
 in `finally` only after owned-container cleanup is confirmed. An existing lock stops the job. It cannot synchronize with the Mac;
 the root agent must still withhold the push until local timing is complete.
 
-The final image runs once, with its normal entrypoint and no network. Success
-requires one result line, a positive pass count, at least five seconds, one
-thread, exact `algorithm=base,faithful=yes,bits=1` tags, and the runner's 78,498-prime
-validation message. This five-second smoke run is compatibility evidence only.
-Hosted hardware and its output must not be used for the project's M4 speed claims.
+The final image runs twice with no network. First with the striped package's
+executable as the entrypoint: success requires one result line, a positive pass
+count, at least five seconds, one thread, exact `algorithm=base,faithful=yes,bits=1`
+tags, and the runner's diagnostic line with 78,498 primes and `Valid: true`. Then
+with its normal entrypoint, `run.sh`: every result line must be well formed, and
+the striped entry's label and tags must appear exactly once. These smoke runs are
+compatibility evidence only. Hosted hardware and its output must not be used for
+the project's M4 speed claims.
 
 By default, the build-stage image compiles and runs Verify and PhaseVerify
 under both `-O -sanitize=address` and `-O -whole-module-optimization`.
@@ -142,7 +140,7 @@ artifact upload. The layout's Swift checks then run once per native job.
 For the fake-only tests, after acquiring the project timing lock, use:
 
 ```sh
-swift tools/swift/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
+swift fork/swift/linux-docker/linux-validation.swift test-lifecycle --output /tmp/new-lifecycle-test-evidence
 ```
 
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the
