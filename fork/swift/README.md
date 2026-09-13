@@ -54,4 +54,4 @@ Use the [PR history](https://github.com/fahlman/Primes/pulls?q=is%3Apr) for indi
 
 ## License
 
-Fork development tools retain the included MIT [license](LICENSE). The solution package and upstream implementations retain their existing repository licensing and attribution.
+Everything fahlman wrote in this fork, the development tools here and the contributions in `PrimeSwift/solution_1`, is licensed under the BSD-3-Clause license, whose text is in [LICENSE](LICENSE). The upstream implementations keep their authors' terms under CONTRIBUTING.md.
