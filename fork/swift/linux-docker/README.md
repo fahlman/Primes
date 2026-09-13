@@ -16,7 +16,9 @@ on the Mac is needed. It does not publish images or measure a performance gain.
 The workflow is `.github/workflows/swift-linux-docker-validation.yml`. It runs
 only for pushes to `swift/linux-docker-validation` that change that workflow or
 `fork/swift/linux-docker/linux-validation.swift`, and only in `fahlman/Primes`.
-The two native jobs run serially.
+The two native jobs run serially; a third job lints `PrimeSwift/solution_1/Dockerfile`
+with the hadolint action and configuration that upstream's CI applies to every
+solution.
 Each job runs every check of the pinned solution's layout. The job limit
 is 60 minutes; individual command limits remain 20 minutes. Repository permissions are read-only.
 Its unchanged concurrency group serializes
