@@ -1,0 +1,41 @@
+{
+  "verified_at_utc": "2026-09-13 12:24:18 UTC",
+  "repository": "fahlman/Primes",
+  "package_candidate": "b826fc6af66835d67494c7d0646fc7d596a2ccc8",
+  "package_base": "890909588f311f9314933d0517e07416310a7c7b",
+  "pull_requests": [
+    26,
+    27,
+    28
+  ],
+  "reason": "The inherited all-language Docker matrix was cancelled deliberately after verifying each new fork-ref run identity. The authorized local refactor checks passed separately; targeted native package Linux/Docker validation remains separate submission work while upstream submission is paused. These cancelled runs are not passing Linux checks.",
+  "runs": [
+    {
+      "conclusion": "cancelled",
+      "databaseId": 34756816009,
+      "event": "push",
+      "headBranch": "swift/submission-review-base",
+      "headSha": "890909588f311f9314933d0517e07416310a7c7b",
+      "status": "completed",
+      "url": "https://github.com/fahlman/Primes/actions/runs/34756816009"
+    },
+    {
+      "conclusion": "cancelled",
+      "databaseId": 34756815788,
+      "event": "push",
+      "headBranch": "swift/submission-cli-refactor",
+      "headSha": "b826fc6af66835d67494c7d0646fc7d596a2ccc8",
+      "status": "completed",
+      "url": "https://github.com/fahlman/Primes/actions/runs/34756815788"
+    },
+    {
+      "conclusion": "cancelled",
+      "databaseId": 34756880574,
+      "event": "pull_request",
+      "headBranch": "swift/submission-cli-refactor",
+      "headSha": "b826fc6af66835d67494c7d0646fc7d596a2ccc8",
+      "status": "completed",
+      "url": "https://github.com/fahlman/Primes/actions/runs/34756880574"
+    }
+  ]
+}
