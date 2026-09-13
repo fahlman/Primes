@@ -7,6 +7,13 @@ earlier Python pair, keeping the same commands, checks, evidence record and
 cleanup rules; the Python versions remain in Git history and in the evidence they
 produced.
 
+The validator and its lifecycle tests are one Swift script,
+`linux-validation.swift`, with the subcommands `validate` and `test-lifecycle`; it
+runs on the runner host, whose Ubuntu images ship Swift 6.3.3. It is a port of the
+earlier Python pair, keeping the same commands, checks, evidence record and
+cleanup rules; the Python versions remain in Git history and in the evidence they
+produced.
+
 This workflow validates the committed Swift Dockerfile and existing correctness
 checks on native Linux amd64 and arm64. It uses Docker already installed on the
 GitHub-hosted `ubuntu-24.04` and `ubuntu-24.04-arm` runners; no Docker installation
@@ -119,8 +126,8 @@ swift experiments/swift/tools/linux-docker/linux-validation.swift test-lifecycle
 The real probe requires Docker and an explicit `--docker-probe`; it acquires the
 runner-local lock itself. At source `f6256fd862ddfdd85f8c02d191fbf84822310798`,
 all 13 focused Python tests and syntax parsing passed under the exclusive lock
-on the Mac; [local record](../../linux-cleanup-evidence/local-f6256fd/local-verification.json)
-and [test log](../../linux-cleanup-evidence/local-f6256fd/unit-tests/unit-tests.log)
+on the Mac; [local record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-cleanup-evidence/local-f6256fd/local-verification.json)
+and [test log](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-cleanup-evidence/local-f6256fd/unit-tests/unit-tests.log)
 retain the commands, exits and source hashes. Docker was not installed locally.
 The single native workflow run at `028125534a516a9adca0cd8f7419bd74d2b51975`
 subsequently passed on amd64 and arm64. Each architecture passed the real probe,
@@ -162,7 +169,7 @@ confirm full six-check coverage on each native architecture for exact solution
 `bd3858cac9a306aa3b8d4729cf059959a7c70885`, with amd64 coverage assembled across
 the original five checks and the focused final check. The original timeout is
 retained as a cancelled run. See the [complete report](../../reports/LinuxDockerValidation.md)
-and [aggregate coverage record](../../linux-docker-validation/aggregate-coverage.json).
+and [aggregate coverage record](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/linux-docker-validation/aggregate-coverage.json).
 
 Implementation and static review do not establish Linux support. Full Linux
 verification requires successful evidence for all six checks on each native

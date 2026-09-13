@@ -60,3 +60,5 @@ cost is claimed; all earlier reports remain historical evidence.
 ## Integration
 
 Adopted in PR #24 merge commit `2ee7b3a`, following generator PR #21 merge `7be57ca`. Production retains the same marking source; only the generator's two 64-bit marker comments differ from `1d05221`. A fresh phase build generated identities from the merged source, and `--check` passed all eight wrappers with full raw-buffer equality and 78,498 primes. Independently reversing the three substitutions reproduced production exactly. `maintenance-integration-evidence/checks-2ee7b3a.json` records commands, identities, binary hash and lock cleanup. Prior ASan/WMO and actual-binary evidence remains applicable to unchanged tooling/runtime inputs; no full-suite repeat or timing campaign was added.
+
+Retrieve the named records from the [phase-tool evidence archive](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/current-phase-evidence) and [integration checks archive](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/maintenance-integration-evidence/checks-2ee7b3a.json).

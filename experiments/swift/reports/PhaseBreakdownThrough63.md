@@ -56,8 +56,8 @@ The immediate optimization opportunity is the sparse byte-stream loop, at approx
 
 ## Evidence
 
-- [Raw samples](../phase-breakdown-results-a1f63c5.json)
-- [Verification, source hashes, assembly review, session conditions and calculations](../phase-breakdown-verification-a1f63c5.json)
+- [Raw samples](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/phase-breakdown-results-a1f63c5.json)
+- [Verification, source hashes, assembly review, session conditions and calculations](https://github.com/fahlman/Primes/blob/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift/phase-breakdown-verification-a1f63c5.json)
 - [Diagnostic source and reproduction notes](../tools/phase-split/README.md)
 - [Shared PR #9](https://github.com/fahlman/Primes/pull/9)
 

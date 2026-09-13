@@ -15,4 +15,4 @@ All times measure fresh allocation, initialization, sieving, observation, and re
 
 The retained implementation is the previously verified unrolled class. The proposed direct-array and cached-per-instance square-root changes did not demonstrate a reliable sieve-kernel improvement, so they were not adopted. Wheel and other submission categories remain deferred.
 
-Raw samples, the reproducible comparison script, source, and methodology are included in the [parent experiment directory](../). The Dockerfile is included but Docker execution has not been tested on this machine.
+Raw samples, the reproducible comparison script, source, and methodology are included in the [parent experiment directory](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift). The Dockerfile is included but Docker execution has not been tested on this machine.

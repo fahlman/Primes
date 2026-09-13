@@ -64,8 +64,8 @@ Measurements are from each experiment's recorded session; use the linked reports
 |---|---|
 | `PrimeSieve.swift` | Committed, directly compiled rendering of the sieve: one bit per odd candidate, bit 0 stands for 3, and a set bit means composite. Edit its template, then regenerate. |
 | `tools/PrimeSieve.swift.in` | Handwritten source with two switch insertion lines and dispatch-bound tokens. This is the authoring source for changes outside generated cases. |
-| `tools/generate-dense.swift` | Canonical whole-file renderer with both marked explicit switches: every odd factor 5–63 at 64 bits and 65–111 at 128 bits. Dispatch bounds come from that metadata. Use `--check PrimeSieve.swift` or `--write PrimeSieve.swift` under the lock; write replaces the complete file. The old `generate-dense-128.swift` filename forwards to it. |
-| `tools/check-dense-generator.swift` | Reusable generator and compatibility-entry checks with independent marking schedules and disposable failure fixtures. Run under the same lock. |
+| `tools/generate-dense.swift` | Canonical whole-file renderer with both marked explicit switches: every odd factor 5–63 at 64 bits and 65–111 at 128 bits. Dispatch bounds come from that metadata. Use `--check PrimeSieve.swift` or `--write PrimeSieve.swift` under the lock; write replaces the complete file. |
+| `tools/check-dense-generator.swift` | Reusable generator checks with independent marking schedules and disposable failure fixtures. Run under the same lock. |
 | `Benchmark.swift` | The timed runner. |
 | `BenchmarkObserver.swift` | An opaque one-byte read, compiled as a separate module so the optimizer can't remove sieve work. It computes no part of the sieve. |
 | `Verify.swift` | Complete-array checks against an independent Boolean sieve. |
@@ -75,7 +75,8 @@ Measurements are from each experiment's recorded session; use the linked reports
 | `tools/compare-upstream.swift` | Timing comparison of a committed candidate against the three upstream entries, downloaded at commit `22bfea9` and built with the same frozen runner and observer. `--output` is required and never overwrites. |
 | `tools/phase-split/` | Generates current phase inputs with source-identity guards; preserves the independent `8f108f5` full-buffer correctness reference. See its README before building or running. |
 | `tools/linux-docker/` | `linux-validation.swift`: the native Linux/Docker validator (`validate`) and its lifecycle tests and Docker probe (`test-lifecycle`), driven by the fork's `swift-linux-docker-validation.yml` workflow on the runner host. |
-| `reports/`, `*.json` | Recorded results. Don't overwrite them unintentionally. |
+| `reports/` | Human-readable findings with immutable links to their recorded evidence. |
+| `archive/swift-evidence` | Published snapshot of historical raw records through `dc3f8cf`; see the [evidence archive](https://github.com/fahlman/Primes/tree/dc3f8cfbbb9d2df7b3e42fbba55d11366933ccee/experiments/swift). These files need not remain in the development checkout. |
 
 ## Sieve rules
 
@@ -114,6 +115,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - The other agent reviews that exact candidate commit before any timing and posts its findings on the PR, explicitly identifying itself as Codex or Claude. An agent's review comment is sufficient when both agents use the same GitHub account. Changes to the sieve or benchmark after review require review of the changed code before further timing.
 - Post benchmark results on the same PR, following the benchmark contract and timing lock above. Identify both measured commits, hardware, Swift version, build flags, run order, validation results, and any conditions that limit the conclusion. Distinguish measured improvement from hypotheses.
 - Commit reports and raw result files without overwriting earlier runs, publish them to the fork, and link the exact files and commits from the PR. A reviewer may publish a separate report branch from its own worktree; the evidence must not exist only on a local branch or in chat.
+- Preserve raw evidence on its published experiment, review or archive branch, and use immutable commit links from the development reports. Historical records do not need to accumulate in the development checkout; keep its current code, tools and reports available.
 - Record whether the experiment is pending, adopted, or rejected on the PR. When it is adopted or rejected, also update Current best and Experiments in this file. Preserve rejected branches and results. Publishing a PR or a review does not itself adopt the experiment; integration stays within the user's authorized scope.
 - Use issues in `fahlman/Primes` for agreed objectives, future experiments, and unresolved work when issues are enabled, and link related PRs. An issue is optional for an individual experiment. While issues are disabled, use the PR and the Experiments table; enabling issues is a separate repository-setting change.
 - Keep this file focused on shared rules and the concise project status. Put detailed findings, measurements, and discussion in PRs and committed reports.
