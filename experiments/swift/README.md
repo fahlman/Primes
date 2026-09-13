@@ -153,7 +153,7 @@ Acquire the timing lock before running this command, back up `all-swift-results.
 
 This takes approximately 60 seconds of timed work plus compilation, downloads originals pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`, and replaces `all-swift-results.json` with the new measurements. Generated files stay under `.build`. Python only builds and launches executables; sieve and timed benchmark logic are Swift.
 
-The earlier two-way comparison remains available through `compare.py` and `comparison-results.json`. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
+The earlier two-way results remain in [comparison-results.json](comparison-results.json), and the [retired comparison runner](https://github.com/fahlman/Primes/blob/405dfc5b6be6bc0bba651d35e8582da97d38388f/experiments/swift/compare.py) is preserved in Git history. The benchmark observer performs an opaque byte read and calculates no part of the sieve. The original Boolean implementation is compared only at one million, avoiding its known bounds issue at some other sizes.
 
 ## Validation
 
