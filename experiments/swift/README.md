@@ -6,14 +6,9 @@ This is a single-threaded, class-owned, odd-only Sieve of Eratosthenes. It store
 
 ## Storage-layout maintenance candidate
 
-Branch `swift/storage-layout` centralizes logical storage sizing in the pure
-`PrimeSieve.storageLayout(for:)` helper. Initialization and benchmark setup use
-its named `oddCount`/`byteCount` result. Empty storage still has zero logical bytes,
-allocates a minimum capacity of one, and passes nil to the observer. Offset
-calculation stays outside `completedPass`; marking, ownership and the separately
-compiled observer are unchanged. This is a maintenance candidate against
-`84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`, with correctness and relevant assembly
-comparison pending at this source commit. No throughput comparison is planned.
+Branch `swift/storage-layout`, exact source `5cbc25e1c41d55e1a48db4737721e589e046b08e`, centralizes logical storage sizing in the pure `PrimeSieve.storageLayout(for:)` helper. Its `StorageLayout` value holds the odd count and computes byte count on access. Initialization and benchmark setup use the same API; empty storage still has zero logical bytes, allocates a minimum capacity of one, and passes nil to the observer. Offset calculation stays outside `completedPass`; marking and the separately compiled observer are unchanged.
+
+Verify ASAN/WMO and ExtraVerify ASAN passed, including 25 explicit layout/zeroing cases and layout-only extreme limits. Complete optimized benchmark assembly is byte-for-byte identical to development control `84d8a4fb0235ca4d5e8261a80877499e3b36b3ef`, including the initializer and all 32 emitted functions. The authoring template is synchronized; canonical and compatibility full-file checks passed. This maintenance candidate remains unadopted. No throughput comparison ran. [Review, limits and preserved attempts](reports/StorageLayoutReview.md).
 
 The comparison tags remain `algorithm=base,faithful=yes,bits=1`, with one thread. Small-factor specialization preserves runtime discovery and separate single-bit operations, following the approach documented in the [other-language review](reports/OtherLanguageOptimizationReview.md). The larger-factor loop uses the wrapping index arithmetic adopted in PR #4.
 

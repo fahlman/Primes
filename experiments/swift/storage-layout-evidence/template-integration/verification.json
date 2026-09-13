@@ -1,0 +1,231 @@
+{
+  "started_at_utc": "2026-09-13T12:14:29.952872+00:00",
+  "status": "passed",
+  "source_candidate": "5cbc25e1c41d55e1a48db4737721e589e046b08e",
+  "scope": "Canonical and compatibility full-file check only; no sieve build, correctness rerun or benchmark.",
+  "commands": [
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift",
+        "tools/generate-dense.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:14:30.163699+00:00",
+      "owned_process_group": 84304,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Complete source and generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-13T12:14:30.828720+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swift",
+        "tools/generate-dense-128.swift",
+        "--check",
+        "PrimeSieve.swift"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T12:14:30.829213+00:00",
+      "owned_process_group": 84309,
+      "exit_code": 0,
+      "combined_stdout_stderr": "Complete source and generated 64-bit 5...63 and 128-bit 65...111 switches match.\n",
+      "finished_at_utc": "2026-09-13T12:14:31.433330+00:00"
+    }
+  ],
+  "wrapper_sha256": "577be9008d136cc3dd0b455a6993330f431d033c2f16f081cbf7eaf31e5c9b75",
+  "integration_head": "8293803b296a5a1d3f2c886f96e2bf229d6e30ce",
+  "authoring_head": "5661fa4ef380399a08e4fdb289bcada15fe9689c",
+  "prior_verification_sha256": "df3c572068b04357f16643c1b8c5db2ddc662c2e085b06bf0b1e83d674b9541e",
+  "source_sha256_before": {
+    "PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "Benchmark.swift": "3e8feb92083f2b0d239ce71f4d09100f886a93551e96d20480761fe87c6ace2e",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/PrimeSieve.swift.in": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0",
+    "tools/generate-dense.swift": "d086d8c76fe7340f4c55446f23a4389e435a1461ab3ef4826464189d00b712c2",
+    "tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9"
+  },
+  "exclusive_lock_before_checks": true,
+  "before": {
+    "at_utc": "2026-09-13T12:14:30.077959+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 31.1,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 18.4,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 16.9,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 9.9,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 3.8,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 3.7,
+        "executable": "Messages"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 3.2,
+        "executable": "launchd"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 3.2,
+        "executable": "codex"
+      },
+      {
+        "pid": 336,
+        "cpu_percent": 1.7,
+        "executable": "logd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.4,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 1.3,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 7157,
+        "cpu_percent": 1.2,
+        "executable": "Mail"
+      },
+      {
+        "pid": 50787,
+        "cpu_percent": 1.1,
+        "executable": "ChatGPT"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 0.8,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 0.8,
+        "executable": "sharingd"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "swift_driver_sha256": "2ed38571e92c0283091838c1649e27650ad9c99950288e883c7b2dc6c4ce89fb",
+  "source_sha256_after": {
+    "PrimeSieve.swift": "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "Benchmark.swift": "3e8feb92083f2b0d239ce71f4d09100f886a93551e96d20480761fe87c6ace2e",
+    "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+    "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686",
+    "tools/PrimeSieve.swift.in": "2b99fc1f6b25e31081264f0629bb239e8c937bb0173408fbfbc256e4949292b0",
+    "tools/generate-dense.swift": "d086d8c76fe7340f4c55446f23a4389e435a1461ab3ef4826464189d00b712c2",
+    "tools/generate-dense-128.swift": "8f80ce9bdde197ca17eb69612accea472adb746e52b5e29a36ee6bbd7b2b64e9"
+  },
+  "source_unchanged_after": true,
+  "after": {
+    "at_utc": "2026-09-13T12:14:31.503817+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 38.1,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 15.6,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 50834,
+        "cpu_percent": 7.0,
+        "executable": "Codex (Renderer)"
+      },
+      {
+        "pid": 84157,
+        "cpu_percent": 6.4,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 50797,
+        "cpu_percent": 4.2,
+        "executable": "Codex (Service)"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 3.4,
+        "executable": "Messages"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 2.2,
+        "executable": "launchd"
+      },
+      {
+        "pid": 401,
+        "cpu_percent": 2.2,
+        "executable": "bluetoothd"
+      },
+      {
+        "pid": 7220,
+        "cpu_percent": 1.6,
+        "executable": "WallpaperSequoiaExtension"
+      },
+      {
+        "pid": 677,
+        "cpu_percent": 1.5,
+        "executable": "sharingd"
+      },
+      {
+        "pid": 7157,
+        "cpu_percent": 1.3,
+        "executable": "Mail"
+      },
+      {
+        "pid": 571,
+        "cpu_percent": 0.9,
+        "executable": "mds_stores"
+      },
+      {
+        "pid": 365,
+        "cpu_percent": 0.8,
+        "executable": "mds"
+      },
+      {
+        "pid": 7781,
+        "cpu_percent": 0.8,
+        "executable": "com.apple.WebKit.WebContent"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 0.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "finished_at_utc": "2026-09-13T12:14:31.504583+00:00",
+  "lock_absent_after": true
+}

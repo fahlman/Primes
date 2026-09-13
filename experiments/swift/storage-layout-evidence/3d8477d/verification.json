@@ -1,0 +1,446 @@
+{
+  "candidate": "3d8477d3b171de164917184a74b0e1578907cefa",
+  "control": "84d8a4fb0235ca4d5e8261a80877499e3b36b3ef",
+  "started_at_utc": "2026-09-13T11:53:53.465121+00:00",
+  "status": "failed_or_requires_review",
+  "scope": "Layout boundaries, Verify ASAN/WMO, ExtraVerify ASAN and actual-source assembly; no throughput timing.",
+  "conditions_scope": "Reject competing builds/tests/benchmarks; audio is recorded but does not invalidate correctness or assembly.",
+  "commands": [
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "--version"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:53:53.705814+00:00",
+      "owned_process_group": 80511,
+      "exit_code": 0,
+      "combined_stdout_stderr": "swift-driver version: 1.148.6 Apple Swift version 6.3.3 (swiftlang-6.3.3.1.3 clang-2100.1.1.101)\nTarget: arm64-apple-macosx26.0\n",
+      "finished_at_utc": "2026-09-13T11:53:53.781383+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-parse-as-library",
+        "-module-name",
+        "BenchmarkObserver",
+        "-emit-module",
+        "-emit-module-path",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/BenchmarkObserver.swiftmodule",
+        "-emit-object",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/candidate/BenchmarkObserver.swift",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:53:53.782711+00:00",
+      "owned_process_group": 80514,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T11:53:53.950568+00:00"
+    },
+    {
+      "command": [
+        "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/swiftc",
+        "-O",
+        "-whole-module-optimization",
+        "-module-name",
+        "PrimeSwift",
+        "-I",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/candidate/PrimeSieve.swift",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/candidate/Benchmark.swift",
+        "-S",
+        "-o",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/storage-layout-evidence/3d8477d/candidate.s"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:53:53.952408+00:00",
+      "owned_process_group": 80517,
+      "exit_code": 0,
+      "combined_stdout_stderr": "",
+      "finished_at_utc": "2026-09-13T11:54:44.722119+00:00"
+    },
+    {
+      "command": [
+        "/usr/bin/otool",
+        "-tvV",
+        "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/BenchmarkObserver.o"
+      ],
+      "cwd": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift",
+      "started_at_utc": "2026-09-13T11:54:44.722701+00:00",
+      "owned_process_group": 80697,
+      "exit_code": 0,
+      "combined_stdout_stderr": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/.build/storage-layout-3d8477d/BenchmarkObserver.o:\n(__TEXT,__text) section\n_$s17BenchmarkObserver7observe_2ats6UInt64VSVSg_SitF:\n0000000000000000\tcbz\tx0, 0x8\n0000000000000004\tldrb\tw0, [x0, x1]\n0000000000000008\tret\n",
+      "finished_at_utc": "2026-09-13T11:54:44.736957+00:00"
+    }
+  ],
+  "wrapper_sha256": "c76e02aab33a62cf11a15bf2608700e54e46c77b6464a1d3c5f536ba31196b86",
+  "support_sha256": "d8e5d556e7f87f25e3042ab57ac0a6d532da5d77d7de7abc89e0840794d064c5",
+  "source_sha256": {
+    "control": {
+      "PrimeSieve.swift": "a57114f199777a3e1b886feed43133da6e2d828c6c552c3648542b6db56b0634",
+      "Benchmark.swift": "48b10fc480ec55864a6728bc1ff0643f526d194db3ff20b35b9b24b27563c8cc",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+      "Verify.swift": "4828c7fe7df6e507f47f834676ddc54a367faedbd7e1c802fc2a843b6a2af223",
+      "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686"
+    },
+    "candidate": {
+      "PrimeSieve.swift": "2ba7cce2b06a792a5ebd0353edb48b0ce6816b9c3c49b5f6c4044fce4085a578",
+      "Benchmark.swift": "3e8feb92083f2b0d239ce71f4d09100f886a93551e96d20480761fe87c6ace2e",
+      "BenchmarkObserver.swift": "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+      "Verify.swift": "025a165604e9f415ba75f0f4d6cb660a326d4c4f7c5ffc3f2e61dc73bead85db",
+      "ExtraVerify.swift": "580374f446781d585e9a0336afdc9396d2ccbdefba5c18a9d7c6b9f4d9df3686"
+    }
+  },
+  "exclusive_lock_before_compilation": true,
+  "before": {
+    "at_utc": "2026-09-13T11:53:53.618388+00:00",
+    "top_processes": [
+      {
+        "pid": 409,
+        "cpu_percent": 15.9,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 13.3,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 80494,
+        "cpu_percent": 7.5,
+        "executable": "Python"
+      },
+      {
+        "pid": 50821,
+        "cpu_percent": 6.2,
+        "executable": "codex"
+      },
+      {
+        "pid": 7781,
+        "cpu_percent": 5.9,
+        "executable": "com.apple.WebKit.WebContent"
+      },
+      {
+        "pid": 424,
+        "cpu_percent": 5.7,
+        "executable": "coreaudiod"
+      },
+      {
+        "pid": 819,
+        "cpu_percent": 4.6,
+        "executable": "corespeechd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.8,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 3.0,
+        "executable": "launchd"
+      },
+      {
+        "pid": 7162,
+        "cpu_percent": 2.9,
+        "executable": "Messages"
+      },
+      {
+        "pid": 377,
+        "cpu_percent": 2.6,
+        "executable": "opendirectoryd"
+      },
+      {
+        "pid": 7144,
+        "cpu_percent": 2.1,
+        "executable": "usernoted"
+      },
+      {
+        "pid": 72895,
+        "cpu_percent": 1.4,
+        "executable": "diskimagesiod"
+      },
+      {
+        "pid": 402,
+        "cpu_percent": 1.3,
+        "executable": "notifyd"
+      },
+      {
+        "pid": 7157,
+        "cpu_percent": 1.3,
+        "executable": "Mail"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [
+      "pid 424(coreaudiod): [0x00150f2e00018527] 00:33:04 PreventUserIdleSystemSleep named: \"com.apple.audio.AVVCAggregateDevice-819-282475249.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice",
+      "pid 424(coreaudiod): [0x00150f2e000196cf] 00:33:05 PreventUserIdleSystemSleep named: \"com.apple.audio.BuiltInSpeakerDevice.context.preventuseridlesleep\"",
+      "Resources: audio-out BuiltInSpeakerDevice"
+    ],
+    "caffeinate_pids": []
+  },
+  "compiler_sha256": "2ed38571e92c0283091838c1649e27650ad9c99950288e883c7b2dc6c4ce89fb",
+  "reused_control_assembly": {
+    "record": "/Users/ryan/Developer/Primes-storage-layout/experiments/swift/storage-layout-evidence/b992595-checks-2/verification.json",
+    "record_sha256": "078fe715b4943ef31d68fdb732d1daf58f16dff74dd06273a07bd3f9345d6352",
+    "assembly_sha256": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5",
+    "reason": "Exact unchanged control source, real observer, compiler and flags already compiled in preserved prior session."
+  },
+  "assembly_comparison": {
+    "$s10Foundation13__DataStorageC22withUnsafeMutableBytes2in5applyxSnySiG_xSwKXEtKlFs16IndexingIteratorVySS8UTF8ViewVG_Sit_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation15ContiguousBytes_pSgWOh": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation15ContiguousBytes_pWOb": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV06InlineB0VyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV10LargeSliceVyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV11InlineSliceVyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationO22withUnsafeMutableBytesyxxSwKXEKlFs16IndexingIteratorVySS8UTF8ViewVG_Sit_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationO5countAESi_tcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOSgWOe": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOWOe": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOWOy": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataV15_RepresentationOyAESWcfCTf4nd_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufCSS8UTF8ViewV_Tt0g5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufc8IteratorQz_SitSwXEfU1_SS8UTF8ViewV_TG5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufc8IteratorQz_SitSwXEfU1_SS8UTF8ViewV_TG5TA": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufcAC15_RepresentationOSRyAEGXEfU0_": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10Foundation4DataVyACxcSTRzs5UInt8V7ElementRtzlufcAC15_RepresentationOSWXEfU_": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC03runC0yyF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC22markWordDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC24markVectorDenseMultiples33_D113D18C9011F4014E4762B5A56EE2E5LL2ofySi_tF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC5limitACSi_tcfc": {
+      "identical": false,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveC6primesSaySiGyF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveCMa": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift0A5SieveCfD": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift13completedPass5limit6offsets6UInt64VSi_SitF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$s10PrimeSwift9BenchmarkV4mainyyFZTf4d_n": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$ss11_StringGutsV27_slowEnsureMatchingEncodingySS5IndexVAEF": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "$ss12_ArrayBufferV20_consumeAndCreateNew14bufferIsUnique15minimumCapacity13growForAppendAByxGSb_SiSbtFSi_Tg5": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_destroy_boxed_opaque_existential_1": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_instantiateConcreteTypeFromMangledNameV2": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "__swift_project_boxed_opaque_existential_1": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    },
+    "main": {
+      "identical": true,
+      "control_present": true,
+      "candidate_present": true
+    }
+  },
+  "assembly_sha256": {
+    "control": "5805244719327f8416f4885d2058037f5a226fad9c1e8fb89666c033312cbac5",
+    "candidate": "47364c26f8821c1765923db425cf499f300ede7e09dfbd4c1475bcba5ec36bdf"
+  },
+  "observer_object_sha256": "34a9cc08bf540beef4b9781c2ed3c9a5bf850ed48b79a76aa255b3705a406f88",
+  "after": {
+    "at_utc": "2026-09-13T11:54:44.873061+00:00",
+    "top_processes": [
+      {
+        "pid": 744,
+        "cpu_percent": 61.7,
+        "executable": "mediaanalysisd"
+      },
+      {
+        "pid": 409,
+        "cpu_percent": 35.7,
+        "executable": "WindowServer"
+      },
+      {
+        "pid": 80678,
+        "cpu_percent": 15.2,
+        "executable": "launcher"
+      },
+      {
+        "pid": 80494,
+        "cpu_percent": 13.5,
+        "executable": "Python"
+      },
+      {
+        "pid": 73135,
+        "cpu_percent": 13.1,
+        "executable": "Wipr"
+      },
+      {
+        "pid": 80694,
+        "cpu_percent": 8.7,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 80695,
+        "cpu_percent": 7.7,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 365,
+        "cpu_percent": 7.3,
+        "executable": "mds"
+      },
+      {
+        "pid": 80693,
+        "cpu_percent": 6.1,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 80696,
+        "cpu_percent": 6.0,
+        "executable": "mdworker_shared"
+      },
+      {
+        "pid": 641,
+        "cpu_percent": 5.4,
+        "executable": "SystemUIServer"
+      },
+      {
+        "pid": 80688,
+        "cpu_percent": 5.1,
+        "executable": "launcher-Helper (GPU)"
+      },
+      {
+        "pid": 1,
+        "cpu_percent": 4.2,
+        "executable": "launchd"
+      },
+      {
+        "pid": 565,
+        "cpu_percent": 3.7,
+        "executable": "com.apple.DriverKit-AppleBCMWLAN"
+      },
+      {
+        "pid": 639,
+        "cpu_percent": 3.5,
+        "executable": "Dock"
+      }
+    ],
+    "competing_build_test_benchmark": [],
+    "audio_assertions": [],
+    "caffeinate_pids": []
+  },
+  "error": "RuntimeError: Assembly differs; stop before final-source correctness and report for review",
+  "finished_at_utc": "2026-09-13T11:54:44.873899+00:00",
+  "lock_absent_after": true
+}
