@@ -1,0 +1,18 @@
+{
+  "command" : [
+    "workflow\/fork\/swift\/linux-docker\/linux-validation.swift",
+    "test-lifecycle",
+    "--docker-probe",
+    "--output",
+    "\/home\/runner\/work\/_temp\/swift-linux-docker-lifecycle"
+  ],
+  "errors" : 0,
+  "failures" : 0,
+  "finished_at_utc" : "2026-09-14T00:09:56.351Z",
+  "source_sha256" : {
+    "linux-validation.swift" : "554365f2c8faea2388711dcee5835109569eb79da15d06c5d7a5a8124e48096f"
+  },
+  "started_at_utc" : "2026-09-14T00:09:53.428Z",
+  "status" : "passed",
+  "tests_run" : 14
+}

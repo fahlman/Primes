@@ -1,0 +1,73 @@
+[
+    {
+        "Id": "sha256:d2dff0eff2f15d82dadf7a46b8ca7d2f080ca1ae748b51118f2fa3a131e9402f",
+        "RepoTags": [
+            "swift-validation-build:126d158a8584-arm64"
+        ],
+        "RepoDigests": [],
+        "Parent": "",
+        "Comment": "buildkit.dockerfile.v0",
+        "Created": "2026-09-14T00:27:40.115834296Z",
+        "DockerVersion": "",
+        "Author": "",
+        "Config": {
+            "Hostname": "",
+            "Domainname": "",
+            "User": "",
+            "AttachStdin": false,
+            "AttachStdout": false,
+            "AttachStderr": false,
+            "Tty": false,
+            "OpenStdin": false,
+            "StdinOnce": false,
+            "Env": [
+                "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                "SWIFT_SIGNING_KEY=52BB7E3DE28A71BE22EC05FFEF80A866B47A981F",
+                "SWIFT_PLATFORM=ubuntu24.04",
+                "SWIFT_BRANCH=swift-6.3.3-release",
+                "SWIFT_VERSION=swift-6.3.3-RELEASE",
+                "SWIFT_WEBROOT=https://download.swift.org"
+            ],
+            "Cmd": [
+                "/bin/bash"
+            ],
+            "Image": "",
+            "Volumes": null,
+            "WorkingDir": "/opt/app",
+            "Entrypoint": null,
+            "OnBuild": null,
+            "Labels": {
+                "description": "Docker Container for the Swift programming language",
+                "maintainer": "Swift Infrastructure <swift-infrastructure@forums.swift.org>",
+                "org.opencontainers.image.version": "24.04"
+            }
+        },
+        "Architecture": "arm64",
+        "Os": "linux",
+        "Size": 4107144092,
+        "GraphDriver": {
+            "Data": {
+                "LowerDir": "/var/lib/docker/overlay2/307tw53erktdvve01bdhkhkua/diff:/var/lib/docker/overlay2/tylys6yar5qscajs1ncu1qwj5/diff:/var/lib/docker/overlay2/e98563296e21e84757966f723f679259e6cbf95d2c634ff690a233f44b401e6f/diff:/var/lib/docker/overlay2/359dcdbae924d193086ac54c1710ac34827a7e54c875e924250a20c2a7b137ce/diff:/var/lib/docker/overlay2/d519a7d4ac2315729d5ace145f54a3e4cc18d2562c64c8412469b3db86383ba3/diff:/var/lib/docker/overlay2/7c302908626b87c6bb4d4db8de5cc7c4ea626ca1237a59d999737490b091e2c6/diff",
+                "MergedDir": "/var/lib/docker/overlay2/s05eage8lv3bfk8vvs82imhcy/merged",
+                "UpperDir": "/var/lib/docker/overlay2/s05eage8lv3bfk8vvs82imhcy/diff",
+                "WorkDir": "/var/lib/docker/overlay2/s05eage8lv3bfk8vvs82imhcy/work"
+            },
+            "Name": "overlay2"
+        },
+        "RootFS": {
+            "Type": "layers",
+            "Layers": [
+                "sha256:01c818468a75d080ea22eed90a9fa08caeb68931c680c3023b01a0b0427a8641",
+                "sha256:213c088f76ae22ccd74f9799f93738b733e5877523711caaf80f8cf960aa374d",
+                "sha256:b1b42b8b7faeb1690c8f0b3053d07865817c517205d29978dd5b00cca59f7aaa",
+                "sha256:df3bcfb4235838d0d307289e46b61b69a1b30a66a8cc8c4d38094cb14c502321",
+                "sha256:f85fcd5d6f25349784ed052c5aa203fa2743c4a8405c5a6ec538a7dde38a737d",
+                "sha256:fe05c900bfc7f723a9a9053a685df26475bb28255df88a6f575480292ffb4d23",
+                "sha256:001d0b33d1b01b33bf02065aea33dd13918c25163d04fe0e92a372bb10495343"
+            ]
+        },
+        "Metadata": {
+            "LastTagTime": "2026-09-14T00:27:41.009758991Z"
+        }
+    }
+]
