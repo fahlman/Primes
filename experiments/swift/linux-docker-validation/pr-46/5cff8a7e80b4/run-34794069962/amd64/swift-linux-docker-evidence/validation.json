@@ -1,0 +1,2416 @@
+{
+  "base_images" : {
+    "swift:6.3.3" : {
+      "Architecture" : "amd64",
+      "Created" : "2026-09-09T02:45:32.087497483Z",
+      "Id" : "sha256:5b35a37f651d1a5c79b0281e1f6b81e8402bdf758d185345cb3b3a591b1c4a61",
+      "Os" : "linux",
+      "RepoDigests" : [
+        "swift@sha256:dd115b20969a2acf74c8dcf6da7c4aeda086053c27453dad59052a65bafc8d0c"
+      ],
+      "RepoTags" : [
+        "swift:6.3.3"
+      ]
+    },
+    "swift:6.3.3-slim" : {
+      "Architecture" : "amd64",
+      "Created" : "2026-09-09T02:43:44.96042084Z",
+      "Id" : "sha256:5e809982ff76144f9b0248a551387a9da5bd5b92772d96de29ead630b24dfe89",
+      "Os" : "linux",
+      "RepoDigests" : [
+        "swift@sha256:d20e340aeaf7109919b2a15c95569470070cca4d34dae40dfa58339a2aa734df"
+      ],
+      "RepoTags" : [
+        "swift:6.3.3-slim"
+      ]
+    }
+  },
+  "build_image" : {
+    "Architecture" : "amd64",
+    "Created" : "2026-09-14T00:56:59.217981413Z",
+    "Id" : "sha256:a77a8f3f78b0c4d11b4f802af7d6eaeeb10fac5819878ea21373e50e638e66ba",
+    "Os" : "linux",
+    "RepoDigests" : [
+
+    ],
+    "RepoTags" : [
+      "swift-validation-build:5cff8a7e80b4-amd64"
+    ]
+  },
+  "check_scope" : "full_suite",
+  "cleaning_up" : false,
+  "commands" : [
+    {
+      "command" : [
+        "git",
+        "-C",
+        "\/home\/runner\/work\/Primes\/Primes\/solution",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:28.227Z",
+      "name" : "solution-head",
+      "owned_process_group" : 3152,
+      "started_at_utc" : "2026-09-14T00:53:28.174Z",
+      "stderr_log" : "logs\/01-solution-head.stderr.log",
+      "stdout_log" : "logs\/01-solution-head.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "git",
+        "-C",
+        "\/home\/runner\/work\/Primes\/Primes\/solution",
+        "status",
+        "--porcelain"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:28.331Z",
+      "name" : "solution-clean",
+      "owned_process_group" : 3153,
+      "started_at_utc" : "2026-09-14T00:53:28.229Z",
+      "stderr_log" : "logs\/02-solution-clean.stderr.log",
+      "stdout_log" : "logs\/02-solution-clean.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "git",
+        "-C",
+        "\/home\/runner\/work\/Primes\/Primes\/workflow",
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:28.385Z",
+      "name" : "workflow-head",
+      "owned_process_group" : 3157,
+      "started_at_utc" : "2026-09-14T00:53:28.334Z",
+      "stderr_log" : "logs\/03-workflow-head.stderr.log",
+      "stdout_log" : "logs\/03-workflow-head.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "uname",
+        "-a"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:29.402Z",
+      "name" : "host-kernel",
+      "owned_process_group" : 3172,
+      "started_at_utc" : "2026-09-14T00:53:29.349Z",
+      "stderr_log" : "logs\/04-host-kernel.stderr.log",
+      "stdout_log" : "logs\/04-host-kernel.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "lscpu"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:29.463Z",
+      "name" : "host-cpu",
+      "owned_process_group" : 3173,
+      "started_at_utc" : "2026-09-14T00:53:29.405Z",
+      "stderr_log" : "logs\/05-host-cpu.stderr.log",
+      "stdout_log" : "logs\/05-host-cpu.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "version",
+        "--format",
+        "{{json .}}"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:29.520Z",
+      "name" : "docker-version",
+      "owned_process_group" : 3174,
+      "started_at_utc" : "2026-09-14T00:53:29.466Z",
+      "stderr_log" : "logs\/06-docker-version.stderr.log",
+      "stdout_log" : "logs\/06-docker-version.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "info",
+        "--format",
+        "{{.OSType}}\/{{.Architecture}}"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:29.878Z",
+      "name" : "docker-platform",
+      "owned_process_group" : 3189,
+      "started_at_utc" : "2026-09-14T00:53:29.523Z",
+      "stderr_log" : "logs\/07-docker-platform.stderr.log",
+      "stdout_log" : "logs\/07-docker-platform.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "pull",
+        "--platform",
+        "linux\/amd64",
+        "swift:6.3.3"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:57.042Z",
+      "name" : "pull-base-0",
+      "owned_process_group" : 3219,
+      "started_at_utc" : "2026-09-14T00:53:29.882Z",
+      "stderr_log" : "logs\/08-pull-base-0.stderr.log",
+      "stdout_log" : "logs\/08-pull-base-0.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "image",
+        "inspect",
+        "swift:6.3.3"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:57.099Z",
+      "name" : "inspect-base-0",
+      "owned_process_group" : 3252,
+      "started_at_utc" : "2026-09-14T00:53:57.045Z",
+      "stderr_log" : "logs\/09-inspect-base-0.stderr.log",
+      "stdout_log" : "logs\/09-inspect-base-0.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "pull",
+        "--platform",
+        "linux\/amd64",
+        "swift:6.3.3-slim"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:58.961Z",
+      "name" : "pull-base-1",
+      "owned_process_group" : 3261,
+      "started_at_utc" : "2026-09-14T00:53:57.103Z",
+      "stderr_log" : "logs\/10-pull-base-1.stderr.log",
+      "stdout_log" : "logs\/10-pull-base-1.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "image",
+        "inspect",
+        "swift:6.3.3-slim"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:53:59.018Z",
+      "name" : "inspect-base-1",
+      "owned_process_group" : 3280,
+      "started_at_utc" : "2026-09-14T00:53:58.964Z",
+      "stderr_log" : "logs\/11-inspect-base-1.stderr.log",
+      "stdout_log" : "logs\/11-inspect-base-1.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "build",
+        "--progress=plain",
+        "--pull=false",
+        "--platform",
+        "linux\/amd64",
+        "--file",
+        "\/home\/runner\/work\/Primes\/Primes\/solution\/PrimeSwift\/solution_1\/Dockerfile",
+        "--target",
+        "build",
+        "--tag",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "--iidfile",
+        "\/home\/runner\/work\/_temp\/swift-linux-docker-evidence\/build-image.id",
+        "\/home\/runner\/work\/Primes\/Primes\/solution\/PrimeSwift\/solution_1"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:00.276Z",
+      "name" : "build-compiler-stage",
+      "owned_process_group" : 3289,
+      "started_at_utc" : "2026-09-14T00:53:59.022Z",
+      "stderr_log" : "logs\/12-build-compiler-stage.stderr.log",
+      "stdout_log" : "logs\/12-build-compiler-stage.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "build",
+        "--progress=plain",
+        "--pull=false",
+        "--platform",
+        "linux\/amd64",
+        "--file",
+        "\/home\/runner\/work\/Primes\/Primes\/solution\/PrimeSwift\/solution_1\/Dockerfile",
+        "--tag",
+        "swift-validation-runtime:5cff8a7e80b4-amd64",
+        "--iidfile",
+        "\/home\/runner\/work\/_temp\/swift-linux-docker-evidence\/runtime-image.id",
+        "\/home\/runner\/work\/Primes\/Primes\/solution\/PrimeSwift\/solution_1"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.037Z",
+      "name" : "build-runtime-image",
+      "owned_process_group" : 4098,
+      "started_at_utc" : "2026-09-14T00:57:00.281Z",
+      "stderr_log" : "logs\/13-build-runtime-image.stderr.log",
+      "stdout_log" : "logs\/13-build-runtime-image.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "image",
+        "inspect",
+        "swift-validation-build:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.096Z",
+      "name" : "inspect-build-image",
+      "owned_process_group" : 4155,
+      "started_at_utc" : "2026-09-14T00:57:01.041Z",
+      "stderr_log" : "logs\/14-inspect-build-image.stderr.log",
+      "stdout_log" : "logs\/14-inspect-build-image.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "image",
+        "inspect",
+        "swift-validation-runtime:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.154Z",
+      "name" : "inspect-runtime-image",
+      "owned_process_group" : 4163,
+      "started_at_utc" : "2026-09-14T00:57:01.100Z",
+      "stderr_log" : "logs\/15-inspect-runtime-image.stderr.log",
+      "stdout_log" : "logs\/15-inspect-runtime-image.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "--version"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.218Z",
+      "name" : "create-container-swift-version",
+      "owned_process_group" : 4171,
+      "started_at_utc" : "2026-09-14T00:57:01.163Z",
+      "stderr_log" : "logs\/16-create-container-swift-version.stderr.log",
+      "stdout_log" : "logs\/16-create-container-swift-version.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.277Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4179,
+      "started_at_utc" : "2026-09-14T00:57:01.223Z",
+      "stderr_log" : "logs\/17-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/17-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.492Z",
+      "name" : "container-swift-version",
+      "owned_process_group" : 4187,
+      "started_at_utc" : "2026-09-14T00:57:01.287Z",
+      "stderr_log" : "logs\/18-container-swift-version.stderr.log",
+      "stdout_log" : "logs\/18-container-swift-version.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.552Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4264,
+      "started_at_utc" : "2026-09-14T00:57:01.497Z",
+      "stderr_log" : "logs\/19-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/19-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.618Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4272,
+      "started_at_utc" : "2026-09-14T00:57:01.562Z",
+      "stderr_log" : "logs\/20-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/20-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.679Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4280,
+      "started_at_utc" : "2026-09-14T00:57:01.623Z",
+      "stderr_log" : "logs\/21-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/21-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.745Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4288,
+      "started_at_utc" : "2026-09-14T00:57:01.689Z",
+      "stderr_log" : "logs\/22-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/22-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.806Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "owned_process_group" : 4297,
+      "started_at_utc" : "2026-09-14T00:57:01.750Z",
+      "stderr_log" : "logs\/23-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stderr.log",
+      "stdout_log" : "logs\/23-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-0.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--entrypoint",
+        ".\/PrimeSwift_1bitStriped_u8\/.build\/release\/PrimeSieveSwift",
+        "swift-validation-runtime:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.878Z",
+      "name" : "create-runtime-smoke",
+      "owned_process_group" : 4306,
+      "started_at_utc" : "2026-09-14T00:57:01.822Z",
+      "stderr_log" : "logs\/24-create-runtime-smoke.stderr.log",
+      "stdout_log" : "logs\/24-create-runtime-smoke.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:01.941Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4314,
+      "started_at_utc" : "2026-09-14T00:57:01.885Z",
+      "stderr_log" : "logs\/25-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/25-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.120Z",
+      "name" : "runtime-smoke",
+      "owned_process_group" : 4322,
+      "started_at_utc" : "2026-09-14T00:57:01.952Z",
+      "stderr_log" : "logs\/26-runtime-smoke.stderr.log",
+      "stdout_log" : "logs\/26-runtime-smoke.stdout.log",
+      "timeout_seconds" : 120
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.182Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4396,
+      "started_at_utc" : "2026-09-14T00:57:07.126Z",
+      "stderr_log" : "logs\/27-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/27-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.250Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4404,
+      "started_at_utc" : "2026-09-14T00:57:07.193Z",
+      "stderr_log" : "logs\/28-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/28-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.313Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4413,
+      "started_at_utc" : "2026-09-14T00:57:07.256Z",
+      "stderr_log" : "logs\/29-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/29-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.383Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4422,
+      "started_at_utc" : "2026-09-14T00:57:07.326Z",
+      "stderr_log" : "logs\/30-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/30-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.449Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "owned_process_group" : 4430,
+      "started_at_utc" : "2026-09-14T00:57:07.392Z",
+      "stderr_log" : "logs\/31-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stderr.log",
+      "stdout_log" : "logs\/31-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-1.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "swift-validation-runtime:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.597Z",
+      "name" : "create-entry-smoke",
+      "owned_process_group" : 4438,
+      "started_at_utc" : "2026-09-14T00:57:07.540Z",
+      "stderr_log" : "logs\/32-create-entry-smoke.stderr.log",
+      "stdout_log" : "logs\/32-create-entry-smoke.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:07.662Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4447,
+      "started_at_utc" : "2026-09-14T00:57:07.605Z",
+      "stderr_log" : "logs\/33-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/33-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:22.863Z",
+      "name" : "entry-smoke",
+      "owned_process_group" : 4455,
+      "started_at_utc" : "2026-09-14T00:57:07.676Z",
+      "stderr_log" : "logs\/34-entry-smoke.stderr.log",
+      "stdout_log" : "logs\/34-entry-smoke.stdout.log",
+      "timeout_seconds" : 300
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:22.929Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4539,
+      "started_at_utc" : "2026-09-14T00:57:22.871Z",
+      "stderr_log" : "logs\/35-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/35-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.001Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4547,
+      "started_at_utc" : "2026-09-14T00:57:22.943Z",
+      "stderr_log" : "logs\/36-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/36-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.068Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4556,
+      "started_at_utc" : "2026-09-14T00:57:23.009Z",
+      "stderr_log" : "logs\/37-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/37-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.142Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4564,
+      "started_at_utc" : "2026-09-14T00:57:23.084Z",
+      "stderr_log" : "logs\/38-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/38-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.208Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "owned_process_group" : 4573,
+      "started_at_utc" : "2026-09-14T00:57:23.150Z",
+      "stderr_log" : "logs\/39-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stderr.log",
+      "stdout_log" : "logs\/39-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-2.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "-O",
+        "-sanitize=address",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Tools\/Verify.swift",
+        "-o",
+        "\/validation\/verify-asan"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.291Z",
+      "name" : "create-compile-verify-asan",
+      "owned_process_group" : 4581,
+      "started_at_utc" : "2026-09-14T00:57:23.232Z",
+      "stderr_log" : "logs\/40-create-compile-verify-asan.stderr.log",
+      "stdout_log" : "logs\/40-create-compile-verify-asan.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:57:23.358Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4589,
+      "started_at_utc" : "2026-09-14T00:57:23.299Z",
+      "stderr_log" : "logs\/41-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/41-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:33.846Z",
+      "name" : "compile-verify-asan",
+      "owned_process_group" : 4597,
+      "started_at_utc" : "2026-09-14T00:57:23.376Z",
+      "stderr_log" : "logs\/42-compile-verify-asan.stderr.log",
+      "stdout_log" : "logs\/42-compile-verify-asan.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:33.914Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4735,
+      "started_at_utc" : "2026-09-14T00:59:33.855Z",
+      "stderr_log" : "logs\/43-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/43-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:33.991Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4743,
+      "started_at_utc" : "2026-09-14T00:59:33.932Z",
+      "stderr_log" : "logs\/44-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/44-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:34.060Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4751,
+      "started_at_utc" : "2026-09-14T00:59:34.001Z",
+      "stderr_log" : "logs\/45-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/45-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:34.140Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4760,
+      "started_at_utc" : "2026-09-14T00:59:34.080Z",
+      "stderr_log" : "logs\/46-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/46-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:34.209Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "owned_process_group" : 4768,
+      "started_at_utc" : "2026-09-14T00:59:34.149Z",
+      "stderr_log" : "logs\/47-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stderr.log",
+      "stdout_log" : "logs\/47-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-3.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "\/validation\/verify-asan",
+        "swift-validation-build:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:34.297Z",
+      "name" : "create-run-verify-asan",
+      "owned_process_group" : 4776,
+      "started_at_utc" : "2026-09-14T00:59:34.237Z",
+      "stderr_log" : "logs\/48-create-run-verify-asan.stderr.log",
+      "stdout_log" : "logs\/48-create-run-verify-asan.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:34.367Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4784,
+      "started_at_utc" : "2026-09-14T00:59:34.307Z",
+      "stderr_log" : "logs\/49-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/49-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.367Z",
+      "name" : "run-verify-asan",
+      "owned_process_group" : 4792,
+      "started_at_utc" : "2026-09-14T00:59:34.386Z",
+      "stderr_log" : "logs\/50-run-verify-asan.stderr.log",
+      "stdout_log" : "logs\/50-run-verify-asan.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.437Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4869,
+      "started_at_utc" : "2026-09-14T00:59:43.377Z",
+      "stderr_log" : "logs\/51-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/51-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.518Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4877,
+      "started_at_utc" : "2026-09-14T00:59:43.457Z",
+      "stderr_log" : "logs\/52-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/52-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.589Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4885,
+      "started_at_utc" : "2026-09-14T00:59:43.528Z",
+      "stderr_log" : "logs\/53-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/53-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.669Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4894,
+      "started_at_utc" : "2026-09-14T00:59:43.609Z",
+      "stderr_log" : "logs\/54-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/54-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.740Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "owned_process_group" : 4902,
+      "started_at_utc" : "2026-09-14T00:59:43.680Z",
+      "stderr_log" : "logs\/55-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stderr.log",
+      "stdout_log" : "logs\/55-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-4.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "-O",
+        "-sanitize=address",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift",
+        "\/source\/fork\/swift\/phase-split\/PhaseSieve.swift",
+        "\/source\/fork\/swift\/phase-split\/PhaseVerify.swift",
+        "-o",
+        "\/validation\/phase-verify-asan"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.844Z",
+      "name" : "create-compile-phase-verify-asan",
+      "owned_process_group" : 4910,
+      "started_at_utc" : "2026-09-14T00:59:43.782Z",
+      "stderr_log" : "logs\/56-create-compile-phase-verify-asan.stderr.log",
+      "stdout_log" : "logs\/56-create-compile-phase-verify-asan.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T00:59:43.914Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 4918,
+      "started_at_utc" : "2026-09-14T00:59:43.854Z",
+      "stderr_log" : "logs\/57-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/57-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.290Z",
+      "name" : "compile-phase-verify-asan",
+      "owned_process_group" : 4926,
+      "started_at_utc" : "2026-09-14T00:59:43.936Z",
+      "stderr_log" : "logs\/58-compile-phase-verify-asan.stderr.log",
+      "stdout_log" : "logs\/58-compile-phase-verify-asan.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.363Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 5052,
+      "started_at_utc" : "2026-09-14T01:02:12.302Z",
+      "stderr_log" : "logs\/59-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/59-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.446Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 5060,
+      "started_at_utc" : "2026-09-14T01:02:12.384Z",
+      "stderr_log" : "logs\/60-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/60-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.519Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 5068,
+      "started_at_utc" : "2026-09-14T01:02:12.457Z",
+      "stderr_log" : "logs\/61-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/61-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.604Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 5076,
+      "started_at_utc" : "2026-09-14T01:02:12.542Z",
+      "stderr_log" : "logs\/62-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/62-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.679Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "owned_process_group" : 5085,
+      "started_at_utc" : "2026-09-14T01:02:12.616Z",
+      "stderr_log" : "logs\/63-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stderr.log",
+      "stdout_log" : "logs\/63-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-5.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "\/validation\/phase-verify-asan",
+        "swift-validation-build:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.776Z",
+      "name" : "create-run-phase-verify-asan",
+      "owned_process_group" : 5093,
+      "started_at_utc" : "2026-09-14T01:02:12.714Z",
+      "stderr_log" : "logs\/64-create-run-phase-verify-asan.stderr.log",
+      "stdout_log" : "logs\/64-create-run-phase-verify-asan.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:12.851Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5101,
+      "started_at_utc" : "2026-09-14T01:02:12.788Z",
+      "stderr_log" : "logs\/65-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/65-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.344Z",
+      "name" : "run-phase-verify-asan",
+      "owned_process_group" : 5109,
+      "started_at_utc" : "2026-09-14T01:02:12.874Z",
+      "stderr_log" : "logs\/66-run-phase-verify-asan.stderr.log",
+      "stdout_log" : "logs\/66-run-phase-verify-asan.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.419Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5181,
+      "started_at_utc" : "2026-09-14T01:02:16.356Z",
+      "stderr_log" : "logs\/67-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/67-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.507Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5189,
+      "started_at_utc" : "2026-09-14T01:02:16.444Z",
+      "stderr_log" : "logs\/68-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/68-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.583Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5197,
+      "started_at_utc" : "2026-09-14T01:02:16.520Z",
+      "stderr_log" : "logs\/69-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/69-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.671Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5205,
+      "started_at_utc" : "2026-09-14T01:02:16.608Z",
+      "stderr_log" : "logs\/70-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/70-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.748Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "owned_process_group" : 5213,
+      "started_at_utc" : "2026-09-14T01:02:16.685Z",
+      "stderr_log" : "logs\/71-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stderr.log",
+      "stdout_log" : "logs\/71-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-6.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "-O",
+        "-whole-module-optimization",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Tools\/Verify.swift",
+        "-o",
+        "\/validation\/verify-wmo"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.861Z",
+      "name" : "create-compile-verify-wmo",
+      "owned_process_group" : 5222,
+      "started_at_utc" : "2026-09-14T01:02:16.799Z",
+      "stderr_log" : "logs\/72-create-compile-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/72-create-compile-verify-wmo.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:02:16.937Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5230,
+      "started_at_utc" : "2026-09-14T01:02:16.874Z",
+      "stderr_log" : "logs\/73-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/73-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:19.932Z",
+      "name" : "compile-verify-wmo",
+      "owned_process_group" : 5238,
+      "started_at_utc" : "2026-09-14T01:02:16.963Z",
+      "stderr_log" : "logs\/74-compile-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/74-compile-verify-wmo.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.008Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5346,
+      "started_at_utc" : "2026-09-14T01:04:19.945Z",
+      "stderr_log" : "logs\/75-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/75-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.098Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5355,
+      "started_at_utc" : "2026-09-14T01:04:20.035Z",
+      "stderr_log" : "logs\/76-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/76-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.176Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5363,
+      "started_at_utc" : "2026-09-14T01:04:20.112Z",
+      "stderr_log" : "logs\/77-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/77-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.266Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5372,
+      "started_at_utc" : "2026-09-14T01:04:20.203Z",
+      "stderr_log" : "logs\/78-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/78-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.344Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "owned_process_group" : 5380,
+      "started_at_utc" : "2026-09-14T01:04:20.280Z",
+      "stderr_log" : "logs\/79-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stderr.log",
+      "stdout_log" : "logs\/79-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-7.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "\/validation\/verify-wmo",
+        "swift-validation-build:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.449Z",
+      "name" : "create-run-verify-wmo",
+      "owned_process_group" : 5388,
+      "started_at_utc" : "2026-09-14T01:04:20.385Z",
+      "stderr_log" : "logs\/80-create-run-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/80-create-run-verify-wmo.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:20.528Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5397,
+      "started_at_utc" : "2026-09-14T01:04:20.463Z",
+      "stderr_log" : "logs\/81-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/81-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:23.924Z",
+      "name" : "run-verify-wmo",
+      "owned_process_group" : 5405,
+      "started_at_utc" : "2026-09-14T01:04:20.554Z",
+      "stderr_log" : "logs\/82-run-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/82-run-verify-wmo.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.004Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5478,
+      "started_at_utc" : "2026-09-14T01:04:23.939Z",
+      "stderr_log" : "logs\/83-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/83-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.096Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5486,
+      "started_at_utc" : "2026-09-14T01:04:24.032Z",
+      "stderr_log" : "logs\/84-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/84-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.175Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5494,
+      "started_at_utc" : "2026-09-14T01:04:24.111Z",
+      "stderr_log" : "logs\/85-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/85-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.269Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5502,
+      "started_at_utc" : "2026-09-14T01:04:24.204Z",
+      "stderr_log" : "logs\/86-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/86-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.349Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "owned_process_group" : 5510,
+      "started_at_utc" : "2026-09-14T01:04:24.283Z",
+      "stderr_log" : "logs\/87-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stderr.log",
+      "stdout_log" : "logs\/87-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-8.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "swiftc",
+        "swift-validation-build:5cff8a7e80b4-amd64",
+        "-O",
+        "-whole-module-optimization",
+        "\/source\/PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift",
+        "\/source\/fork\/swift\/phase-split\/PhaseSieve.swift",
+        "\/source\/fork\/swift\/phase-split\/PhaseVerify.swift",
+        "-o",
+        "\/validation\/phase-verify-wmo"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.473Z",
+      "name" : "create-compile-phase-verify-wmo",
+      "owned_process_group" : 5518,
+      "started_at_utc" : "2026-09-14T01:04:24.408Z",
+      "stderr_log" : "logs\/88-create-compile-phase-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/88-create-compile-phase-verify-wmo.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:04:24.554Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5526,
+      "started_at_utc" : "2026-09-14T01:04:24.489Z",
+      "stderr_log" : "logs\/89-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/89-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.162Z",
+      "name" : "compile-phase-verify-wmo",
+      "owned_process_group" : 5534,
+      "started_at_utc" : "2026-09-14T01:04:24.584Z",
+      "stderr_log" : "logs\/90-compile-phase-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/90-compile-phase-verify-wmo.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.243Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5650,
+      "started_at_utc" : "2026-09-14T01:06:40.177Z",
+      "stderr_log" : "logs\/91-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/91-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.339Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5658,
+      "started_at_utc" : "2026-09-14T01:06:40.273Z",
+      "stderr_log" : "logs\/92-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/92-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.421Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5666,
+      "started_at_utc" : "2026-09-14T01:06:40.355Z",
+      "stderr_log" : "logs\/93-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/93-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.519Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5674,
+      "started_at_utc" : "2026-09-14T01:06:40.452Z",
+      "stderr_log" : "logs\/94-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/94-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.601Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "owned_process_group" : 5683,
+      "started_at_utc" : "2026-09-14T01:06:40.535Z",
+      "stderr_log" : "logs\/95-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stderr.log",
+      "stdout_log" : "logs\/95-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-9.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "create",
+        "--name",
+        "swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+        "--label",
+        "org.fahlman.primes.validation-owner=fc3a3547ed73426abf75b360ecf21e33",
+        "--platform",
+        "linux\/amd64",
+        "--network",
+        "none",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/Primes\/Primes\/solution,target=\/source,readonly",
+        "--mount",
+        "type=bind,source=\/home\/runner\/work\/_temp\/swift-linux-docker-checks,target=\/validation",
+        "--workdir",
+        "\/validation",
+        "--entrypoint",
+        "\/validation\/phase-verify-wmo",
+        "swift-validation-build:5cff8a7e80b4-amd64"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.717Z",
+      "name" : "create-run-phase-verify-wmo",
+      "owned_process_group" : 5692,
+      "started_at_utc" : "2026-09-14T01:06:40.650Z",
+      "stderr_log" : "logs\/96-create-run-phase-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/96-create-run-phase-verify-wmo.stdout.log",
+      "timeout_seconds" : 60
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:40.802Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5701,
+      "started_at_utc" : "2026-09-14T01:06:40.734Z",
+      "stderr_log" : "logs\/97-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/97-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "start",
+        "--attach",
+        "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.205Z",
+      "name" : "run-phase-verify-wmo",
+      "owned_process_group" : 5709,
+      "started_at_utc" : "2026-09-14T01:06:40.836Z",
+      "stderr_log" : "logs\/98-run-phase-verify-wmo.stderr.log",
+      "stdout_log" : "logs\/98-run-phase-verify-wmo.stdout.log",
+      "timeout_seconds" : 1200
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.290Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5783,
+      "started_at_utc" : "2026-09-14T01:06:42.223Z",
+      "stderr_log" : "logs\/99-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/99-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.391Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5791,
+      "started_at_utc" : "2026-09-14T01:06:42.324Z",
+      "stderr_log" : "logs\/100-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/100-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "inspect",
+        "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.477Z",
+      "name" : "inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5799,
+      "started_at_utc" : "2026-09-14T01:06:42.408Z",
+      "stderr_log" : "logs\/101-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/101-inspect-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "rm",
+        "--force",
+        "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.577Z",
+      "name" : "remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5807,
+      "started_at_utc" : "2026-09-14T01:06:42.511Z",
+      "stderr_log" : "logs\/102-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/102-remove-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    },
+    {
+      "command" : [
+        "docker",
+        "container",
+        "ls",
+        "--all",
+        "--quiet",
+        "--no-trunc",
+        "--filter",
+        "id=6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b"
+      ],
+      "exit_code" : 0,
+      "finished_at_utc" : "2026-09-14T01:06:42.662Z",
+      "name" : "find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "owned_process_group" : 5816,
+      "started_at_utc" : "2026-09-14T01:06:42.594Z",
+      "stderr_log" : "logs\/103-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stderr.log",
+      "stdout_log" : "logs\/103-find-owned-swift-validation-fc3a3547ed73426abf75b360ecf21e33-10.stdout.log",
+      "timeout_seconds" : 5
+    }
+  ],
+  "completed_checks" : [
+    "verify-asan",
+    "phase-verify-asan",
+    "verify-wmo",
+    "phase-verify-wmo"
+  ],
+  "container_owner" : "fc3a3547ed73426abf75b360ecf21e33",
+  "containers" : [
+    {
+      "creation_confirmed" : true,
+      "id" : "65b5c55d180ebaf7c95643e55930d3115033314d02e00cf6ba32e356808f16af",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T00:57:01.434155603Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:57:01.310364003Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-0",
+      "operation" : "container-swift-version",
+      "removed_at_utc" : "2026-09-14T00:57:01.812Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "06a96d5d89dd4ffb4d1dd3d9683885f10c7007e969770a4f3ec8819ed3628059",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T00:57:07.059716617Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:57:01.976224664Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-1",
+      "operation" : "runtime-smoke",
+      "removed_at_utc" : "2026-09-14T00:57:07.456Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "892a99f6201482c86539a3e08a292b92ac31f58820b42461fe7acbd19ad21d6d",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T00:57:22.804944378Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:57:07.701022104Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-2",
+      "operation" : "entry-smoke",
+      "removed_at_utc" : "2026-09-14T00:57:23.216Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "e182b983dcab80bf806adf6bdf076315a143d3e661b2c878bd187920eb0050af",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T00:59:33.791358944Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:57:23.403284107Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-3",
+      "operation" : "compile-verify-asan",
+      "removed_at_utc" : "2026-09-14T00:59:34.219Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "ee70932c295de8f5410fe218ddb0f7813605a13766b2bf01c7923430ee1d2154",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T00:59:43.323860715Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:59:34.41353519Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-4",
+      "operation" : "run-verify-asan",
+      "removed_at_utc" : "2026-09-14T00:59:43.753Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "15569d8c15e788b7be147b096ab2a6e710e24ed6b016f5217bfd0cf6be59fd04",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:02:12.248842527Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T00:59:43.964718801Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-5",
+      "operation" : "compile-phase-verify-asan",
+      "removed_at_utc" : "2026-09-14T01:02:12.691Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "1b9dcb5ddea51d0ed17953c9412b168d75be915908b9d0d905cff0bf5fca6334",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:02:16.26441591Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T01:02:12.903351759Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-6",
+      "operation" : "run-phase-verify-asan",
+      "removed_at_utc" : "2026-09-14T01:02:16.762Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "dbea444c7acc04261b2f60477870e64011e7c1f3579fa74aa975a3518e1655c2",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:04:19.886331694Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T01:02:16.995372947Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-7",
+      "operation" : "compile-verify-wmo",
+      "removed_at_utc" : "2026-09-14T01:04:20.359Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "c5939415136ff111580872eb45975692e4896c51c7a253715ef4e37b1eeff1a6",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:04:23.849041323Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T01:04:20.587083303Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-8",
+      "operation" : "run-verify-wmo",
+      "removed_at_utc" : "2026-09-14T01:04:24.364Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "16d074ec33b6afa7ac82ce7973446b0b307d85e9de8c90f0fd04f3d2a7c78bdc",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:06:40.101219139Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T01:04:24.617620719Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-9",
+      "operation" : "compile-phase-verify-wmo",
+      "removed_at_utc" : "2026-09-14T01:06:40.618Z",
+      "removed_confirmed" : true
+    },
+    {
+      "creation_confirmed" : true,
+      "id" : "6d215f3da325735dbf15788c4e606a2841fc8a51dae62d98db200451fb48971b",
+      "last_inspected_state" : {
+        "Dead" : false,
+        "Error" : "",
+        "ExitCode" : 0,
+        "FinishedAt" : "2026-09-14T01:06:42.142930748Z",
+        "OOMKilled" : false,
+        "Paused" : false,
+        "Pid" : 0,
+        "Restarting" : false,
+        "Running" : false,
+        "StartedAt" : "2026-09-14T01:06:40.871045658Z",
+        "Status" : "exited"
+      },
+      "name" : "swift-validation-fc3a3547ed73426abf75b360ecf21e33-10",
+      "operation" : "run-phase-verify-wmo",
+      "removed_at_utc" : "2026-09-14T01:06:42.679Z",
+      "removed_confirmed" : true
+    }
+  ],
+  "docker_version" : {
+    "Client" : {
+      "ApiVersion" : "1.48",
+      "Arch" : "amd64",
+      "BuildTime" : "Tue Mar 25 15:07:16 2025",
+      "Context" : "default",
+      "DefaultAPIVersion" : "1.48",
+      "GitCommit" : "b8034c0",
+      "GoVersion" : "go1.23.7",
+      "Os" : "linux",
+      "Platform" : {
+        "Name" : "Docker Engine - Community"
+      },
+      "Version" : "28.0.4"
+    },
+    "Server" : {
+      "ApiVersion" : "1.48",
+      "Arch" : "amd64",
+      "BuildTime" : "2025-03-25T15:07:16.000000000+00:00",
+      "Components" : [
+        {
+          "Details" : {
+            "ApiVersion" : "1.48",
+            "Arch" : "amd64",
+            "BuildTime" : "Tue Mar 25 15:07:16 2025",
+            "Experimental" : "false",
+            "GitCommit" : "6430e49",
+            "GoVersion" : "go1.23.7",
+            "KernelVersion" : "6.17.0-1022-azure",
+            "MinAPIVersion" : "1.24",
+            "Os" : "linux"
+          },
+          "Name" : "Engine",
+          "Version" : "28.0.4"
+        },
+        {
+          "Details" : {
+            "GitCommit" : "db8809540e1a7a9da5d518876894933ff55692ab"
+          },
+          "Name" : "containerd",
+          "Version" : "v2.3.4"
+        },
+        {
+          "Details" : {
+            "GitCommit" : "v1.5.1-0-g8f2685a4"
+          },
+          "Name" : "runc",
+          "Version" : "1.5.1"
+        },
+        {
+          "Details" : {
+            "GitCommit" : "de40ad0"
+          },
+          "Name" : "docker-init",
+          "Version" : "0.19.0"
+        }
+      ],
+      "GitCommit" : "6430e49",
+      "GoVersion" : "go1.23.7",
+      "KernelVersion" : "6.17.0-1022-azure",
+      "MinAPIVersion" : "1.24",
+      "Os" : "linux",
+      "Platform" : {
+        "Name" : "Docker Engine - Community"
+      },
+      "Version" : "28.0.4"
+    }
+  },
+  "entry_smoke" : {
+    "candidate" : "yellowcub_fahlman_striped_UInt8",
+    "performance_evidence" : false,
+    "results" : [
+      "yellowcub_1bit_UInt8;algorithm=base,faithful=yes,bits=1",
+      "yellowcub_fahlman_striped_UInt8;algorithm=base,faithful=yes,bits=1",
+      "j-f1_yellowcub_bool;algorithm=base,faithful=yes,bits=8"
+    ]
+  },
+  "finished_at_utc" : "2026-09-14T01:06:43.541Z",
+  "github" : {
+    "GITHUB_REF" : "refs\/heads\/swift\/linux-docker-validation",
+    "GITHUB_REPOSITORY" : "fahlman\/Primes",
+    "GITHUB_RUN_ATTEMPT" : "1",
+    "GITHUB_RUN_ID" : "34794069962",
+    "GITHUB_SERVER_URL" : "https:\/\/github.com",
+    "GITHUB_SHA" : "04eac8c36ba7b7a564fdd6fe289c2344685f7a70",
+    "ImageOS" : "ubuntu24",
+    "ImageVersion" : "20260907.300.1",
+    "RUNNER_ARCH" : "X64",
+    "RUNNER_OS" : "Linux"
+  },
+  "host_machine" : "x86_64",
+  "host_system" : "Linux",
+  "owned_container_cleanup_confirmed" : true,
+  "purpose" : "Linux\/Docker correctness and runtime compatibility only; no speed claim.",
+  "requested_checks" : [
+    "verify-asan",
+    "phase-verify-asan",
+    "verify-wmo",
+    "phase-verify-wmo"
+  ],
+  "requested_platform" : "linux\/amd64",
+  "requested_solution_revision" : "5cff8a7e80b4af11c8f58441790de7742e49d426",
+  "run_url" : "https:\/\/github.com\/fahlman\/Primes\/actions\/runs\/34794069962",
+  "runner_local_lock" : {
+    "acquired_exclusively" : true,
+    "path" : "\/tmp\/primes-timing.lock",
+    "removed_in_finally" : true
+  },
+  "runtime_image" : {
+    "Architecture" : "amd64",
+    "Created" : "2026-09-14T00:57:00.481074739Z",
+    "Id" : "sha256:2bfb67b99051d19944a678ec490137c36bda0a03cf0bd017a1f9ea6aa9df3380",
+    "Os" : "linux",
+    "RepoDigests" : [
+
+    ],
+    "RepoTags" : [
+      "swift-validation-runtime:5cff8a7e80b4-amd64"
+    ]
+  },
+  "runtime_smoke" : {
+    "label" : "yellowcub_fahlman_striped_UInt8",
+    "passes" : 36866,
+    "performance_evidence" : false,
+    "prime_count" : 78498,
+    "seconds" : 5.000063101,
+    "tags" : "algorithm=base,faithful=yes,bits=1",
+    "threads" : 1
+  },
+  "solution_revision" : "5cff8a7e80b4af11c8f58441790de7742e49d426",
+  "source_hash_root" : ".",
+  "source_layout" : "solution-package",
+  "source_sha256" : {
+    "fork\/swift\/phase-split\/PhaseSieve.swift" : "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "fork\/swift\/phase-split\/PhaseVerify.swift" : "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+    "PrimeSwift\/solution_1\/.dockerignore" : "c14f36c070c94b854e6d72989822199e036baeb0233021aa55f1edfb5a8238e8",
+    "PrimeSwift\/solution_1\/Dockerfile" : "4562b2bfe6a3ced412985331853cf34154b840617733533c38a3176bf1049560",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Package.resolved" : "6bc5af0df9381bcdd62d63d9b37cf2f2b871bdbbcea297c41a4300804a8fa7ed",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Package.swift" : "c3f492dbbf40f507c3e85963626f39e20ef3ab19d69527973d7661736720a9e5",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/BenchmarkObserver\/BenchmarkObserver.swift" : "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/BenchmarkDuration.swift" : "560a5886d97bfb73f87c90e223afc003ef33a3810a9fc9e4abcb8c8eff01218c",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/main.swift" : "54dc457053491b6397a1367ad9be64b9f108a2402128ec3573ad53010c78e43b",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift" : "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Tools\/Verify.swift" : "238b4298c175cccc81ba070e381d6fc70e28fa0cd6f5d1aae2d50e26122607ea",
+    "PrimeSwift\/solution_1\/run.sh" : "d2431a8ee3f83cc16d6e0298a461f8bf188e8df8c059b375c3e176e53a2406bb"
+  },
+  "source_sha256_after" : {
+    "fork\/swift\/phase-split\/PhaseSieve.swift" : "0cfc963b0f404fbe7f8fd1db76d346458f38320584b4901e9129147ec0927ef5",
+    "fork\/swift\/phase-split\/PhaseVerify.swift" : "6432c66b215f1ff15fde86d3679c18f40c4f841b6675a55f89bbea507d33b243",
+    "PrimeSwift\/solution_1\/.dockerignore" : "c14f36c070c94b854e6d72989822199e036baeb0233021aa55f1edfb5a8238e8",
+    "PrimeSwift\/solution_1\/Dockerfile" : "4562b2bfe6a3ced412985331853cf34154b840617733533c38a3176bf1049560",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Package.resolved" : "6bc5af0df9381bcdd62d63d9b37cf2f2b871bdbbcea297c41a4300804a8fa7ed",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Package.swift" : "c3f492dbbf40f507c3e85963626f39e20ef3ab19d69527973d7661736720a9e5",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/BenchmarkObserver\/BenchmarkObserver.swift" : "2687371d4ccfdf4bf1e53ff85ea3baf649d6df249190e3b3a91e255faf6f853e",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/BenchmarkDuration.swift" : "560a5886d97bfb73f87c90e223afc003ef33a3810a9fc9e4abcb8c8eff01218c",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/main.swift" : "54dc457053491b6397a1367ad9be64b9f108a2402128ec3573ad53010c78e43b",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Sources\/PrimeSieveSwift\/PrimeSieve.swift" : "99a363054644cb6391162e10cfe1709d23f831e2ee7d434efff965da7268f262",
+    "PrimeSwift\/solution_1\/PrimeSwift_1bitStriped_u8\/Tools\/Verify.swift" : "238b4298c175cccc81ba070e381d6fc70e28fa0cd6f5d1aae2d50e26122607ea",
+    "PrimeSwift\/solution_1\/run.sh" : "d2431a8ee3f83cc16d6e0298a461f8bf188e8df8c059b375c3e176e53a2406bb"
+  },
+  "started_at_utc" : "2026-09-14T00:53:28.169Z",
+  "status" : "passed",
+  "swift_version" : "Swift version 6.3.3 (swift-6.3.3-RELEASE)\nTarget: x86_64-unknown-linux-gnu",
+  "unrequested_checks" : [
+
+  ],
+  "workflow_revision" : "04eac8c36ba7b7a564fdd6fe289c2344685f7a70",
+  "workflow_sha256" : {
+    ".github\/workflows\/swift-linux-docker-validation.yml" : "ba453e5dfea768e63c01ea14b8107ab3f9e27464b6bf449a5ce1beb39590e085",
+    "fork\/swift\/linux-docker\/linux-validation.swift" : "554365f2c8faea2388711dcee5835109569eb79da15d06c5d7a5a8124e48096f"
+  }
+}
