@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # series: generic 2 of 4, amd64 only
+  # series: generic 3 of 4, amd64 only
   # The solution under test is independent of the workflow commit.
   SOLUTION_REVISION: 5cff8a7e80b4af11c8f58441790de7742e49d426
 
