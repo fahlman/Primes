@@ -3,13 +3,16 @@
 ![Algorithm](https://img.shields.io/badge/Algorithm-base-green)
 ![Faithfulness](https://img.shields.io/badge/Faithful-yes-green)
 ![Parallelism](https://img.shields.io/badge/Parallel-no-green)
+![Parallelism](https://img.shields.io/badge/Parallel-yes-green)
 ![Bit count](https://img.shields.io/badge/Bits-1-green)
 ![Bit count](https://img.shields.io/badge/Bits-8-yellowgreen)
 
-This folder contains three single-threaded implementations: an array of 8-bit
-Booleans, packed UInt8 bits, and striped UInt8 bits. The striped entry uses one bit
-per odd candidate and marks composites with dense small-factor handlers and an
-unrolled sparse loop. The Boolean and packed implementations are unchanged.
+This folder contains three implementations: an array of 8-bit Booleans, packed
+UInt8 bits, and striped UInt8 bits. The striped entry uses one bit per odd
+candidate and marks composites with dense small-factor handlers and an unrolled
+sparse loop; `run.sh` runs it single-threaded and then multithreaded at 4 threads,
+half the processors and all of them, each thread running its own sieves. The
+Boolean and packed implementations are unchanged and single-threaded.
 
 Credits:
 
@@ -52,6 +55,12 @@ optimizer cannot remove the completed sieve. The striped package explicitly
 disables SwiftPM's default cross-module optimization for its observer and
 executable targets. Enumeration, result checking, and printing occur outside timing.
 
+The multithreaded line comes from the same executable with `--threads`: N threads
+each run the same loop on their own fresh sieves for the full running time, sharing
+nothing but the limit and the deadline. Passes are summed, the duration is the
+longest thread's, and the line reports N threads under the label
+`yellowcub_fahlman_striped_UInt8_threaded`. No sieve is split across threads.
+
 ## Run instructions
 
 Use Swift 6.3.3. From this folder, build and run all three entries:
@@ -62,6 +71,11 @@ swift build -c release -Xswiftc -O -Xswiftc -whole-module-optimization --package
 swift build -c release -Xswiftc -O -Xswiftc -whole-module-optimization --package-path PrimeSwift_8bitBool
 ./run.sh
 ```
+
+`run.sh` runs the striped entry with one thread, then with 4 threads, half the
+processors and all of them, skipping counts that repeat or exceed the machine.
+Pass `--threads N` to choose a count yourself; `--threads 0` selects the active
+processor count.
 
 Or build and run the Docker image:
 
@@ -133,22 +147,28 @@ fahlman's contributions in this folder are licensed under the BSD-3-Clause licen
 
 ## Output
 
-On an Apple M4 Pro (macOS 26.6.2, Swift 6.3.3), after the build commands above, `./run.sh` printed:
+On an Apple M4 Pro (macOS 26.6.2, Swift 6.3.3, 14 active processors), after the build commands above, `./run.sh` printed:
 
 ```
-Passes: 13784, Time: 5.000250935554504, Avg: 0.000362757612852184, Limit: 1000000, Count: 78498, Valid: true
+Passes: 14909, Time: 5.0002559423446655, Avg: 0.0003353850655540053, Limit: 1000000, Count: 78498, Valid: true
 
-yellowcub_1bit_UInt8;13784;5.000250935554504;1;algorithm=base,faithful=yes,bits=1
+yellowcub_1bit_UInt8;14909;5.0002559423446655;1;algorithm=base,faithful=yes,bits=1
 
-yellowcub_fahlman_striped_UInt8;127639;5.000029667;1;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8;134395;5.000032708;1;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;500783;5.000035792;4;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;839613;5.000039125;7;algorithm=base,faithful=yes,bits=1
+yellowcub_fahlman_striped_UInt8_threaded;1329486;5.000046167;14;algorithm=base,faithful=yes,bits=1
 
-Passes: 16749, Time: 5.000002026557922, Avg: 0.00029852540608740356, Limit: 1000000, Count: 78498, Valid: true
+Passes: 16720, Time: 5.000118970870972, Avg: 0.00029905017768367054, Limit: 1000000, Count: 78498, Valid: true
 
-j-f1_yellowcub_bool;16749;5.000002026557922;1;algorithm=base,faithful=yes,bits=8
+j-f1_yellowcub_bool;16720;5.000118970870972;1;algorithm=base,faithful=yes,bits=8
 ```
 
-The striped entry reports its diagnostic on standard error:
+The striped entry reports a diagnostic line on standard error for each of its runs:
 
 ```
-Passes: 127639, Time: 5.000029667, Avg: 3.9173212474243765e-05, Limit: 1000000, Count: 78498, Valid: true, Checksum: 27413282
+Passes: 134395, Time: 5.000032708, Avg: 3.720400839316939e-05, Threads: 1, Limit: 1000000, Count: 78498, Valid: true, Checksum: 28835899
+Passes: 500783, Time: 5.000035792, Avg: 9.984435957290883e-06, Threads: 4, Limit: 1000000, Count: 78498, Valid: true, Checksum: 107671054
+Passes: 839613, Time: 5.000039125, Avg: 5.955171162190199e-06, Threads: 7, Limit: 1000000, Count: 78498, Valid: true, Checksum: 180438781
+Passes: 1329486, Time: 5.000046167, Avg: 3.7608866637181584e-06, Threads: 14, Limit: 1000000, Count: 78498, Valid: true, Checksum: 284916815
 ```

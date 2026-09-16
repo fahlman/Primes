@@ -60,7 +60,7 @@ func sourceLayout(_ solution: URL) throws -> SourceLayout {
         return SourceLayout(
             name: "solution-package", rootPath: ".", context: folder, dockerfile: folder + "/Dockerfile",
             candidateEntry: "PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift",
-            diagnostic: "Passes: [0-9]+, Time: [0-9.e+-]+, Avg: [0-9.e+-]+, Limit: 1000000, Count: 78498, Valid: true, Checksum: [0-9]+",
+            diagnostic: "Passes: [0-9]+, Time: [0-9.e+-]+, Avg: [0-9.e+-]+, (Threads: [0-9]+, )?Limit: 1000000, Count: 78498, Valid: true, Checksum: [0-9]+",
             core: core,
             sourceFiles: [folder + "/Dockerfile", folder + "/.dockerignore", folder + "/run.sh",
                           package + "/Package.swift", package + "/Package.resolved",
@@ -663,7 +663,7 @@ func validate(_ arguments: [String]) throws {
             let entry = try containers("entry-smoke", container + [runtime], timeout: 300)
             let results = entry.stdout.split(separator: "\n").map { $0.split(separator: ";", omittingEmptySubsequences: false).map(String.init) }.filter { $0.count == 5 }
             guard !results.isEmpty,
-                  results.allSatisfy({ Int($0[1]).map { $0 > 0 } == true && Double($0[2]).map { $0 >= 5 } == true && $0[3] == "1" && $0[4].hasPrefix("algorithm=base,faithful=yes,bits=") }),
+                  results.allSatisfy({ Int($0[1]).map { $0 > 0 } == true && Double($0[2]).map { $0 >= 5 } == true && Int($0[3]).map { $0 >= 1 } == true && $0[4].hasPrefix("algorithm=base,faithful=yes,bits=") }),
                   results.filter({ $0[0] == fields[0] && $0[4] == fields[4] }).count == 1 else {
                 throw RuntimeError("The image's entrypoint did not report the shipped entries as expected.")
             }
