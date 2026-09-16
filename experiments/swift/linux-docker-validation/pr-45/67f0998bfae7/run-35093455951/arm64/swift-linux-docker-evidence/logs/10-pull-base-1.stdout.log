@@ -1,0 +1,12 @@
+6.3.3-slim: Pulling from library/swift
+8a38824eedc5: Already exists
+fcf5e32093a6: Pulling fs layer
+667fd637b731: Pulling fs layer
+fcf5e32093a6: Verifying Checksum
+fcf5e32093a6: Download complete
+667fd637b731: Download complete
+fcf5e32093a6: Pull complete
+667fd637b731: Pull complete
+Digest: sha256:20c70a4a58020d36c65b2b8c928c38f6e550dbc185353c4c9a2620383ccf7506
+Status: Downloaded newer image for swift:6.3.3-slim
+docker.io/library/swift:6.3.3-slim

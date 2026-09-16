@@ -1,0 +1,21 @@
+6.3.3: Pulling from library/swift
+8a38824eedc5: Pulling fs layer
+5554c39d1486: Pulling fs layer
+140263ba3ff2: Pulling fs layer
+8b5138490022: Pulling fs layer
+8b5138490022: Waiting
+8a38824eedc5: Verifying Checksum
+8a38824eedc5: Download complete
+8b5138490022: Verifying Checksum
+8b5138490022: Download complete
+5554c39d1486: Verifying Checksum
+5554c39d1486: Download complete
+8a38824eedc5: Pull complete
+140263ba3ff2: Verifying Checksum
+140263ba3ff2: Download complete
+5554c39d1486: Pull complete
+140263ba3ff2: Pull complete
+8b5138490022: Pull complete
+Digest: sha256:8de8ea332a61e961ead4ef41029c2552b18e1a70dd5942d25ecf7d8de2eec5b5
+Status: Downloaded newer image for swift:6.3.3
+docker.io/library/swift:6.3.3

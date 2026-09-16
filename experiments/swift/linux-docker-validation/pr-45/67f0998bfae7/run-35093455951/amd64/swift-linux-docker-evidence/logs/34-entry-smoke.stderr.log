@@ -1,0 +1,2 @@
+Passes: 53181, Time: 5.00008308, Avg: 9.402010266824618e-05, Threads: 1, Limit: 1000000, Count: 78498, Valid: true, Checksum: 11408630
+Passes: 87793, Time: 5.000142167, Avg: 5.695376814780222e-05, Threads: 4, Limit: 1000000, Count: 78498, Valid: true, Checksum: 18558321
