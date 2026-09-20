@@ -15,9 +15,7 @@ This is a collection of three sieve implementations in Swift:
    Sieving clears individual bits using a table of the eight single-bit masks.
 3. **Striped UInt8** (`PrimeSwift_1bitStriped_u8`) stores eight odd candidates per
    byte, using generated handlers for small factors and sixteen marks per loop
-   iteration for larger factors. Each source operation marks one composite.
-
-All three discover factors at runtime and allocate a fresh sieve for each pass.
+   iteration for larger factors.
 
 Credits:
 
@@ -61,11 +59,10 @@ docker run --rm prime-swift
 The x86-64 Docker image targets Haswell and requires a compatible CPU. The arm64
 build uses the default target.
 
-For striped source changes, edit the [template](PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in)
-and [generator](PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift), whose usage
-comments document `--write` (regenerate the whole file) and `--check` (verify it).
-Builds compile the committed generated source. [Verify.swift](PrimeSwift_1bitStriped_u8/Tools/Verify.swift)
-contains the correctness-check commands.
+Striped [generation](PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift) and
+[verification](PrimeSwift_1bitStriped_u8/Tools/Verify.swift) commands are documented
+in their source files; edit the [template](PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in)
+for sieve changes.
 
 ## Output
 
