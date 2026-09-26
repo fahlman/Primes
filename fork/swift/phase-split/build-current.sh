@@ -7,7 +7,7 @@ if [ "$#" -ne 1 ]; then
     exit 2
 fi
 if [ ! -f /tmp/primes-timing.lock ]; then
-    echo "Acquire and own /tmp/primes-timing.lock before building; see ../../AGENTS.md." >&2
+    echo "Acquire and own /tmp/primes-timing.lock before building; see REPO_AGENTS.md at the repository root." >&2
     exit 2
 fi
 # Presence is a guard, not proof of ownership; the calling agent must own the lock.

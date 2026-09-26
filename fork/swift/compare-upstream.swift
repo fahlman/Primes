@@ -6,7 +6,7 @@
 // the project's timing lock, from any directory, with network access:
 //   swift fork/swift/compare-upstream.swift --output RESULTS.json [--candidate REVISION] [--repo PATH]
 // The candidate defaults to HEAD. The output file must not exist. Timing counts
-// as evidence only on the reference machine; see AGENTS.md.
+// as evidence only on the reference machine; see REPO_AGENTS.md.
 import Foundation
 
 let harnessRevision = "25402d46ba991b39451724d3873d326626981e3f"

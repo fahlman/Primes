@@ -15,7 +15,7 @@ swift check-dense-generator.swift
 sh ./run.sh
 ```
 
-`run.sh` builds the unchanged development benchmark with the canonical sieve and separately compiled observer. It uses `-O -whole-module-optimization`, limit 1,000,000 and at least five seconds; allocation through release is timed. Validation expects 78,498 primes. The full [candidate checklist](../../AGENTS.md#done-checklist-for-a-candidate) lists the ASan/WMO and assembly commands.
+`run.sh` builds the unchanged development benchmark with the canonical sieve and separately compiled observer. It uses `-O -whole-module-optimization`, limit 1,000,000 and at least five seconds; allocation through release is timed. Validation expects 78,498 primes. The full [candidate checklist](../../REPO_AGENTS.md#done-checklist-for-a-candidate) lists the ASan/WMO and assembly commands.
 
 The [phase tools](phase-split/README.md) derive diagnostics from the canonical source. The historical `PhaseSieve.swift` remains an independent full-buffer reference. See [Linux validation](linux-docker/README.md) for the native Linux checks of the solution folder's Docker image, which runs all three Swift entries.
 
@@ -28,7 +28,7 @@ swift compare-revisions.swift --variant control=CONTROL_REVISION --variant candi
 swift compare-upstream.swift --candidate CANDIDATE_REVISION --output UNIQUE_UPSTREAM_RESULTS.json
 ```
 
-Both harnesses require a unique `--output` path and refuse to overwrite records. They use the unchanged runner and observer from commit `25402d4`; upstream sources are pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`. Candidate lookup supports the canonical package path and historical `experiments/swift/PrimeSieve.swift` revisions. Build outputs stay under `.build`. Follow the [benchmark contract](../../AGENTS.md#benchmark-contract); tooling smoke checks are not accepted performance results.
+Both harnesses require a unique `--output` path and refuse to overwrite records. They use the unchanged runner and observer from commit `25402d4`; upstream sources are pinned to `22bfea9c7122c46dcda799020fccf5ae83fe667f`. Candidate lookup supports the canonical package path and historical `experiments/swift/PrimeSieve.swift` revisions. Build outputs stay under `.build`. Follow the [benchmark contract](../../REPO_AGENTS.md#benchmark-contract); tooling smoke checks are not accepted performance results.
 
 ## Accepted measurements
 
