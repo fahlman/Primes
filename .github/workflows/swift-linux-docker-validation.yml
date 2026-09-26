@@ -16,7 +16,7 @@ concurrency:
 
 env:
   # The solution under test is independent of the workflow commit.
-  SOLUTION_REVISION: 67f0998bfae733909a856eef5cee195b2f99ba77
+  SOLUTION_REVISION: 303a8a5b58e52bc70eb029eaa13bfe38612b47f7
 
 jobs:
   lint:
