@@ -621,7 +621,7 @@ func validate(_ arguments: [String]) throws {
             let stage = Range(match.range(at: 2), in: dockerfile).map { String(dockerfile[$0]) } ?? ""
             return (image, stage)
         }
-        guard fromLines.count == 2, fromLines[0] == ("swift:6.3.3", "build"), fromLines[1] == ("swift:6.3.3-slim", "") else {
+        guard fromLines.count == 2, fromLines[0] == ("swift:6.4.0", "build"), fromLines[1] == ("swift:6.4.0-slim", "") else {
             throw RuntimeError("Review this validator for the changed Dockerfile stages.")
         }
         var baseImages: [String: Any] = [:]
@@ -644,7 +644,7 @@ func validate(_ arguments: [String]) throws {
         let container = ["--platform", platform, "--network", "none"]
         let swiftVersion = try containers("container-swift-version", container + ["--entrypoint", "swiftc", builder, "--version"], timeout: 60).stdout
         journal["swift_version"] = swiftVersion.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard swiftVersion.contains("Swift version 6.3.3") else { throw RuntimeError("Unexpected Swift compiler version in build stage.") }
+        guard swiftVersion.contains("Swift version 6.4") else { throw RuntimeError("Unexpected Swift compiler version in build stage.") }
         // The candidate runs once on its own: one result line and its diagnostic.
         let candidate = layout.candidateEntry.map { ["--entrypoint", "./" + $0] } ?? []
         let smoke = try containers("runtime-smoke", container + candidate + [runtime], timeout: 120)

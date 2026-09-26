@@ -1,4 +1,4 @@
-FROM swift:6.3.3 AS build
+FROM swift:6.4.0 AS build
 
 WORKDIR /opt/app
 
@@ -11,7 +11,7 @@ RUN swift build -v --configuration release -Xswiftc -O -Xswiftc -whole-module-op
     swift build -v --configuration release -Xswiftc -O -Xswiftc -whole-module-optimization "$@" --package-path PrimeSwift_1bitStriped_u8 && \
     swift build -v --configuration release -Xswiftc -O -Xswiftc -whole-module-optimization --package-path PrimeSwift_8bitBool
 
-FROM swift:6.3.3-slim
+FROM swift:6.4.0-slim
 WORKDIR /opt/app
 COPY --from=build /opt/app/PrimeSwift_1bit_u8/.build/release/PrimeSieveSwift ./PrimeSwift_1bit_u8/.build/release/PrimeSieveSwift
 COPY --from=build /opt/app/PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift ./PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift

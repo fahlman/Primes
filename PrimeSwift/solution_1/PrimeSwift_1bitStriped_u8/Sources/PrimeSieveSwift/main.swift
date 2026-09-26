@@ -13,7 +13,10 @@ func completedPass(limit: Int, offset: Int) -> UInt64 {
 
 /// One thread's share of the benchmark: its own passes over its own sieves.
 /// Workers share nothing but the limit and the running time.
-final class Worker {
+/// Each worker is mutated only by the one thread that runs it, and the main thread
+/// reads it only after `group.wait()`, so handing it to that thread is safe; Swift
+/// cannot see that hand-off, hence `@unchecked`.
+final class Worker: @unchecked Sendable {
     private(set) var passes = 0
     private(set) var checksum: UInt64 = 0
     private(set) var elapsed: UInt64 = 0
