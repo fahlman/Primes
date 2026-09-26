@@ -6,7 +6,7 @@ The package owns its editable template and generator in `Tools`, and compiles th
 
 ## Build and verify
 
-Use Swift 6.3.3. Acquire `/tmp/primes-timing.lock` under the [working rules](../../AGENTS.md#timing-sessions) before compiling, testing or benchmarking. From this directory:
+Use the newest Swift release. Acquire `/tmp/primes-timing.lock` under the [working rules](../../REPO_AGENTS.md#timing-sessions) before compiling, testing or benchmarking. From this directory:
 
 ```sh
 swift_package=../../PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
