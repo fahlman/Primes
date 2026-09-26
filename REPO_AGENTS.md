@@ -2,21 +2,18 @@
 
 Read the shared `AGENTS.md` first. The rules below preserve the Swift sieve
 project's category, benchmark protocol, upstream boundaries, and branch policy.
-The pinned timing compiler is the narrowly scoped measurement exception below;
-the shared latest-stable policy still governs ordinary development.
 Verify historical PR status before acting on it.
 
 These instructions apply to Swift work in `PrimeSwift/solution_1`, `fork/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `fork/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [fork/swift/README.md](fork/swift/README.md), and each PR owns its change history and decision. This file, `AGENTS.md`, `CLAUDE.md`, `fork/swift` and `.github/workflows/swift-linux-docker-validation.yml` belong to the fork only; exclude them from any upstream submission.
 
-## Toolchain and measurement exception
+## Toolchain
 
 Settings inspected on 2026-09-25 in the three `PrimeSwift/solution_1`
 package manifests and `fork/swift/run.sh`, `fork/swift/compare-revisions.swift`,
 and `fork/swift/compare-upstream.swift`.
 
 - Selected local tools: Xcode 27.0 (`27A266a`), Apple Swift 6.4
-  (`swiftlang-6.4.0.34.1`), macOS SDK 27.0. This installation snapshot is
-  separate from the frozen comparison toolchain below.
+  (`swiftlang-6.4.0.34.1`), macOS SDK 27.0.
 - Swift tools minimum: 5.7 for `PrimeSwift_1bitStriped_u8`; 5.3 for the
   `PrimeSwift_1bit_u8` and `PrimeSwift_8bitBool` comparison packages.
 - Swift language mode: the packages use the Swift 5 default for their tools
@@ -26,18 +23,20 @@ and `fork/swift/compare-upstream.swift`.
   an SDK. Direct comparison commands do not specify `-sdk` or `-target`;
   record the actual compiler/SDK/target in the run evidence rather than inferring
   them from the package minimum or today's installation.
-- **Approved measurement exception (2026-09-25):** retain Swift 6.3.3 on the
-  Apple M4 Pro reference machine for reproducible benchmark comparisons and
-  their associated compilation and validation. Candidate and control use the
-  same toolchain and flags. This does not set the compiler for unrelated development.
-- The selected Swift 6.4 compiler does not satisfy that frozen comparison rule.
-  Identify the Swift 6.3.3 compiler build, Xcode, and SDK from the selected tools
-  and the run record; those exact values are not pinned by the existing scripts.
-  A compiler change or a new comparison baseline is separate authorized work.
+- Timing comparisons use the newest Swift release, like all other work. Build
+  the candidate and every control with the same compiler and flags in the same
+  session, and record the compiler build, Xcode, and SDK in the run record.
+- Results measured with different compilers are not comparable. After a
+  compiler change, re-run the controls on the new compiler rather than comparing
+  against older numbers. Earlier results remain records of their own revision
+  and compiler.
+- `PrimeSwift/solution_1/Dockerfile`, that solution's `README.md`, and the Linux
+  validation in `fork/swift/linux-docker/` still use Swift 6.3.3. Moving them to
+  the newest release is a separate upgrade task.
 
-Existing package minimums remain current configuration, not a general exception
-to the shared development policy. Preserve the upstream comparison packages'
-bytes and follow the existing upstream boundaries when planning any upgrade.
+Existing package minimums are current configuration, and they are behind the
+shared rules; upgrading them is a separate task. Preserve the upstream comparison
+packages' bytes and follow the existing upstream boundaries when planning it.
 
 ## Goal
 
@@ -70,7 +69,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Keep the observer a separately compiled module that the benchmark can't inline, built as in `fork/swift/run.sh`. Never change the workload or weaken this protection to improve a timing.
 - Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
 - Build the benchmark with `-O -whole-module-optimization` and the observer as in `fork/swift/run.sh`. Compared variants use identical flags and the same runner.
-- Timing evidence comes only from the reference machine (Apple M4 Pro, Swift 6.3.3): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
+- Timing evidence comes only from the reference machine (Apple M4 Pro, with the newest Swift release): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
 - Compare committed revisions with `swift fork/swift/compare-revisions.swift`. Include the current development branch as a development control in the same run. `--output` is required and never overwrites, so every session leaves its own record.
 - Use `swift fork/swift/compare-upstream.swift` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It builds the upstream adapters and the candidate with the frozen `25402d4` runner and observer, and records the candidate revision, the upstream revision, source and adapter hashes, hardware, Swift version and run order itself. `--output` is required and never overwrites. Hold the timing lock before it starts compiling.
 - Admission rule for a speed change: three rotated five-second trials per variant in one session, and the candidate qualifies only if every candidate trial beats every control trial. Overlapping ranges are flat, not a gain. Don't repeat a flat or losing session to look for a win; a repeat happens only at the user's request and is reported separately, never pooled. A refactor of timed code is accepted on byte-identical benchmark assembly against the control, built with the same observer, flags and module name; if the assembly changes, it needs the same timing admission as a speed change, and a flat result does not show it is harmless.
