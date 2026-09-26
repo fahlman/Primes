@@ -35,7 +35,7 @@ record the compiler commands, binary hashes and assembly review as usual.
 ## Build and short checks
 
 From `fork/swift`, exclusively acquire and own the timing lock described
-in [AGENTS.md](../../../AGENTS.md) before any compilation or execution. Release
+in [REPO_AGENTS.md](../../../REPO_AGENTS.md#timing-sessions) before any compilation or execution. Release
 only your own lock in a `finally`/trap. No competing builds, tests, benchmarks
 or media. The script checks lock presence; the caller remains responsible for
 ownership. Use a new directory for each build so existing inputs and evidence
