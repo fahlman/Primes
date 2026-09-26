@@ -32,7 +32,7 @@ fahlman's contributions are licensed under BSD-3-Clause.
 
 ## Run instructions
 
-With Swift 6.3.3, build and run from this folder:
+With Swift 6.4, build and run from this folder:
 
 ```sh
 swift build -c release -Xswiftc -O -Xswiftc -whole-module-optimization --package-path PrimeSwift_1bit_u8
