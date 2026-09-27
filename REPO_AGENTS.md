@@ -31,12 +31,18 @@ and `fork/swift/compare-upstream.swift`.
   against older numbers. Earlier results remain records of their own revision
   and compiler.
 - `PrimeSwift/solution_1/Dockerfile`, that solution's `README.md`, and the Linux
-  validation in `fork/swift/linux-docker/` still use Swift 6.3.3. Moving them to
-  the newest release is a separate upgrade task.
+  validation in `fork/swift/linux-docker/` use Swift 6.3.3, the compiler the
+  submitted entry ships with.
 
-Existing package minimums are current configuration, and they are behind the
-shared rules; upgrading them is a separate task. Preserve the upstream comparison
-packages' bytes and follow the existing upstream boundaries when planning it.
+**Upstream wins for the submitted entry (Ryan, 2026-09-27).** Primes is a fork of
+a project Ryan doesn't own. Everything submitted upstream, meaning the solution
+folder's packages, `Dockerfile`, `run.sh` and `README.md`, follows upstream's
+rules rather than the shared rules' newest-toolchain, Swift 6 mode and
+newest-minimum requirements. The entry changes only when a change makes it faster
+or upstream needs it. Until then it stays on Swift 6.3.3 with its current package
+minimums, and the upstream comparison packages keep their authors' bytes. The
+fork's own tools under `fork/swift`, which never go upstream, follow the shared
+rules.
 
 ## Goal
 
