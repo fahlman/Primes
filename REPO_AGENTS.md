@@ -6,7 +6,3 @@ Only upstream's requirements for Ryan's entry in `PrimeSwift/solution_1` are lis
 
 - The entry builds and runs in Docker on Linux, because upstream's
   `CONTRIBUTING.md` requires a `Dockerfile` for every solution.
-
-## Benchmark contract
-
-- Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
