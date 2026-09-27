@@ -23,9 +23,10 @@ and `fork/swift/compare-upstream.swift`.
   an SDK. Direct comparison commands do not specify `-sdk` or `-target`;
   record the actual compiler/SDK/target in the run evidence rather than inferring
   them from the package minimum or today's installation.
-- Timing comparisons use the newest Swift release, like all other work. Build
-  the candidate and every control with the same compiler and flags in the same
-  session, and record the compiler build, Xcode, and SDK in the run record.
+- Timing comparisons of the submitted entry use its shipping compiler, Swift
+  6.3.3. Build the candidate and every control with the same compiler and flags
+  in the same session, and record the compiler build, Xcode, and SDK in the run
+  record.
 - Results measured with different compilers are not comparable. After a
   compiler change, re-run the controls on the new compiler rather than comparing
   against older numbers. Earlier results remain records of their own revision
@@ -60,7 +61,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 - Discover factors at run time by checking odd candidates in order, starting at 3. Stopping at √limit, starting at p², and inverted flags are allowed. Word scans that jump to the next unmarked bit are out of scope unless agreed first.
 - Mark every composite with its own operation in the source. Unrolling and reordering the marks are fine; the eight fixed-mask streams do both. The compiler may merge these operations in machine code. The classification rests on the source, so say so wherever it matters.
-- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. No external dependencies.
+- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. The sieve uses no external dependencies; the entry's runner keeps upstream's `swift-argument-parser` dependency, declared `from: "0.0.1"` and locked at 0.5.0.
 - The completed flags are the result. A count or checksum alone is not.
 - Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, and marking a prime as composite and then restoring it.
 - A multithreaded run is N single-threaded workers, each creating its own fresh sieves; no sieve is split across threads, and nothing is shared between them but the limit and the running time. The sieve code is the same bytes as the single-threaded entry's.
@@ -75,7 +76,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Keep the observer a separately compiled module that the benchmark can't inline, built as in `fork/swift/run.sh`. Never change the workload or weaken this protection to improve a timing.
 - Limit 1,000,000, at least 5 seconds per run, 78,498 primes expected.
 - Build the benchmark with `-O -whole-module-optimization` and the observer as in `fork/swift/run.sh`. Compared variants use identical flags and the same runner.
-- Timing evidence comes only from the reference machine (Apple M4 Pro, with the newest Swift release): serial runs in rotated order, with nothing else building, testing, benchmarking, or playing media. Timings from any other machine, a Linux container, or Codex cloud are not evidence of a speedup; use those environments for correctness only.
+- Measure in the shipping configuration, the entry's Docker image, as the shared rules require. Timings taken outside it, including on the Apple M4 Pro reference machine, are evidence about the sieve code only and are labeled that way. Timing runs are serial and in rotated order, with nothing else building, testing, benchmarking, or playing media.
 - Compare committed revisions with `swift fork/swift/compare-revisions.swift`. Include the current development branch as a development control in the same run. `--output` is required and never overwrites, so every session leaves its own record.
 - Use `swift fork/swift/compare-upstream.swift` for comparisons against the upstream entries and identify the fastest upstream median as the project baseline. It builds the upstream adapters and the candidate with the frozen `25402d4` runner and observer, and records the candidate revision, the upstream revision, source and adapter hashes, hardware, Swift version and run order itself. `--output` is required and never overwrites. Hold the timing lock before it starts compiling.
 - Admission rule for a speed change: three rotated five-second trials per variant in one session, and the candidate qualifies only if every candidate trial beats every control trial. Overlapping ranges are flat, not a gain. Don't repeat a flat or losing session to look for a win; a repeat happens only at the user's request and is reported separately, never pooled. A refactor of timed code is accepted on byte-identical benchmark assembly against the control, built with the same observer, flags and module name; if the assembly changes, it needs the same timing admission as a speed change, and a flat result does not show it is harmless.
@@ -86,7 +87,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Hold `/tmp/primes-timing.lock` for any compile, test or benchmark you run, not only timing sessions: create it with a one-line description of the work before starting, and delete it when done. Only its creator removes it. Before starting, check for the file and wait while it exists. This lock prevents overlapping Primes jobs; it supplements the shared reservation registry.
 
 ## Work scope and branches
-- Use one `swift/<experiment>` branch per experiment, based on `swift/dense-small-factors`, with one PR in `fahlman/Primes`. Verify the head and base repositories. Keep the PR a draft while required work is incomplete.
+- Use one branch per experiment, named as the shared rules require, based on `swift/dense-small-factors`, with one PR in `fahlman/Primes`. Verify the head and base repositories. Keep the PR a draft while required work is incomplete.
 - Use an isolated worktree as required by the shared guide. Put temporary worktrees under `/Users/ryan/Developer/Primes/.worktrees/`, create them from the main repository, and confirm the sparse checkout includes `PrimeSwift`, `fork` and `.github`; if necessary, run `git sparse-checkout set PrimeSwift fork .github` in the new worktree. Do not edit another agent's worktree.
 - Once a branch is merged or its PR is closed, publish any unique source/evidence and remove its worktree and disposable builds. Keep the branch. Generated caches need no backup; preserve any unique uncommitted work before removal.
 - Don't discard existing changes, rewrite pushed history, or push to upstream. Push to `origin` only. An upstream submission requires a fresh branch from `upstream/drag-race` containing only the solution folder; verify that with `git diff --stat upstream/drag-race...HEAD` before opening it. The submission is [upstream PR #1083](https://github.com/PlummersSoftwareLLC/Primes/pull/1083) from `swift/submission`; any change it needs lands on development first and then on `swift/submission` as a new commit, never as a rewrite.
