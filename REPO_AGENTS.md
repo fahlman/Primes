@@ -15,7 +15,8 @@ and `fork/swift/compare-upstream.swift`.
 - Selected local tools: Xcode 27.0 (`27A266a`), Apple Swift 6.4
   (`swiftlang-6.4.0.34.1`), macOS SDK 27.0.
 - Swift tools minimum: 5.7 for `PrimeSwift_1bitStriped_u8`; 5.3 for the
-  `PrimeSwift_1bit_u8` and `PrimeSwift_8bitBool` comparison packages.
+  `PrimeSwift_1bit_u8` and `PrimeSwift_8bitBool` comparison packages, which are
+  other authors' code and stay at upstream's bytes.
 - Swift language mode: the packages use the Swift 5 default for their tools
   versions. The direct `swiftc` comparison commands do not specify
   `-swift-version`; they use the selected compiler's default.
@@ -23,27 +24,20 @@ and `fork/swift/compare-upstream.swift`.
   an SDK. Direct comparison commands do not specify `-sdk` or `-target`;
   record the actual compiler/SDK/target in the run evidence rather than inferring
   them from the package minimum or today's installation.
-- Timing comparisons of the submitted entry use its shipping compiler, Swift
-  6.3.3. Build the candidate and every control with the same compiler and flags
-  in the same session, and record the compiler build, Xcode, and SDK in the run
-  record.
+- Timing comparisons of the entry use the compiler it ships with, the Swift
+  image in its `Dockerfile`. Build the candidate and every control with the same
+  compiler and flags in the same session, and record the compiler build, Xcode,
+  and SDK in the run record.
 - Results measured with different compilers are not comparable. After a
   compiler change, re-run the controls on the new compiler rather than comparing
   against older numbers. Earlier results remain records of their own revision
   and compiler.
 - `PrimeSwift/solution_1/Dockerfile`, that solution's `README.md`, and the Linux
-  validation in `fork/swift/linux-docker/` use Swift 6.3.3, the compiler the
-  submitted entry ships with.
-
-**Upstream wins for the submitted entry (Ryan, 2026-09-27).** Primes is a fork of
-a project Ryan doesn't own. Everything submitted upstream, meaning the solution
-folder's packages, `Dockerfile`, `run.sh` and `README.md`, follows upstream's
-rules rather than the shared rules' newest-toolchain, Swift 6 mode and
-newest-minimum requirements. The entry changes only when a change makes it faster
-or upstream needs it. Until then it stays on Swift 6.3.3 with its current package
-minimums, and the upstream comparison packages keep their authors' bytes. The
-fork's own tools under `fork/swift`, which never go upstream, follow the shared
-rules.
+  validation in `fork/swift/linux-docker/` use Swift 6.3.3.
+- The entry is behind the shared rules on compiler, language mode and minimum
+  macOS. Its upgrade is [PR #50](https://github.com/fahlman/Primes/pull/50).
+- The entry builds and runs in Docker on Linux, because upstream's
+  `CONTRIBUTING.md` requires a `Dockerfile` for every solution.
 
 ## Goal
 
@@ -61,7 +55,7 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 - Discover factors at run time by checking odd candidates in order, starting at 3. Stopping at √limit, starting at p², and inverted flags are allowed. Word scans that jump to the next unmarked bit are out of scope unless agreed first.
 - Mark every composite with its own operation in the source. Unrolling and reordering the marks are fine; the eight fixed-mask streams do both. The compiler may merge these operations in machine code. The classification rests on the source, so say so wherever it matters.
-- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. The sieve uses no external dependencies; the entry's runner keeps upstream's `swift-argument-parser` dependency, declared `from: "0.0.1"` and locked at 0.5.0.
+- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. The sieve uses no external dependencies; the entry's runner depends on `swift-argument-parser`, declared `from: "0.0.1"` and locked at 0.5.0.
 - The completed flags are the result. A count or checksum alone is not.
 - Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, and marking a prime as composite and then restoring it.
 - A multithreaded run is N single-threaded workers, each creating its own fresh sieves; no sieve is split across threads, and nothing is shared between them but the limit and the running time. The sieve code is the same bytes as the single-threaded entry's.
