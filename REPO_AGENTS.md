@@ -4,26 +4,12 @@ Read the shared `AGENTS.md` first. The rules below preserve the Swift sieve
 project's category, benchmark protocol, upstream boundaries, and branch policy.
 Verify historical PR status before acting on it.
 
-These instructions apply to Swift work in `PrimeSwift/solution_1`, `fork/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `fork/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [fork/swift/README.md](fork/swift/README.md), and each PR owns its change history and decision. This file, `AGENTS.md`, `CLAUDE.md`, `fork/swift` and `.github/workflows/swift-linux-docker-validation.yml` belong to the fork only; exclude them from any upstream submission.
+These instructions apply to Swift work in `PrimeSwift/solution_1`, `fork/swift` and its Linux validation workflow. The adopted striped package owns the sieve, template, generator and correctness checks; `fork/swift` owns fork-only benchmarking and diagnostics. Current commands and accepted measurements are in [fork/swift/README.md](fork/swift/README.md), and each PR owns its change history and decision. This file, `AGENTS.md`, `CLAUDE.md`, `fork/swift` and `.github/workflows/swift-linux-docker-validation.yml` belong to the fork only.
 
 ## Toolchain
 
-Settings inspected on 2026-09-25 in the three `PrimeSwift/solution_1`
-package manifests and `fork/swift/run.sh`, `fork/swift/compare-revisions.swift`,
-and `fork/swift/compare-upstream.swift`.
-
 - Selected local tools: Xcode 27.0 (`27A266a`), Apple Swift 6.4
   (`swiftlang-6.4.0.34.1`), macOS SDK 27.0.
-- Swift tools minimum: 5.7 for `PrimeSwift_1bitStriped_u8`; 5.3 for the
-  `PrimeSwift_1bit_u8` and `PrimeSwift_8bitBool` comparison packages, which are
-  other authors' code and stay at upstream's bytes.
-- Swift language mode: the packages use the Swift 5 default for their tools
-  versions. The direct `swiftc` comparison commands do not specify
-  `-swift-version`; they use the selected compiler's default.
-- SDK and deployment: the package manifests declare macOS 10.15 and do not pin
-  an SDK. Direct comparison commands do not specify `-sdk` or `-target`;
-  record the actual compiler/SDK/target in the run evidence rather than inferring
-  them from the package minimum or today's installation.
 - Timing comparisons of the entry use the compiler it ships with, the Swift
   image in its `Dockerfile`. Build the candidate and every control with the same
   compiler and flags in the same session, and record the compiler build, Xcode,
@@ -32,10 +18,6 @@ and `fork/swift/compare-upstream.swift`.
   compiler change, re-run the controls on the new compiler rather than comparing
   against older numbers. Earlier results remain records of their own revision
   and compiler.
-- `PrimeSwift/solution_1/Dockerfile`, that solution's `README.md`, and the Linux
-  validation in `fork/swift/linux-docker/` use Swift 6.3.3.
-- The entry is behind the shared rules on compiler, language mode and minimum
-  macOS. Its upgrade is [PR #50](https://github.com/fahlman/Primes/pull/50).
 - The entry builds and runs in Docker on Linux, because upstream's
   `CONTRIBUTING.md` requires a `Dockerfile` for every solution.
 
@@ -55,14 +37,14 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 
 - Discover factors at run time by checking odd candidates in order, starting at 3. Stopping at √limit, starting at p², and inverted flags are allowed. Word scans that jump to the next unmarked bit are out of scope unless agreed first.
 - Mark every composite with its own operation in the source. Unrolling and reordering the marks are fine; the eight fixed-mask streams do both. The compiler may merge these operations in machine code. The classification rests on the source, so say so wherever it matters.
-- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. The sieve uses no external dependencies; the entry's runner depends on `swift-argument-parser`, declared `from: "0.0.1"` and locked at 0.5.0.
+- Every pass creates a fresh sieve instance that owns the complete state and a buffer allocated at run time and sized to the limit. Nothing survives into the next pass. The sieve uses no external dependencies.
 - The completed flags are the result. A count or checksum alone is not.
 - Not allowed in this work: wheels, presieving, copied composite patterns, multi-bit composite masks written in source, mask or pattern tables, precomputed prime lists, buffers or state reused across passes, and marking a prime as composite and then restoring it.
 - A multithreaded run is N single-threaded workers, each creating its own fresh sieves; no sieve is split across threads, and nothing is shared between them but the limit and the running time. The sieve code is the same bytes as the single-threaded entry's.
 - Specialized small-factor handlers: dispatch only after the runtime bit test finds the candidate unmarked. Provide a handler for every odd value in the handled range, not only primes, so no knowledge of primality is built in. Start at p², mark individually up to any alignment boundary, and finish with a bounded tail.
 - Output tags must match the code: `algorithm=base,faithful=yes,bits=1` and the thread count actually used. READMEs and PR records must describe what the code does.
 - Implement the sieve, the benchmark and the project's tools in Swift, with POSIX `sh` only for thin wrappers such as `run.sh`. No sieve or benchmark logic lives outside Swift, and no other language is needed anywhere in the fork.
-- When borrowing an idea from another submission, read its code. Its labels are not proof that it complies.
+- When borrowing an idea from another solution, read its code. Its labels are not proof that it complies.
 
 ## Benchmark contract
 
@@ -84,8 +66,8 @@ Read the Rules, Base algorithm, and Faithfulness sections of `CONTRIBUTING.md` a
 - Use one branch per experiment, named as the shared rules require, based on `swift/dense-small-factors`, with one PR in `fahlman/Primes`. Verify the head and base repositories. Keep the PR a draft while required work is incomplete.
 - Use an isolated worktree as required by the shared guide. Put temporary worktrees under `/Users/ryan/Developer/Primes/.worktrees/`, create them from the main repository, and confirm the sparse checkout includes `PrimeSwift`, `fork` and `.github`; if necessary, run `git sparse-checkout set PrimeSwift fork .github` in the new worktree. Do not edit another agent's worktree.
 - Once a branch is merged or its PR is closed, publish any unique source/evidence and remove its worktree and disposable builds. Keep the branch. Generated caches need no backup; preserve any unique uncommitted work before removal.
-- Don't discard existing changes, rewrite pushed history, or push to upstream. Push to `origin` only. An upstream submission requires a fresh branch from `upstream/drag-race` containing only the solution folder; verify that with `git diff --stat upstream/drag-race...HEAD` before opening it. The submission is [upstream PR #1083](https://github.com/PlummersSoftwareLLC/Primes/pull/1083) from `swift/submission`; any change it needs lands on development first and then on `swift/submission` as a new commit, never as a rewrite.
-- Upstream's files stay at upstream's bytes. Outside `PrimeSwift/solution_1` and the fork-only files named above, development changes nothing since it branched from `upstream/drag-race`; inside the solution folder it changes only what the entry needs to build and run, the restraint `CONTRIBUTING.md` asks of a PR that improves an existing solution. That excludes convenience edits: lockfiles or ignore files in packages we don't own, guards in the inherited CI. Keep local ignores in `.git/info/exclude`, which every worktree of the repository shares. This prints nothing while the rule holds:
+- Don't discard existing changes, rewrite pushed history, or push to upstream. Push to `origin` only.
+- Upstream's files stay at upstream's bytes. Outside `PrimeSwift/solution_1` and the fork-only files named above, development changes nothing since it branched from `upstream/drag-race`; inside the solution folder it changes only what the entry needs to build and run. That excludes convenience edits: lockfiles or ignore files in packages we don't own, guards in the inherited CI. Keep local ignores in `.git/info/exclude`, which every worktree of the repository shares. This prints nothing while the rule holds:
 
   ```sh
   git diff --name-only upstream/drag-race...HEAD -- . ':!PrimeSwift/solution_1' ':!fork/swift' ':!AGENTS.md' ':!REPO_AGENTS.md' ':!CLAUDE.md' ':!.github/workflows/swift-linux-docker-validation.yml'
