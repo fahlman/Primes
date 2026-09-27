@@ -5,7 +5,7 @@
 //   swift fork/swift/compare-revisions.swift --variant NAME=REVISION [--variant ...] --output RESULTS.json
 // Variant names use lowercase letters, digits, hyphens and underscores; the first
 // variant is the reference for speedup_over_first. The output file must not exist.
-// Timing counts as evidence only on the reference machine; see AGENTS.md.
+// Timing counts as evidence only on the reference machine; see REPO_AGENTS.md.
 import Foundation
 
 let harnessRevision = "25402d46ba991b39451724d3873d326626981e3f"
