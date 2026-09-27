@@ -1,18 +1,18 @@
-// swift-tools-version:5.7
+// swift-tools-version:6.4
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
 let package = Package(
     name: "PrimeSieveSwift",
-    platforms: [.macOS(.v10_15)],
+    platforms: [.macOS(.v27)],
     products: [
         .executable(
             name: "PrimeSieveSwift",
             targets: ["PrimeSieveSwift"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-argument-parser", from: "0.0.1")
+        .package(url: "https://github.com/apple/swift-argument-parser", from: "1.8.2")
     ],
     targets: [
         // The observer stays opaque to the executable's optimizer. Do not enable

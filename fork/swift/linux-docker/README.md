@@ -2,7 +2,7 @@
 
 The validator and its lifecycle tests are one Swift script,
 `linux-validation.swift`, with the subcommands `validate` and `test-lifecycle`; it
-runs on the runner host, whose Ubuntu images ship Swift 6.3.3. It is a port of the
+runs on the runner host with the Swift toolchain its Ubuntu image ships. It is a port of the
 earlier Python pair, keeping the same commands, checks, evidence record and
 cleanup rules; the Python versions remain in Git history and in the evidence they
 produced.
@@ -73,7 +73,7 @@ their official GitHub repositories on 2026-09-12:
 ## One validation run
 
 The script first verifies native runner and Docker-daemon architecture. It pulls
-the Dockerfile's two versioned Swift 6.3.3 images once and records their immutable
+the Dockerfile's two versioned Swift 6.4.0 images once and records their immutable
 repository digests. It builds both the existing `build` stage and final runtime
 image with the unchanged Dockerfile and `--pull=false`. Plain build logs retain
 the builder's base-image resolution; inspect records retain image IDs and digests.
