@@ -259,7 +259,7 @@ final class PrimeSieve {
         words.storeBytes(of: value.littleEndian, toByteOffset: offset, as: UInt64.self)
     }
 
-    /// Dense marking on 128-bit chunks for every odd factor from 65 through 111.
+    /// Dense marking on 256-bit chunks for every odd factor from 65 through 111.
     /// Called only after the ordinary runtime candidate-bit test. No prime list or
     /// composite pattern is encoded: each generated case supplies bit offsets.
     private func markVectorDenseMultiples(of p: Int) {
@@ -269,31 +269,31 @@ final class PrimeSieve {
         let bitEnd = byteCount << 3
         var bit = (p * p - 3) / 2
 
-        // Odd p is coprime to 128: at most 127 individual marks reach a boundary.
-        while bit < bitEnd && bit & 127 != 0 {
+        // Odd p is coprime to 256: at most 255 individual marks reach a boundary.
+        while bit < bitEnd && bit & 255 != 0 {
             bytes[bit >> 3] |= UInt8(1) << (bit & 7)
             bit += p
         }
         guard bit < bitEnd else { return }
 
         let words = UnsafeMutableRawPointer(bytes)
-        var word = bit >> 7
-        let fullWords = byteCount >> 4
+        var word = bit >> 8
+        let fullWords = byteCount >> 5
 
-        // 128 consecutive marks span p complete 128-bit chunks. In chunk j,
-        // the first mark is (-128 * j) mod p, followed by increments of p.
-        // Group bounds require all 16 bytes of every load/store to exist.
-        // INSERT GENERATED DENSE 128
+        // 256 consecutive marks span p complete 256-bit chunks. In chunk j,
+        // the first mark is (-256 * j) mod p, followed by increments of p.
+        // Group bounds require all 32 bytes of every load/store to exist.
+        // INSERT GENERATED DENSE 256
 
-        // At most 128 marks remain, including any partial chunk and byte padding.
-        bit = word * 128
+        // At most 256 marks remain, including any partial chunk and byte padding.
+        bit = word * 256
         while bit < bitEnd {
             bytes[bit >> 3] |= UInt8(1) << (bit & 7)
             bit += p
         }
     }
 
-    /// A 128-bit local value with two UInt64 lanes. Each multiple receives its own
+    /// A 256-bit local value with four UInt64 lanes. Each multiple receives its own
     /// single-bit OR; the compiler may combine those operations. Unaligned raw
     /// access avoids assuming the byte allocation has SIMD alignment. Convert each
     /// lane separately so the byte/bit order remains little-endian on every host.
@@ -301,20 +301,24 @@ final class PrimeSieve {
     private func markVectorWord(
         _ words: UnsafeMutableRawPointer, _ word: Int, first: Int, step p: Int
     ) {
-        // Callers guarantee 0 <= word < byteCount / 16, hence
-        // 16 * word <= byteCount - 16; wrapping cannot change the offset.
-        let offset = word &* 16
-        var value = words.loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)
+        // Callers guarantee 0 <= word < byteCount / 32, hence
+        // 32 * word <= byteCount - 32; wrapping cannot change the offset.
+        let offset = word &* 32
+        var value = words.loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)
         value[0] = UInt64(littleEndian: value[0])
         value[1] = UInt64(littleEndian: value[1])
+        value[2] = UInt64(littleEndian: value[2])
+        value[3] = UInt64(littleEndian: value[3])
         var bit = first
-        while bit < 128 {
+        while bit < 256 {
             value[bit >> 6] |= UInt64(1) << (bit & 63)
             bit += p
         }
         value[0] = value[0].littleEndian
         value[1] = value[1].littleEndian
-        words.storeBytes(of: value, toByteOffset: offset, as: SIMD2<UInt64>.self)
+        value[2] = value[2].littleEndian
+        value[3] = value[3].littleEndian
+        words.storeBytes(of: value, toByteOffset: offset, as: SIMD4<UInt64>.self)
     }
 
     func primes() -> [Int] {

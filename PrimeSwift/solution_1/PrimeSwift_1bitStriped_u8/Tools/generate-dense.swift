@@ -64,7 +64,7 @@ struct DenseSwitch {
 let switches = [
     DenseSwitch(width: 64, firstFactor: 5, lastFactor: 63,
                 helper: "markWord", diagnostic: "Word-dense"),
-    DenseSwitch(width: 128, firstFactor: 65, lastFactor: 111,
+    DenseSwitch(width: 256, firstFactor: 65, lastFactor: 111,
                 helper: "markVectorWord", diagnostic: "Vector-dense"),
 ]
 
@@ -91,7 +91,7 @@ func render(_ template: String) throws -> String {
     guard switches.count == 2,
           switches[0].width == 64, switches[0].firstFactor == 5,
           switches[0].helper == "markWord",
-          switches[1].width == 128, switches[1].helper == "markVectorWord",
+          switches[1].width == 256, switches[1].helper == "markVectorWord",
           switches[1].firstFactor == switches[0].lastFactor + 2,
           switches.allSatisfy({ $0.firstFactor & 1 == 1 && $0.lastFactor & 1 == 1 &&
               $0.firstFactor <= $0.lastFactor && $0.lastFactor < $0.width }) else {
@@ -141,7 +141,7 @@ func render(_ template: String) throws -> String {
         }
         let body = String(template[start..<end.lowerBound])
         try requireOnce("while bit < \(block.width) {", in: body, label: "\(block.helper) bit width")
-        let storageType = block.width == 64 ? "UInt64.self" : "SIMD2<UInt64>.self"
+        let storageType = block.width == 64 ? "UInt64.self" : "SIMD4<UInt64>.self"
         guard body.contains("loadUnaligned(fromByteOffset: offset, as: \(storageType))"),
               body.contains("toByteOffset: offset, as: \(storageType))") else {
             throw fail("Changed \(block.helper) storage width")

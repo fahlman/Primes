@@ -52,7 +52,7 @@ func integer(_ text: String) throws -> Int {
 // calls into absolute marked positions and compare with a plain linear sequence.
 func checkSchedules(_ output: String) throws -> [String: Int] {
     var factors = 0, calls = 0, marks = 0
-    for (width, lower, upper, helper) in [(64, 5, 63, "markWord"), (128, 65, 111, "markVectorWord")] {
+    for (width, lower, upper, helper) in [(64, 5, 63, "markWord"), (256, 65, 111, "markVectorWord")] {
         let block = try markedBlock(output, width: width)
         let cases = try captures("^        case ([0-9]+):$", in: block).map { try integer($0[0]) }
         try require(cases == Array(stride(from: lower, through: upper, by: 2)), "Missing or extra odd cases at width \(width)")
@@ -155,28 +155,28 @@ final class GeneratorChecks {
         }
         // This is a file/CLI check, so current source identity is the expected
         // render. Separate admission checks prove identity to the adopted commit.
-        let expectedBlocks = try markedBlock(source, width: 64) + markedBlock(source, width: 128)
+        let expectedBlocks = try markedBlock(source, width: 64) + markedBlock(source, width: 256)
         let goodTemplate = try fixture(template, "template with spaces.swift.in")
         let begin64 = "        // BEGIN GENERATED DENSE 64\n", end64 = "        // END GENERATED DENSE 64\n"
-        let begin128 = "        // BEGIN GENERATED DENSE 128\n", end128 = "        // END GENERATED DENSE 128\n"
-        let missing = try replacingOnce(source, end128, "")
+        let beginVector = "        // BEGIN GENERATED DENSE 256\n", endVector = "        // END GENERATED DENSE 256\n"
+        let missing = try replacingOnce(source, endVector, "")
         let duplicate = try replacingOnce(source, begin64, begin64 + begin64)
         let reversed = try replacingOnce(try replacingOnce(source, begin64, "REVERSE-BEGIN\n"), end64, begin64)
             .replacingOccurrences(of: "REVERSE-BEGIN\n", with: end64)
-        let overlap = try replacingOnce(try replacingOnce(source, end64, ""), begin128, begin128 + end64)
+        let overlap = try replacingOnce(try replacingOnce(source, end64, ""), beginVector, beginVector + end64)
         let corruptBoth = try replacingOnce(
             try replacingOnce(source, "first: 1, step: 5)", "first: 2, step: 5)"),
-            "first: 2, step: 65)", "first: 3, step: 65)")
-        let insert64 = "        // INSERT GENERATED DENSE 64\n", insert128 = "        // INSERT GENERATED DENSE 128\n"
-        let swapped = try replacingOnce(try replacingOnce(template, insert64, "REVERSE-INSERT\n"), insert128, insert64)
-            .replacingOccurrences(of: "REVERSE-INSERT\n", with: insert128)
+            "first: 4, step: 65)", "first: 5, step: 65)")
+        let insert64 = "        // INSERT GENERATED DENSE 64\n", insertVector = "        // INSERT GENERATED DENSE 256\n"
+        let swapped = try replacingOnce(try replacingOnce(template, insert64, "REVERSE-INSERT\n"), insertVector, insert64)
+            .replacingOccurrences(of: "REVERSE-INSERT\n", with: insertVector)
         let swappedDispatch = try replacingOnce(
             try replacingOnce(template, "markWordDenseMultiples(of: p)", "SWAPPED-DISPATCH"),
             "markVectorDenseMultiples(of: p)", "markWordDenseMultiples(of: p)")
             .replacingOccurrences(of: "SWAPPED-DISPATCH", with: "markVectorDenseMultiples(of: p)")
         let badTemplates = [
             ("missing-insertion", try replacingOnce(template, insert64, "")),
-            ("duplicate-insertion", try replacingOnce(template, insert128, insert128 + insert128)),
+            ("duplicate-insertion", try replacingOnce(template, insertVector, insertVector + insertVector)),
             ("reversed-insertions", swapped),
             ("missing-dispatch-token", try replacingOnce(template, "{{WORD_DISPATCH_UPPER_BOUND}}", "64")),
             ("duplicate-dispatch-token", template + "// {{VECTOR_DISPATCH_UPPER_BOUND}}\n"),
@@ -184,13 +184,13 @@ final class GeneratorChecks {
             ("dispatch-shape", try replacingOnce(template, "if p < {{VECTOR_DISPATCH_UPPER_BOUND}}", "if p <= {{VECTOR_DISPATCH_UPPER_BOUND}}")),
             ("swapped-dispatch-handlers", swappedDispatch),
             ("word-helper-width", try replacingOnce(template, "while bit < 64 {", "while bit < 63 {")),
-            ("vector-helper-width", try replacingOnce(template, "while bit < 128 {", "while bit < 127 {")),
+            ("vector-helper-width", try replacingOnce(template, "while bit < 256 {", "while bit < 255 {")),
             ("word-storage-type", try replacingOnce(template,
                 "loadUnaligned(fromByteOffset: offset, as: UInt64.self)",
                 "loadUnaligned(fromByteOffset: offset, as: UInt32.self)")),
             ("vector-storage-type", try replacingOnce(template,
-                "loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)",
-                "loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)")),
+                "loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)",
+                "loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)")),
         ]
         do {
             let tool = "generate-dense.swift"
@@ -207,7 +207,7 @@ final class GeneratorChecks {
             try require(try Data(contentsOf: good) == original, "Writing a correct fixture changed its bytes")
             for (name, corrupted) in [
                 ("corrupt-word", try replacingOnce(source, "first: 1, step: 5)", "first: 2, step: 5)")),
-                ("corrupt-vector", try replacingOnce(source, "first: 2, step: 65)", "first: 3, step: 65)")),
+                ("corrupt-vector", try replacingOnce(source, "first: 4, step: 65)", "first: 5, step: 65)")),
                 ("corrupt-both-blocks", corruptBoth),
                 ("corrupt-handwritten", try replacingOnce(source, "private let limit: Int", "private let limit: Int // disposable corruption")),
                 ("word-dispatch-cutoff", try replacingOnce(source, "if p < 64 {", "if p < 62 {")),

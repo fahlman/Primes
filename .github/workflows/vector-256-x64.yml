@@ -1,0 +1,117 @@
+name: 256-bit vs 128-bit vector handlers, x86-64
+
+# One approved experiment (Ryan, 2026-10-04): upstream's merged Swift entry against
+# the same entry with only PrimeSieve.swift replaced by this branch's version, whose
+# handlers for odd factors 65-111 use 256-bit chunks instead of 128-bit ones.
+# Correctness checks run first; both images use the shipping Dockerfile.
+on:
+  push:
+    branches: [claude/vector-256]
+
+permissions:
+  contents: read
+
+env:
+  # Upstream's merge of the entry, PlummersSoftwareLLC/Primes#1083.
+  UPSTREAM_REVISION: 95b6354127d72f60ebe006615921c682ae9c1d0c
+  SIEVE: PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift
+
+jobs:
+  compare:
+    if: github.repository == 'fahlman/Primes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out upstream's merged Swift solution
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: PlummersSoftwareLLC/Primes
+          ref: ${{ env.UPSTREAM_REVISION }}
+          sparse-checkout: PrimeSwift/solution_1
+          path: upstream
+          persist-credentials: false
+
+      - name: Check out this branch's package and fork tools
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          sparse-checkout: |
+            PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
+            fork/swift
+          path: fork
+          persist-credentials: false
+
+      - name: Assemble the candidate
+        run: |
+          set -eu
+          cp -R upstream/PrimeSwift/solution_1 candidate
+          cp "fork/PrimeSwift/solution_1/$SIEVE" "candidate/$SIEVE"
+          # The candidate differs from upstream's solution in this one file only.
+          diff -rq upstream/PrimeSwift/solution_1 candidate || true
+          test "$(diff -rq upstream/PrimeSwift/solution_1 candidate | wc -l)" -eq 1
+
+      - name: Record the machine
+        run: |
+          uname -a
+          lscpu
+          docker version --format 'Docker server {{.Server.Version}}'
+
+      - name: Generator and correctness checks
+        run: |
+          set -eu
+          docker pull -q swift:6.3.3
+          docker run --rm swift:6.3.3 swift --version
+          docker run --rm --network none -v "$PWD:/w" -w /w swift:6.3.3 sh -c '
+            set -eu
+            package=fork/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
+            sieve="$package/Sources/PrimeSieveSwift/PrimeSieve.swift"
+            echo "== generator rendering"
+            swift "$package/Tools/generate-dense.swift" --check "$sieve"
+            echo "== generator regression checks"
+            swift fork/fork/swift/check-dense-generator.swift > /tmp/generator-checks.json
+            tail -c 600 /tmp/generator-checks.json; echo
+            phase="fork/fork/swift/phase-split/PhaseSieve.swift fork/fork/swift/phase-split/PhaseVerify.swift"
+            for flags in "-O -sanitize=address" "-O -whole-module-optimization"; do
+              echo "== verify $flags"
+              swiftc $flags "$sieve" "$package/Tools/Verify.swift" -o /tmp/verify && /tmp/verify
+              echo "== phase-verify $flags"
+              swiftc $flags "$sieve" $phase -o /tmp/phase-verify && /tmp/phase-verify
+            done'
+
+      - name: Build both images
+        run: |
+          set -eu
+          for tag in 6.3.3 6.3.3-slim; do
+            docker pull -q "swift:$tag"
+            docker image inspect --format "swift:$tag {{index .RepoDigests 0}}" "swift:$tag"
+          done
+          docker build --pull -t primes:vector-128 upstream/PrimeSwift/solution_1
+          docker build --pull -t primes:vector-256 candidate
+          docker build --target build -t primes-build:vector-128 upstream/PrimeSwift/solution_1
+          docker build --target build -t primes-build:vector-256 candidate
+
+      # Supporting evidence only: the size of each shipped dense-marking function, how
+      # many of its shifts use a run-time amount, and how many 256-bit (ymm) operations it has.
+      - name: Compare the shipped machine code
+        continue-on-error: true
+        run: |
+          set -eu
+          for variant in vector-128 vector-256; do
+            docker run --rm --entrypoint sh "primes-build:$variant" -c '
+              objdump -d --no-show-raw-insn PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift > /tmp/all.s
+              for f in markWordDenseMultiples markVectorDenseMultiples; do
+                awk -v f="$f" "index(\$0, f) && /^[0-9a-f]+ <.*>:\$/ {on=1; next} /^\$/ {on=0} on" /tmp/all.s > /tmp/f.s
+                echo "$0 $f: $(wc -l < /tmp/f.s) instructions, $(grep -c -E "shlx|bts[a-z]* +%r|shl[a-z]* +%cl" /tmp/f.s || true) run-time shifts, $(grep -c ymm /tmp/f.s || true) ymm"
+              done' "$variant"
+          done
+
+      - name: Time the striped entry in rotated order
+        run: |
+          set -eu
+          binary=./PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift
+          for round in 1 2 3 4 5; do
+            if [ $((round % 2)) -eq 1 ]; then order="vector-128 vector-256"; else order="vector-256 vector-128"; fi
+            for variant in $order; do
+              output=$(docker run --rm --entrypoint "$binary" "primes:$variant" 2>&1)
+              echo "round=$round variant=$variant :: $(printf '%s' "$output" | tr '\n' ' ')"
+            done
+          done

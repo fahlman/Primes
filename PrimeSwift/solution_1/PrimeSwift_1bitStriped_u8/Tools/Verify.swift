@@ -95,26 +95,29 @@ struct Verify {
         // where dense word groups first appear, with every tail length.
         for limit in -2...30_000 { check(limit, repeating: limit <= 2_048) }
 
-        // The 128-bit handlers can begin full groups beyond 30,000. Include
-        // alignment and first/second group edges for every odd handled value.
+        // The vector handlers can begin full groups beyond 30,000. Include
+        // alignment and first/second group edges for every odd handled value,
+        // at both the former 128-bit and the current 256-bit chunk width.
         // A group's byte-rounded storage exists at limit 2*endBit-13, before
         // every flag in its last byte is valid; also test 2*endBit+1 explicitly.
         var vectorLimits = Set<Int>()
-        for factor in stride(from: 65, through: 127, by: 2) {
-            var aligned = (factor * factor - 3) / 2
-            while aligned & 127 != 0 { aligned += factor }
-            let groupEnd = aligned + 128 * factor
-            for boundary in [factor * factor, 2 * aligned + 3,
-                             2 * groupEnd - 13, 2 * groupEnd + 1,
-                             2 * (groupEnd + 128 * factor) - 13,
-                             2 * (groupEnd + 128 * factor) + 1] {
-                for offset in -2...2 { vectorLimits.insert(boundary + offset) }
-            }
-            // Exercise every possible next tail-mark position, including the
-            // transition from 127 to 128 marks, on both sides of its number.
-            for mark in 0..<128 {
-                let nextNumber = 2 * (groupEnd + mark * factor) + 3
-                for offset in -1...1 { vectorLimits.insert(nextNumber + offset) }
+        for width in [128, 256] {
+            for factor in stride(from: 65, through: 127, by: 2) {
+                var aligned = (factor * factor - 3) / 2
+                while aligned & (width - 1) != 0 { aligned += factor }
+                let groupEnd = aligned + width * factor
+                for boundary in [factor * factor, 2 * aligned + 3,
+                                 2 * groupEnd - 13, 2 * groupEnd + 1,
+                                 2 * (groupEnd + width * factor) - 13,
+                                 2 * (groupEnd + width * factor) + 1] {
+                    for offset in -2...2 { vectorLimits.insert(boundary + offset) }
+                }
+                // Exercise every possible next tail-mark position, including the
+                // transition to a full chunk's worth of marks, on both sides of its number.
+                for mark in 0..<width {
+                    let nextNumber = 2 * (groupEnd + mark * factor) + 3
+                    for offset in -1...1 { vectorLimits.insert(nextNumber + offset) }
+                }
             }
         }
         for limit in vectorLimits.sorted() { check(limit) }
@@ -151,6 +154,6 @@ struct Verify {
         for limit in [994_008, 994_009, 994_010, 1_000_000, 10_000_000] { check(limit, repeating: true) }
         precondition(expected(1_000_000).count == 78_498 && expected(10_000_000).count == 664_579)
 
-        print("Passed: \(checks) complete prime lists: every limit -2...30,000, \(vectorLimits.count) 128-bit alignment/group/tail limits, \(groupLimits.count) sparse group and cleanup limits, \(squareLimits) limits within 3 of every prime square up to 2,000,000, 500 random limits up to 2,000,000, and the large limits including 1M (78,498 primes) and 10M (664,579).")
+        print("Passed: \(checks) complete prime lists: every limit -2...30,000, \(vectorLimits.count) 128- and 256-bit alignment/group/tail limits, \(groupLimits.count) sparse group and cleanup limits, \(squareLimits) limits within 3 of every prime square up to 2,000,000, 500 random limits up to 2,000,000, and the large limits including 1M (78,498 primes) and 10M (664,579).")
     }
 }
