@@ -44,11 +44,14 @@ jobs:
               Dockerfile > Dockerfile.swift-6.4.0
           diff Dockerfile Dockerfile.swift-6.4.0 || true
           test "$(diff Dockerfile Dockerfile.swift-6.4.0 | grep -c '^[<>]')" -eq 4
-          docker build --pull -f Dockerfile -t primes-swift:6.3.3 .
-          docker build --pull -f Dockerfile.swift-6.4.0 -t primes-swift:6.4.0 .
+          # BuildKit keeps pulled base images out of the local image store, so
+          # pull them explicitly to record their digests.
           for tag in 6.3.3 6.3.3-slim 6.4.0 6.4.0-slim; do
+            docker pull -q "swift:$tag"
             docker image inspect --format "swift:$tag {{index .RepoDigests 0}}" "swift:$tag"
           done
+          docker build --pull -f Dockerfile -t primes-swift:6.3.3 .
+          docker build --pull -f Dockerfile.swift-6.4.0 -t primes-swift:6.4.0 .
           docker run --rm swift:6.3.3 swift --version
           docker run --rm swift:6.4.0 swift --version
 
