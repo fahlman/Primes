@@ -3651,10 +3651,10 @@ final class PrimeSieve {
         }
     }
 
-    /// A 128-bit local value with two UInt64 lanes. Each multiple receives its own
-    /// single-bit OR; the compiler may combine those operations. Unaligned raw
-    /// access avoids assuming the byte allocation has SIMD alignment. Convert each
-    /// lane separately so the byte/bit order remains little-endian on every host.
+    /// A 128-bit chunk expressed as two independent UInt64 values. Each multiple
+    /// receives its own single-bit OR; the compiler may combine adjacent word
+    /// operations. Unaligned access and per-word endian conversion preserve the
+    /// byte buffer's layout without requiring wider allocation alignment.
     @inline(__always)
     private func markVectorWord(
         _ words: UnsafeMutableRawPointer, _ word: Int, first: Int, step p: Int
@@ -3662,17 +3662,19 @@ final class PrimeSieve {
         // Callers guarantee 0 <= word < byteCount / 16, hence
         // 16 * word <= byteCount - 16; wrapping cannot change the offset.
         let offset = word &* 16
-        var value = words.loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)
-        value[0] = UInt64(littleEndian: value[0])
-        value[1] = UInt64(littleEndian: value[1])
+        var low = UInt64(littleEndian: words.loadUnaligned(fromByteOffset: offset, as: UInt64.self))
+        var high = UInt64(littleEndian: words.loadUnaligned(fromByteOffset: offset &+ 8, as: UInt64.self))
         var bit = first
-        while bit < 128 {
-            value[bit >> 6] |= UInt64(1) << (bit & 63)
+        while bit < 64 {
+            low |= UInt64(1) << bit
             bit += p
         }
-        value[0] = value[0].littleEndian
-        value[1] = value[1].littleEndian
-        words.storeBytes(of: value, toByteOffset: offset, as: SIMD2<UInt64>.self)
+        while bit < 128 {
+            high |= UInt64(1) << (bit - 64)
+            bit += p
+        }
+        words.storeBytes(of: low.littleEndian, toByteOffset: offset, as: UInt64.self)
+        words.storeBytes(of: high.littleEndian, toByteOffset: offset &+ 8, as: UInt64.self)
     }
 
     func primes() -> [Int] {

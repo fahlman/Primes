@@ -141,10 +141,15 @@ func render(_ template: String) throws -> String {
         }
         let body = String(template[start..<end.lowerBound])
         try requireOnce("while bit < \(block.width) {", in: body, label: "\(block.helper) bit width")
-        let storageType = block.width == 64 ? "UInt64.self" : "SIMD2<UInt64>.self"
-        guard body.contains("loadUnaligned(fromByteOffset: offset, as: \(storageType))"),
-              body.contains("toByteOffset: offset, as: \(storageType))") else {
+        let offsets = block.width == 64 ? ["offset"] : ["offset", "offset &+ 8"]
+        guard offsets.allSatisfy({ offset in
+            body.contains("loadUnaligned(fromByteOffset: \(offset), as: UInt64.self))") &&
+            body.contains("toByteOffset: \(offset), as: UInt64.self)")
+        }) else {
             throw fail("Changed \(block.helper) storage width")
+        }
+        if block.width == 128 {
+            try requireOnce("while bit < 64 {", in: body, label: "\(block.helper) lower word width")
         }
     }
     var source = template

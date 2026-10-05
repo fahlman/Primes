@@ -183,14 +183,18 @@ final class GeneratorChecks {
             ("unknown-token", template + "// {{UNSUPPORTED_GENERATOR_TOKEN}}\n"),
             ("dispatch-shape", try replacingOnce(template, "if p < {{VECTOR_DISPATCH_UPPER_BOUND}}", "if p <= {{VECTOR_DISPATCH_UPPER_BOUND}}")),
             ("swapped-dispatch-handlers", swappedDispatch),
-            ("word-helper-width", try replacingOnce(template, "while bit < 64 {", "while bit < 63 {")),
+            ("word-helper-width", try replacingOnce(template, "while bit < 64 {\n            value |=", "while bit < 63 {\n            value |=")),
             ("vector-helper-width", try replacingOnce(template, "while bit < 128 {", "while bit < 127 {")),
+            ("vector-lower-word-width", try replacingOnce(template, "while bit < 64 {\n            low |=", "while bit < 63 {\n            low |=")),
             ("word-storage-type", try replacingOnce(template,
-                "loadUnaligned(fromByteOffset: offset, as: UInt64.self)",
-                "loadUnaligned(fromByteOffset: offset, as: UInt32.self)")),
+                "var value = UInt64(littleEndian: words.loadUnaligned(fromByteOffset: offset, as: UInt64.self))",
+                "var value = UInt64(littleEndian: words.loadUnaligned(fromByteOffset: offset, as: UInt32.self))")),
             ("vector-storage-type", try replacingOnce(template,
-                "loadUnaligned(fromByteOffset: offset, as: SIMD2<UInt64>.self)",
-                "loadUnaligned(fromByteOffset: offset, as: SIMD4<UInt64>.self)")),
+                "loadUnaligned(fromByteOffset: offset &+ 8, as: UInt64.self)",
+                "loadUnaligned(fromByteOffset: offset &+ 8, as: UInt32.self)")),
+            ("vector-upper-word-offset", try replacingOnce(template,
+                "toByteOffset: offset &+ 8, as: UInt64.self)",
+                "toByteOffset: offset &+ 16, as: UInt64.self)")),
         ]
         do {
             let tool = "generate-dense.swift"
