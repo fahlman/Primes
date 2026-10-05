@@ -1,0 +1,234 @@
+name: Two UInt64 lanes vs SIMD2 handlers, x86-64
+
+# One approved experiment (Ryan, 2026-10-04): retain the 128-bit schedules but
+# express each chunk as two UInt64 values. The shipping solution is the control;
+# the candidate substitutes only PrimeSieve.swift. No automatic repeat batches.
+on:
+  push:
+    branches: [codex/two-u64-lanes]
+    paths:
+      - .github/workflows/two-u64-x64.yml
+      - PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift
+      - PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in
+      - PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift
+
+permissions:
+  contents: read
+
+concurrency:
+  group: two-u64-x64
+  cancel-in-progress: false
+
+env:
+  UPSTREAM_REVISION: 95b6354127d72f60ebe006615921c682ae9c1d0c
+  SIEVE: PrimeSwift_1bitStriped_u8/Sources/PrimeSieveSwift/PrimeSieve.swift
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  compare:
+    if: github.repository == 'fahlman/Primes'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - name: Check out the shipping solution
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          repository: PlummersSoftwareLLC/Primes
+          ref: ${{ env.UPSTREAM_REVISION }}
+          sparse-checkout: PrimeSwift/solution_1
+          path: upstream
+          persist-credentials: false
+
+      - name: Check out the candidate and its verification tools
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          ref: ${{ github.sha }}
+          sparse-checkout: |
+            PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
+            fork/swift
+          path: fork
+          persist-credentials: false
+
+      - name: Freeze the inputs and record the machine
+        run: |
+          set -euo pipefail
+          mkdir evidence
+          exec > >(tee evidence/preparation.log) 2>&1
+          test "$(uname -m)" = x86_64
+          uname -a
+          lscpu | tee evidence/lscpu.txt
+          docker version
+          jq --version
+          cp -R upstream/PrimeSwift/solution_1 candidate
+          cp "fork/PrimeSwift/solution_1/$SIEVE" "candidate/$SIEVE"
+          # Verify the one-file substitution, including the absence of extra files.
+          difference=$(diff -rq upstream/PrimeSwift/solution_1 candidate || test "$?" = 1)
+          printf '%s\n' "$difference"
+          test "$difference" = "Files upstream/PrimeSwift/solution_1/$SIEVE and candidate/$SIEVE differ"
+          for variant in control candidate; do
+            root=upstream/PrimeSwift/solution_1
+            if [ "$variant" = candidate ]; then root=candidate; fi
+            (cd "$root" && find . -type f -print0 | sort -z | xargs -0 sha256sum) > "evidence/$variant-source-sha256.txt"
+          done
+          cp fork/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/PrimeSieve.swift.in evidence/candidate-template.swift.in
+          cp fork/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8/Tools/generate-dense.swift evidence/generate-dense.swift
+          cp "candidate/$SIEVE" evidence/candidate-PrimeSieve.swift
+          cp "upstream/PrimeSwift/solution_1/$SIEVE" evidence/control-PrimeSieve.swift
+          jq -n --arg upstream "$UPSTREAM_REVISION" --arg candidate "$GITHUB_SHA" \
+            --arg run_id "$GITHUB_RUN_ID" --arg attempt "$GITHUB_RUN_ATTEMPT" \
+            --arg runner "$RUNNER_NAME" --arg started "$(date -u +%FT%TZ)" \
+            '{upstream_revision:$upstream,candidate_revision:$candidate,run_id:$run_id,
+              run_attempt:$attempt,runner:$runner,started_utc:$started,
+              platform:"native x86-64 Linux",compiler:"Swift 6.3.3",target_cpu:"haswell",
+              build:"shipping Dockerfile: release, -O, whole-module optimization, CMO disabled",
+              input_limit:1000000,target_seconds:5,threads:1,pairs:5,
+              acceptance:"Every candidate throughput must exceed every control throughput",
+              repeat_policy:"One batch; failed or inconclusive runs are retained, not automatically repeated"}' \
+            > evidence/metadata.json
+
+      - name: Check the generator and correctness before measuring
+        run: |
+          set -euo pipefail
+          exec > >(tee evidence/verification.log) 2>&1
+          docker pull swift:6.3.3
+          docker image inspect swift:6.3.3 > evidence/compiler-image.json
+          docker run --rm swift:6.3.3 swift --version | tee evidence/compiler-version.txt
+          docker run --rm --network none -v "$PWD:/w" -w /w swift:6.3.3 bash -c '
+            set -euo pipefail
+            package=fork/PrimeSwift/solution_1/PrimeSwift_1bitStriped_u8
+            sieve="$package/Sources/PrimeSieveSwift/PrimeSieve.swift"
+            echo "== generator rendering"
+            swift "$package/Tools/generate-dense.swift" --check "$sieve"
+            echo "== generator regression checks"
+            swift fork/fork/swift/check-dense-generator.swift > evidence/generator-checks.json
+            cat evidence/generator-checks.json
+            phase="fork/fork/swift/phase-split/PhaseSieve.swift fork/fork/swift/phase-split/PhaseVerify.swift"
+            for flags in "-O -sanitize=address" "-O -whole-module-optimization"; do
+              echo "== Verify $flags -target-cpu haswell"
+              swiftc $flags -target-cpu haswell "$sieve" "$package/Tools/Verify.swift" -o /tmp/verify
+              /tmp/verify
+              echo "== PhaseVerify $flags -target-cpu haswell"
+              swiftc $flags -target-cpu haswell "$sieve" $phase -o /tmp/phase-verify
+              /tmp/phase-verify
+            done'
+
+      - name: Build both shipping images
+        run: |
+          set -euo pipefail
+          exec > >(tee evidence/build.log) 2>&1
+          docker pull swift:6.3.3-slim
+          # The tags have been pulled once. Both builds reuse those same local images.
+          for variant in control candidate; do
+            root=upstream/PrimeSwift/solution_1
+            if [ "$variant" = candidate ]; then root=candidate; fi
+            docker build --pull=false --progress=plain -t "primes:$variant" "$root"
+            docker build --pull=false --progress=plain --target build -t "primes-build:$variant" "$root"
+            docker image inspect "primes:$variant" "primes-build:$variant" > "evidence/$variant-images.json"
+            docker run --rm --entrypoint sh "primes-build:$variant" -c \
+              'cat PrimeSwift_1bitStriped_u8/Package.resolved' \
+              > "evidence/$variant-Package.resolved"
+            docker run --rm --entrypoint sh "primes-build:$variant" -c \
+              'sha256sum PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift' \
+              > "evidence/$variant-build-binary-sha256.txt"
+            docker run --rm --entrypoint sh "primes:$variant" -c \
+              'sha256sum PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift' \
+              > "evidence/$variant-shipped-binary-sha256.txt"
+            cmp "evidence/$variant-build-binary-sha256.txt" "evidence/$variant-shipped-binary-sha256.txt"
+          done
+          cmp evidence/control-Package.resolved evidence/candidate-Package.resolved
+          docker image inspect swift:6.3.3 swift:6.3.3-slim > evidence/base-images.json
+
+      - name: Retain the actual shipped machine code and observer calls
+        id: assembly
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          exec > >(tee evidence/assembly.log) 2>&1
+          for variant in control candidate; do
+            docker run --rm --entrypoint sh "primes-build:$variant" -c \
+              'objdump -d --no-show-raw-insn PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift' \
+              > "evidence/$variant-disassembly.txt"
+            # A real call to the separately compiled observer must remain visible.
+            grep -E 'call.*observe' "evidence/$variant-disassembly.txt" | tee "evidence/$variant-observer-calls.txt" || true
+          done
+          for variant in control candidate; do
+            for function in runSieve markWordDenseMultiples markVectorDenseMultiples; do
+              awk -v f="$function" 'index($0, f) && /^[0-9a-f]+ <.*>:$/ {inside=1; next} /^$/ {inside=0} inside' \
+                "evidence/$variant-disassembly.txt" > "evidence/$variant-$function.txt"
+              instructions=$(grep -cE '^ *[0-9a-f]+:' "evidence/$variant-$function.txt" || true)
+              shifts=$(grep -cE 'shlx|bts[a-z]* +%r|shl[a-z]* +%cl' "evidence/$variant-$function.txt" || true)
+              printf '%s %s: %s instructions; %s runtime shifts\n' "$variant" "$function" "$instructions" "$shifts"
+              if [ "$instructions" -eq 0 ]; then echo "No separate symbol found; the function may have been inlined."; fi
+            done
+          done
+
+      - name: Measure five alternating pairs with the default Docker executable
+        env:
+          ASSEMBLY_OUTCOME: ${{ steps.assembly.outcome }}
+        run: |
+          set -euo pipefail
+          exec > >(tee evidence/timing.log) 2>&1
+          test -s evidence/control-observer-calls.txt
+          test -s evidence/candidate-observer-calls.txt
+          binary=./PrimeSwift_1bitStriped_u8/.build/release/PrimeSieveSwift
+          index=0
+          for round in 1 2 3 4 5; do
+            if [ $((round % 2)) -eq 1 ]; then order="control candidate"; else order="candidate control"; fi
+            for variant in $order; do
+              index=$((index + 1))
+              prefix="evidence/sample-$index-$variant"
+              test ! -e "$prefix.json"
+              # Keep stdout and stderr even if the process or validation fails.
+              docker run --rm --network none --entrypoint "$binary" "primes:$variant" > "$prefix.stdout" 2> "$prefix.stderr"
+              cat "$prefix.stdout" "$prefix.stderr"
+              jq -en --rawfile out "$prefix.stdout" --rawfile err "$prefix.stderr" \
+                --arg variant "$variant" --argjson round "$round" --argjson index "$index" '
+                ($out | sub("\n$"; "") | split(";")) as $fields |
+                ($err | sub("\n$"; "") | capture("^Passes: (?<passes>[0-9]+), Time: (?<duration>[0-9.eE+-]+), Avg: (?<average>[0-9.eE+-]+), Limit: (?<limit>[0-9]+), Count: (?<count>[0-9]+), Valid: (?<valid>[a-z]+), Checksum: (?<checksum>[0-9]+)$")) as $diagnostic |
+                if ($fields | length) != 5 or $fields[0] != "yellowcub_fahlman_striped_UInt8" or
+                   $fields[3] != "1" or $fields[4] != "algorithm=base,faithful=yes,bits=1" or
+                   $diagnostic.limit != "1000000" or $diagnostic.count != "78498" or
+                   $diagnostic.valid != "true" or $fields[1] != $diagnostic.passes or
+                   $fields[2] != $diagnostic.duration then error("Unexpected benchmark output") else . end |
+                ($fields[1] | tonumber) as $passes | ($fields[2] | tonumber) as $duration |
+                if $passes <= 0 or ($passes | floor) != $passes or $duration < 5 or
+                   ($duration | isfinite | not) then error("Invalid pass count or duration") else . end |
+                {index:$index,round:$round,variant:$variant,passes:$passes,duration_seconds:$duration,
+                 throughput_per_second:($passes / $duration),microseconds_per_sieve:($duration * 1000000 / $passes),
+                 limit:1000000,prime_count:78498,threads:1,checksum:$diagnostic.checksum,
+                 stdout:$out,stderr:$err}' > "$prefix.json"
+            done
+          done
+          result="evidence/two-u64-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT.json"
+          test ! -e "$result"
+          jq -s --slurpfile metadata evidence/metadata.json --arg assembly "$ASSEMBLY_OUTCOME" '
+            def median: sort | .[length / 2 | floor];
+            sort_by(.index) as $samples |
+            [$samples[] | select(.variant == "control")] as $control |
+            [$samples[] | select(.variant == "candidate")] as $candidate |
+            if ($samples | length) != 10 or ($control | length) != 5 or ($candidate | length) != 5
+              then error("Incomplete batch") else . end |
+            ($control | map(.throughput_per_second) | median) as $controlMedian |
+            ($candidate | map(.throughput_per_second) | median) as $candidateMedian |
+            (($candidate | map(.throughput_per_second) | min) > ($control | map(.throughput_per_second) | max)) as $separated |
+            {metadata:$metadata[0],assembly_diagnostics:$assembly,samples:$samples,
+             summary:{control_median_throughput:$controlMedian,candidate_median_throughput:$candidateMedian,
+               median_throughput_change_percent:(100 * ($candidateMedian / $controlMedian - 1)),
+               control_median_microseconds:($control | map(.microseconds_per_sieve) | median),
+               candidate_median_microseconds:($candidate | map(.microseconds_per_sieve) | median),
+               every_candidate_beats_every_control:$separated,
+               verdict:(if $separated then "candidate clearly faster in this session" else "no qualifying win in this session" end)}}' \
+            evidence/sample-*.json > "$result"
+          cat "$result"
+
+      - name: Preserve all evidence, including failed and partial runs
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
+        with:
+          name: two-u64-x64-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evidence/
+          if-no-files-found: warn
+          retention-days: 30
